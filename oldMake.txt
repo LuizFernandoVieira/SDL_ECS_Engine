@@ -1,0 +1,85 @@
+CXX = clang++
+SDL = -framework SDL2
+CXXFLAGS = -Wall -c -std=c++11
+SRC = main.cpp game.cpp statemachine.cpp state.cpp gamestate.cpp screen.cpp gamescreen.cpp inputhandler.cpp
+OBJECTS=$(SOURCES:.cpp=.o)
+EXE = prog
+
+all: $(SRC) $(EXE)
+
+$(EXE): $(OBJ)
+	$(CXX) $(SDL) $(OBJ) -o $@
+
+.cpp.o:
+	$(CXX) $(CXXFLAGS) $< -o $@
+
+clean:
+	rm -f *.o
+
+#####################
+
+all: main
+
+main:
+ g++ src/*.cpp src/*/*.cpp -o segmenter -D _DEBUG `pkg-config --cflags --libs opencv` -std=c++11 -g
+
+
+#####################
+
+CXX = clang++
+SDL = -framework SDL2
+CXXFLAGS = -Wall -c -std=c++11
+EXE = prog
+
+all: $(EXE)
+
+$(EXE):
+	$(CXX) $(SDL) *.cpp $(CXXFLAGS) -o $@
+
+
+#####################
+
+
+
+
+all: $(EXE)
+
+$(EXE): build/main.o build/game.o build/statemachine.o build/state.o build/gamestate.o build/firstlevel.o build/inputhandler.o build/sprite.o build/resources.o build/player.o build/rect.o
+	$(CXX) $(LDFLAGS) $^ -o $@
+
+build/main.o: src/main.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
+
+game.o: src/Game.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
+
+statemachine.o: src/StateMachine.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
+
+state.o: src/State.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
+
+gamestate.o: src/GameState.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
+
+firstlevel.o: src/FirstLevel.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
+
+inputhandler.o: src/InputHandler.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
+
+sprite.o: src/Sprite.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
+
+resources.o: src/Resources.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
+
+player.o: src/Player.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
+
+rect.o: src/Rect.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
+
+clean:
+	rm -f *.o
+
