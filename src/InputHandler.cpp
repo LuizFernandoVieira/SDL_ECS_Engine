@@ -1,17 +1,7 @@
 #include "../include/InputHandler.hpp"
-#include "../include/JumpCommand.hpp"
-#include "../include/MoveCommand.hpp"
-#include "../include/PlaceTileCommand.hpp"
 
 InputHandler::InputHandler()
 {
-	keySpace_ = new JumpCommand();
-	keyA_ = new MoveCommand(false, false, false, true);
-	keyD_ = new MoveCommand(false, true, false, false);
-	keyW_ = new MoveCommand(true, false, false, false);
-	keyS_ = new MoveCommand(false, false, true, false);
-	keyT_ = new PlaceTileCommand(1, 1);
-
 	for (int i = 0; i < 6; i++) {
 		mouseState[i] = false;
 		mouseUpdate[i] = 0;
@@ -28,61 +18,39 @@ InputHandler::InputHandler()
 	mouseY = 0;
 }
 
-std::vector<Command*> InputHandler::handleInput()
+InputHandler& InputHandler::GetInstance()
+{
+	static InputHandler instance;
+	return instance;
+}
+
+void InputHandler::update()
 {
 	SDL_Event event;
 
 	updateCounter++;
 	quit = false;
 
+	// Obtenha as coordenadas do mouse
 	SDL_GetMouseState(&mouseX, &mouseY);
 
-	std::vector<Command*> commands;
-
-	while(SDL_PollEvent(&event))
+	while (SDL_PollEvent(&event))
 	{
-		if(event.type == SDL_QUIT)
+		if (event.type == SDL_QUIT)
 		{
 			quit = true;
-		}	
-
-		if(event.type == SDL_KEYDOWN)
-		{
-			if(event.key.keysym.sym == UP_ARROW_KEY)
-			{
-				commands.emplace_back(keyW_);
-			}
-			if(event.key.keysym.sym == RIGHT_ARROW_KEY)
-			{
-				commands.emplace_back(keyD_);
-			}
-			if(event.key.keysym.sym == DOWN_ARROW_KEY)
-			{
-				commands.emplace_back(keyS_);
-			}
-			if(event.key.keysym.sym == LEFT_ARROW_KEY)
-			{
-				commands.emplace_back(keyA_);
-			}
-
-			if(event.key.keysym.sym == SPACE_BAR)
-			{
-				commands.emplace_back(keySpace_);
-			}
-
-			if(event.key.keysym.sym == SDLK_t)
-			{
-				keyT_ = new PlaceTileCommand((int)mouseX/32, (int)mouseY/32);
-				commands.emplace_back(keyT_);
-			}
 		}
 
-		if(event.type == SDL_CONTROLLERBUTTONDOWN)
+		if (event.type == SDL_MOUSEBUTTONDOWN)
 		{
-			if(event.cbutton.button == SDL_CONTROLLER_BUTTON_A)
-			{
-				commands.emplace_back(keySpace_);
-			}
+			mouseState[event.button.button] = true;
+			mouseUpdate[event.button.button] = updateCounter;
+		}
+
+		if (event.type == SDL_MOUSEBUTTONUP)
+		{
+			mouseState[event.button.button] = false;
+			mouseUpdate[event.button.button] = updateCounter;
 		}
 
 		if (event.type == SDL_KEYDOWN && !event.key.repeat)
@@ -113,8 +81,6 @@ std::vector<Command*> InputHandler::handleInput()
 			}
 		}
 	}
-
-	return commands;
 }
 
 bool InputHandler::keyPress(int key)

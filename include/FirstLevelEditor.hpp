@@ -18,7 +18,7 @@ public:
 	void render();
 private:
 	State* state_;
-	InputHandler* inputHandler_;
+	// InputHandler* inputHandler_;
 	TileSet* tileSet_;
 	TileMap* tileMap_;
 	God* god_;

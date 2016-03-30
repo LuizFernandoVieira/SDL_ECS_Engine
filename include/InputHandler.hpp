@@ -10,8 +10,6 @@
 #include <iostream>
 #include <vector>
 
-#include "Command.hpp"
-
 #define LEFT_ARROW_KEY SDLK_LEFT
 #define RIGHT_ARROW_KEY SDLK_RIGHT
 #define UP_ARROW_KEY SDLK_UP
@@ -24,8 +22,8 @@
 class InputHandler
 {
 public:
-	InputHandler();
-	std::vector<Command*> handleInput();
+	static InputHandler& GetInstance();
+	void update();
 	bool keyPress(int key);
 	bool keyRelease(int key);
 	bool isKeyDown(int key);
@@ -36,12 +34,8 @@ public:
 	int getMouseY();
 	bool quitRequested();
 private:
-	Command* keySpace_;
-	Command* keyW_;
-	Command* keyD_;
-	Command* keyS_;
-	Command* keyA_;
-	Command* keyT_;
+	InputHandler();
+	~InputHandler(){}
 	bool mouseState[6];
 	int mouseUpdate[6];
 	bool keyState[416];

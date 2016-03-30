@@ -5,8 +5,8 @@
 FirstLevelEditor::FirstLevelEditor(State& state)
 {
 	state_ = &state;
-	inputHandler_ =  new InputHandler();
-	Camera::setInputHandler(*inputHandler_);
+	// inputHandler_ =  new InputHandler();
+	// Camera::setInputHandler(*inputHandler_);
 	tileSet_ = new TileSet(32, 32, "../img/ground.png");
 	tileMap_ = new TileMap("../map/tileMap.txt", tileSet_);
 	god_ = new God(128, 128, *tileMap_);
@@ -24,10 +24,10 @@ void FirstLevelEditor::create()
 
 void FirstLevelEditor::update(float dt)
 {
-	std::vector <Command*> commands = inputHandler_->handleInput();
-	for(auto it = commands.begin(); it != commands.end(); ++it) {
-		(*it)->execute(*god_);
-	}
+	// std::vector <Command*> commands = inputHandler_->handleInput();
+	// for(auto it = commands.begin(); it != commands.end(); ++it) {
+	// 	(*it)->execute(*god_);
+	// }
 
 	god_->update(dt);
 

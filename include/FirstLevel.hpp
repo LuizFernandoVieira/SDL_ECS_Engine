@@ -9,6 +9,7 @@
 #include "InputHandler.hpp"
 #include "TileSet.hpp"
 #include "TileMap.hpp"
+#include "StateSystem.hpp"
 #include "RenderSystem.hpp"
 
 class FirstLevel : public ILevel
@@ -22,14 +23,15 @@ public:
 private:
 	void createPlayer();
 	State* state_;
-	InputHandler* inputHandler_;
 
 	unsigned int player_;
 	static unsigned int nextId_;
 
 	std::map<int, TransformComponent*> mapTransform_;
+	std::map<int, StateComponent*> mapState_;
 	std::map<int, RenderComponent*> mapRender_;
 
+	StateSystem* stateSystem_;
 	RenderSystem* renderSystem_;
 };
 

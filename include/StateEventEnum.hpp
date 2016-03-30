@@ -3,9 +3,7 @@
 
 enum StateEventEnum
 {
-	KEY_ESC,
-	BUTTON_PLAY,
-	BUTTON_QUIT
+	BLA
 };
 
 #endif

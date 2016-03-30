@@ -3,6 +3,7 @@
 #include "../include/Command.hpp"
 
 #include "../include/TransformComponent.hpp"
+#include "../include/StateComponent.hpp"
 #include "../include/RenderComponent.hpp"
 
 unsigned int FirstLevel::nextId_ = 0;
@@ -10,10 +11,10 @@ unsigned int FirstLevel::nextId_ = 0;
 FirstLevel::FirstLevel(State& state)
 {
 	state_ = &state;
-	inputHandler_ =  new InputHandler();
 
 	createPlayer();
 
+	stateSystem_ = new StateSystem();
 	renderSystem_ = new RenderSystem();
 }
 
@@ -29,12 +30,7 @@ void FirstLevel::create()
 
 void FirstLevel::update(float dt)
 {
-	std::vector <Command*> commands = inputHandler_->handleInput();
-
-
-	if (inputHandler_->quitRequested()) {
-		state_->setQuit(true);
-	}
+	stateSystem_->update(mapState_);
 }
 
 void FirstLevel::render()
@@ -47,5 +43,6 @@ void FirstLevel::createPlayer()
 	player_ = nextId_;
 	nextId_++;
 	mapTransform_.insert(std::pair<int,TransformComponent*> (player_, new TransformComponent()));
+	mapState_.insert(std::pair<int,StateComponent*> (player_, new StateComponent()));
 	mapRender_.insert(std::pair<int,RenderComponent*> (player_, new RenderComponent(new Sprite("../img/god.png"))));
 }
