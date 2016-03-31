@@ -1,12 +1,15 @@
 #ifndef FIRSTLEVELEDITOR_HPP
 #define FIRSTLEVELEDITOR_HPP
 
+#include <map>
+#include <vector>
+
 #include "ILevel.hpp"
 #include "State.hpp"
-#include "InputHandler.hpp"
 #include "TileSet.hpp"
 #include "TileMap.hpp"
-#include "God.hpp"
+#include "StateSystem.hpp"
+#include "RenderSystem.hpp"
 
 class FirstLevelEditor : public ILevel
 {
@@ -17,11 +20,17 @@ public:
 	void update(float dt);
 	void render();
 private:
+	void createGod();
 	State* state_;
-	// InputHandler* inputHandler_;
 	TileSet* tileSet_;
 	TileMap* tileMap_;
-	God* god_;
+	unsigned int god_;
+	static unsigned int nextId_;
+	std::map<int, TransformComponent*> mapTransform_;
+	std::map<int, StateComponent*> 	mapState_;
+	std::map<int, RenderComponent*> mapRender_;
+	StateSystem* stateSystem_;
+	RenderSystem* renderSystem_;	
 };
 
 #endif
