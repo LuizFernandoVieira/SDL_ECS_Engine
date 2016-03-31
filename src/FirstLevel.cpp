@@ -1,7 +1,7 @@
 #include "../include/FirstLevel.hpp"
 #include "../include/Camera.hpp"
 #include "../include/Command.hpp"
-
+#include "../include/InputHandler.hpp"
 #include "../include/TransformComponent.hpp"
 #include "../include/StateComponent.hpp"
 #include "../include/RenderComponent.hpp"
@@ -30,7 +30,13 @@ void FirstLevel::create()
 
 void FirstLevel::update(float dt)
 {
+	InputHandler::getInstance().update();
+
 	stateSystem_->update(mapState_);
+
+	if(InputHandler::getInstance().quitRequested()) {
+		state_->setQuit(true);
+	}
 }
 
 void FirstLevel::render()

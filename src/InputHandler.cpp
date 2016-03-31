@@ -18,7 +18,7 @@ InputHandler::InputHandler()
 	mouseY = 0;
 }
 
-InputHandler& InputHandler::GetInstance()
+InputHandler& InputHandler::getInstance()
 {
 	static InputHandler instance;
 	return instance;

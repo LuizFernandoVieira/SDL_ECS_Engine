@@ -1,7 +1,7 @@
 #ifndef ENTITYSTATEMACHINE_HPP
 #define ENTITYSTATEMACHINE_HPP
 
-#include "EntityState.hpp"
+class EntityState;
 
 class EntityStateMachine
 {
@@ -14,5 +14,7 @@ public:
 private:
 	EntityState* currentState_;
 };
+
+#include "EntityState.hpp"
 
 #endif

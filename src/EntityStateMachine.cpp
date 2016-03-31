@@ -1,8 +1,9 @@
 #include "../include/EntityStateMachine.hpp"
+#include "../include/PlayerIdleState.hpp"
 
 EntityStateMachine::EntityStateMachine()
 {
-
+	currentState_ = new PlayerIdleState(*this);
 }
 
 void EntityStateMachine::changeState(EntityState& state)

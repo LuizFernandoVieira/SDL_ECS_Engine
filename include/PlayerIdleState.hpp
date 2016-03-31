@@ -6,6 +6,8 @@
 class PlayerIdleState : public EntityState
 {
 public:
+	PlayerIdleState(EntityStateMachine& stateMachine);
+	virtual ~PlayerIdleState();
 	void handle();
 };
 

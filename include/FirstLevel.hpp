@@ -6,7 +6,6 @@
 
 #include "ILevel.hpp"
 #include "State.hpp"
-#include "InputHandler.hpp"
 #include "TileSet.hpp"
 #include "TileMap.hpp"
 #include "StateSystem.hpp"
@@ -28,7 +27,7 @@ private:
 	static unsigned int nextId_;
 
 	std::map<int, TransformComponent*> mapTransform_;
-	std::map<int, StateComponent*> mapState_;
+	std::map<int, StateComponent*> 	mapState_;
 	std::map<int, RenderComponent*> mapRender_;
 
 	StateSystem* stateSystem_;

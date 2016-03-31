@@ -8,7 +8,7 @@ class EntityStateMachine;
 class StateComponent : public Component
 {
 public:
-	StateComponent() {}
+	StateComponent();
 	~StateComponent() {}
 	EntityStateMachine* getStateMachine() { return stateMachine_; }
 	void setStateMachine(EntityStateMachine& stateMachine) { stateMachine_ = &stateMachine; }

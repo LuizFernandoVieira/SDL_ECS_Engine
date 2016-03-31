@@ -22,7 +22,7 @@
 class InputHandler
 {
 public:
-	static InputHandler& GetInstance();
+	static InputHandler& getInstance();
 	void update();
 	bool keyPress(int key);
 	bool keyRelease(int key);
