@@ -4,7 +4,7 @@
 class System
 {
 public:
-	~System();
+	~System() {}
 };
 
 #endif

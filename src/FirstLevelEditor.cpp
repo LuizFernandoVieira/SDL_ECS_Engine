@@ -13,8 +13,9 @@ FirstLevelEditor::FirstLevelEditor(State& state)
 
 	createGod();
 	
-	stateSystem_ = new StateSystem();
+	// stateSystem_ = new StateSystem();
 	renderSystem_ = new RenderSystem();
+	editorSystem_ = new LevelEditorSystem(*tileMap_, "../map/tileMap.txt");
 }
 
 FirstLevelEditor::~FirstLevelEditor()
@@ -30,6 +31,8 @@ void FirstLevelEditor::create()
 void FirstLevelEditor::update(float dt)
 {
 	InputHandler::getInstance().update();
+
+	editorSystem_->update(mapTransform_[god_]);
 	
 	if(InputHandler::getInstance().quitRequested()) {
 		state_->setQuit(true);
@@ -47,6 +50,6 @@ void FirstLevelEditor::createGod()
 	god_ = nextId_;
 	nextId_++;
 	mapTransform_.insert(std::pair<int,TransformComponent*> (god_, new TransformComponent()));
-	mapState_.insert(std::pair<int,StateComponent*> (god_, new StateComponent()));
+	// mapState_.insert(std::pair<int,StateComponent*> (god_, new StateComponent()));
 	mapRender_.insert(std::pair<int,RenderComponent*> (god_, new RenderComponent(new Sprite("../img/god.png"))));
 }

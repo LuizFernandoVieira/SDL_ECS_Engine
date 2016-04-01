@@ -1,4 +1,4 @@
-#include "TileSet.hpp"
+#include "../include/TileSet.hpp"
 
 TileSet::TileSet(int tileWidth, int tileHeight, const char* file)
 {

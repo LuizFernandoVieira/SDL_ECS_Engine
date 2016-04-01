@@ -1,0 +1,11 @@
+A fazer:
+
+- Deletar classe Entity;
+- Acrescentar largura, altura, escala e rotação na transform component;
+- Acrescentar argumentos nos construtores dos components;
+- DELETAR PONTEIROS!!!!!!!!!!!!!!!!!!!
+- Organizar em pastas
+
+Adicionais:
+
+- Alterar input para singleton ou arrumar os commands;

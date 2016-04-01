@@ -1,4 +1,4 @@
-#include "TileMap.hpp"
+#include "../include/TileMap.hpp"
 
 TileMap::TileMap(const char* file, TileSet* tileSet)
 {
