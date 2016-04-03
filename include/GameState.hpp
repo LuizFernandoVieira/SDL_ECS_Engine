@@ -15,7 +15,7 @@ public:
 	void render();
 	void handle(StateEventEnum& event);
 private:
-	FirstLevelEditor* firstLevel_;
+	FirstLevel* firstLevel_;
 };
 
 #endif

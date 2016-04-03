@@ -3,7 +3,7 @@
 void GameState::create(StateMachine& stateMachine)
 {
 	setStateMachine(stateMachine);
-	firstLevel_	= new FirstLevelEditor(*this);
+	firstLevel_	= new FirstLevel(*this);
 	firstLevel_->create();
 }
 
