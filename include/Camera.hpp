@@ -3,7 +3,7 @@
 
 #include "InputHandler.hpp"
 #include "GameObject.hpp"
-#include "Point.hpp"
+#include "Vec2.hpp"
 
 #define CAMERA_SPEED 300
 
@@ -13,13 +13,13 @@ public:
 	static void follow(GameObject& focus);
 	static void unfollow();
 	static void update(float dt);
-	static Point getPosition();
+	static Vec2 getPosition();
 	static void setInputHandler(InputHandler& inputHandler);
 private:
 	static InputHandler* inputHandler_;
 	static GameObject* focus_;
-	static Point pos_;
-	static Point speed_;
+	static Vec2 pos_;
+	static Vec2 speed_;
 };
 
 #endif

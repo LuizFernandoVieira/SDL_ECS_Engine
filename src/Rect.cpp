@@ -16,47 +16,34 @@ Rect::Rect(float x, float y, float w, float h)
 	h_ = h;
 }
 
-Point Rect::getCenter()
+Vec2 Rect::getCenter()
 {
-	return Point(x_+(w_ /2), y_+(h_ /2));
+	return Vec2( x_+(w_ /2), y_+(h_ /2) );
 }
 
-float Rect::getX()
+
+Rect Rect::operator+ (const Vec2& vec2)
 {
-	return x_;
+	Rect rect;
+	rect.x( x_ + vec2.x() );
+	rect.y( y_ + vec2.y() );
+	rect.w(w_);
+	rect.h(h_);
+	return rect;
 }
 
-float Rect::getY()
+bool Rect::isInside(Vec2 vec2)
 {
-	return y_;
+	if ( vec2.x() >= x_ &&
+		 vec2.x() <= x_ + w_ &&
+		 vec2.y() >= y_ &&
+		 vec2.y() <= y_ + h_ )
+		return true;
+	else
+		return false;
 }
 
-float Rect::getW()
+float Distance(Rect r1, Rect r2)
 {
-	return w_;
-}
-
-float Rect::getH()
-{
-	return h_;
-}
-
-void Rect::setX(float x)
-{
-	x_ = x;
-}
-
-void Rect::setY(float y)
-{
-	y_ = y;
-}
-
-void Rect::setW(float w)
-{
-	w_ = w;
-}
-
-void Rect::setH(float h)
-{
-	h_ = h;
+	return Distance( r1.getCenter(), r2.getCenter() );
 }

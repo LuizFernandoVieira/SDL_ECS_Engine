@@ -12,8 +12,8 @@ void RenderSystem::update(std::map<int, TransformComponent*> tc,
 	for(auto it = rc.begin(); it != rc.end(); ++it) {
 		Rect* tcRect = tc[it->first]->getRect();
 		it->second->getSprite()->render(
-			tcRect->getX(),
-			tcRect->getY(),
+			tcRect->x(),
+			tcRect->y(),
 			0
 		);
 	}
