@@ -64,7 +64,7 @@ void LevelEditorSystem::placeTile(int x, int y)
 	// std::cout << "linear: " << location << std::endl;
 
 	fs.seekp(fs.tellg(), std::ios_base::beg);
-	// fs.seekp( location * withComma + firstBreakLine + y, std::ios_base::beg );
+	fs.seekp( location * withComma + firstBreakLine + y, std::ios_base::cur );
 
 	fs << "02";
 
