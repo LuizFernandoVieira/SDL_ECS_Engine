@@ -1,9 +1,9 @@
 #ifndef PLAYERWALKINGSTATE_HPP
 #define PLAYERWALKINGSTATE_HPP
 
-#include "EntityState.hpp"
+#include "WalkingState.hpp"
 
-class PlayerWalkingState : public EntityState
+class PlayerWalkingState : public WalkingState
 {
 public:
 	PlayerWalkingState(EntityStateMachine& stateMachine);

@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-PlayerWalkingState::PlayerWalkingState(EntityStateMachine& stateMachine) : EntityState(stateMachine) 
+PlayerWalkingState::PlayerWalkingState(EntityStateMachine& stateMachine) : WalkingState(stateMachine) 
 {
 
 }

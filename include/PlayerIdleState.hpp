@@ -1,9 +1,9 @@
 #ifndef PLAYERIDLESTATE_HPP
 #define PLAYERIDLESTATE_HPP
 
-#include "EntityState.hpp"
+#include "IdleState.hpp"
 
-class PlayerIdleState : public EntityState
+class PlayerIdleState : public IdleState
 {
 public:
 	PlayerIdleState(EntityStateMachine& stateMachine);

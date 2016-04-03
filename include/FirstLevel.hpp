@@ -10,6 +10,7 @@
 #include "TileMap.hpp"
 #include "StateSystem.hpp"
 #include "RenderSystem.hpp"
+#include "MoveSystem.hpp"
 
 class FirstLevel : public ILevel
 {
@@ -29,8 +30,10 @@ private:
 	std::map<int, TransformComponent*> mapTransform_;
 	std::map<int, StateComponent*> 	mapState_;
 	std::map<int, RenderComponent*> mapRender_;
+	std::map<int, PhysicsComponent*> mapPhysics_;
 	StateSystem* stateSystem_;
 	RenderSystem* renderSystem_;
+	MoveSystem* moveSystem_;
 };
 
 #endif

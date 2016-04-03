@@ -8,10 +8,10 @@
 #include "StateComponent.hpp"
 #include "PhysicsComponent.hpp"
 
-class RenderSystem : public System
+class MoveSystem : public System
 {
 public:
-	RenderSystem();
+	MoveSystem();
 	void update(
 		std::map<int, TransformComponent*> tc,
 		std::map<int, StateComponent*> sc,

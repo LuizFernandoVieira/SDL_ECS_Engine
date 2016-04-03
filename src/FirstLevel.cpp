@@ -19,6 +19,7 @@ FirstLevel::FirstLevel(State& state)
 
 	stateSystem_ = new StateSystem();
 	renderSystem_ = new RenderSystem();
+	moveSystem_ = new MoveSystem();
 }
 
 FirstLevel::~FirstLevel()
@@ -36,6 +37,8 @@ void FirstLevel::update(float dt)
 	InputHandler::getInstance().update();
 
 	stateSystem_->update(mapState_);
+	std::cout << "OI" << std::endl;
+	moveSystem_->update(mapTransform_, mapState_, mapPhysics_);
 
 	if(InputHandler::getInstance().quitRequested()) {
 		state_->setQuit(true);
@@ -54,5 +57,6 @@ void FirstLevel::createPlayer()
 	nextId_++;
 	mapTransform_.insert(std::pair<int,TransformComponent*> (player_, new TransformComponent()));
 	mapState_.insert(std::pair<int,StateComponent*> (player_, new StateComponent()));
+	mapPhysics_.insert(std::pair<int,PhysicsComponent*> (player_, new PhysicsComponent()));
 	mapRender_.insert(std::pair<int,RenderComponent*> (player_, new RenderComponent(new Sprite("../img/player.png"))));
 }

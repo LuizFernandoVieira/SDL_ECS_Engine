@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-PlayerIdleState::PlayerIdleState(EntityStateMachine& stateMachine) : EntityState(stateMachine) 
+PlayerIdleState::PlayerIdleState(EntityStateMachine& stateMachine) : IdleState(stateMachine) 
 {
 
 }
