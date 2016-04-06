@@ -1,6 +1,5 @@
 #include "../include/FirstLevel.hpp"
 #include "../include/Camera.hpp"
-#include "../include/Command.hpp"
 #include "../include/InputHandler.hpp"
 #include "../include/TransformComponent.hpp"
 #include "../include/StateComponent.hpp"
@@ -37,7 +36,6 @@ void FirstLevel::update(float dt)
 	InputHandler::getInstance().update();
 
 	stateSystem_->update(mapState_);
-	std::cout << "OI" << std::endl;
 	moveSystem_->update(mapTransform_, mapState_, mapPhysics_);
 
 	if(InputHandler::getInstance().quitRequested()) {

@@ -13,7 +13,7 @@ PlayerJumpingState::~PlayerJumpingState()
 
 }
 
-void PlayerJumpingState::handle()
+void PlayerJumpingState::handle(StateComponent* sc)
 {
 
 	if(InputHandler::getInstance().keyPress(UP_ARROW_KEY)) {

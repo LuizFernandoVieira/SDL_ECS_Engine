@@ -2,13 +2,14 @@
 #define PLAYERWALKINGSTATE_HPP
 
 #include "WalkingState.hpp"
+#include "StateComponent.hpp"
 
 class PlayerWalkingState : public WalkingState
 {
 public:
 	PlayerWalkingState(EntityStateMachine& stateMachine);
 	virtual ~PlayerWalkingState();
-	void handle();
+	void handle(StateComponent* sc);
 };
 
 #endif

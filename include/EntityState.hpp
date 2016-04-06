@@ -3,16 +3,15 @@
 
 #include <string>
 
-#include "StateComponent.hpp"
-
 class EntityStateMachine;
+class StateComponent;
 
 class EntityState
 {
 public:
 	EntityState(EntityStateMachine& stateMachine) { stateMachine_ = &stateMachine; }
 	virtual ~EntityState(){}
-	virtual void handle() = 0;
+	virtual void handle(StateComponent* sc) = 0;
 	// Checa tipo da classe imediatamente filha de EntityState
 	virtual bool is(std::string) = 0;
 protected:
@@ -20,5 +19,6 @@ protected:
 };
 
 #include "EntityStateMachine.hpp"
+#include "StateComponent.hpp"
 
 #endif

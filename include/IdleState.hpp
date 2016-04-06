@@ -4,11 +4,12 @@
 #include <string>
 
 #include "EntityState.hpp"
+#include "EntityStateMachine.hpp"
 
 class IdleState : public EntityState
 {
 public:
-	IdleState(EntityStateMachine& stateMachine);
+	IdleState(EntityStateMachine& stateMachine) : EntityState(stateMachine) {}
 	bool is(std::string type)
 	{ 
 		if (type == "IdleState") 

@@ -12,8 +12,11 @@ public:
 	~StateComponent() {}
 	EntityStateMachine* getStateMachine() { return stateMachine_; }
 	void setStateMachine(EntityStateMachine& stateMachine) { stateMachine_ = &stateMachine; }
+	bool isFacingRight() { return facingRight_; }
+	void setFacingRight(bool facingRight) { facingRight_ = facingRight; }
 private:
 	EntityStateMachine* stateMachine_;
+	bool facingRight_;
 };
 
 #include "EntityStateMachine.hpp"

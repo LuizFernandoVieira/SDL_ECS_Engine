@@ -8,7 +8,7 @@
 class WalkingState : public EntityState
 {
 public:
-	WalkingState(EntityStateMachine& stateMachine) : EntityState(EntityStateMachine& stateMachine) {}
+	WalkingState(EntityStateMachine& stateMachine) : EntityState(stateMachine) {}
 	bool is(std::string type)
 	{ 
 		if (type == "WalkingState") 

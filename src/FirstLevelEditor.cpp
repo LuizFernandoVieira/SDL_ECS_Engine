@@ -1,6 +1,5 @@
 #include "../include/FirstLevelEditor.hpp"
 #include "../include/Camera.hpp"
-#include "../include/Command.hpp"
 
 unsigned int FirstLevelEditor::nextId_ = 0;
 
