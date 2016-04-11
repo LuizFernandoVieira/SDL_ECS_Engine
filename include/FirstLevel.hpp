@@ -31,9 +31,9 @@ private:
 	std::map<int, StateComponent*> 	mapState_;
 	std::map<int, RenderComponent*> mapRender_;
 	std::map<int, PhysicsComponent*> mapPhysics_;
-	StateSystem* stateSystem_;
-	RenderSystem* renderSystem_;
-	MoveSystem* moveSystem_;
+	StateSystem stateSystem_;
+	RenderSystem renderSystem_;
+	MoveSystem moveSystem_;
 };
 
 #endif

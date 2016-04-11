@@ -8,6 +8,8 @@ class State;
 class StateMachine
 {
 public:
+	StateMachine();
+	~StateMachine();
 	void create();
 	void update(float dt);
 	void render();

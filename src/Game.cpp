@@ -18,8 +18,8 @@ Game::Game(int width, int height)
 	initRenderer();
 	initControllers();
 
-	stateMachine_ = new StateMachine();
-	stateMachine_->create();
+	stateMachine_ = StateMachine();
+	stateMachine_.create();
 }
 
 Game::~Game()
@@ -36,11 +36,11 @@ Game& Game::getInstance()
 
 void Game::run()
 {
-	while(!stateMachine_->getState()->quitRequested())
+	while(!stateMachine_.getState()->quitRequested())
 	{
 		calculateDeltaTime();
-		stateMachine_->update(dt_);
-		stateMachine_->render();
+		stateMachine_.update(dt_);
+		stateMachine_.render();
 		SDL_RenderPresent(renderer_);
 		if ( (float)(SDL_GetTicks() - frameStart_) < 1000.0 / 60.0 )
 		{

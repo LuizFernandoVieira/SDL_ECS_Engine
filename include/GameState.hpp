@@ -10,6 +10,8 @@
 class GameState: public State
 {
 public:
+	GameState();
+	~GameState();
 	void create(StateMachine& stateMachine);
 	void update(float dt);
 	void render();

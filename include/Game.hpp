@@ -33,7 +33,7 @@ private:
 	SDL_Window* window_;
 	SDL_Renderer* renderer_;
 	SDL_GameController* controller_;
-	StateMachine* stateMachine_;
+	StateMachine stateMachine_;
 	float dt_;
 	int frameStart_;
 };

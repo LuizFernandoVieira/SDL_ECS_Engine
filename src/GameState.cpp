@@ -1,8 +1,19 @@
 #include "../include/GameState.hpp"
 
+GameState::GameState()
+{
+
+}
+
+GameState::~GameState()
+{
+	delete firstLevel_;
+}
+
 void GameState::create(StateMachine& stateMachine)
 {
-	setStateMachine(stateMachine);
+	stateMachine_ = &stateMachine;
+	quit = false;
 	firstLevel_	= new FirstLevel(*this);
 	firstLevel_->create();
 }

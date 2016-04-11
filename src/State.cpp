@@ -1,21 +1,5 @@
 #include "../include/State.hpp"
 
-void State::create(StateMachine& stateMachine)
-{
-	stateMachine_ = &stateMachine;
-	quit = false;
-}
-
-void State::update(float dt)
-{
-	
-}
-
-void State::render()
-{
-	
-}
-
 bool State::quitRequested()
 {
 	return quit;

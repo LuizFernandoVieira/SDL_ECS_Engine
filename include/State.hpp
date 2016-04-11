@@ -1,15 +1,16 @@
 #ifndef STATE_HPP
 #define STATE_HPP
 
-#include "IState.hpp"
 #include "StateMachine.hpp"
 
-class State: public IState
+class State
 {
 public:
-	void create(StateMachine& stateMachine);
-	void update(float dt);
-	void render();
+	virtual ~State() {}
+	virtual void create(StateMachine& stateMachine) {}
+	virtual void update(float dt) = 0;
+	virtual void render() = 0;
+	virtual void handle (StateEventEnum& event) = 0;
 	bool quitRequested();
 	StateMachine* getStateMachine();
 	void setStateMachine(StateMachine& stateMachine);
@@ -17,7 +18,6 @@ public:
 	void setQuit(bool q) { quit = q; } 
 protected:
 	bool quit;
-private:
 	StateMachine* stateMachine_;
 };
 

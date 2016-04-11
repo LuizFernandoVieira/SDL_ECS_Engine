@@ -16,9 +16,9 @@ FirstLevel::FirstLevel(State& state)
 
 	createPlayer();
 
-	stateSystem_ = new StateSystem();
-	renderSystem_ = new RenderSystem();
-	moveSystem_ = new MoveSystem();
+	stateSystem_ = StateSystem();
+	renderSystem_ = RenderSystem();
+	moveSystem_ = MoveSystem();
 }
 
 FirstLevel::~FirstLevel()
@@ -35,8 +35,8 @@ void FirstLevel::update(float dt)
 {
 	InputHandler::getInstance().update();
 
-	stateSystem_->update(mapState_);
-	moveSystem_->update(mapTransform_, mapState_, mapPhysics_);
+	stateSystem_.update(mapState_);
+	moveSystem_.update(mapTransform_, mapState_, mapPhysics_);
 
 	if(InputHandler::getInstance().quitRequested()) {
 		state_->setQuit(true);
@@ -46,7 +46,7 @@ void FirstLevel::update(float dt)
 void FirstLevel::render()
 {
 	tileMap_->render(0,0);
-	renderSystem_->update(mapTransform_, mapRender_);
+	renderSystem_.update(mapTransform_, mapRender_);
 }
 
 void FirstLevel::createPlayer()

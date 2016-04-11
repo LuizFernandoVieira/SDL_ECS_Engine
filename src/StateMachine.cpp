@@ -2,6 +2,16 @@
 #include "../include/GameState.hpp"
 #include "../include/LevelEditorState.hpp"
 
+StateMachine::StateMachine()
+{
+	
+}
+
+StateMachine::~StateMachine()
+{
+	delete state_;
+}
+
 void StateMachine::create()
 {
 	state_ = new GameState();
