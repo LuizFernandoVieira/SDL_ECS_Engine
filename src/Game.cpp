@@ -18,8 +18,8 @@ Game::Game(int width, int height)
 	initRenderer();
 	initControllers();
 
-	stateMachine_ = StateMachine();
-	stateMachine_.create();
+	stateMachine_ = new StateMachine();
+	stateMachine_->create();
 }
 
 Game::~Game()
@@ -36,11 +36,11 @@ Game& Game::getInstance()
 
 void Game::run()
 {
-	while(!stateMachine_.getState()->quitRequested())
+	while(!stateMachine_->getState()->quitRequested())
 	{
 		calculateDeltaTime();
-		stateMachine_.update(dt_);
-		stateMachine_.render();
+		stateMachine_->update(dt_);
+		stateMachine_->render();
 		SDL_RenderPresent(renderer_);
 		if ( (float)(SDL_GetTicks() - frameStart_) < 1000.0 / 60.0 )
 		{
@@ -60,18 +60,32 @@ void Game::initSDL()
 
 void Game::initWindow(int width, int height)
 {
+	SDL_DisplayMode mode;
+	if (SDL_GetDesktopDisplayMode(0, &mode) != 0) {
+		std::cerr << "Erro na criacao da janela do jogo" << 
+			std::endl << SDL_GetError() << std::endl;
+		exit(1);
+	}
+
 	window_ = SDL_CreateWindow 
 	( 	
 		"title", 
 		SDL_WINDOWPOS_CENTERED, 
 		SDL_WINDOWPOS_CENTERED, 
-		width, height, 0 
+		/*mode.w*/width, /*mode.h*/height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE 
 	);
 	if (window_ == NULL) {
 		std::cerr << "Erro na criacao da janela do jogo" << 
 			std::endl << SDL_GetError() << std::endl;
 		exit(1);
 	}
+
+	// if (SDL_SetWindowFullscreen(window_, SDL_WINDOW_FULLSCREEN) != 0) {
+	// 	std::cerr << "Erro na criacao da janela do jogo" << 
+	// 		std::endl << SDL_GetError() << std::endl;
+	// 	exit(1);
+	// }
+	// SDL_MaximizeWindow(window_);
 }
 
 void Game::initRenderer()

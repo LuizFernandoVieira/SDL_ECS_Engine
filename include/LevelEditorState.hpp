@@ -5,16 +5,19 @@
 #include "StateMachine.hpp"
 #include "StateEventEnum.hpp"
 #include "FirstLevelEditor.hpp"
+#include "NavigationPanel.hpp"
 
 class LevelEditorState: public State
 {
 public:
+	LevelEditorState();
+	~LevelEditorState();
 	void create(StateMachine& stateMachine);
 	void update(float dt);
 	void render();
 	void handle(StateEventEnum& event);
 private:
-	FirstLevelEditor* firstLevelEditor_;	
+	NavigationPanel* leftPanel_;
 };
 
 #endif

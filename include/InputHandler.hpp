@@ -32,6 +32,9 @@ public:
 	bool isMouseDown(int button);
 	int getMouseX();
 	int getMouseY();
+	bool getScreenResized();
+	int getScreenWidth();
+	int getScreenHeight();
 	bool quitRequested();
 private:
 	InputHandler();
@@ -44,6 +47,9 @@ private:
 	int updateCounter;
 	int mouseX;
 	int mouseY;
+	int screenWidth;
+	int screenHeight;
+	bool screenResized;
 };
 
 #endif

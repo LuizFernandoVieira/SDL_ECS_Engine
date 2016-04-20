@@ -14,8 +14,8 @@ StateMachine::~StateMachine()
 
 void StateMachine::create()
 {
-	state_ = new GameState();
-	// state_ = new LevelEditorState();
+	// state_ = new GameState();
+	state_ = new LevelEditorState();
 	state_->create(*this); 
 }
 

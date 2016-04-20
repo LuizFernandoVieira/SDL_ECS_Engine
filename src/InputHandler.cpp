@@ -16,6 +16,7 @@ InputHandler::InputHandler()
 	updateCounter = 0;
 	mouseX = 0;
 	mouseY = 0;
+	screenResized = false;
 }
 
 InputHandler& InputHandler::getInstance()
@@ -30,6 +31,7 @@ void InputHandler::update()
 
 	updateCounter++;
 	quit = false;
+	screenResized = false;
 
 	// Obtenha as coordenadas do mouse
 	SDL_GetMouseState(&mouseX, &mouseY);
@@ -78,6 +80,16 @@ void InputHandler::update()
 			{
 				keyState[event.key.keysym.sym - 0x3FFFFF81] = false;
 				keyUpdate[event.key.keysym.sym - 0x3FFFFF81] = updateCounter;
+			}
+		}
+
+		if (event.type == SDL_WINDOWEVENT)
+		{
+			if (event.window.event == SDL_WINDOWEVENT_RESIZED)
+			{
+				screenWidth = event.window.data1,
+				screenHeight = event.window.data2;
+				screenResized = true;
 			}
 		}
 	}
@@ -165,4 +177,19 @@ int InputHandler::getMouseY()
 bool InputHandler::quitRequested()
 {
 	return quit;
+}
+
+bool InputHandler::getScreenResized()
+{
+	return screenResized;
+}
+
+int InputHandler::getScreenWidth()
+{
+	return screenWidth;
+}
+
+int InputHandler::getScreenHeight()
+{
+	return screenHeight;
 }
