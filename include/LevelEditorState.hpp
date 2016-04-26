@@ -13,11 +13,12 @@ public:
 	LevelEditorState();
 	~LevelEditorState();
 	void create(StateMachine& stateMachine);
+	void initGUI();
 	void update(float dt);
 	void render();
 	void handle(StateEventEnum& event);
 private:
-	NavigationPanel* leftPanel_;
+	Panel mainPanel_;
 };
 
 #endif

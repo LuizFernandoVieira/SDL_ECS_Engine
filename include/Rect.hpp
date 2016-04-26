@@ -8,6 +8,7 @@ class Rect
 public:
 	Rect();
 	Rect(float x, float y, float w, float h);
+	Rect(Rect& rect);
 
 	Vec2 getCenter();
 

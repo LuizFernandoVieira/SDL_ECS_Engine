@@ -11,7 +11,7 @@ public:
 	void update(float dt);
 	void render();
 private:
-	Sprite* sprite_;
+	Sprite sprite_;
 };
 
 #endif

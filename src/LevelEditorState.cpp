@@ -7,28 +7,30 @@
 	#include "SDL.h"
 #endif
 
-LevelEditorState::LevelEditorState()
+LevelEditorState::LevelEditorState() : 
+mainPanel_(
+	Rect(0,0,Globals::WINDOW_WIDTH, Globals::WINDOW_HEIGHT),
+	"../img/bgTilePanel.png"
+)
 {
+	
 }
 
 LevelEditorState::~LevelEditorState()
 {
-	delete leftPanel_;
 }
 
 void LevelEditorState::create(StateMachine& stateMachine)
 {
 	stateMachine_ = &stateMachine;
 	quit = false;
+	initGUI();
+}
 
-	// SDL_DisplayMode mode;
-	// if (SDL_GetDesktopDisplayMode(0, &mode) != 0) {
-	// 	std::cerr << "Erro na criacao da janela do jogo" << 
-	// 		std::endl << SDL_GetError() << std::endl;
-	// 	exit(1);
-	// }
-
-	leftPanel_ = new NavigationPanel(/*mode.w*/1024, /*mode.h*/600);
+void LevelEditorState::initGUI()
+{
+	Panel leftPanel_ = Panel();
+	mainPanel.add(leftPanel_);
 }
 
 void LevelEditorState::update(float dt)
@@ -36,6 +38,11 @@ void LevelEditorState::update(float dt)
 	InputHandler::getInstance().update();
 
 	leftPanel_->update();
+
+	if (InputHandler::getInstance().getScreenResized())
+	{
+
+	}
 
 	if(InputHandler::getInstance().quitRequested()) {
 		setQuit(true);

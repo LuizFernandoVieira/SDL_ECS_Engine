@@ -1,21 +1,16 @@
 #ifndef NAVIGATIONPANEL_HPP
 #define NAVIGATIONPANEL_HPP
 
+#include "Panel.hpp"
 #include "Sprite.hpp"
 
-class NavigationPanel
+class NavigationPanel : public Panel
 {
 public:
-	NavigationPanel(int screenWidth, int screenHeight);
+	NavigationPanel(Rect& rect, std::string imgPath);
 	~NavigationPanel(){}
 	void update();
 	void render();
-
-private:
-	int screenWidth_;
-	int screenHeight_;
-	float width_;
-	Sprite border_;
 };
 
 #endif
