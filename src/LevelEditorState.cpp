@@ -1,17 +1,9 @@
 #include "../include/LevelEditorState.hpp"
 #include "../include/InputHandler.hpp"
-
-#ifdef __APPLE__
-	#include <SDL2/SDL.h>
-#else
-	#include "SDL.h"
-#endif
+// #include "../include/Globals.hpp"
 
 LevelEditorState::LevelEditorState() : 
-mainPanel_(
-	Rect(0,0,Globals::WINDOW_WIDTH, Globals::WINDOW_HEIGHT),
-	"../img/bgTilePanel.png"
-)
+mainPanel_(Rect(0,0,1024, 600), "../img/bgTilePanel.png")
 {
 	
 }
@@ -29,20 +21,39 @@ void LevelEditorState::create(StateMachine& stateMachine)
 
 void LevelEditorState::initGUI()
 {
-	Panel leftPanel_ = Panel();
-	mainPanel.add(leftPanel_);
+	Rect leftRectProportion  = Rect(0, 0, 0.2, 1);
+	Rect rightRectProportion = Rect(0.2, 0, 0.8, 1);
+
+	Rect leftRect  = Rect(
+		leftRectProportion.x() * mainPanel_.getRect().w() + mainPanel_.getRect().x(),
+		leftRectProportion.y() * mainPanel_.getRect().h() + mainPanel_.getRect().y(),
+		leftRectProportion.w() * mainPanel_.getRect().w(),
+		leftRectProportion.h() * mainPanel_.getRect().h()
+	);
+	Rect rightRect = Rect(
+		rightRectProportion.x() * mainPanel_.getRect().w() + mainPanel_.getRect().x(),
+		rightRectProportion.y() * mainPanel_.getRect().h() + mainPanel_.getRect().y(),
+		rightRectProportion.w() * mainPanel_.getRect().w(),
+		rightRectProportion.h() * mainPanel_.getRect().h()
+	);
+
+	Panel leftPanel  = Panel(leftRect, "../img/leftPanelBg.png");
+	Panel rightPanel = Panel(rightRect, "../img/leftPanelBg.png");
+
+	mainPanel_.add(leftPanel, leftRectProportion);
+	mainPanel_.add(rightPanel, rightRectProportion);
 }
 
 void LevelEditorState::update(float dt)
 {
 	InputHandler::getInstance().update();
 
-	leftPanel_->update();
+	mainPanel_.update();
 
-	if (InputHandler::getInstance().getScreenResized())
-	{
-
-	}
+	// if (InputHandler::getInstance().getScreenResized())
+	// {
+	// 	mainPanel_.
+	// }
 
 	if(InputHandler::getInstance().quitRequested()) {
 		setQuit(true);
@@ -51,7 +62,7 @@ void LevelEditorState::update(float dt)
 
 void LevelEditorState::render()
 {
-	leftPanel_->render();
+	mainPanel_.render();
 }
 
 void LevelEditorState::handle(StateEventEnum& event)

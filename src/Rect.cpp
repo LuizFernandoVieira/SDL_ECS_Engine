@@ -16,13 +16,13 @@ Rect::Rect(float x, float y, float w, float h)
 	h_ = h;
 }
 
-Rect::Rect(Rect& rect) 
-{
-	x_ = rect.x;
-	y_ = rect.y;
-	w_ = rect.w;
-	h_ = rect.h;
-}
+// Rect::Rect(Rect rect) 
+// {
+// 	x_ = rect.x;
+// 	y_ = rect.y;
+// 	w_ = rect.w;
+// 	h_ = rect.h;
+// }
 
 Vec2 Rect::getCenter()
 {
@@ -37,6 +37,16 @@ Rect Rect::operator+ (const Vec2& vec2)
 	rect.y( y_ + vec2.y() );
 	rect.w(w_);
 	rect.h(h_);
+	return rect;
+}
+
+Rect Rect::operator* (const Rect& r)
+{
+	Rect rect;
+	rect.x( x_ * r.x() );
+	rect.y( y_ * r.y() );
+	rect.w( w_ * r.w() );
+	rect.h( h_ * r.h() );
 	return rect;
 }
 

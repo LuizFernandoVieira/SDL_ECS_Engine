@@ -5,7 +5,7 @@
 #include "StateMachine.hpp"
 #include "StateEventEnum.hpp"
 #include "FirstLevelEditor.hpp"
-#include "NavigationPanel.hpp"
+#include "Panel.hpp"
 
 class LevelEditorState: public State
 {

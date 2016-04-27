@@ -5,19 +5,21 @@
 #include <string>
 
 #include "Sprite.hpp"
+#include "Rect.hpp"
 #include "Button.hpp"
 
 class Panel
 {
 public:
-	Panel(Rect& rect, std::string imgPath);
+	Panel(Rect rect, std::string imgPath);
 	~Panel() {}
 	void update();
 	void render();
-	void add(Panel& panel);
-	void add(Button& button);
+	void add(Panel panel, Rect rect);
+	void add(Button button);
+	Rect getRect();
 private:
-	std::vector<Panel> panels_;
+	std::vector<std::pair<Panel, Rect> > panels_;
 	std::vector<Button> buttons_;
 	Rect rect_;
 	Sprite bg_;
