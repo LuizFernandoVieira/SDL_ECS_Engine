@@ -18,6 +18,7 @@ public:
 	void add(Panel panel, Rect rect);
 	void add(Button button);
 	Rect getRect();
+	void setRect(Rect rect);
 private:
 	std::vector<std::pair<Panel, Rect> > panels_;
 	std::vector<Button> buttons_;

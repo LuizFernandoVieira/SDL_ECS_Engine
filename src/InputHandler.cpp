@@ -1,4 +1,5 @@
 #include "../include/InputHandler.hpp"
+#include "../include/Globals.hpp"
 
 InputHandler::InputHandler()
 {
@@ -87,8 +88,10 @@ void InputHandler::update()
 		{
 			if (event.window.event == SDL_WINDOWEVENT_RESIZED)
 			{
-				screenWidth = event.window.data1,
-				screenHeight = event.window.data2;
+				// screenWidth = event.window.data1,
+				// screenHeight = event.window.data2;
+				Globals::WINDOW_WIDTH = event.window.data1,
+				Globals::WINDOW_HEIGHT = event.window.data2;
 				screenResized = true;
 			}
 		}

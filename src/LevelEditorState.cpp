@@ -1,9 +1,9 @@
 #include "../include/LevelEditorState.hpp"
 #include "../include/InputHandler.hpp"
-// #include "../include/Globals.hpp"
+#include "../include/Globals.hpp"
 
 LevelEditorState::LevelEditorState() : 
-mainPanel_(Rect(0,0,1024, 600), "../img/bgTilePanel.png")
+mainPanel_(Rect(0, 0, Globals::WINDOW_WIDTH, Globals::WINDOW_HEIGHT), "../img/bgTilePanel.png")
 {
 	
 }
@@ -38,7 +38,7 @@ void LevelEditorState::initGUI()
 	);
 
 	Panel leftPanel  = Panel(leftRect, "../img/leftPanelBg.png");
-	Panel rightPanel = Panel(rightRect, "../img/leftPanelBg.png");
+	Panel rightPanel = Panel(rightRect, "../img/rightPanelBg.png");
 
 	mainPanel_.add(leftPanel, leftRectProportion);
 	mainPanel_.add(rightPanel, rightRectProportion);
@@ -48,12 +48,12 @@ void LevelEditorState::update(float dt)
 {
 	InputHandler::getInstance().update();
 
-	mainPanel_.update();
+	if (InputHandler::getInstance().getScreenResized())
+	{
+		mainPanel_.setRect(Rect(0, 0, Globals::WINDOW_WIDTH, Globals::WINDOW_HEIGHT));
+	}
 
-	// if (InputHandler::getInstance().getScreenResized())
-	// {
-	// 	mainPanel_.
-	// }
+	mainPanel_.update();
 
 	if(InputHandler::getInstance().quitRequested()) {
 		setQuit(true);
