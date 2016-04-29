@@ -1,21 +1,27 @@
-// #ifndef TILESPANEL_HPP
-// #define TILESPANEL_HPP
+#ifndef TILESPANEL_HPP
+#define TILESPANEL_HPP
 
-// #include "Sprite.hpp"
+#include <string>
 
-// class TilesPanel
-// {
-// public:
-// 	TilesPanel(int screenWidth, int screenHeight);
-// 	~TilesPanel(){}
-// 	void update();
-// 	void render();
+#include "Panel.hpp"
+#include "TileSet.hpp"
+#include "TileMap.hpp"
+#include "Sprite.hpp"
+#include "LevelEditorSystem.hpp"
 
-// private:
-// 	int screenWidth_;
-// 	int screenHeight_;
-// 	float width_;
-// 	Sprite border_;
-// };
+class TilesPanel : public Panel
+{
+public:
+	TilesPanel(Rect rect, std::string imgPath);
+	~TilesPanel(){}
+	virtual void update();
+	virtual void render();
 
-// #endif
+private:
+	TileSet* tileSet_;
+	TileMap* tileMap_;
+
+	LevelEditorSystem* editorSystem_;
+};
+
+#endif

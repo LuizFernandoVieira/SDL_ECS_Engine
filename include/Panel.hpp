@@ -13,14 +13,14 @@ class Panel
 public:
 	Panel(Rect rect, std::string imgPath);
 	~Panel() {}
-	void update();
-	void render();
-	void add(Panel panel, Rect rect);
+	virtual void update();
+	virtual void render();
+	void add(Panel& panel, Rect rect);
 	void add(Button button);
 	Rect getRect();
 	void setRect(Rect rect);
-private:
-	std::vector<std::pair<Panel, Rect> > panels_;
+protected:
+	std::vector<std::pair<Panel*, Rect> > panels_;
 	std::vector<Button> buttons_;
 	Rect rect_;
 	Sprite bg_;

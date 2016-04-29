@@ -33,8 +33,8 @@ public:
 	int getMouseX();
 	int getMouseY();
 	bool getScreenResized();
-	int getScreenWidth();
-	int getScreenHeight();
+	// int getScreenWidth();
+	// int getScreenHeight();
 	bool quitRequested();
 private:
 	InputHandler();
@@ -47,8 +47,8 @@ private:
 	int updateCounter;
 	int mouseX;
 	int mouseY;
-	int screenWidth;
-	int screenHeight;
+	// int screenWidth;
+	// int screenHeight;
 	bool screenResized;
 };
 

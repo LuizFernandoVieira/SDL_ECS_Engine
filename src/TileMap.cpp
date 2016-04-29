@@ -56,12 +56,10 @@ void TileMap::render(int cameraX, int cameraY)
 	for (int i = 0; i < mapDepth_; i++) {
 		renderLayer(i, cameraX, cameraY);
 	}
-	tileSet_->render (02, 0, 0);
 }
 
 void TileMap::renderLayer(int layer, int cameraX, int cameraY)
 {
-	// std::cout << "idj: " << at(31, 16, 0) << std::endl;
 	for (int i = 0; i < mapHeight_; i++) {
 		for (int j = 0; j < mapWidth_; j++) {
 			if (at(j, i, layer) >= 0) {
@@ -72,8 +70,8 @@ void TileMap::renderLayer(int layer, int cameraX, int cameraY)
 				// }
 				tileSet_->render( 
 					(unsigned)at(j, i, layer), 
-					(float)(j * tileSet_->getTileWidth() - cameraX * layer), 
-					(float)(i * tileSet_->getTileHeight() - cameraY * layer) 
+					(float)(j * tileSet_->getTileWidth() + cameraX - cameraX * layer), 
+					(float)(i * tileSet_->getTileHeight() + cameraY - cameraY * layer) 
 				);
 			}
 		}

@@ -6,6 +6,7 @@
 #include "StateEventEnum.hpp"
 #include "FirstLevelEditor.hpp"
 #include "Panel.hpp"
+#include "TilesPanel.hpp"
 
 class LevelEditorState: public State
 {

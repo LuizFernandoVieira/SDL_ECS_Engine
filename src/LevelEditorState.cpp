@@ -5,7 +5,6 @@
 LevelEditorState::LevelEditorState() : 
 mainPanel_(Rect(0, 0, Globals::WINDOW_WIDTH, Globals::WINDOW_HEIGHT), "../img/bgTilePanel.png")
 {
-	
 }
 
 LevelEditorState::~LevelEditorState()
@@ -37,11 +36,11 @@ void LevelEditorState::initGUI()
 		rightRectProportion.h() * mainPanel_.getRect().h()
 	);
 
-	Panel leftPanel  = Panel(leftRect, "../img/leftPanelBg.png");
-	Panel rightPanel = Panel(rightRect, "../img/rightPanelBg.png");
+	Panel* leftPanel  = new Panel(leftRect, "../img/leftPanelBg.png");
+	Panel* rightPanel = new TilesPanel(rightRect, "../img/rightPanelBg.png");
 
-	mainPanel_.add(leftPanel, leftRectProportion);
-	mainPanel_.add(rightPanel, rightRectProportion);
+	mainPanel_.add(*leftPanel, leftRectProportion);
+	mainPanel_.add(*rightPanel, rightRectProportion);
 }
 
 void LevelEditorState::update(float dt)

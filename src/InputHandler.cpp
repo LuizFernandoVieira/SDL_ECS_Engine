@@ -90,7 +90,7 @@ void InputHandler::update()
 			{
 				// screenWidth = event.window.data1,
 				// screenHeight = event.window.data2;
-				Globals::WINDOW_WIDTH = event.window.data1,
+				Globals::WINDOW_WIDTH = event.window.data1;
 				Globals::WINDOW_HEIGHT = event.window.data2;
 				screenResized = true;
 			}
@@ -187,12 +187,12 @@ bool InputHandler::getScreenResized()
 	return screenResized;
 }
 
-int InputHandler::getScreenWidth()
-{
-	return screenWidth;
-}
+// int InputHandler::getScreenWidth()
+// {
+// 	return screenWidth;
+// }
 
-int InputHandler::getScreenHeight()
-{
-	return screenHeight;
-}
+// int InputHandler::getScreenHeight()
+// {
+// 	return screenHeight;
+// }
