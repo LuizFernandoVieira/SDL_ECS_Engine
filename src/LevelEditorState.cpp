@@ -49,8 +49,8 @@ void LevelEditorState::initGUI()
 	Panel* rightPanel = new TilesPanel(*tileSet_, rightRect, "../img/rightPanelBg.png");
 	Panel* tilesPanel = new Panel(tilesRect, "../img/god.png");
 
-	mainPanel_.add(*leftPanel, leftRectProportion);
 	mainPanel_.add(*rightPanel, rightRectProportion);
+	mainPanel_.add(*leftPanel, leftRectProportion);
 	leftPanel->add(*tilesPanel, tilesRectProportion);
 
 	int nTilesRow = tilesRect.w() / (32 + 2);

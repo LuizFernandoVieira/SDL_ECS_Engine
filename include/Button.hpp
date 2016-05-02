@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "Sprite.hpp"
+#include "StaticSprite.hpp"
 #include "Rect.hpp"
 
 class Button
@@ -19,7 +19,7 @@ public:
 	void setResizable(bool resizable);
 private:
 	Rect rect_;
-	Sprite sprite_;
+	StaticSprite sprite_;
 	bool resizable_;
 };
 

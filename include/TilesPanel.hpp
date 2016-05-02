@@ -6,7 +6,6 @@
 #include "Panel.hpp"
 #include "TileSet.hpp"
 #include "TileMap.hpp"
-#include "Sprite.hpp"
 #include "LevelEditorSystem.hpp"
 
 class TilesPanel : public Panel

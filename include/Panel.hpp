@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 
-#include "Sprite.hpp"
+#include "StaticSprite.hpp"
 #include "Rect.hpp"
 #include "Button.hpp"
 
@@ -23,7 +23,7 @@ protected:
 	std::vector<std::pair<Panel*, Rect>> panels_;
 	std::vector<std::pair<Button*, Rect>> buttons_;
 	Rect rect_;
-	Sprite bg_;
+	StaticSprite bg_;
 };
 
 #endif
