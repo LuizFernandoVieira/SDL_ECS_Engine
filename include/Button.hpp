@@ -17,6 +17,7 @@ public:
 	void setRect(Rect rect);
 	bool isResizable();
 	void setResizable(bool resizable);
+	void setSpriteClip(Rect clip);
 private:
 	Rect rect_;
 	StaticSprite sprite_;

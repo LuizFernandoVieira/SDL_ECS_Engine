@@ -13,6 +13,7 @@ public:
 	int getTileWidth() const;
 	int getTileHeight() const;
 	int getNumberOfTiles();
+	int getNumberOfColumns() { return columns_; }
 private:
 	Sprite* tileSet_;
 	int rows_;

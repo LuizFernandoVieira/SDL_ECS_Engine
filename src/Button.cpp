@@ -44,3 +44,14 @@ void Button::setResizable(bool resizable)
 {
 	resizable_ = resizable;
 }
+
+void Button::setSpriteClip(Rect clip)
+{
+	sprite_.setClip(clip.x(), clip.y(), clip.w(), clip.h());
+	sprite_.setScaleX(1.0);
+	sprite_.setScaleY(1.0);
+	// sprite_.setScaleX( rect_.w() / (float)sprite_.getWidth() );
+	// sprite_.setScaleY( rect_.h() / (float)sprite_.getHeight() );
+	sprite_.setScaleX( rect_.w() / clip.w() );
+	sprite_.setScaleY( rect_.h() / clip.h() );
+}

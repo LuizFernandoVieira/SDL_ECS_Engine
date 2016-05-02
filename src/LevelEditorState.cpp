@@ -59,7 +59,16 @@ void LevelEditorState::initGUI()
 	for(int i=0; i<tileSet_->getNumberOfTiles(); i++) {
 		if (i % nTilesRow == 0 && i != 0)
 			yOffset += tilesRect.y() + 4;
-		Button* btn = new Button(Rect( (i % nTilesRow) * (32+2) + 2 + tilesRect.x(), yOffset + tilesRect.y(), 32, 32), "../img/bg.png");
+		Button* btn = new Button(
+			Rect( 
+				(i % nTilesRow) * (32+2) + 2 + tilesRect.x(), 
+				yOffset + tilesRect.y(), 
+				32, 32), 
+			"../img/ground.png");
+		btn->setSpriteClip(Rect(
+			(i%tileSet_->getNumberOfColumns()) * 32, 
+			(int)(i/tileSet_->getNumberOfColumns()) * 32, 
+			32, 32 ));
 		tilesPanel->add(*btn, Rect());
 	}
 }
