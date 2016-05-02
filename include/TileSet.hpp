@@ -12,6 +12,7 @@ public:
 	void render(unsigned index, float x, float y);
 	int getTileWidth() const;
 	int getTileHeight() const;
+	int getNumberOfTiles();
 private:
 	Sprite* tileSet_;
 	int rows_;

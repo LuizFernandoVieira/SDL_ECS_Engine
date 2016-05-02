@@ -17,7 +17,7 @@ public:
 	~Sprite();
 	void open(const char* file);
 	void setClip(int x, int y, int w, int h);
-	void render(int x, int y, float angle = 0);
+	virtual void render(int x, int y, float angle = 0);
 	void update(float dt);
 	int getWidth();
 	int getHeight();
@@ -27,7 +27,7 @@ public:
 	void setFrame(int frame);
 	void setFrameCount(int frameCount);
 	void setFrameTime(float frameTime);
-private:
+protected:
 	std::shared_ptr<SDL_Texture> texture_;
 	int width_;
 	int height_;

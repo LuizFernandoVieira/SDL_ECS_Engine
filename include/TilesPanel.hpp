@@ -12,7 +12,7 @@
 class TilesPanel : public Panel
 {
 public:
-	TilesPanel(Rect rect, std::string imgPath);
+	TilesPanel(TileSet& tileSet, Rect rect, std::string imgPath);
 	~TilesPanel(){}
 	virtual void update();
 	virtual void render();

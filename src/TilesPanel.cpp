@@ -2,9 +2,9 @@
 #include "../include/Rect.hpp"
 // #include "../include/InputHandler.hpp"
 
-TilesPanel::TilesPanel(Rect rect, std::string imgPath) : Panel(rect, imgPath)
+TilesPanel::TilesPanel(TileSet& tileSet, Rect rect, std::string imgPath) : Panel(rect, imgPath)
 {
-	tileSet_ = new TileSet(32, 32, "../img/ground.png");
+	tileSet_ = &tileSet;
 	tileMap_ = new TileMap("../map/tileMap.txt", tileSet_);
 
 	// editorSystem_ = new LevelEditorSystem(*tileMap_, "../map/tileMap.txt");

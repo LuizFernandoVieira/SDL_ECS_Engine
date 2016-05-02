@@ -15,13 +15,13 @@ public:
 	~Panel() {}
 	virtual void update();
 	virtual void render();
+	void add(Button& button, Rect rect);
 	void add(Panel& panel, Rect rect);
-	void add(Button button);
 	Rect getRect();
 	void setRect(Rect rect);
 protected:
-	std::vector<std::pair<Panel*, Rect> > panels_;
-	std::vector<Button> buttons_;
+	std::vector<std::pair<Panel*, Rect>> panels_;
+	std::vector<std::pair<Button*, Rect>> buttons_;
 	Rect rect_;
 	Sprite bg_;
 };

@@ -41,3 +41,8 @@ int TileSet::getTileHeight() const
 {
 	return tileHeight_;
 }
+
+int TileSet::getNumberOfTiles()
+{
+	return rows_ * columns_;
+}

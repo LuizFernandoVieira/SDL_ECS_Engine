@@ -6,6 +6,7 @@
 #include "StateEventEnum.hpp"
 #include "FirstLevelEditor.hpp"
 #include "Panel.hpp"
+#include "TileSet.hpp"
 #include "TilesPanel.hpp"
 
 class LevelEditorState: public State
@@ -19,6 +20,7 @@ public:
 	void render();
 	void handle(StateEventEnum& event);
 private:
+	TileSet* tileSet_;
 	Panel mainPanel_;
 };
 
