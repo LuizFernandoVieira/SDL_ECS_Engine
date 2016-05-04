@@ -6,7 +6,7 @@
 LevelEditorState::LevelEditorState() : 
 mainPanel_(Rect(0, 0, Globals::WINDOW_WIDTH, Globals::WINDOW_HEIGHT), "../img/bgTilePanel.png")
 {
-	tileSet_ = new TileSet(32, 32, "../img/ground.png");
+	tileSet_ = new TileSet(Globals::TILE_WIDTH, Globals::TILE_HEIGHT, "../img/ground.png");
 }
 
 LevelEditorState::~LevelEditorState()
@@ -53,22 +53,32 @@ void LevelEditorState::initGUI()
 	mainPanel_.add(*leftPanel, leftRectProportion);
 	leftPanel->add(*tilesPanel, tilesRectProportion);
 
-	int nTilesRow = tilesRect.w() / (32 + 2);
-	int yOffset = 2;
+	int nTilesRow = tilesRect.w() / (Globals::TILE_WIDTH + 2);
+	int curRow = 0;
+	int curColumn = 0;
 
-	for(int i=0; i<tileSet_->getNumberOfTiles(); i++) {
+	for(int i=0; i<tileSet_->getNumberOfTiles(); i++, curColumn++)
+	{
 		if (i % nTilesRow == 0 && i != 0)
-			yOffset += tilesRect.y() + 4;
+		{
+			curRow++;
+			curColumn = 0;
+		}
 		Button* btn = new Button(
-			Rect( 
-				(i % nTilesRow) * (32+2) + 2 + tilesRect.x(), 
-				yOffset + tilesRect.y(), 
-				32, 32), 
-			"../img/ground.png");
-		btn->setSpriteClip(Rect(
-			(i%tileSet_->getNumberOfColumns()) * 32, 
-			(int)(i/tileSet_->getNumberOfColumns()) * 32, 
-			32, 32 ));
+			Rect(
+				curColumn * (Globals::TILE_WIDTH + 2) + 2 + tilesRect.x(),
+				curRow * (Globals::TILE_HEIGHT + 2) + 2 + tilesRect.y(),
+				Globals::TILE_WIDTH, 
+				Globals::TILE_HEIGHT), 
+			"../img/ground.png"
+		);
+		btn->setSpriteClip(
+			Rect(
+				(i%tileSet_->getNumberOfColumns()) * Globals::TILE_WIDTH, 
+				(int)(i/tileSet_->getNumberOfColumns()) * Globals::TILE_HEIGHT, 
+				Globals::TILE_WIDTH, 
+				Globals::TILE_HEIGHT )
+		);
 		tilesPanel->add(*btn, Rect());
 	}
 }

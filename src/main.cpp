@@ -5,6 +5,8 @@
 
 int Globals::WINDOW_WIDTH = 1024;
 int Globals::WINDOW_HEIGHT = 600;
+int Globals::TILE_WIDTH = 32;
+int Globals::TILE_HEIGHT = 32;
 
 int main(int argc, char *argv[])
 {

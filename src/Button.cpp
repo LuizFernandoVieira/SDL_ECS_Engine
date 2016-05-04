@@ -29,10 +29,13 @@ Rect Button::getRect() {
 void Button::setRect(Rect rect)
 {
 	rect_ = rect;
-	sprite_.setScaleX(1.0);
-	sprite_.setScaleY(1.0);
-	sprite_.setScaleX( rect_.w() / (float)sprite_.getWidth() );
-	sprite_.setScaleY( rect_.h() / (float)sprite_.getHeight() );
+	if (resizable_)
+	{
+		sprite_.setScaleX(1.0);
+		sprite_.setScaleY(1.0);
+		sprite_.setScaleX( rect_.w() / (float)sprite_.getWidth() );
+		sprite_.setScaleY( rect_.h() / (float)sprite_.getHeight() );
+	}
 }
 
 bool Button::isResizable()

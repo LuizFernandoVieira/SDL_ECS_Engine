@@ -4,6 +4,7 @@
 #include "../include/TransformComponent.hpp"
 #include "../include/StateComponent.hpp"
 #include "../include/RenderComponent.hpp"
+#include "../include/Globals.hpp"
 
 unsigned int FirstLevel::nextId_ = 0;
 
@@ -11,7 +12,7 @@ FirstLevel::FirstLevel(State& state)
 {
 	state_ = &state;
 
-	tileSet_ = new TileSet(32, 32, "../img/ground.png");
+	tileSet_ = new TileSet(Globals::TILE_WIDTH, Globals::TILE_HEIGHT, "../img/ground.png");
 	tileMap_ = new TileMap("../map/tileMap.txt", tileSet_);
 
 	createPlayer();

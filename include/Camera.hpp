@@ -13,9 +13,7 @@ public:
 	static void unfollow();
 	static void update(float dt);
 	static Vec2 getPosition();
-	// static void setInputHandler(InputHandler& inputHandler);
 private:
-	// static InputHandler* inputHandler_;
 	static GameObject* focus_;
 	static Vec2 pos_;
 	static Vec2 speed_;

@@ -1,5 +1,6 @@
 #include "../include/Panel.hpp"
 #include "../include/InputHandler.hpp"
+#include "../include/Globals.hpp"
 
 Panel::Panel(Rect rect, std::string imgPath) : rect_(rect), bg_(imgPath.c_str())
 {
@@ -22,7 +23,14 @@ void Panel::update()
 			);
 			it->first->setRect(newPanelSize);
 		}
-		for(auto it=buttons_.begin(); it!=buttons_.end(); ++it ) {
+
+		int nTilesRow = rect_.w() / (Globals::TILE_WIDTH + 2);
+		int curRow = 0;
+		int curColumn = 0;
+		int i = 0;
+
+		for(auto it=buttons_.begin(); it!=buttons_.end(); ++it, i++, curColumn++ )
+		{
 			if (it->first->isResizable())
 			{
 				Rect newButtonSize = Rect(
@@ -32,6 +40,21 @@ void Panel::update()
 					it->second.h() * rect_.h()
 				);
 				it->first->setRect(newButtonSize);
+			}
+			else
+			{
+				if (i % nTilesRow == 0 && i != 0)
+				{
+					curRow++;
+					curColumn = 0;
+				}
+				it->first->setRect(
+					Rect( 
+						curColumn * (Globals::TILE_WIDTH + 2) + 2 + rect_.x(),
+						curRow * (Globals::TILE_HEIGHT + 2) + 2 + rect_.y(),
+						Globals::TILE_WIDTH, 
+						Globals::TILE_HEIGHT)
+				);
 			}
 		}
 	}
