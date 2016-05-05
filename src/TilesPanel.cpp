@@ -58,6 +58,8 @@ void TilesPanel::placeTile(int x, int y)
 	int mapHeight;
 	int mapDepth;
 	char comma;
+	char* endOfLine;
+	char aux;
 
 	fs.open(tileMapFilename_, std::fstream::in | std::fstream::out);
 
@@ -73,20 +75,41 @@ void TilesPanel::placeTile(int x, int y)
 	fs >> mapDepth;
 	fs >> comma;
 
+	// fs.getline(endOfLine, 256); // \n
+	// fs.getline(endOfLine, 256); // \n
+
+	// for (int i = 0; i < 7; i++)
+	// {
+	// 	fs.get(aux);
+	// 	switch(aux)
+	// 	{
+	// 		case '\n':
+	// 			std::cout << "barra n" << std::endl;
+	// 			break;
+	// 		case '\r':
+	// 			std::cout << "barra r" << std::endl;
+	// 			break;
+	// 		default:
+	// 			std::cout << aux << std::endl;
+	// 			break;
+	// 	}
+	// }
+
 	int location = x + y*mapWidth + 0*mapWidth*mapHeight;
 	int withComma = 3;
-	int firstBreakLine = 2;
-
-	// std::cout << "(x,y): " << x << ", " << y << std::endl;
-	// std::cout << "linear: " << location << std::endl;
 
 	fs.seekp(fs.tellg(), std::ios_base::beg);
-	fs.seekp( location * withComma + firstBreakLine + y, std::ios_base::cur );
+
+	#ifdef __APPLE__
+		int firstBreakLine = 2;
+		fs.seekp( location * withComma + firstBreakLine + y, std::ios_base::cur );
+	#else
+		fs.seekp( (location-1) * withComma + /*firstBreakLine +*/ y * 2, std::ios_base::cur );
+	#endif
 
 	fs << "02";
 
 	fs.close();
-
 
 	tileMap_->tileMatrix_[x + y*mapWidth + 0*mapWidth*mapHeight] = 02;
 }

@@ -41,6 +41,8 @@ void LevelEditorSystem::placeTile(int x, int y)
 	int mapHeight;
 	int mapDepth;
 	char comma;
+	char aux;
+	int index;
 
 	fs.open(tileMapFilename_, std::fstream::in | std::fstream::out);
 
@@ -56,17 +58,38 @@ void LevelEditorSystem::placeTile(int x, int y)
 	fs >> mapDepth;
 	fs >> comma;
 
+	for (int i = 0; i < 7; i++)
+	{
+		fs.get(aux);
+		switch(aux)
+		{
+			case '\n':
+				std::cout << "barra n" << std::endl;
+				break;
+			case '\r':
+				std::cout << "barra r" << std::endl;
+				break;
+			default:
+				std::cout << aux << std::endl;
+				break;
+		}
+	}
+	// fs.getline(str, 256); // \n
+	// fs.getline(str, 256); // \n
+
+
 	int location = x + y*mapWidth + 0*mapWidth*mapHeight;
 	int withComma = 3;
-	int firstBreakLine = 2;
+	// int firstBreakLine = 2;
 
 	// std::cout << "(x,y): " << x << ", " << y << std::endl;
 	// std::cout << "linear: " << location << std::endl;
 
-	fs.seekp(fs.tellg(), std::ios_base::beg);
-	fs.seekp( location * withComma + firstBreakLine + y, std::ios_base::cur );
+	// fs.seekp(fs.tellg(), std::ios_base::beg);
+	// fs.seekp( location * withComma + /*firstBreakLine +*/ y, std::ios_base::cur );
+	// for (int i = 0; i < location; i++)
 
-	fs << "02";
+	// fs << "02";
 
 	fs.close();
 
