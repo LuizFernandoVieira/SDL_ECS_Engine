@@ -7,10 +7,13 @@ LevelEditorState::LevelEditorState() :
 mainPanel_(Rect(0, 0, Globals::WINDOW_WIDTH, Globals::WINDOW_HEIGHT), "../img/bgTilePanel.png")
 {
 	tileSet_ = new TileSet(Globals::TILE_WIDTH, Globals::TILE_HEIGHT, "../img/ground.png");
+	tileMap_ = new TileMap("../map/tileMap.txt", tileSet_);
 }
 
 LevelEditorState::~LevelEditorState()
 {
+	delete tileMap_;
+	delete tileSet_;
 }
 
 void LevelEditorState::create(StateMachine& stateMachine)
@@ -26,27 +29,12 @@ void LevelEditorState::initGUI()
 	Rect rightRectProportion = Rect(0.2, 0.00, 0.8, 1.0);
 	Rect tilesRectProportion = Rect(0.1, 0.05, 0.8, 0.9);
 
-	Rect leftRect  = Rect(
-		leftRectProportion.x() * mainPanel_.getRect().w() + mainPanel_.getRect().x(),
-		leftRectProportion.y() * mainPanel_.getRect().h() + mainPanel_.getRect().y(),
-		leftRectProportion.w() * mainPanel_.getRect().w(),
-		leftRectProportion.h() * mainPanel_.getRect().h()
-	);
-	Rect rightRect = Rect(
-		rightRectProportion.x() * mainPanel_.getRect().w() + mainPanel_.getRect().x(),
-		rightRectProportion.y() * mainPanel_.getRect().h() + mainPanel_.getRect().y(),
-		rightRectProportion.w() * mainPanel_.getRect().w(),
-		rightRectProportion.h() * mainPanel_.getRect().h()
-	);
-	Rect tilesRect = Rect(
-		tilesRectProportion.x() * leftRect.w() + leftRect.x(),
-		tilesRectProportion.y() * leftRect.h() + leftRect.y(),
-		tilesRectProportion.w() * leftRect.w(),
-		tilesRectProportion.h() * leftRect.h()
-	);
+	Rect leftRect  = getPanelRect(mainPanel_.getRect(), leftRectProportion);
+	Rect rightRect = getPanelRect(mainPanel_.getRect(), rightRectProportion);
+	Rect tilesRect = getPanelRect(leftRect, tilesRectProportion);
 
 	Panel* leftPanel  = new Panel(leftRect, "../img/leftPanelBg.png");
-	Panel* rightPanel = new TilesPanel(*tileSet_, rightRect, "../img/rightPanelBg.png");
+	Panel* rightPanel = new TilesPanel(*tileSet_, *tileMap_, rightRect, "../img/rightPanelBg.png");
 	Panel* tilesPanel = new Panel(tilesRect, "../img/god.png");
 
 	mainPanel_.add(*rightPanel, rightRectProportion);
@@ -109,4 +97,15 @@ void LevelEditorState::render()
 void LevelEditorState::handle(StateEventEnum& event)
 {
 
+}
+
+
+Rect LevelEditorState::getPanelRect(Rect& parent, Rect& proportions)
+{
+	return Rect(
+		proportions.x() * parent.w() + parent.x(),
+		proportions.y() * parent.h() + parent.y(),
+		proportions.w() * parent.w(),
+		proportions.h() * parent.h()
+	);
 }

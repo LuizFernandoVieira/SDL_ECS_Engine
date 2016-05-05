@@ -12,12 +12,12 @@ class Panel
 {
 public:
 	Panel(Rect rect, std::string imgPath);
-	~Panel() {}
+	~Panel();
 	virtual void update();
 	virtual void render();
 	void add(Button& button, Rect rect);
 	void add(Panel& panel, Rect rect);
-	Rect getRect();
+	Rect& getRect();
 	void setRect(Rect rect);
 protected:
 	std::vector<std::pair<Panel*, Rect>> panels_;

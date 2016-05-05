@@ -7,6 +7,7 @@
 #include "FirstLevelEditor.hpp"
 #include "Panel.hpp"
 #include "TileSet.hpp"
+#include "TileMap.hpp"
 #include "TilesPanel.hpp"
 
 class LevelEditorState: public State
@@ -20,7 +21,10 @@ public:
 	void render();
 	void handle(StateEventEnum& event);
 private:
+	Rect getPanelRect(Rect& parent, Rect& proportions);
+
 	TileSet* tileSet_;
+	TileMap* tileMap_;
 	Panel mainPanel_;
 };
 

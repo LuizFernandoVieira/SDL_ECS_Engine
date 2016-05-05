@@ -99,7 +99,7 @@ void Game::initRenderer()
 		std::cerr << "Erro na criacao do renderizador do jogo" << 
 			std::endl << SDL_GetError() << std::endl;
 		exit(1);
-	}	
+	}
 }
 
 void Game::initControllers()

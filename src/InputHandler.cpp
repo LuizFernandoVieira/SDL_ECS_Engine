@@ -177,6 +177,11 @@ int InputHandler::getMouseY()
 	return mouseY;
 }
 
+Vec2 InputHandler::getMouse()
+{
+	return Vec2(mouseX, mouseY);
+}
+
 bool InputHandler::quitRequested()
 {
 	return quit;

@@ -10,6 +10,8 @@
 #include <iostream>
 #include <vector>
 
+#include "Vec2.hpp"
+
 #define LEFT_ARROW_KEY SDLK_LEFT
 #define RIGHT_ARROW_KEY SDLK_RIGHT
 #define UP_ARROW_KEY SDLK_UP
@@ -32,6 +34,7 @@ public:
 	bool isMouseDown(int button);
 	int getMouseX();
 	int getMouseY();
+	Vec2 getMouse();
 	bool getScreenResized();
 	// int getScreenWidth();
 	// int getScreenHeight();

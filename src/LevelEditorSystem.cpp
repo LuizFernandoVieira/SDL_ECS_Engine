@@ -1,5 +1,5 @@
 #include "../include/LevelEditorSystem.hpp"
-
+#include "../include/Globals.hpp"
 #include "../include/InputHandler.hpp"
 #include "../include/Rect.hpp"
 
@@ -20,16 +20,16 @@ LevelEditorSystem::~LevelEditorSystem()
 void LevelEditorSystem::update(TransformComponent* tc)
 {
 	// Tile da tela q o ponteiro do mouse está em cima
-	int tileX = (int)(InputHandler::getInstance().getMouseX() / 32) * 32;
-	int tileY = (int)(InputHandler::getInstance().getMouseY() / 32) * 32;
+	int tileX = (int)(InputHandler::getInstance().getMouseX() / Globals::TILE_WIDTH) * Globals::TILE_WIDTH;
+	int tileY = (int)(InputHandler::getInstance().getMouseY() / Globals::TILE_HEIGHT) * Globals::TILE_HEIGHT;
 
 	// Mover o God para este tile
-	Rect* rect = new Rect( tileX, tileY, 32, 32 );
+	Rect* rect = new Rect( tileX, tileY, Globals::TILE_WIDTH, Globals::TILE_HEIGHT );
 	tc->setRect(*rect);
 
 	if (InputHandler::getInstance().mousePress(LEFT_MOUSE_BUTTON))
 	{
-		placeTile(tileX / 32, tileY / 32);
+		placeTile(tileX / Globals::TILE_WIDTH, tileY / Globals::TILE_HEIGHT);
 	}
 }
 

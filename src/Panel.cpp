@@ -9,6 +9,13 @@ Panel::Panel(Rect rect, std::string imgPath) : rect_(rect), bg_(imgPath.c_str())
 }
 
 
+Panel::~Panel()
+{
+	panels_.clear();
+	buttons_.clear();
+}
+
+
 void Panel::update()
 {
 	if (InputHandler::getInstance().getScreenResized())
@@ -88,7 +95,7 @@ void Panel::add(Button& button, Rect rect)
 	buttons_.emplace_back(std::pair<Button*, Rect>(&button, rect));
 }
 
-Rect Panel::getRect() {
+Rect& Panel::getRect() {
 	return rect_;
 }
 

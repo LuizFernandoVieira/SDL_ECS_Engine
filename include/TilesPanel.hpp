@@ -2,25 +2,31 @@
 #define TILESPANEL_HPP
 
 #include <string>
+#include <iostream>
 
-#include "Panel.hpp"
+#include "Rect.hpp"
+#include "Sprite.hpp"
 #include "TileSet.hpp"
 #include "TileMap.hpp"
-#include "LevelEditorSystem.hpp"
+#include "Panel.hpp"
 
 class TilesPanel : public Panel
 {
 public:
-	TilesPanel(TileSet& tileSet, Rect rect, std::string imgPath);
-	~TilesPanel(){}
+	TilesPanel(TileSet& tileSet, TileMap& tileMap, Rect rect, std::string imgPath);
+	~TilesPanel();
 	virtual void update();
 	virtual void render();
 
 private:
+	void placeTile(int x, int y);
+
 	TileSet* tileSet_;
 	TileMap* tileMap_;
+	std::string tileMapFilename_;
 
-	LevelEditorSystem* editorSystem_;
+	Rect cursorPos_;
+	Sprite cursorBg_;
 };
 
 #endif
