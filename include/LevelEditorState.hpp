@@ -26,6 +26,12 @@ private:
 	TileSet* tileSet_;
 	TileMap* tileMap_;
 	Panel mainPanel_;
+
+	std::vector<Button*> tileButtons_;
+
+	int selectedTile;
 };
+
+void tileBtnExecute(State* state);
 
 #endif

@@ -1,11 +1,17 @@
 A fazer:
 
-- Deletar classe Entity;
 - Acrescentar largura, altura, escala e rotação na transform component;
 - Acrescentar argumentos nos construtores dos components;
 - DELETAR PONTEIROS!!!!!!!!!!!!!!!!!!!
-- Organizar em pastas
 
-Adicionais:
 
-- Alterar input para singleton ou arrumar os commands;
+============ EDITOR DE MAPA ====================
+
+- Selecionar botão dos tiles;
+- Add/alterar tiles na visualização e no arquivo;
+- Scroll dos painéis;
+- Ferramentas add/remover tiles;
+- Drag para add/remover tiles;
+- Add/remover/selecionar objetos;
+- Abas para layers parallax;
+- Selecionar tile set / tile map;

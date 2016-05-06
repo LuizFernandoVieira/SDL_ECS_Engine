@@ -8,6 +8,7 @@ mainPanel_(Rect(0, 0, Globals::WINDOW_WIDTH, Globals::WINDOW_HEIGHT), "../img/bg
 {
 	tileSet_ = new TileSet(Globals::TILE_WIDTH, Globals::TILE_HEIGHT, "../img/ground.png");
 	tileMap_ = new TileMap("../map/tileMap.txt", tileSet_);
+	selectedTile = 0;
 }
 
 LevelEditorState::~LevelEditorState()
@@ -58,7 +59,8 @@ void LevelEditorState::initGUI()
 				curRow * (Globals::TILE_HEIGHT + 2) + 2 + tilesRect.y(),
 				Globals::TILE_WIDTH, 
 				Globals::TILE_HEIGHT), 
-			"../img/ground.png"
+			"../img/ground.png",
+			tileBtnExecute
 		);
 		btn->setSpriteClip(
 			Rect(
@@ -68,6 +70,7 @@ void LevelEditorState::initGUI()
 				Globals::TILE_HEIGHT )
 		);
 		tilesPanel->add(*btn, Rect());
+		tileButtons_.push_back(btn);
 	}
 }
 
@@ -80,9 +83,23 @@ void LevelEditorState::update(float dt)
 		mainPanel_.setRect(Rect(0, 0, Globals::WINDOW_WIDTH, Globals::WINDOW_HEIGHT));
 	}
 
+	Camera::update(dt);
+
 	mainPanel_.update();
 
-	Camera::update(dt);
+	if (InputHandler::getInstance().mousePress(LEFT_MOUSE_BUTTON))
+	{
+		for (int i = 0; i < tileButtons_.size(); i++)
+		{
+			if (tileButtons_[i]->getRect().isInside(InputHandler::getInstance().getMouse()))
+			{
+				tileButtons_[i]->execute_(this);
+				selectedTile = i;
+			}
+		}
+	}
+
+	std::cout << selectedTile << std::endl;
 
 	if(InputHandler::getInstance().quitRequested()) {
 		setQuit(true);
@@ -108,4 +125,10 @@ Rect LevelEditorState::getPanelRect(Rect& parent, Rect& proportions)
 		proportions.w() * parent.w(),
 		proportions.h() * parent.h()
 	);
+}
+
+
+void tileBtnExecute(State* state)
+{
+	
 }

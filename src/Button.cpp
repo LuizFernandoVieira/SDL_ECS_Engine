@@ -1,11 +1,13 @@
 #include "../include/Button.hpp"
 #include "../include/InputHandler.hpp"
 
-Button::Button(Rect rect, std::string imgPath): rect_(rect), sprite_(imgPath.c_str())
+Button::Button(Rect rect, std::string imgPath, std::function<void(State*)> execute) : 
+	rect_(rect), sprite_(imgPath.c_str())
 {
 	sprite_.setScaleX( rect_.w() / (float)sprite_.getWidth() );
 	sprite_.setScaleY( rect_.h() / (float)sprite_.getHeight() );
 	resizable_ = false;
+	execute_ = execute;
 }
 
 Button::~Button()
@@ -15,14 +17,13 @@ Button::~Button()
 
 void Button::update()
 {
-	if (InputHandler::getInstance().mousePress(LEFT_MOUSE_BUTTON))
-	{
-		if (rect_.isInside(InputHandler::getInstance().getMouse()))
-		{
-			// DO SOMETHING
-			// execute();
-		}
-	}
+	// if (InputHandler::getInstance().mousePress(LEFT_MOUSE_BUTTON))
+	// {
+	// 	if (rect_.isInside(InputHandler::getInstance().getMouse()))
+	// 	{
+	// 		execute_(state_);
+	// 	}
+	// }
 }
 
 void Button::render()
