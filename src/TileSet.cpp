@@ -17,7 +17,7 @@ TileSet::TileSet(int tileWidth, int tileHeight, const char* file)
 
 void TileSet::render(unsigned index, float x, float y)
 {
-	if(index > rows_*columns_) {
+	if((int)index > rows_*columns_) {
 		//throw std::invalid_argument("Indice muito grande para o numero de tiles");
 		std::cout << "Indice muito grande para o numero de tiles" << std::endl;
 		std::cout << "index: " << index << std::endl;

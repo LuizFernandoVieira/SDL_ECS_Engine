@@ -5,7 +5,6 @@
 #include "StateMachine.hpp"
 #include "StateEventEnum.hpp"
 #include "FirstLevel.hpp"
-#include "FirstLevelEditor.hpp"
 
 class GameState: public State
 {

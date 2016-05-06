@@ -4,7 +4,6 @@
 #include "State.hpp"
 #include "StateMachine.hpp"
 #include "StateEventEnum.hpp"
-#include "FirstLevelEditor.hpp"
 #include "Panel.hpp"
 #include "TileSet.hpp"
 #include "TileMap.hpp"

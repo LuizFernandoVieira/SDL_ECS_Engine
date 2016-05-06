@@ -89,7 +89,7 @@ void LevelEditorState::update(float dt)
 
 	if (InputHandler::getInstance().mousePress(LEFT_MOUSE_BUTTON))
 	{
-		for (int i = 0; i < tileButtons_.size(); i++)
+		for (int i = 0; i < (int)tileButtons_.size(); i++)
 		{
 			if (tileButtons_[i]->getRect().isInside(InputHandler::getInstance().getMouse()))
 			{
