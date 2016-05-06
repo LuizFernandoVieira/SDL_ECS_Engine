@@ -35,7 +35,7 @@ void LevelEditorState::initGUI()
 	Rect tilesRect = getPanelRect(leftRect, tilesRectProportion);
 
 	Panel* leftPanel  = new Panel(leftRect, "../img/leftPanelBg.png");
-	Panel* rightPanel = new TilesPanel(*tileSet_, *tileMap_, rightRect, "../img/rightPanelBg.png");
+	Panel* rightPanel = new TilesPanel(*tileSet_, *tileMap_, rightRect, "../img/rightPanelBg.png", selectedTile);
 	Panel* tilesPanel = new Panel(tilesRect, "../img/god.png");
 
 	mainPanel_.add(*rightPanel, rightRectProportion);
@@ -98,8 +98,6 @@ void LevelEditorState::update(float dt)
 			}
 		}
 	}
-
-	std::cout << selectedTile << std::endl;
 
 	if(InputHandler::getInstance().quitRequested()) {
 		setQuit(true);

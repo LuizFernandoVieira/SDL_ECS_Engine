@@ -78,6 +78,21 @@ Vec2 Vec2::operator* (const float& e) const
 // 	return Vec2;
 // }
 
+bool Vec2::operator== (const Vec2& v) const
+{
+	if(x_ == v.x() && y_ == v.y())
+		return true;
+	else
+		return false;
+}
+
+bool Vec2::operator!= (const Vec2& v) const
+{
+	if(x_ != v.x() || y_ != v.y())
+		return true;
+	else
+		return false;
+}
 
 void Vec2::Rotate(float angle)
 {

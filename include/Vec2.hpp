@@ -23,6 +23,10 @@ public:
 	Vec2 operator* (const float& e) const;
 	// Point operator/ (const float& e) const;
 
+	// Operações Lógicas
+	bool operator== (const Vec2& v) const;
+	bool operator!= (const Vec2& v) const;
+
 	// Rotacionar vetor em torno da origem
 	void Rotate(float angle);
 	// Rotacionar vetor em torno do ponto vec2 enviado

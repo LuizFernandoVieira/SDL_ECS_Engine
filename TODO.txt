@@ -7,7 +7,7 @@ A fazer:
 
 ============ EDITOR DE MAPA ====================
 
-- Selecionar botão dos tiles;
+
 - Add/alterar tiles na visualização e no arquivo;
 - Scroll dos painéis;
 - Ferramentas add/remover tiles;
