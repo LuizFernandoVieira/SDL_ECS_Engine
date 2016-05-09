@@ -10,17 +10,19 @@
 #include "TileSet.hpp"
 #include "TileMap.hpp"
 #include "Panel.hpp"
+#include "LevelEditorState.hpp"
 
 class TilesPanel : public Panel
 {
 public:
-	TilesPanel(TileSet& tileSet, TileMap& tileMap, Rect rect, std::string imgPath, int& selectedTile);
+	TilesPanel(TileSet& tileSet, TileMap& tileMap, Rect rect, std::string imgPath, int& selectedTile, LevelEditorState::Tools& selectedTool);
 	~TilesPanel();
 	virtual void update();
 	virtual void render();
 
 private:
 	void placeTile(int x, int y);
+	void deleteTile(int x, int y);
 
 	TileSet* tileSet_;
 	TileMap* tileMap_;
@@ -33,6 +35,8 @@ private:
 	Vec2 curDragClick_;
 
 	int* selectedTile_;
+
+	LevelEditorState::Tools* selectedTool_;
 };
 
 #endif

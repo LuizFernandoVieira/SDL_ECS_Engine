@@ -9,6 +9,7 @@ mainPanel_(Rect(0, 0, Globals::WINDOW_WIDTH, Globals::WINDOW_HEIGHT), "../img/bg
 	tileSet_ = new TileSet(Globals::TILE_WIDTH, Globals::TILE_HEIGHT, "../img/ground.png");
 	tileMap_ = new TileMap("../map/tileMap.txt", tileSet_);
 	selectedTile = 0;
+	selectedTool_ = DELETE;
 }
 
 LevelEditorState::~LevelEditorState()
@@ -26,21 +27,35 @@ void LevelEditorState::create(StateMachine& stateMachine)
 
 void LevelEditorState::initGUI()
 {
-	Rect leftRectProportion  = Rect(0.0, 0.00, 0.2, 1.0);
-	Rect rightRectProportion = Rect(0.2, 0.00, 0.8, 1.0);
-	Rect tilesRectProportion = Rect(0.1, 0.05, 0.8, 0.9);
+	Rect leftRectProportion  				= Rect(0.0, 0.00, 0.20, 1.00);
+	Rect rightRectProportion 				= Rect(0.2, 0.00, 0.80, 1.00);
+	Rect tilesRectProportion 				= Rect(0.1, 0.10, 0.80, 0.80);
+	Rect addTilesRectProportion 		= Rect(0.1, 0.025, 0.15, 0.05);
+	Rect selectTilesRectProportion 	= Rect(0.3, 0.025, 0.15, 0.05);
+	Rect deleteTilesRectProportion  = Rect(0.5, 0.025, 0.15, 0.05);
 
-	Rect leftRect  = getPanelRect(mainPanel_.getRect(), leftRectProportion);
-	Rect rightRect = getPanelRect(mainPanel_.getRect(), rightRectProportion);
-	Rect tilesRect = getPanelRect(leftRect, tilesRectProportion);
+	Rect leftRect  				= getPanelRect(mainPanel_.getRect(), leftRectProportion);
+	Rect rightRect 				= getPanelRect(mainPanel_.getRect(), rightRectProportion);
+	Rect tilesRect 				= getPanelRect(leftRect, tilesRectProportion);
+	Rect addTilesRect 		= getPanelRect(leftRect, addTilesRectProportion);
+	Rect selectTilesRect 	= getPanelRect(leftRect, selectTilesRectProportion);
+	Rect deleteTilesRect 	= getPanelRect(leftRect, deleteTilesRectProportion);
 
 	Panel* leftPanel  = new Panel(leftRect, "../img/leftPanelBg.png");
-	Panel* rightPanel = new TilesPanel(*tileSet_, *tileMap_, rightRect, "../img/rightPanelBg.png", selectedTile);
+	Panel* rightPanel = new TilesPanel(*tileSet_, *tileMap_, rightRect, "../img/rightPanelBg.png", selectedTile, selectedTool_);
 	Panel* tilesPanel = new Panel(tilesRect, "../img/god.png");
+
+	addTilesBtn_ 		= new Button(addTilesRect, "../img/addTilesBtn.png", tileBtnExecute);
+	selectTilesBtn_ = new Button(selectTilesRect, "../img/addTilesBtn.png", tileBtnExecute);
+	deleteTilesBtn_ = new Button(deleteTilesRect, "../img/addTilesBtn.png", tileBtnExecute);
 
 	mainPanel_.add(*rightPanel, rightRectProportion);
 	mainPanel_.add(*leftPanel, leftRectProportion);
 	leftPanel->add(*tilesPanel, tilesRectProportion);
+
+	leftPanel->add(*addTilesBtn_, addTilesRectProportion);
+	leftPanel->add(*selectTilesBtn_, selectTilesRectProportion);
+	leftPanel->add(*deleteTilesBtn_, deleteTilesRectProportion);
 
 	int nTilesRow = tilesRect.w() / (Globals::TILE_WIDTH + 2);
 	int curRow = 0;
@@ -89,12 +104,22 @@ void LevelEditorState::update(float dt)
 
 	if (InputHandler::getInstance().mousePress(LEFT_MOUSE_BUTTON))
 	{
-		for (int i = 0; i < (int)tileButtons_.size(); i++)
+		if (addTilesBtn_->getRect().isInside(InputHandler::getInstance().getMouse()))
 		{
-			if (tileButtons_[i]->getRect().isInside(InputHandler::getInstance().getMouse()))
+			selectedTool_ = ADD;
+		} else if (selectTilesBtn_->getRect().isInside(InputHandler::getInstance().getMouse())) {
+			selectedTool_ = SELECT;
+		} else if (deleteTilesBtn_->getRect().isInside(InputHandler::getInstance().getMouse())) {
+			selectedTool_ = DELETE;
+		} else {
+			for (int i = 0; i < (int)tileButtons_.size(); i++)
 			{
-				tileButtons_[i]->execute_(this);
-				selectedTile = i;
+				if (tileButtons_[i]->getRect().isInside(InputHandler::getInstance().getMouse()))
+				{
+					tileButtons_[i]->execute_(this);
+					selectedTile = i;
+					break;
+				}
 			}
 		}
 	}
