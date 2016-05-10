@@ -13,8 +13,8 @@ class Button
 public:
 	Button(Rect rect, std::string imgPath, std::function<void(State*)> execute);
 	~Button();
-	virtual void update();
-	virtual void render();
+	void update();
+	void render();
 	Rect getRect();
 	void setRect(Rect rect);
 	bool isResizable();

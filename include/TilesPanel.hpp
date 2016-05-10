@@ -17,8 +17,8 @@ class TilesPanel : public Panel
 public:
 	TilesPanel(TileSet& tileSet, TileMap& tileMap, Rect rect, std::string imgPath, int& selectedTile, LevelEditorState::Tools& selectedTool);
 	~TilesPanel();
-	virtual void update();
-	virtual void render();
+	void update();
+	void render();
 
 private:
 	void placeTile(int x, int y);

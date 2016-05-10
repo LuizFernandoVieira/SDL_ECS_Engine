@@ -1,4 +1,5 @@
 #include "../include/LevelEditorState.hpp"
+#include "../include/TilesPanel.hpp"
 #include "../include/InputHandler.hpp"
 #include "../include/Globals.hpp"
 #include "../include/Camera.hpp"
@@ -8,14 +9,18 @@ mainPanel_(Rect(0, 0, Globals::WINDOW_WIDTH, Globals::WINDOW_HEIGHT), "../img/bg
 {
 	tileSet_ = new TileSet(Globals::TILE_WIDTH, Globals::TILE_HEIGHT, "../img/ground.png");
 	tileMap_ = new TileMap("../map/tileMap.txt", tileSet_);
-	selectedTile = 0;
-	selectedTool_ = DELETE;
+	selectedTile_ = 0;
+	selectedTool_ = ADD;
 }
 
 LevelEditorState::~LevelEditorState()
 {
 	delete tileMap_;
 	delete tileSet_;
+	delete addTilesBtn_;
+	delete selectTilesBtn_;
+	delete deleteTilesBtn_;
+	tileButtons_.clear();
 }
 
 void LevelEditorState::create(StateMachine& stateMachine)
@@ -42,12 +47,15 @@ void LevelEditorState::initGUI()
 	Rect deleteTilesRect 	= getPanelRect(leftRect, deleteTilesRectProportion);
 
 	Panel* leftPanel  = new Panel(leftRect, "../img/leftPanelBg.png");
-	Panel* rightPanel = new TilesPanel(*tileSet_, *tileMap_, rightRect, "../img/rightPanelBg.png", selectedTile, selectedTool_);
+	Panel* rightPanel = new TilesPanel(*tileSet_, *tileMap_, rightRect, "../img/rightPanelBg.png", selectedTile_, selectedTool_);
 	Panel* tilesPanel = new Panel(tilesRect, "../img/god.png");
 
 	addTilesBtn_ 		= new Button(addTilesRect, "../img/addTilesBtn.png", tileBtnExecute);
+	addTilesBtn_->setResizable(true);
 	selectTilesBtn_ = new Button(selectTilesRect, "../img/addTilesBtn.png", tileBtnExecute);
+	selectTilesBtn_->setResizable(true);
 	deleteTilesBtn_ = new Button(deleteTilesRect, "../img/addTilesBtn.png", tileBtnExecute);
+	deleteTilesBtn_->setResizable(true);
 
 	mainPanel_.add(*rightPanel, rightRectProportion);
 	mainPanel_.add(*leftPanel, leftRectProportion);
@@ -117,7 +125,7 @@ void LevelEditorState::update(float dt)
 				if (tileButtons_[i]->getRect().isInside(InputHandler::getInstance().getMouse()))
 				{
 					tileButtons_[i]->execute_(this);
-					selectedTile = i;
+					selectedTile_ = i;
 					break;
 				}
 			}

@@ -27,6 +27,8 @@ TilesPanel::~TilesPanel()
 {
 	tileMap_ = nullptr;
 	tileSet_ = nullptr;
+	delete selectedTile_;
+	delete selectedTool_;
 }
 
 
@@ -111,7 +113,8 @@ void TilesPanel::render()
 	Panel::render();
 	tileMap_->render(rect_.x(), rect_.y());
 	// cursorBg_.render(cursorPos_.x(), cursorPos_.y());
-	tileSet_->render(*selectedTile_, cursorPos_.x(), cursorPos_.y());
+	if (rect_.isInside(InputHandler::getInstance().getMouse()))
+		tileSet_->render(*selectedTile_, cursorPos_.x(), cursorPos_.y());
 
 	// Renderizar cursor por cima dos tiles selecionados com drag
 	if (firstDragClick_ != Vec2()) {
@@ -173,7 +176,7 @@ void TilesPanel::placeTile(int x, int y)
 		int firstBreakLine = 2;		// tamanho dos dois primeiros line breaks
 		fs.seekp( location * withComma + firstBreakLine + y, std::ios_base::cur ); // + y para line breaks no final de cada linha
 	#else
-		fs.seekp( (location-1) * withComma + y * 2, std::ios_base::cur ); // nao me pergunte por que essa conta
+		fs.seekp( location * withComma + y * 2, std::ios_base::cur ); // nao me pergunte por que essa conta
 	#endif
 
 	std::ostringstream ss;
@@ -222,7 +225,7 @@ void TilesPanel::deleteTile(int x, int y)
 		int firstBreakLine = 2;		// tamanho dos dois primeiros line breaks
 		fs.seekp( location * withComma + firstBreakLine + y, std::ios_base::cur ); // + y para line breaks no final de cada linha
 	#else
-		fs.seekp( (location-1) * withComma + y * 2, std::ios_base::cur ); // nao me pergunte por que essa conta
+		fs.seekp( location * withComma + y * 2, std::ios_base::cur ); // nao me pergunte por que essa conta
 	#endif
 
 	fs << "-1";

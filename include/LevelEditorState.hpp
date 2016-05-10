@@ -39,12 +39,11 @@ private:
 	Button* selectTilesBtn_;
 	Button* deleteTilesBtn_;
 
-	int selectedTile;
+	int selectedTile_;
 	Tools selectedTool_;
 };
 
 void tileBtnExecute(State* state);
 
-#include "TilesPanel.hpp"
 
 #endif
