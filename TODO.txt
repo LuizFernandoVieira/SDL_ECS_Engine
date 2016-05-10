@@ -3,15 +3,21 @@ A fazer:
 - Acrescentar largura, altura, escala e rotação na transform component;
 - Acrescentar argumentos nos construtores dos components;
 - DELETAR PONTEIROS!!!!!!!!!!!!!!!!!!!
+- Tirar create dos states;
 
 
 ============ EDITOR DE MAPA ====================
 
-
-- Add/alterar tiles na visualização e no arquivo;
-- Scroll dos painéis;
 - Ferramentas add/remover tiles;
 - Drag para add/remover tiles;
 - Add/remover/selecionar objetos;
 - Abas para layers parallax;
-- Selecionar tile set / tile map;
+
+
+Primeira entrega
+	
+Segunda entrega
+	Scroll dos painéis;
+
+Terceira entrega
+	Selecionar tile set / tile map;
