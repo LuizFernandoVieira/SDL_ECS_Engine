@@ -7,7 +7,8 @@
 #include "Panel.hpp"
 #include "TileSet.hpp"
 #include "TileMap.hpp"
-#include "TilesPanel.hpp"
+
+class TilesPanel;
 
 class LevelEditorState: public State
 {
@@ -19,6 +20,12 @@ public:
 	void update(float dt);
 	void render();
 	void handle(StateEventEnum& event);
+	
+	enum Tools {
+		ADD,
+		SELECT,
+		DELETE
+	};
 private:
 	Rect getPanelRect(Rect& parent, Rect& proportions);
 
@@ -28,9 +35,16 @@ private:
 
 	std::vector<Button*> tileButtons_;
 
+	Button* addTilesBtn_;
+	Button* selectTilesBtn_;
+	Button* deleteTilesBtn_;
+
 	int selectedTile;
+	Tools selectedTool_;
 };
 
 void tileBtnExecute(State* state);
+
+#include "TilesPanel.hpp"
 
 #endif

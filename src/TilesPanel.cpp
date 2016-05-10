@@ -6,7 +6,7 @@
 #include "../include/InputHandler.hpp"
 #include "../include/Camera.hpp"
 
-TilesPanel::TilesPanel(TileSet& tileSet, TileMap& tileMap, Rect rect, std::string imgPath, int& selectedTile) : 
+TilesPanel::TilesPanel(TileSet& tileSet, TileMap& tileMap, Rect rect, std::string imgPath, int& selectedTile, LevelEditorState::Tools& selectedTool) : 
 	Panel(rect, imgPath), 
 	cursorPos_(rect.x(), rect.y(), Globals::TILE_WIDTH, Globals::TILE_HEIGHT),
 	cursorBg_("../img/god.png"),
@@ -19,6 +19,7 @@ TilesPanel::TilesPanel(TileSet& tileSet, TileMap& tileMap, Rect rect, std::strin
 	tileMapFilename_ = "../map/tileMap.txt"; // MUDAR ISSO!!!!
 
 	selectedTile_ = &selectedTile;
+	selectedTool_ = &selectedTool;
 }
 
 
@@ -45,7 +46,11 @@ void TilesPanel::update()
 
 		if (InputHandler::getInstance().mousePress(LEFT_MOUSE_BUTTON))
 		{
-			placeTile(tileX, tileY);
+			if(*selectedTool_ == LevelEditorState::Tools::ADD) {
+				placeTile(tileX, tileY);
+			} else if (*selectedTool_ == LevelEditorState::Tools::DELETE) {
+				deleteTile(tileX, tileY);
+			}
 		}
 		else if (InputHandler::getInstance().isMouseDown(LEFT_MOUSE_BUTTON))
 		{
@@ -80,10 +85,17 @@ void TilesPanel::update()
 
 			for(int x = smallX; x<=bigX; x+=Globals::TILE_WIDTH) {
 				for(int y = smallY; y<=bigY; y+=Globals::TILE_HEIGHT) {
-					placeTile( 
-						((x - rect_.x()) / Globals::TILE_WIDTH) + 1, // nao me pergunte por que + 1
-						(y - rect_.y()) / Globals::TILE_HEIGHT
-					);
+					if(*selectedTool_ == LevelEditorState::Tools::ADD) {
+						placeTile( 
+							((x - rect_.x()) / Globals::TILE_WIDTH) + 1, // nao me pergunte por que + 1
+							(y - rect_.y()) / Globals::TILE_HEIGHT
+						);
+					} else if (*selectedTool_ == LevelEditorState::Tools::DELETE) {
+						deleteTile(
+							((x - rect_.x()) / Globals::TILE_WIDTH) + 1,
+							(y - rect_.y()) / Globals::TILE_HEIGHT
+						);
+					}
 				}
 			}
 
@@ -176,4 +188,47 @@ void TilesPanel::placeTile(int x, int y)
 
 	// Alterar visualização em runtime
 	tileMap_->tileMatrix_[x + y*mapWidth + 0*mapWidth*mapHeight] = *selectedTile_;
+}
+
+void TilesPanel::deleteTile(int x, int y)
+{
+	std::fstream fs;
+	int mapWidth;
+	int mapHeight;
+	int mapDepth;
+	char comma;
+
+	fs.open(tileMapFilename_, std::fstream::in | std::fstream::out);
+
+	if(!fs.is_open())
+	{
+		std::cout << "ERRO: nao foi possivel abrir o tile map " << tileMapFilename_ << std::endl;
+	}
+
+	fs >> mapWidth;
+	fs >> comma;
+	fs >> mapHeight;
+	fs >> comma;
+	fs >> mapDepth;
+	fs >> comma;
+
+	int location = x + y*mapWidth + 0*mapWidth*mapHeight;
+	int withComma = 3;		// tamanho de cada tile no arquivo, dois digitos mais virgula
+
+	fs.seekp(fs.tellg(), std::ios_base::beg);
+
+	// linebreak diferente no apple e nos outros SOS
+	#ifdef __APPLE__
+		int firstBreakLine = 2;		// tamanho dos dois primeiros line breaks
+		fs.seekp( location * withComma + firstBreakLine + y, std::ios_base::cur ); // + y para line breaks no final de cada linha
+	#else
+		fs.seekp( (location-1) * withComma + y * 2, std::ios_base::cur ); // nao me pergunte por que essa conta
+	#endif
+
+	fs << "-1";
+
+	fs.close();
+
+	// Alterar visualização em runtime
+	tileMap_->tileMatrix_[x + y*mapWidth + 0*mapWidth*mapHeight] = -1;
 }
