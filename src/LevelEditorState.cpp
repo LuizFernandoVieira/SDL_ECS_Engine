@@ -32,39 +32,76 @@ void LevelEditorState::create(StateMachine& stateMachine)
 
 void LevelEditorState::initGUI()
 {
-	Rect leftRectProportion  				= Rect(0.0, 0.00, 0.20, 1.00);
-	Rect rightRectProportion 				= Rect(0.2, 0.00, 0.80, 1.00);
-	Rect tilesRectProportion 				= Rect(0.1, 0.10, 0.80, 0.80);
+	// Proportion
+	Rect leftRectProportion  				= Rect(0.0, 0.000, 0.20, 1.00);
+	Rect rightRectProportion 				= Rect(0.2, 0.050, 0.80, 0.95);
+	Rect tilesRectProportion 				= Rect(0.1, 0.100, 0.80, 0.80);
 	Rect addTilesRectProportion 		= Rect(0.1, 0.025, 0.15, 0.05);
 	Rect selectTilesRectProportion 	= Rect(0.3, 0.025, 0.15, 0.05);
 	Rect deleteTilesRectProportion  = Rect(0.5, 0.025, 0.15, 0.05);
+	Rect layersRectProportion   		= Rect(0.2, 0.000, 0.80, 0.05);
 
+	Rect layerButton1RectProportion = Rect(0.1, 0.100, 0.10, 0.80);
+	Rect layerButton2RectProportion = Rect(0.3, 0.100, 0.10, 0.80);
+	Rect layerButton3RectProportion =	Rect(0.5, 0.100, 0.10, 0.80);
+	Rect layerButton4RectProportion = Rect(0.7, 0.100, 0.10, 0.80);
+
+	// Rect
 	Rect leftRect  				= getPanelRect(mainPanel_.getRect(), leftRectProportion);
 	Rect rightRect 				= getPanelRect(mainPanel_.getRect(), rightRectProportion);
 	Rect tilesRect 				= getPanelRect(leftRect, tilesRectProportion);
 	Rect addTilesRect 		= getPanelRect(leftRect, addTilesRectProportion);
 	Rect selectTilesRect 	= getPanelRect(leftRect, selectTilesRectProportion);
 	Rect deleteTilesRect 	= getPanelRect(leftRect, deleteTilesRectProportion);
+	Rect layersRect 			= getPanelRect(mainPanel_.getRect(), layersRectProportion);
 
+	Rect layerButton1Rect = getPanelRect(layersRect, layerButton1RectProportion);
+	Rect layerButton2Rect = getPanelRect(layersRect, layerButton2RectProportion);
+	Rect layerButton3Rect = getPanelRect(layersRect, layerButton3RectProportion);
+	Rect layerButton4Rect = getPanelRect(layersRect, layerButton4RectProportion);
+
+	// Panel
 	Panel* leftPanel  = new Panel(leftRect, "../img/leftPanelBg.png");
 	Panel* rightPanel = new TilesPanel(*tileSet_, *tileMap_, rightRect, "../img/rightPanelBg.png", selectedTile_, selectedTool_);
 	Panel* tilesPanel = new Panel(tilesRect, "../img/god.png");
 
+	Panel* layersPanel = new Panel(layersRect, "../img/lp.png");
+
+	// Button
 	addTilesBtn_ 		= new Button(addTilesRect, "../img/addTilesBtn.png", tileBtnExecute);
-	addTilesBtn_->setResizable(true);
 	selectTilesBtn_ = new Button(selectTilesRect, "../img/addTilesBtn.png", tileBtnExecute);
-	selectTilesBtn_->setResizable(true);
 	deleteTilesBtn_ = new Button(deleteTilesRect, "../img/addTilesBtn.png", tileBtnExecute);
+
+	addTilesBtn_->setResizable(true);
+	selectTilesBtn_->setResizable(true);
 	deleteTilesBtn_->setResizable(true);
 
+	layerButtons_.push_back(new Button(layerButton1Rect, "../img/lb.png", tileBtnExecute));
+	layerButtons_.push_back(new Button(layerButton2Rect, "../img/lb.png", tileBtnExecute));
+	layerButtons_.push_back(new Button(layerButton3Rect, "../img/lb.png", tileBtnExecute));
+	layerButtons_.push_back(new Button(layerButton4Rect, "../img/lb.png", tileBtnExecute));
+
+	layerButtons_[0]->setResizable(true);
+	layerButtons_[1]->setResizable(true);
+	layerButtons_[2]->setResizable(true);
+	layerButtons_[3]->setResizable(true);	
+
+	// Add
 	mainPanel_.add(*rightPanel, rightRectProportion);
 	mainPanel_.add(*leftPanel, leftRectProportion);
+	mainPanel_.add(*layersPanel, layersRectProportion);
+	
 	leftPanel->add(*tilesPanel, tilesRectProportion);
-
 	leftPanel->add(*addTilesBtn_, addTilesRectProportion);
 	leftPanel->add(*selectTilesBtn_, selectTilesRectProportion);
 	leftPanel->add(*deleteTilesBtn_, deleteTilesRectProportion);
 
+	layersPanel->add(*layerButtons_[0], layerButton1RectProportion);
+	layersPanel->add(*layerButtons_[1], layerButton2RectProportion);
+	layersPanel->add(*layerButtons_[2], layerButton3RectProportion);
+	layersPanel->add(*layerButtons_[3], layerButton4RectProportion);
+
+	// Tile Buttons
 	int nTilesRow = tilesRect.w() / (Globals::TILE_WIDTH + 2);
 	int curRow = 0;
 	int curColumn = 0;

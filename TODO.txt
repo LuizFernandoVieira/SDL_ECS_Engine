@@ -8,11 +8,9 @@ A fazer:
 
 ============ EDITOR DE MAPA ====================
 
-- Ferramentas add/remover tiles;
-- Drag para add/remover tiles;
 - Add/remover/selecionar objetos;
-- Abas para layers parallax;
 
+- Abas para layers parallax;
 
 Primeira entrega
 	
@@ -21,3 +19,7 @@ Segunda entrega
 
 Terceira entrega
 	Selecionar tile set / tile map;
+
+
+
+DELETAR TILE NAO FUNCIONA NO MAC K

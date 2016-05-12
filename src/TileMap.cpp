@@ -1,4 +1,5 @@
 #include "../include/TileMap.hpp"
+#include "../include/Camera.hpp"
 
 TileMap::TileMap(const char* file, TileSet* tileSet)
 {
@@ -63,15 +64,10 @@ void TileMap::renderLayer(int layer, int cameraX, int cameraY)
 	for (int i = 0; i < mapHeight_; i++) {
 		for (int j = 0; j < mapWidth_; j++) {
 			if (at(j, i, layer) >= 0) {
-				// if (j == 31 && i == 16) {
-				// 	std::cout << "-: " << (unsigned)at(j, i, layer) << std::endl;
-				// 	std::cout << "A: " << j * tileSet_->getTileWidth() << std::endl;
-				// 	std::cout << "B: " << i * tileSet_->getTileHeight() << std::endl;
-				// }
 				tileSet_->render( 
 					(unsigned)at(j, i, layer), 
-					(float)(j * tileSet_->getTileWidth() + cameraX - cameraX * layer), 
-					(float)(i * tileSet_->getTileHeight() + cameraY - cameraY * layer) 
+					(float)(j * tileSet_->getTileWidth()  + cameraX + Camera::getPosition().x() * (layer-1)*0.5), 
+					(float)(i * tileSet_->getTileHeight() + cameraY + Camera::getPosition().y() * (layer-1)*0.5) 
 				);
 			}
 		}

@@ -8,6 +8,8 @@
 #include "TileSet.hpp"
 #include "TileMap.hpp"
 
+#include <vector>
+
 class TilesPanel;
 
 class LevelEditorState: public State
@@ -38,6 +40,8 @@ private:
 	Button* addTilesBtn_;
 	Button* selectTilesBtn_;
 	Button* deleteTilesBtn_;
+
+	std::vector<Button*> layerButtons_;
 
 	int selectedTile_;
 	Tools selectedTool_;
