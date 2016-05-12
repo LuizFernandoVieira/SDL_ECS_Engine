@@ -11,6 +11,7 @@ mainPanel_(Rect(0, 0, Globals::WINDOW_WIDTH, Globals::WINDOW_HEIGHT), "../img/bg
 	tileMap_ = new TileMap("../map/tileMap.txt", tileSet_);
 	selectedTile_ = 0;
 	selectedTool_ = ADD;
+	selectedLayer_ = 1;
 }
 
 LevelEditorState::~LevelEditorState()
@@ -62,7 +63,7 @@ void LevelEditorState::initGUI()
 
 	// Panel
 	Panel* leftPanel  = new Panel(leftRect, "../img/leftPanelBg.png");
-	Panel* rightPanel = new TilesPanel(*tileSet_, *tileMap_, rightRect, "../img/rightPanelBg.png", selectedTile_, selectedTool_);
+	Panel* rightPanel = new TilesPanel(*tileSet_, *tileMap_, rightRect, "../img/rightPanelBg.png", selectedTile_, selectedLayer_, selectedTool_);
 	Panel* tilesPanel = new Panel(tilesRect, "../img/god.png");
 
 	Panel* layersPanel = new Panel(layersRect, "../img/lp.png");
@@ -161,8 +162,17 @@ void LevelEditorState::update(float dt)
 			{
 				if (tileButtons_[i]->getRect().isInside(InputHandler::getInstance().getMouse()))
 				{
-					tileButtons_[i]->execute_(this);
+					// tileButtons_[i]->execute_(this);
 					selectedTile_ = i;
+					break;
+				}
+			}
+			for (int i = 0; i < layerButtons_.size(); i++)
+			{
+				if (layerButtons_[i]->getRect().isInside(InputHandler::getInstance().getMouse()))
+				{
+					// layerButtons_[i]->execute_(this);
+					selectedLayer_ = i;
 					break;
 				}
 			}

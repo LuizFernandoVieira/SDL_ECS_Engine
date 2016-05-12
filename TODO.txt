@@ -10,8 +10,6 @@ A fazer:
 
 - Add/remover/selecionar objetos;
 
-- Abas para layers parallax;
-
 Primeira entrega
 	
 Segunda entrega

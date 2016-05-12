@@ -4,6 +4,7 @@
 #include <vector>
 #include <fstream>
 #include <iostream>
+#include <string>
 
 #include "TileSet.hpp"
 
@@ -11,7 +12,8 @@ class TileMap
 {
 public:
 	TileMap(const char* file, TileSet* tileSet);
-	void load(const char* file);
+	void load();
+	void save();
 	void setTileSet(TileSet* tileSet);
 	int& at(int x, int y, int z=0);
 	void render(int cameraX, int cameraY);
@@ -22,6 +24,7 @@ public:
 	std::vector<int> tileMatrix_;
 private:
 	TileSet* tileSet_;
+	std::string filename_;
 	int mapWidth_;
 	int mapHeight_;
 	int mapDepth_;

@@ -15,7 +15,7 @@
 class TilesPanel : public Panel
 {
 public:
-	TilesPanel(TileSet& tileSet, TileMap& tileMap, Rect rect, std::string imgPath, int& selectedTile, LevelEditorState::Tools& selectedTool);
+	TilesPanel(TileSet& tileSet, TileMap& tileMap, Rect rect, std::string imgPath, int& selectedTile, int& selectedLayer, LevelEditorState::Tools& selectedTool);
 	~TilesPanel();
 	void update();
 	void render();
@@ -35,6 +35,7 @@ private:
 	Vec2 curDragClick_;
 
 	int* selectedTile_;
+	int* selectedLayer_;
 
 	LevelEditorState::Tools* selectedTool_;
 };

@@ -44,6 +44,7 @@ private:
 	std::vector<Button*> layerButtons_;
 
 	int selectedTile_;
+	int selectedLayer_;
 	Tools selectedTool_;
 };
 

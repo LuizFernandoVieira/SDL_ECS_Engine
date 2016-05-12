@@ -1,24 +1,26 @@
+#include <sstream>
+
 #include "../include/TileMap.hpp"
 #include "../include/Camera.hpp"
 
-TileMap::TileMap(const char* file, TileSet* tileSet)
+TileMap::TileMap(const char* file, TileSet* tileSet) : filename_(file)
 {
-	load(file);
+	load();
 	tileSet_ = tileSet;
 }
 
-void TileMap::load(const char* file)
+void TileMap::load()
 {
 	tileMatrix_.clear();
 
 	std::ifstream ifs;
 	char comma;
 
-	ifs.open(file, std::ifstream::in);
+	ifs.open(filename_, std::ifstream::in);
 
 	if(!ifs.is_open())
 	{
-		std::string fileStr(file);
+		std::string fileStr(filename_);
 		//throw ExcecaoArquivo("Erro na abertura do arquivo de tile map " + fileStr);
 		std::cout << "tileMap exception" << std::endl;
 	}
@@ -42,6 +44,50 @@ void TileMap::load(const char* file)
 	ifs.close();
 }
 
+void TileMap::save()
+{
+	std::ofstream ofs(filename_, std::ofstream::out | std::ofstream::trunc);
+	if(!ofs.is_open())
+	{
+		std::cout << "Erro na abertura do arquivo de tile map para escrita" << std::endl;
+	}
+
+	ofs << mapWidth_;
+	ofs << ',';
+	ofs << mapHeight_;
+	ofs << ',';
+	ofs << mapDepth_;
+	ofs << ',';
+
+	ofs << std::endl;
+	ofs << std::endl;
+
+	for (int z = 0; z < mapDepth_; z++)
+	{
+		for (int y = 0; y < mapHeight_; y++)
+		{
+			for (int x = 0; x < mapWidth_; x++)
+			{
+				// to_string
+				std::ostringstream ss;
+				int value = at(x, y, z);
+				ss << value;
+				std::string strValue = ss.str();
+				if(value >= 0 && value < 10) {
+					strValue = "0" + strValue;
+				}
+				ofs << strValue;
+				ofs << ',';
+			}
+			ofs << std::endl;
+		}
+		ofs << std::endl;
+		ofs << std::endl;
+	}
+
+	ofs.close();
+}
+
 void TileMap::setTileSet(TileSet* tileSet)
 {
 	tileSet_ = tileSet;
@@ -54,7 +100,7 @@ int& TileMap::at(int x, int y, int z)
 
 void TileMap::render(int cameraX, int cameraY)
 {
-	for (int i = 0; i < mapDepth_; i++) {
+	for (int i = mapDepth_ - 1; i >= 0; i--) {
 		renderLayer(i, cameraX, cameraY);
 	}
 }
@@ -64,11 +110,44 @@ void TileMap::renderLayer(int layer, int cameraX, int cameraY)
 	for (int i = 0; i < mapHeight_; i++) {
 		for (int j = 0; j < mapWidth_; j++) {
 			if (at(j, i, layer) >= 0) {
-				tileSet_->render( 
-					(unsigned)at(j, i, layer), 
-					(float)(j * tileSet_->getTileWidth()  + cameraX + Camera::getPosition().x() * (layer-1)*0.5), 
-					(float)(i * tileSet_->getTileHeight() + cameraY + Camera::getPosition().y() * (layer-1)*0.5) 
-				);
+				// tileSet_->render( 
+				// 	(unsigned)at(j, i, layer), 
+				// 	(float)(j * tileSet_->getTileWidth()  + cameraX + Camera::getPosition().x() * (layer-1)*0.5), 
+				// 	(float)(i * tileSet_->getTileHeight() + cameraY + Camera::getPosition().y() * (layer-1)*0.5) 
+				// );
+				switch(layer)
+				{
+					case 0:
+						tileSet_->render( 
+							(unsigned)at(j, i, layer), 
+							(float)(j * tileSet_->getTileWidth()  + cameraX - Camera::getPosition().x() * 0.5), 
+							(float)(i * tileSet_->getTileHeight() + cameraY - Camera::getPosition().y() * 0.5) 
+						);
+						break;
+					case 1:
+						tileSet_->render( 
+							(unsigned)at(j, i, layer), 
+							(float)(j * tileSet_->getTileWidth()  + cameraX), 
+							(float)(i * tileSet_->getTileHeight() + cameraY) 
+						);
+						break;
+					case 2:
+						tileSet_->render( 
+							(unsigned)at(j, i, layer), 
+							(float)(j * tileSet_->getTileWidth()  + cameraX + Camera::getPosition().x() * 0.5), 
+							(float)(i * tileSet_->getTileHeight() + cameraY + Camera::getPosition().y() * 0.5) 
+						);
+						break;
+					case 3:
+						tileSet_->render( 
+							(unsigned)at(j, i, layer), 
+							(float)(j * tileSet_->getTileWidth()  + cameraX + Camera::getPosition().x() * 0.75), 
+							(float)(i * tileSet_->getTileHeight() + cameraY + Camera::getPosition().y() * 0.75) 
+						);
+						break;
+					default:
+						break;
+				}
 			}
 		}
 	}

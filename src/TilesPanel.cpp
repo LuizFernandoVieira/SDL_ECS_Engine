@@ -6,7 +6,7 @@
 #include "../include/InputHandler.hpp"
 #include "../include/Camera.hpp"
 
-TilesPanel::TilesPanel(TileSet& tileSet, TileMap& tileMap, Rect rect, std::string imgPath, int& selectedTile, LevelEditorState::Tools& selectedTool) : 
+TilesPanel::TilesPanel(TileSet& tileSet, TileMap& tileMap, Rect rect, std::string imgPath, int& selectedTile, int& selectedLayer, LevelEditorState::Tools& selectedTool) : 
 	Panel(rect, imgPath), 
 	cursorPos_(rect.x(), rect.y(), Globals::TILE_WIDTH, Globals::TILE_HEIGHT),
 	cursorBg_("../img/god.png"),
@@ -19,6 +19,7 @@ TilesPanel::TilesPanel(TileSet& tileSet, TileMap& tileMap, Rect rect, std::strin
 	tileMapFilename_ = "../map/tileMap.txt"; // MUDAR ISSO!!!!
 
 	selectedTile_ = &selectedTile;
+	selectedLayer_ = &selectedLayer;
 	selectedTool_ = &selectedTool;
 }
 
@@ -105,6 +106,11 @@ void TilesPanel::update()
 			curDragClick_ = Vec2();
 		}
 	}
+
+	if (InputHandler::getInstance().keyPress('s'))
+	{
+		tileMap_->save();
+	}
 }
 
 
@@ -146,92 +152,18 @@ void TilesPanel::render()
 
 void TilesPanel::placeTile(int x, int y)
 {
-	std::fstream fs;
-	int mapWidth;
-	int mapHeight;
-	int mapDepth;
-	char comma;
-
-	fs.open(tileMapFilename_, std::fstream::in | std::fstream::out);
-
-	if(!fs.is_open())
-	{
-		std::cout << "ERRO: nao foi possivel abrir o tile map " << tileMapFilename_ << std::endl;
-	}
-
-	fs >> mapWidth;
-	fs >> comma;
-	fs >> mapHeight;
-	fs >> comma;
-	fs >> mapDepth;
-	fs >> comma;
-
-	int location = x + y*mapWidth + 0*mapWidth*mapHeight;
-	int withComma = 3;		// tamanho de cada tile no arquivo, dois digitos mais virgula
-
-	fs.seekp(fs.tellg(), std::ios_base::beg);
-
-	// linebreak diferente no apple e nos outros SOS
-	#ifdef __APPLE__
-		int firstBreakLine = 2;		// tamanho dos dois primeiros line breaks
-		fs.seekp( location * withComma + firstBreakLine + y, std::ios_base::cur ); // + y para line breaks no final de cada linha
-	#else
-		fs.seekp( location * withComma + y * 2, std::ios_base::cur ); // nao me pergunte por que essa conta
-	#endif
-
-	std::ostringstream ss;
-	ss << *selectedTile_;
-	std::string correctString = ss.str();
-	if(*selectedTile_ < 10) {
-		correctString = "0" + correctString;
-	}
-	fs << correctString.c_str();
-
-	fs.close();
-
-	// Alterar visualização em runtime
-	tileMap_->tileMatrix_[x + y*mapWidth + 0*mapWidth*mapHeight] = *selectedTile_;
+	tileMap_->tileMatrix_[
+		x + 
+		y*tileMap_->getWidth() + 
+		(*selectedLayer_)*tileMap_->getWidth()*tileMap_->getHeight()
+	] = *selectedTile_;
 }
 
 void TilesPanel::deleteTile(int x, int y)
 {
-	std::fstream fs;
-	int mapWidth;
-	int mapHeight;
-	int mapDepth;
-	char comma;
-
-	fs.open(tileMapFilename_, std::fstream::in | std::fstream::out);
-
-	if(!fs.is_open())
-	{
-		std::cout << "ERRO: nao foi possivel abrir o tile map " << tileMapFilename_ << std::endl;
-	}
-
-	fs >> mapWidth;
-	fs >> comma;
-	fs >> mapHeight;
-	fs >> comma;
-	fs >> mapDepth;
-	fs >> comma;
-
-	int location = x + y*mapWidth + 0*mapWidth*mapHeight;
-	int withComma = 3;		// tamanho de cada tile no arquivo, dois digitos mais virgula
-
-	fs.seekp(fs.tellg(), std::ios_base::beg);
-
-	// linebreak diferente no apple e nos outros SOS
-	#ifdef __APPLE__
-		int firstBreakLine = 2;		// tamanho dos dois primeiros line breaks
-		fs.seekp( location * withComma + firstBreakLine + y, std::ios_base::cur ); // + y para line breaks no final de cada linha
-	#else
-		fs.seekp( location * withComma + y * 2, std::ios_base::cur ); // nao me pergunte por que essa conta
-	#endif
-
-	fs << "-1";
-
-	fs.close();
-
-	// Alterar visualização em runtime
-	tileMap_->tileMatrix_[x + y*mapWidth + 0*mapWidth*mapHeight] = -1;
+	tileMap_->tileMatrix_[
+		x + 
+		y*tileMap_->getWidth() + 
+		(*selectedLayer_)*tileMap_->getWidth()*tileMap_->getHeight()
+	] = -1;
 }
