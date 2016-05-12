@@ -1,5 +1,5 @@
-#ifndef TILESPANEL_HPP
-#define TILESPANEL_HPP
+#ifndef TILEMAPPANEL_HPP
+#define TILEMAPPANEL_HPP
 
 #include <string>
 #include <iostream>
@@ -12,11 +12,11 @@
 #include "Panel.hpp"
 #include "LevelEditorState.hpp"
 
-class TilesPanel : public Panel
+class TileMapPanel : public Panel
 {
 public:
-	TilesPanel(TileSet& tileSet, TileMap& tileMap, Rect rect, std::string imgPath, int& selectedTile, int& selectedLayer, LevelEditorState::Tools& selectedTool);
-	~TilesPanel();
+	TileMapPanel(TileSet& tileSet, TileMap& tileMap, Rect rect, std::string imgPath, int& selectedTile, int& selectedLayer, LevelEditorState::Tools& selectedTool);
+	~TileMapPanel();
 	void update();
 	void render();
 

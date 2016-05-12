@@ -7,6 +7,7 @@
 #include "Panel.hpp"
 #include "TileSet.hpp"
 #include "TileMap.hpp"
+#include "TileSetAndObjectsPanel.hpp"
 
 #include <vector>
 
@@ -22,7 +23,7 @@ public:
 	void update(float dt);
 	void render();
 	void handle(StateEventEnum& event);
-	
+
 	enum Tools {
 		ADD,
 		SELECT,
@@ -46,6 +47,8 @@ private:
 	int selectedTile_;
 	int selectedLayer_;
 	Tools selectedTool_;
+
+	TileSetAndObjectsPanel* tileSetAndObjectsPanel_;
 };
 
 void tileBtnExecute(State* state);

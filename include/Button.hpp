@@ -11,17 +11,17 @@
 class Button
 {
 public:
-	Button(Rect rect, std::string imgPath, std::function<void(State*)> execute);
+	Button(Rect rect, std::string imgPath/*, std::function<void(State*)> execute*/);
 	~Button();
 	void update();
 	void render();
-	Rect getRect();
+	Rect& getRect();
 	void setRect(Rect rect);
 	bool isResizable();
 	void setResizable(bool resizable);
 	void setSpriteClip(Rect clip);
 
-	std::function<void(State*)> execute_;
+	// std::function<void(State*)> execute_;
 
 private:
 	Rect rect_;

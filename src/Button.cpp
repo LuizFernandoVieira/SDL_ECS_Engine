@@ -1,18 +1,18 @@
 #include "../include/Button.hpp"
 #include "../include/InputHandler.hpp"
 
-Button::Button(Rect rect, std::string imgPath, std::function<void(State*)> execute) : 
+Button::Button(Rect rect, std::string imgPath/*, std::function<void(State*)> execute*/) :
 	rect_(rect), sprite_(imgPath.c_str())
 {
 	sprite_.setScaleX( rect_.w() / (float)sprite_.getWidth() );
 	sprite_.setScaleY( rect_.h() / (float)sprite_.getHeight() );
 	resizable_ = false;
-	execute_ = execute;
+	// execute_ = execute;
 }
 
 Button::~Button()
 {
-	
+
 }
 
 void Button::update()
@@ -31,7 +31,7 @@ void Button::render()
 	sprite_.render(rect_.x(), rect_.y());
 }
 
-Rect Button::getRect() {
+Rect& Button::getRect() {
 	return rect_;
 }
 

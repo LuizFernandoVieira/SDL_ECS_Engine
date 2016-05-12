@@ -1,13 +1,13 @@
 #include <sstream>
 
-#include "../include/TilesPanel.hpp"
+#include "../include/TileMapPanel.hpp"
 #include "../include/Globals.hpp"
 #include "../include/Vec2.hpp"
 #include "../include/InputHandler.hpp"
 #include "../include/Camera.hpp"
 
-TilesPanel::TilesPanel(TileSet& tileSet, TileMap& tileMap, Rect rect, std::string imgPath, int& selectedTile, int& selectedLayer, LevelEditorState::Tools& selectedTool) : 
-	Panel(rect, imgPath), 
+TileMapPanel::TileMapPanel(TileSet& tileSet, TileMap& tileMap, Rect rect, std::string imgPath, int& selectedTile, int& selectedLayer, LevelEditorState::Tools& selectedTool) :
+	Panel(rect, imgPath),
 	cursorPos_(rect.x(), rect.y(), Globals::TILE_WIDTH, Globals::TILE_HEIGHT),
 	cursorBg_("../img/god.png"),
 	firstDragClick_(),
@@ -24,7 +24,7 @@ TilesPanel::TilesPanel(TileSet& tileSet, TileMap& tileMap, Rect rect, std::strin
 }
 
 
-TilesPanel::~TilesPanel()
+TileMapPanel::~TileMapPanel()
 {
 	tileMap_ = nullptr;
 	tileSet_ = nullptr;
@@ -33,7 +33,7 @@ TilesPanel::~TilesPanel()
 }
 
 
-void TilesPanel::update()
+void TileMapPanel::update()
 {
 	Panel::update();
 
@@ -58,7 +58,7 @@ void TilesPanel::update()
 		else if (InputHandler::getInstance().isMouseDown(LEFT_MOUSE_BUTTON))
 		{
 			Vec2 v = Vec2(
-				tileX * Globals::TILE_WIDTH + rect_.x(), 
+				tileX * Globals::TILE_WIDTH + rect_.x(),
 				tileY * Globals::TILE_HEIGHT + rect_.y()
 			);
 			if (firstDragClick_ == Vec2()) {
@@ -89,7 +89,7 @@ void TilesPanel::update()
 			for(int x = smallX; x<=bigX; x+=Globals::TILE_WIDTH) {
 				for(int y = smallY; y<=bigY; y+=Globals::TILE_HEIGHT) {
 					if(*selectedTool_ == LevelEditorState::Tools::ADD) {
-						placeTile( 
+						placeTile(
 							((x - rect_.x()) / Globals::TILE_WIDTH) + 1, // nao me pergunte por que + 1
 							(y - rect_.y()) / Globals::TILE_HEIGHT
 						);
@@ -114,7 +114,7 @@ void TilesPanel::update()
 }
 
 
-void TilesPanel::render()
+void TileMapPanel::render()
 {
 	Panel::render();
 	tileMap_->render(rect_.x(), rect_.y());
@@ -150,20 +150,20 @@ void TilesPanel::render()
 }
 
 
-void TilesPanel::placeTile(int x, int y)
+void TileMapPanel::placeTile(int x, int y)
 {
 	tileMap_->tileMatrix_[
-		x + 
-		y*tileMap_->getWidth() + 
+		x +
+		y*tileMap_->getWidth() +
 		(*selectedLayer_)*tileMap_->getWidth()*tileMap_->getHeight()
 	] = *selectedTile_;
 }
 
-void TilesPanel::deleteTile(int x, int y)
+void TileMapPanel::deleteTile(int x, int y)
 {
 	tileMap_->tileMatrix_[
-		x + 
-		y*tileMap_->getWidth() + 
+		x +
+		y*tileMap_->getWidth() +
 		(*selectedLayer_)*tileMap_->getWidth()*tileMap_->getHeight()
 	] = -1;
 }
