@@ -130,7 +130,8 @@ void LevelEditorState::initGUI()
 				Globals::TILE_WIDTH,
 				Globals::TILE_HEIGHT )
 		);
-		tileSetAndObjectsPanel_->addButton(*btn, TileSetAndObjectsPanel::Tab::TILES);
+		// tileSetAndObjectsPanel_->addButton(*btn, TileSetAndObjectsPanel::Tab::TILES);
+		tileSetAndObjectsPanel_->addButton(*btn);
 		tileButtons_.push_back(btn);
 	}
 }

@@ -6,6 +6,7 @@
 #include "Panel.hpp"
 #include "Rect.hpp"
 #include "Button.hpp"
+#include "StaticSprite.hpp"
 
 class TileSetAndObjectsPanel : public Panel
 {
@@ -15,19 +16,28 @@ public:
 	void update();
 	void render();
 
-  enum Tab {
-    TILES,
-    OBJECTS
-  };
+	enum Tab {
+		TILES,
+		OBJECTS
+	};
 
-  void addButton(Button& button, Tab tab);
-  TileSetAndObjectsPanel::Tab getSelectedTab();
+	// void addButton(Button& button, Tab tab);
+	void addButton(Button& button);
+	TileSetAndObjectsPanel::Tab getSelectedTab();
+
 private:
-  TileSetAndObjectsPanel::Tab selectedTab_;
+	TileSetAndObjectsPanel::Tab selectedTab_;
 
-  std::vector<std::pair<Button*, Tab>> tileButtons_;
+	// std::vector<std::pair<Button*, Tab>> tileButtons_;
+	std::vector<Button> tileButtons_;
 
-  int tabButtonHeight;
+	int tabButtonHeight;
+
+	StaticSprite* objectSp;
+	Button* previousObject;
+	Rect previousObjectProportions;
+	Button* nextObject;
+	Rect nextObjectProportions;
 };
 
 

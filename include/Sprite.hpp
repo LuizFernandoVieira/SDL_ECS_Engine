@@ -18,6 +18,7 @@ public:
 	void open(const char* file);
 	void setClip(int x, int y, int w, int h);
 	virtual void render(int x, int y, float angle = 0);
+	void renderSelection(int x, int y);
 	void update(float dt);
 	int getWidth();
 	int getHeight();

@@ -59,6 +59,16 @@ void Sprite::render(int x, int y, float angle)
 	SDL_RenderCopyEx ( Game::getInstance().getRenderer(), texture_.get(), &clipRect_, &dstRect, (double)angle, NULL, SDL_FLIP_NONE );
 }
 
+void Sprite::renderSelection(int x, int y)
+{
+	SDL_RenderDrawLine(Game::getInstance().getRenderer(), x, y, clipRect_.w + x, y);
+	SDL_RenderDrawLine(Game::getInstance().getRenderer(), x, y, x, clipRect_.h + y);
+	SDL_RenderDrawLine(Game::getInstance().getRenderer(), x, y, clipRect_.w + x, clipRect_.h + y);
+	SDL_RenderDrawLine(Game::getInstance().getRenderer(), clipRect_.w + x, y, clipRect_.w + x, clipRect_.h + y);
+	SDL_RenderDrawLine(Game::getInstance().getRenderer(), x, clipRect_.h + y, clipRect_.w + x, clipRect_.h + y);
+	SDL_RenderDrawLine(Game::getInstance().getRenderer(), clipRect_.w + x, y, x, clipRect_.h + y);
+}
+
 int Sprite::getWidth()
 {
 	return (width_ / frameCount_) * scaleX_;

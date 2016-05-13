@@ -39,13 +39,32 @@ void TileMapPanel::update()
 
 	if (rect_.isInside(InputHandler::getInstance().getMouse()))
 	{
+		double speedChangePerLayer;
+		switch(*selectedLayer_)
+		{
+			case 0:
+				speedChangePerLayer = -0.5;
+				break;
+			case 1:
+				speedChangePerLayer = 0;
+				break;
+			case 2:
+				speedChangePerLayer = 0.5;
+				break;
+			case 3:
+				speedChangePerLayer = 0.75;
+				break;
+			default:
+				break;
+		}
+
 		// Tile da tela q o ponteiro do mouse está em cima
-		int tileX = (int)((InputHandler::getInstance().getMouseX() - rect_.x() + Camera::getPosition().x()) / Globals::TILE_WIDTH);
-		int tileY = (int)((InputHandler::getInstance().getMouseY() - rect_.y() + Camera::getPosition().y()) / Globals::TILE_HEIGHT);
+		int tileX = (int)((InputHandler::getInstance().getMouseX() - rect_.x() + Camera::getPosition().x() - speedChangePerLayer * Camera::getPosition().x() ) / Globals::TILE_WIDTH);
+		int tileY = (int)((InputHandler::getInstance().getMouseY() - rect_.y() + Camera::getPosition().y() - speedChangePerLayer * Camera::getPosition().y() ) / Globals::TILE_HEIGHT);
 
 		// Mover o cursor para este tile
-		cursorPos_.x( tileX * Globals::TILE_WIDTH + rect_.x() );
-		cursorPos_.y( tileY * Globals::TILE_HEIGHT + rect_.y() );
+		cursorPos_.x( tileX * Globals::TILE_WIDTH + rect_.x() + speedChangePerLayer * Camera::getPosition().x() );
+		cursorPos_.y( tileY * Globals::TILE_HEIGHT + rect_.y() + speedChangePerLayer * Camera::getPosition().y() );
 
 		if (InputHandler::getInstance().mousePress(LEFT_MOUSE_BUTTON))
 		{
