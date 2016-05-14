@@ -8,11 +8,12 @@ class TransformComponent : public Component
 {
 public:
 	TransformComponent() { rect_ = new Rect(); }
+	TransformComponent(Rect* rect) { rect_ = rect; }
 	~TransformComponent() {}
 	Rect* getRect() { return rect_; }
 	void setRect(Rect& rect) { rect_ = &rect; }
-private:
 	Rect* rect_;
+// private:
 };
 
 #endif

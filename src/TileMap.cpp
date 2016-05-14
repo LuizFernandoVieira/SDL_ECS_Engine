@@ -20,9 +20,7 @@ void TileMap::load()
 
 	if(!ifs.is_open())
 	{
-		std::string fileStr(filename_);
-		//throw ExcecaoArquivo("Erro na abertura do arquivo de tile map " + fileStr);
-		std::cout << "tileMap exception" << std::endl;
+		std::cout << "Erro na abertura do arquivo de tile map para leitura" << std::endl;
 	}
 
 	ifs >> mapWidth_;

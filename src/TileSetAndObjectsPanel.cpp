@@ -89,23 +89,43 @@ void TileSetAndObjectsPanel::update()
 
 		// resize dos botoes de tiles
 		int nTilesRow = rect_.w() / (Globals::TILE_WIDTH + 2);
-		if (nTilesRow == 0)
-			nTilesRow = 1;
+		// if (nTilesRow == 0)
+		// 	nTilesRow = 1;
 		int curRow = 0;
 		int curColumn = 0;
-		int i = 0;
 
 		// Gambiarra pra atualizar a altura dos botoes
 		tabButtonHeight = buttons_[0].first->getRect().y();
 
-		for(auto it=tileButtons_.begin(); it!=tileButtons_.end(); ++it, i++, curColumn++ )
+		for(int i = 0; i < (int)tileButtons_.size(); i++, curColumn++ )
 		{
 			if (i % nTilesRow == 0 && i != 0)
 			{
 				curRow++;
 				curColumn = 0;
 			}
-			it->/*first->*/setRect(
+			tileButtons_[i].setRect(
+				Rect(
+					curColumn * (Globals::TILE_WIDTH + 2) + 2 + rect_.x(),
+					curRow * (Globals::TILE_HEIGHT + 2) + 2 + rect_.y() + tabButtonHeight,
+					Globals::TILE_WIDTH,
+					Globals::TILE_HEIGHT)
+			);
+		}
+
+		// resize dos botoes de collision
+
+		curRow = 0;
+		curColumn = 0;
+
+		for(int i = 0; i < (int)collisionButtons_.size(); i++, curColumn++ )
+		{
+			if (i % nTilesRow == 0 && i != 0)
+			{
+				curRow++;
+				curColumn = 0;
+			}
+			collisionButtons_[i].setRect(
 				Rect(
 					curColumn * (Globals::TILE_WIDTH + 2) + 2 + rect_.x(),
 					curRow * (Globals::TILE_HEIGHT + 2) + 2 + rect_.y() + tabButtonHeight,
@@ -122,6 +142,10 @@ void TileSetAndObjectsPanel::update()
 			selectedTab_ = TILES;
 		}
 		else if (buttons_[1].first->getRect().isInside(InputHandler::getInstance().getMouse()))
+		{
+			selectedTab_ = COLLISION;
+		}
+		else if (buttons_[2].first->getRect().isInside(InputHandler::getInstance().getMouse()))
 		{
 			selectedTab_ = OBJECTS;
 		}
@@ -152,10 +176,13 @@ void TileSetAndObjectsPanel::render()
 // 	tileButtons_.emplace_back(std::pair<Button*, Tab>(&button, tab));
 // 	button.setRect(button.getRect() + Vec2(0, tabButtonHeight));
 // }
-void TileSetAndObjectsPanel::addButton(Button& button)
+void TileSetAndObjectsPanel::addButton(Button& button, Tab tab)
 {
 	button.setRect(button.getRect() + Vec2(0, tabButtonHeight));
-	tileButtons_.emplace_back(button);
+	if (tab == TILES)
+		tileButtons_.emplace_back(button);
+	else if (tab == COLLISION)
+		collisionButtons_.emplace_back(button);
 }
 
 

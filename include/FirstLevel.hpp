@@ -25,6 +25,7 @@ private:
 	State* state_;
 	TileSet* tileSet_;
 	TileMap* tileMap_;
+	Sprite bg;
 	unsigned int player_;
 	static unsigned int nextId_;
 	std::map<int, TransformComponent*> mapTransform_;

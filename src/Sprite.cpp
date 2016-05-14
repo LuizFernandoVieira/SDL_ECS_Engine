@@ -61,12 +61,13 @@ void Sprite::render(int x, int y, float angle)
 
 void Sprite::renderSelection(int x, int y)
 {
-	SDL_RenderDrawLine(Game::getInstance().getRenderer(), x, y, clipRect_.w + x, y);
-	SDL_RenderDrawLine(Game::getInstance().getRenderer(), x, y, x, clipRect_.h + y);
-	SDL_RenderDrawLine(Game::getInstance().getRenderer(), x, y, clipRect_.w + x, clipRect_.h + y);
-	SDL_RenderDrawLine(Game::getInstance().getRenderer(), clipRect_.w + x, y, clipRect_.w + x, clipRect_.h + y);
-	SDL_RenderDrawLine(Game::getInstance().getRenderer(), x, clipRect_.h + y, clipRect_.w + x, clipRect_.h + y);
-	SDL_RenderDrawLine(Game::getInstance().getRenderer(), clipRect_.w + x, y, x, clipRect_.h + y);
+	SDL_Renderer* renderer = Game::getInstance().getRenderer();
+	SDL_RenderDrawLine(renderer, x, y, clipRect_.w + x, y);
+	SDL_RenderDrawLine(renderer, x, y, x, clipRect_.h + y);
+	SDL_RenderDrawLine(renderer, x, y, clipRect_.w + x, clipRect_.h + y);
+	SDL_RenderDrawLine(renderer, clipRect_.w + x, y, clipRect_.w + x, clipRect_.h + y);
+	SDL_RenderDrawLine(renderer, x, clipRect_.h + y, clipRect_.w + x, clipRect_.h + y);
+	SDL_RenderDrawLine(renderer, clipRect_.w + x, y, x, clipRect_.h + y);
 }
 
 int Sprite::getWidth()

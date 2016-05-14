@@ -6,7 +6,7 @@
 #include "../include/InputHandler.hpp"
 #include "../include/Camera.hpp"
 
-TileMapPanel::TileMapPanel(TileSet& tileSet, TileMap& tileMap, Rect rect, std::string imgPath, int& selectedTile, int& selectedLayer, LevelEditorState::Tools& selectedTool) :
+TileMapPanel::TileMapPanel(TileSet& tileSet, TileMap& tileMap, CollisionMap& collisionMap, Rect rect, std::string imgPath, int& selectedTile, int& selectedLayer, LevelEditorState::Tools& selectedTool) :
 	Panel(rect, imgPath),
 	cursorPos_(rect.x(), rect.y(), Globals::TILE_WIDTH, Globals::TILE_HEIGHT),
 	cursorBg_("../img/god.png"),
@@ -15,8 +15,7 @@ TileMapPanel::TileMapPanel(TileSet& tileSet, TileMap& tileMap, Rect rect, std::s
 {
 	tileSet_ = &tileSet;
 	tileMap_ = &tileMap;
-
-	tileMapFilename_ = "../map/tileMap.txt"; // MUDAR ISSO!!!!
+	collisionMap_ = &collisionMap;
 
 	selectedTile_ = &selectedTile;
 	selectedLayer_ = &selectedLayer;
@@ -28,8 +27,10 @@ TileMapPanel::~TileMapPanel()
 {
 	tileMap_ = nullptr;
 	tileSet_ = nullptr;
+	collisionMap_ = nullptr;
 	delete selectedTile_;
 	delete selectedTool_;
+	delete selectedLayer_;
 }
 
 

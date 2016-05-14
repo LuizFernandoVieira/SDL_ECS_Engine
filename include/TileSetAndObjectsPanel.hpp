@@ -18,18 +18,19 @@ public:
 
 	enum Tab {
 		TILES,
+		COLLISION,
 		OBJECTS
 	};
 
-	// void addButton(Button& button, Tab tab);
-	void addButton(Button& button);
+	void addButton(Button& button, Tab tab);
+	// void addButton(Button& button);
 	TileSetAndObjectsPanel::Tab getSelectedTab();
 
 private:
 	TileSetAndObjectsPanel::Tab selectedTab_;
 
-	// std::vector<std::pair<Button*, Tab>> tileButtons_;
 	std::vector<Button> tileButtons_;
+	std::vector<Button> collisionButtons_;
 
 	int tabButtonHeight;
 

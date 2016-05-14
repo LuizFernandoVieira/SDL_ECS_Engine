@@ -1,14 +1,15 @@
 #include "../include/Camera.hpp"
 #include "../include/InputHandler.hpp"
+#include "../include/Globals.hpp"
 
 // InputHandler* Camera::inputHandler_;
-GameObject* Camera::focus_;
+TransformComponent* Camera::focus_;
 Vec2 Camera::pos_;
 Vec2 Camera::speed_;
 
-void Camera::follow(GameObject& focus)
+void Camera::follow(TransformComponent* focus)
 {
-	focus_ = &focus;
+	focus_ = focus;
 }
 
 void Camera::unfollow()
@@ -21,8 +22,9 @@ void Camera::update(float dt)
 	if(focus_ != NULL)
 	{
 		// pos_ = focus_->getRect().getCenter() + Vec2(-512,-300);
-		pos_ = Vec2 (focus_->getRect().getCenter().x() - 512,
-									focus_->getRect().getCenter().y() - 300);
+		// pos_ = Vec2 (focus_->rect_.getCenter().x() - Globals::WINDOW_WIDTH / 2,
+									// focus_->rect_.getCenter().y() - Globals::WINDOW_HEIGHT / 2);
+		pos_ = focus_->rect_->getCenter() - Vec2(Globals::WINDOW_WIDTH / 2, Globals::WINDOW_HEIGHT / 2);
 	} 
 	else 
 	{

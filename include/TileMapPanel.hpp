@@ -9,13 +9,14 @@
 #include "Sprite.hpp"
 #include "TileSet.hpp"
 #include "TileMap.hpp"
+#include "CollisionMap.hpp"
 #include "Panel.hpp"
 #include "LevelEditorState.hpp"
 
 class TileMapPanel : public Panel
 {
 public:
-	TileMapPanel(TileSet& tileSet, TileMap& tileMap, Rect rect, std::string imgPath, int& selectedTile, int& selectedLayer, LevelEditorState::Tools& selectedTool);
+	TileMapPanel(TileSet& tileSet, TileMap& tileMap, CollisionMap& collisionMap, Rect rect, std::string imgPath, int& selectedTile, int& selectedLayer, LevelEditorState::Tools& selectedTool);
 	~TileMapPanel();
 	void update();
 	void render();
@@ -26,7 +27,7 @@ private:
 
 	TileSet* tileSet_;
 	TileMap* tileMap_;
-	std::string tileMapFilename_;
+	CollisionMap* collisionMap_;
 
 	Rect cursorPos_;
 	Sprite cursorBg_;

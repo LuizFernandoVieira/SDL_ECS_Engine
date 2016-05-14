@@ -9,15 +9,18 @@ mainPanel_(Rect(0, 0, Globals::WINDOW_WIDTH, Globals::WINDOW_HEIGHT), "../img/bg
 {
 	tileSet_ = new TileSet(Globals::TILE_WIDTH, Globals::TILE_HEIGHT, "../img/ground.png");
 	tileMap_ = new TileMap("../map/tileMap.txt", tileSet_);
+	collisionMap_ = new CollisionMap("../map/collisionMap.txt");
 	selectedTile_ = 0;
 	selectedTool_ = ADD;
 	selectedLayer_ = 1;
+	selectedCollision_ = 0;
 }
 
 LevelEditorState::~LevelEditorState()
 {
 	delete tileMap_;
 	delete tileSet_;
+	delete collisionMap_;
 	delete addTilesBtn_;
 	delete selectTilesBtn_;
 	delete deleteTilesBtn_;
@@ -63,7 +66,7 @@ void LevelEditorState::initGUI()
 
 	// Panel
 	Panel* leftPanel  = new Panel(leftRect, "../img/leftPanelBg.png");
-	Panel* rightPanel = new TileMapPanel(*tileSet_, *tileMap_, rightRect, "../img/rightPanelBg.png", selectedTile_, selectedLayer_, selectedTool_);
+	Panel* rightPanel = new TileMapPanel(*tileSet_, *tileMap_, *collisionMap_, rightRect, "../img/rightPanelBg.png", selectedTile_, selectedLayer_, selectedTool_);
 	tileSetAndObjectsPanel_ = new TileSetAndObjectsPanel(tileSetAndObjectsRect, "../img/god.png");
 
 	Panel* layersPanel = new Panel(layersRect, "../img/lp.png");
@@ -87,6 +90,8 @@ void LevelEditorState::initGUI()
 	layerButtons_[2]->setResizable(true);
 	layerButtons_[3]->setResizable(true);
 
+	collisionButtons_.push_back(new Button(layerButton1Rect, "../img/player.png"/*, tileBtnExecute*/));
+
 	// Add
 	mainPanel_.add(*rightPanel, rightRectProportion);
 	mainPanel_.add(*leftPanel, leftRectProportion);
@@ -107,7 +112,7 @@ void LevelEditorState::initGUI()
 	int curRow = 0;
 	int curColumn = 0;
 
-	for(int i=0; i<tileSet_->getNumberOfTiles(); i++, curColumn++)
+	for(int i = 0; i < tileSet_->getNumberOfTiles(); i++, curColumn++)
 	{
 		if (i % nTilesRow == 0 && i != 0)
 		{
@@ -130,9 +135,29 @@ void LevelEditorState::initGUI()
 				Globals::TILE_WIDTH,
 				Globals::TILE_HEIGHT )
 		);
-		// tileSetAndObjectsPanel_->addButton(*btn, TileSetAndObjectsPanel::Tab::TILES);
-		tileSetAndObjectsPanel_->addButton(*btn);
+		tileSetAndObjectsPanel_->addButton(*btn, TileSetAndObjectsPanel::Tab::TILES);
 		tileButtons_.push_back(btn);
+	}
+
+	// Collision buttons
+	curRow = 0;
+	curColumn = 0;
+	for (int i = 0; i < (int)collisionButtons_.size(); i++, curColumn++)
+	{
+		if (i % nTilesRow == 0 && i != 0)
+		{
+			curRow++;
+			curColumn = 0;
+		}
+		collisionButtons_[i]->setRect(
+			Rect(
+				curColumn * (Globals::TILE_WIDTH + 2) + 2 + tileSetAndObjectsRect.x(),
+				curRow * (Globals::TILE_HEIGHT + 2) + 2 + tileSetAndObjectsRect.y(),
+				Globals::TILE_WIDTH,
+				Globals::TILE_HEIGHT)
+		);
+
+		tileSetAndObjectsPanel_->addButton(*collisionButtons_[i], TileSetAndObjectsPanel::Tab::COLLISION);
 	}
 }
 
@@ -171,7 +196,18 @@ void LevelEditorState::update(float dt)
 					}
 				}
 			}
-			for (int i = 0; i < layerButtons_.size(); i++)
+			else if (tileSetAndObjectsPanel_->getSelectedTab() == TileSetAndObjectsPanel::Tab::COLLISION)
+			{
+				for (int i = 0; i < (int)collisionButtons_.size(); i++)
+				{
+					if (collisionButtons_[i]->getRect().isInside(InputHandler::getInstance().getMouse()))
+					{
+						selectedCollision_ = i;
+						break;
+					}
+				}
+			}
+			for (int i = 0; i < (int)layerButtons_.size(); i++)
 			{
 				if (layerButtons_[i]->getRect().isInside(InputHandler::getInstance().getMouse()))
 				{

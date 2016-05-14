@@ -16,12 +16,16 @@ void MoveSystem::update(
 	{
 		if (sc[it->first]->getStateMachine()->getCurrentState()->is("WalkingState"))
 		{
-			Rect* rect = tc[it->first]->getRect();
+			// Rect rect = tc[it->first]->getRect();
+			// if (sc[it->first]->isFacingRight())
+			// 	rect.x(rect.x() + 5);
+			// else
+			// 	rect.x(rect.x() - 5);
+			// tc[it->first]->setRect(rect);
 			if (sc[it->first]->isFacingRight())
-				rect->x(rect->x() + 5);
+				*tc[it->first]->rect_ = *tc[it->first]->rect_ + Vec2(5,0);
 			else
-				rect->x(rect->x() - 5);
-			tc[it->first]->setRect(*rect);
+				*tc[it->first]->rect_ = *tc[it->first]->rect_ + Vec2(-5,0);
 		}
 	}
 }

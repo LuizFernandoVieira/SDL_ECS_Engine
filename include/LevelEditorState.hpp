@@ -7,6 +7,7 @@
 #include "Panel.hpp"
 #include "TileSet.hpp"
 #include "TileMap.hpp"
+#include "CollisionMap.hpp"
 #include "TileSetAndObjectsPanel.hpp"
 
 #include <vector>
@@ -34,6 +35,7 @@ private:
 
 	TileSet* tileSet_;
 	TileMap* tileMap_;
+	CollisionMap* collisionMap_;
 	Panel mainPanel_;
 
 	std::vector<Button*> tileButtons_;
@@ -43,9 +45,11 @@ private:
 	Button* deleteTilesBtn_;
 
 	std::vector<Button*> layerButtons_;
+	std::vector<Button*> collisionButtons_;
 
 	int selectedTile_;
 	int selectedLayer_;
+	int selectedCollision_;
 	Tools selectedTool_;
 
 	TileSetAndObjectsPanel* tileSetAndObjectsPanel_;
