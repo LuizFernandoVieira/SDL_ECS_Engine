@@ -14,6 +14,7 @@ mainPanel_(Rect(0, 0, Globals::WINDOW_WIDTH, Globals::WINDOW_HEIGHT), "../img/bg
 	selectedTool_ = ADD;
 	selectedLayer_ = 1;
 	selectedCollision_ = 0;
+	selectedTab_ = NULL;
 }
 
 LevelEditorState::~LevelEditorState()
@@ -66,8 +67,9 @@ void LevelEditorState::initGUI()
 
 	// Panel
 	Panel* leftPanel  = new Panel(leftRect, "../img/leftPanelBg.png");
-	Panel* rightPanel = new TileMapPanel(*tileSet_, *tileMap_, *collisionMap_, rightRect, "../img/rightPanelBg.png", selectedTile_, selectedLayer_, selectedTool_);
 	tileSetAndObjectsPanel_ = new TileSetAndObjectsPanel(tileSetAndObjectsRect, "../img/god.png");
+	selectedTab_ = &tileSetAndObjectsPanel_->getSelectedTab();
+	Panel* rightPanel = new TileMapPanel(*tileSet_, *tileMap_, *collisionMap_, rightRect, "../img/rightPanelBg.png", selectedTile_, selectedLayer_, selectedCollision_, (int*)selectedTab_, selectedTool_);
 
 	Panel* layersPanel = new Panel(layersRect, "../img/lp.png");
 
@@ -172,8 +174,6 @@ void LevelEditorState::update(float dt)
 
 	Camera::update(dt);
 
-	mainPanel_.update();
-
 	if (InputHandler::getInstance().mousePress(LEFT_MOUSE_BUTTON))
 	{
 		if (addTilesBtn_->getRect().isInside(InputHandler::getInstance().getMouse()))
@@ -184,7 +184,7 @@ void LevelEditorState::update(float dt)
 		} else if (deleteTilesBtn_->getRect().isInside(InputHandler::getInstance().getMouse())) {
 			selectedTool_ = DELETE;
 		} else {
-			if (tileSetAndObjectsPanel_->getSelectedTab() == TileSetAndObjectsPanel::Tab::TILES)
+			if (*selectedTab_ == TileSetAndObjectsPanel::Tab::TILES)
 			{
 				for (int i = 0; i < (int)tileButtons_.size(); i++)
 				{
@@ -196,7 +196,7 @@ void LevelEditorState::update(float dt)
 					}
 				}
 			}
-			else if (tileSetAndObjectsPanel_->getSelectedTab() == TileSetAndObjectsPanel::Tab::COLLISION)
+			else if (*selectedTab_ == TileSetAndObjectsPanel::Tab::COLLISION)
 			{
 				for (int i = 0; i < (int)collisionButtons_.size(); i++)
 				{
@@ -218,6 +218,8 @@ void LevelEditorState::update(float dt)
 			}
 		}
 	}
+
+	mainPanel_.update();
 
 	if(InputHandler::getInstance().quitRequested()) {
 		setQuit(true);

@@ -6,7 +6,7 @@
 #include "../include/InputHandler.hpp"
 #include "../include/Camera.hpp"
 
-TileMapPanel::TileMapPanel(TileSet& tileSet, TileMap& tileMap, CollisionMap& collisionMap, Rect rect, std::string imgPath, int& selectedTile, int& selectedLayer, LevelEditorState::Tools& selectedTool) :
+TileMapPanel::TileMapPanel(TileSet& tileSet, TileMap& tileMap, CollisionMap& collisionMap, Rect rect, std::string imgPath, int& selectedTile, int& selectedLayer, int& selectedCollision, int* selectedTab, LevelEditorState::Tools& selectedTool) :
 	Panel(rect, imgPath),
 	cursorPos_(rect.x(), rect.y(), Globals::TILE_WIDTH, Globals::TILE_HEIGHT),
 	cursorBg_("../img/god.png"),
@@ -19,6 +19,8 @@ TileMapPanel::TileMapPanel(TileSet& tileSet, TileMap& tileMap, CollisionMap& col
 
 	selectedTile_ = &selectedTile;
 	selectedLayer_ = &selectedLayer;
+	selectedCollision_ = &selectedCollision;
+	selectedTab_ = selectedTab;
 	selectedTool_ = &selectedTool;
 }
 
@@ -58,6 +60,8 @@ void TileMapPanel::update()
 			default:
 				break;
 		}
+		if (*selectedTab_ == 1)
+			speedChangePerLayer = 0;
 
 		// Tile da tela q o ponteiro do mouse está em cima
 		int tileX = (int)((InputHandler::getInstance().getMouseX() - rect_.x() + Camera::getPosition().x() - speedChangePerLayer * Camera::getPosition().x() ) / Globals::TILE_WIDTH);
@@ -70,9 +74,15 @@ void TileMapPanel::update()
 		if (InputHandler::getInstance().mousePress(LEFT_MOUSE_BUTTON))
 		{
 			if(*selectedTool_ == LevelEditorState::Tools::ADD) {
-				placeTile(tileX, tileY);
+				if (*selectedTab_ == 0)
+					placeTile(tileX, tileY);
+				else if (*selectedTab_ == 1)
+					placeCollisionTile(tileX, tileY);
 			} else if (*selectedTool_ == LevelEditorState::Tools::DELETE) {
-				deleteTile(tileX, tileY);
+				if (*selectedTab_ == 0)
+					deleteTile(tileX, tileY);
+				else if (*selectedTab_ == 1)
+					deleteCollisionTile(tileX, tileY);
 			}
 		}
 		else if (InputHandler::getInstance().isMouseDown(LEFT_MOUSE_BUTTON))
@@ -109,15 +119,27 @@ void TileMapPanel::update()
 			for(int x = smallX; x<=bigX; x+=Globals::TILE_WIDTH) {
 				for(int y = smallY; y<=bigY; y+=Globals::TILE_HEIGHT) {
 					if(*selectedTool_ == LevelEditorState::Tools::ADD) {
-						placeTile(
-							((x - rect_.x()) / Globals::TILE_WIDTH) + 1, // nao me pergunte por que + 1
-							(y - rect_.y()) / Globals::TILE_HEIGHT
-						);
+						if (*selectedTab_ == 0)
+							placeTile(
+								((x - rect_.x()) / Globals::TILE_WIDTH) + 1, // nao me pergunte por que + 1
+								(y - rect_.y()) / Globals::TILE_HEIGHT
+							);
+						else if (*selectedTab_ == 1)
+							placeCollisionTile(
+								((x - rect_.x()) / Globals::TILE_WIDTH) + 1, // nao me pergunte por que + 1
+								(y - rect_.y()) / Globals::TILE_HEIGHT
+							);
 					} else if (*selectedTool_ == LevelEditorState::Tools::DELETE) {
-						deleteTile(
-							((x - rect_.x()) / Globals::TILE_WIDTH) + 1,
-							(y - rect_.y()) / Globals::TILE_HEIGHT
-						);
+						if (*selectedTab_ == 0)
+							deleteTile(
+								((x - rect_.x()) / Globals::TILE_WIDTH) + 1,
+								(y - rect_.y()) / Globals::TILE_HEIGHT
+							);
+						else if (*selectedTab_ == 1)
+							deleteCollisionTile(
+								((x - rect_.x()) / Globals::TILE_WIDTH) + 1, // nao me pergunte por que + 1
+								(y - rect_.y()) / Globals::TILE_HEIGHT
+							);
 					}
 				}
 			}
@@ -130,6 +152,7 @@ void TileMapPanel::update()
 	if (InputHandler::getInstance().keyPress('s'))
 	{
 		tileMap_->save();
+		collisionMap_->save();
 	}
 }
 
@@ -141,6 +164,7 @@ void TileMapPanel::render()
 	// cursorBg_.render(cursorPos_.x(), cursorPos_.y());
 	if (rect_.isInside(InputHandler::getInstance().getMouse()))
 		tileSet_->render(*selectedTile_, cursorPos_.x(), cursorPos_.y());
+	collisionMap_->render(rect_.x(), rect_.y());
 
 	// Renderizar cursor por cima dos tiles selecionados com drag
 	if (firstDragClick_ != Vec2()) {
@@ -185,5 +209,22 @@ void TileMapPanel::deleteTile(int x, int y)
 		x +
 		y*tileMap_->getWidth() +
 		(*selectedLayer_)*tileMap_->getWidth()*tileMap_->getHeight()
+	] = -1;
+}
+
+
+void TileMapPanel::placeCollisionTile(int x, int y)
+{
+	collisionMap_->collisionMatrix_[
+		x +
+		y*collisionMap_->getWidth()
+	] = *selectedCollision_;
+}
+
+void TileMapPanel::deleteCollisionTile(int x, int y)
+{
+	collisionMap_->collisionMatrix_[
+		x +
+		y*collisionMap_->getWidth()
 	] = -1;
 }

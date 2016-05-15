@@ -24,7 +24,7 @@ public:
 
 	void addButton(Button& button, Tab tab);
 	// void addButton(Button& button);
-	TileSetAndObjectsPanel::Tab getSelectedTab();
+	TileSetAndObjectsPanel::Tab& getSelectedTab();
 
 private:
 	TileSetAndObjectsPanel::Tab selectedTab_;

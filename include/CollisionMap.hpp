@@ -20,13 +20,15 @@ public:
 	CollisionMap(const char* file);
 	void save();
 	void load();
-	void render(Rect rect);
+	void render(int x, int y);
 	int& at(int x, int y);
 	int getWidth() const;
 	int getHeight() const;
 
 	std::vector<int> collisionMatrix_;
 private:
+	void renderSelection(Rect rect);
+
 	std::string filename_;
 	
 	int mapWidth_;

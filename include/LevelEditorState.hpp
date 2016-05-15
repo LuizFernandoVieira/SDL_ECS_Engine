@@ -49,6 +49,7 @@ private:
 
 	int selectedTile_;
 	int selectedLayer_;
+	TileSetAndObjectsPanel::Tab* selectedTab_;
 	int selectedCollision_;
 	Tools selectedTool_;
 

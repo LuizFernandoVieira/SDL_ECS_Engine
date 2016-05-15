@@ -8,14 +8,21 @@ TileSetAndObjectsPanel::TileSetAndObjectsPanel(Rect rect, std::string imgPath) :
 	selectedTab_ = TILES;
 
 	// Criar botoes das abas
-	Rect tileButtonProportions = Rect(0.1, 0.0, 0.4, 0.05);
-	Rect objectButtonProportions = Rect(0.5, 0.0, 0.4, 0.05);
+	Rect tileButtonProportions = Rect(0.05, 0.0, 0.3, 0.05);
+	Rect collisionButtonProportions = Rect(0.35, 0.0, 0.3, 0.05);
+	Rect objectButtonProportions = Rect(0.65, 0.0, 0.3, 0.05);
 
 	Rect tileButtonRect = Rect(
 		tileButtonProportions.x() * rect_.w() + rect_.x(),
 		tileButtonProportions.y() * rect_.h() + rect_.y(),
 		tileButtonProportions.w() * rect_.w(),
 		tileButtonProportions.h() * rect_.h()
+	);
+	Rect collisionButtonRect = Rect(
+		collisionButtonProportions.x() * rect_.w() + rect_.x(),
+		collisionButtonProportions.y() * rect_.h() + rect_.y(),
+		collisionButtonProportions.w() * rect_.w(),
+		collisionButtonProportions.h() * rect_.h()
 	);
 	Rect objectButtonRect = Rect(
 		objectButtonProportions.x() * rect_.w() + rect_.x(),
@@ -25,12 +32,15 @@ TileSetAndObjectsPanel::TileSetAndObjectsPanel(Rect rect, std::string imgPath) :
 	);
 
 	Button* tileButton   = new Button(tileButtonRect, "../img/lb.png"/*, nullptr*/);
-	Button* objectButton = new Button(objectButtonRect, "../img/lp.png"/*, nullptr*/);
+	Button* collisionButton = new Button(collisionButtonRect, "../img/lp.png"/*, nullptr*/);
+	Button* objectButton = new Button(objectButtonRect, "../img/bgTilePanel.png"/*, nullptr*/);
 
 	tileButton->setResizable(true);
+	collisionButton->setResizable(true);
 	objectButton->setResizable(true);
 
 	add(*tileButton, tileButtonProportions);
+	add(*collisionButton, collisionButtonProportions);
 	add(*objectButton, objectButtonProportions);
 
 	// Somar a altura dos botoes de tabs aos outros botoes
@@ -157,17 +167,24 @@ void TileSetAndObjectsPanel::render()
 	Panel::render();
 	if (selectedTab_ == TILES)
 	{
-		for(auto it=tileButtons_.begin(); it!=tileButtons_.end(); ++it)
+		for(int i = 0; i < (int)tileButtons_.size(); i++)
 		{
-			it->/*first->*/render();
+			tileButtons_[i].render();
 		}
 	}
-	else
+	else if (selectedTab_ == OBJECTS)
 	{
 		previousObject->render();
 		nextObject->render();
 		objectSp->render(rect_.x() + 30, rect_.y() + 100);
 		objectSp->renderSelection(rect_.x() + 30, rect_.y() + 100);
+	}
+	else
+	{
+		for (int i = 0; i < (int)collisionButtons_.size(); i++)
+		{
+			collisionButtons_[i].render();
+		}
 	}
 }
 
@@ -186,7 +203,7 @@ void TileSetAndObjectsPanel::addButton(Button& button, Tab tab)
 }
 
 
-TileSetAndObjectsPanel::Tab TileSetAndObjectsPanel::getSelectedTab()
+TileSetAndObjectsPanel::Tab& TileSetAndObjectsPanel::getSelectedTab()
 {
 	return selectedTab_;
 }

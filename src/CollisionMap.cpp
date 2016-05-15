@@ -1,5 +1,6 @@
 #include "../include/CollisionMap.hpp"
 #include "../include/Game.hpp"
+#include "../include/Globals.hpp"
 
 CollisionMap::CollisionMap(const char* file) : filename_(file)
 {
@@ -81,7 +82,24 @@ int& CollisionMap::at(int x, int y)
 	return collisionMatrix_[ x + y*mapWidth_ ];
 }
 
-void CollisionMap::render(Rect rect)
+
+void CollisionMap::render(int x, int y)
+{
+	for (int i = 0; i < mapHeight_; i++) {
+		for (int j = 0; j < mapWidth_; j++) {
+			if (at(j, i) >= 0) {
+				renderSelection(Rect(
+					j * Globals::TILE_WIDTH + x, 
+					i * Globals::TILE_HEIGHT + y, 
+					Globals::TILE_WIDTH, 
+					Globals::TILE_HEIGHT
+				));
+			}
+		}
+	}
+}
+
+void CollisionMap::renderSelection(Rect rect)
 {
 	SDL_Renderer* renderer = Game::getInstance().getRenderer();
 	SDL_RenderDrawLine(renderer, rect.x(), rect.y(), rect.w() + rect.x(), rect.y());

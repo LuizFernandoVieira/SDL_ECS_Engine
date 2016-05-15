@@ -16,7 +16,7 @@
 class TileMapPanel : public Panel
 {
 public:
-	TileMapPanel(TileSet& tileSet, TileMap& tileMap, CollisionMap& collisionMap, Rect rect, std::string imgPath, int& selectedTile, int& selectedLayer, LevelEditorState::Tools& selectedTool);
+	TileMapPanel(TileSet& tileSet, TileMap& tileMap, CollisionMap& collisionMap, Rect rect, std::string imgPath, int& selectedTile, int& selectedLayer, int& selectedCollision, int* selectedTab, LevelEditorState::Tools& selectedTool);
 	~TileMapPanel();
 	void update();
 	void render();
@@ -24,6 +24,8 @@ public:
 private:
 	void placeTile(int x, int y);
 	void deleteTile(int x, int y);
+	void placeCollisionTile(int x, int y);
+	void deleteCollisionTile(int x, int y);
 
 	TileSet* tileSet_;
 	TileMap* tileMap_;
@@ -37,6 +39,8 @@ private:
 
 	int* selectedTile_;
 	int* selectedLayer_;
+	int* selectedCollision_;
+	int* selectedTab_;
 
 	LevelEditorState::Tools* selectedTool_;
 };
