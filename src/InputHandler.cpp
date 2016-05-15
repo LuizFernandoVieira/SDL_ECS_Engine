@@ -95,6 +95,97 @@ void InputHandler::update()
 				screenResized = true;
 			}
 		}
+
+		// ANALOGICO (LA RA)
+		if (event.type == SDL_JOYAXISMOTION )
+    {
+			if( event.jaxis.which == 0 )
+			{
+				//X axis motion
+				if( event.jaxis.axis == 0 )
+				{
+					if( event.jaxis.value < -JOYSTICK_DEAD_ZONE )
+					{
+						std::cout << "arrow left" << std::endl;
+					}
+					else if( event.jaxis.value > JOYSTICK_DEAD_ZONE )
+					{
+						std::cout << "arrow right" << std::endl;
+					}
+				}
+				//Y axis motion
+				if( event.jaxis.axis == 1 )
+        {
+            if( event.jaxis.value < -JOYSTICK_DEAD_ZONE )
+            {
+							std::cout << "arrow up" << std::endl;
+            }
+            else if( event.jaxis.value > JOYSTICK_DEAD_ZONE )
+            {
+							std::cout << "arrow down" << std::endl;
+            }
+        }
+			}
+		}
+
+		// BUTTON EVENTS (LB RB ARROWS YXBA)
+		if (event.type == SDL_JOYBUTTONDOWN )
+		{
+			if (event.jbutton.button == 0) // A
+			{
+				std::cout << "A" << std::endl;
+			}
+			if (event.jbutton.button == 1) // B
+			{
+				std::cout << "B" << std::endl;
+			}
+			if (event.jbutton.button == 2) // X
+			{
+				std::cout << "X" << std::endl;
+			}
+			if (event.jbutton.button == 3) // Y
+			{
+				std::cout << "Y" << std::endl;
+			}
+			if (event.jbutton.button == 4) // LB
+			{
+				std::cout << "LB" << std::endl;
+			}
+			if (event.jbutton.button == 5) // RB
+			{
+				std::cout << "RB" << std::endl;
+			}
+			if (event.jbutton.button == 11) // A UP
+			{
+				std::cout << "ARROW UP" << std::endl;
+			}
+			if (event.jbutton.button == 12) // A DOWN
+			{
+				std::cout << "ARROW DOWN" << std::endl;
+			}
+			if (event.jbutton.button == 13) // A LEFT
+			{
+				std::cout << "ARROW LEFT" << std::endl;
+			}
+			if (event.jbutton.button == 14) // A RIGHT
+			{
+				std::cout << "ARROW RIGHT" << std::endl;
+			}
+		}
+		// if (event.type == SDL_JOYBUTTONUP )
+		// {
+		// 	std::cout << "SDL_JOYBUTTONUP" << std::endl;
+		// }
+
+		// if (event.type == SDL_JOYBALLMOTION)
+		// {
+		// 	std::cout << "SDL_JOYBALLMOTION" << std::endl;
+		// }
+		//
+		// if (event.type == SDL_JOYHATMOTION)
+		// {
+		// 	std::cout << "SDL_JOYHATMOTION" << std::endl;
+		// }
 	}
 }
 
