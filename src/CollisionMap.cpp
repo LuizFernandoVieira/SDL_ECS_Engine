@@ -1,6 +1,7 @@
 #include "../include/CollisionMap.hpp"
 #include "../include/Game.hpp"
 #include "../include/Globals.hpp"
+#include "../include/Camera.hpp"
 
 CollisionMap::CollisionMap(const char* file) : filename_(file)
 {
@@ -89,8 +90,8 @@ void CollisionMap::render(int x, int y)
 		for (int j = 0; j < mapWidth_; j++) {
 			if (at(j, i) >= 0) {
 				renderSelection(Rect(
-					j * Globals::TILE_WIDTH + x, 
-					i * Globals::TILE_HEIGHT + y, 
+					j * Globals::TILE_WIDTH + x - Camera::pos_.x(), 
+					i * Globals::TILE_HEIGHT + y - Camera::pos_.y(), 
 					Globals::TILE_WIDTH, 
 					Globals::TILE_HEIGHT
 				));
