@@ -9,7 +9,7 @@
 TileMapPanel::TileMapPanel(TileSet& tileSet, TileMap& tileMap, CollisionMap& collisionMap, Rect rect, std::string imgPath, int& selectedTile, int& selectedLayer, int& selectedCollision, int* selectedTab, LevelEditorState::Tools& selectedTool) :
 	Panel(rect, imgPath),
 	cursorPos_(rect.x(), rect.y(), Globals::TILE_WIDTH, Globals::TILE_HEIGHT),
-	cursorBg_("../img/god.png"),
+	cursorBg_("../img/interface/editor/btn_1.png"),
 	firstDragClick_(),
 	curDragClick_()
 {
@@ -161,9 +161,11 @@ void TileMapPanel::render()
 {
 	Panel::render();
 	tileMap_->render(rect_.x(), rect_.y());
-	// cursorBg_.render(cursorPos_.x(), cursorPos_.y());
 	if (rect_.isInside(InputHandler::getInstance().getMouse()))
-		tileSet_->render(*selectedTile_, cursorPos_.x(), cursorPos_.y());
+		if (*selectedTool_ == LevelEditorState::Tools::ADD)
+			tileSet_->render(*selectedTile_, cursorPos_.x(), cursorPos_.y());
+		else
+			cursorBg_.render(cursorPos_.x(), cursorPos_.y());
 	collisionMap_->render(rect_.x(), rect_.y());
 
 	// Renderizar cursor por cima dos tiles selecionados com drag
@@ -184,10 +186,37 @@ void TileMapPanel::render()
 			smallY = curDragClick_.y();
 			bigY = firstDragClick_.y();
 		}
+
+		double speedChangePerLayer;
+		switch(*selectedLayer_)
+		{
+			case 0:
+				speedChangePerLayer = -0.5;
+				break;
+			case 1:
+				speedChangePerLayer = 0;
+				break;
+			case 2:
+				speedChangePerLayer = 0.5;
+				break;
+			case 3:
+				speedChangePerLayer = 0.75;
+				break;
+			default:
+				break;
+		}
+		if (*selectedTab_ == 1)
+			speedChangePerLayer = 0;
+
 		for(int x = smallX; x<=bigX; x+=Globals::TILE_WIDTH) {
 			for(int y = smallY; y<=bigY; y+=Globals::TILE_HEIGHT) {
-				// cursorBg_.render(x, y);
-				tileSet_->render(*selectedTile_, x, y);
+				if (*selectedTool_ == LevelEditorState::Tools::ADD)
+					tileSet_->render(*selectedTile_, 
+					                 x + speedChangePerLayer * Camera::getPosition().x(), 
+					                 y + speedChangePerLayer * Camera::getPosition().y());
+				else
+					cursorBg_.render(x + speedChangePerLayer * Camera::getPosition().x(), 
+						             y + speedChangePerLayer * Camera::getPosition().y());
 			}
 		}
 	}

@@ -7,7 +7,7 @@
 LevelEditorState::LevelEditorState() :
 mainPanel_(Rect(0, 0, Globals::WINDOW_WIDTH, Globals::WINDOW_HEIGHT), "../img/bgTilePanel.png")
 {
-	tileSet_ = new TileSet(Globals::TILE_WIDTH, Globals::TILE_HEIGHT, "../img/ground.png");
+	tileSet_ = new TileSet(Globals::TILE_WIDTH, Globals::TILE_HEIGHT, "../img/maps/test/tile_set.png");
 	tileMap_ = new TileMap("../map/tileMap.txt", tileSet_);
 	collisionMap_ = new CollisionMap("../map/collisionMap.txt");
 	selectedTile_ = 0;
@@ -38,13 +38,13 @@ void LevelEditorState::create(StateMachine& stateMachine)
 void LevelEditorState::initGUI()
 {
 	// Proportion
-	Rect leftRectProportion  							= Rect(0.0, 0.000, 0.20, 1.00);
-	Rect rightRectProportion 							= Rect(0.2, 0.050, 0.80, 0.95);
-	Rect tileSetAndObjectsRectProportion 	= Rect(0.1, 0.100, 0.80, 0.80);
-	Rect addTilesRectProportion 					= Rect(0.1, 0.025, 0.15, 0.05);
-	Rect selectTilesRectProportion 				= Rect(0.3, 0.025, 0.15, 0.05);
-	Rect deleteTilesRectProportion				= Rect(0.5, 0.025, 0.15, 0.05);
-	Rect layersRectProportion   					= Rect(0.2, 0.000, 0.80, 0.05);
+	Rect leftRectProportion  							= Rect(0.00, 0.000, 0.20, 1.00);
+	Rect rightRectProportion 							= Rect(0.20, 0.050, 0.80, 0.95);
+	Rect tileSetAndObjectsRectProportion 	= Rect(0.05, 0.100, 0.90, 0.80);
+	Rect addTilesRectProportion 					= Rect(0.10, 0.025, 0.15, 0.05);
+	Rect selectTilesRectProportion 				= Rect(0.30, 0.025, 0.15, 0.05);
+	Rect deleteTilesRectProportion				= Rect(0.50, 0.025, 0.15, 0.05);
+	Rect layersRectProportion   					= Rect(0.20, 0.000, 0.80, 0.05);
 
 	Rect layerButton1RectProportion = Rect(0.1, 0.100, 0.10, 0.80);
 	Rect layerButton2RectProportion = Rect(0.3, 0.100, 0.10, 0.80);
@@ -66,12 +66,12 @@ void LevelEditorState::initGUI()
 	Rect layerButton4Rect = getPanelRect(layersRect, layerButton4RectProportion);
 
 	// Panel
-	Panel* leftPanel  = new Panel(leftRect, "../img/leftPanelBg.png");
-	tileSetAndObjectsPanel_ = new TileSetAndObjectsPanel(tileSetAndObjectsRect, "../img/god.png");
+	Panel* leftPanel  = new Panel(leftRect, "../img/interface/editor/left_panel.png");
+	tileSetAndObjectsPanel_ = new TileSetAndObjectsPanel(tileSetAndObjectsRect, "../img/interface/editor/tile_set_panel.png");
 	selectedTab_ = &tileSetAndObjectsPanel_->getSelectedTab();
-	Panel* rightPanel = new TileMapPanel(*tileSet_, *tileMap_, *collisionMap_, rightRect, "../img/rightPanelBg.png", selectedTile_, selectedLayer_, selectedCollision_, (int*)selectedTab_, selectedTool_);
+	Panel* rightPanel = new TileMapPanel(*tileSet_, *tileMap_, *collisionMap_, rightRect, "../img/interface/editor/tile_map_panel.png", selectedTile_, selectedLayer_, selectedCollision_, (int*)selectedTab_, selectedTool_);
 
-	Panel* layersPanel = new Panel(layersRect, "../img/lp.png");
+	Panel* layersPanel = new Panel(layersRect, "../img/interface/editor/tile_set_panel.png");
 
 	// Button
 	addTilesBtn_ 		= new Button(addTilesRect, "../img/addTilesBtn.png"/*, tileBtnExecute*/);
@@ -82,17 +82,18 @@ void LevelEditorState::initGUI()
 	selectTilesBtn_->setResizable(true);
 	deleteTilesBtn_->setResizable(true);
 
-	layerButtons_.push_back(new Button(layerButton1Rect, "../img/lb.png"/*, tileBtnExecute*/));
-	layerButtons_.push_back(new Button(layerButton2Rect, "../img/lb.png"/*, tileBtnExecute*/));
-	layerButtons_.push_back(new Button(layerButton3Rect, "../img/lb.png"/*, tileBtnExecute*/));
-	layerButtons_.push_back(new Button(layerButton4Rect, "../img/lb.png"/*, tileBtnExecute*/));
+	layerButtons_.push_back(new Button(layerButton1Rect, "../img/interface/editor/btn_4.png"/*, tileBtnExecute*/));
+	layerButtons_.push_back(new Button(layerButton2Rect, "../img/interface/editor/btn_5.png"/*, tileBtnExecute*/));
+	layerButtons_.push_back(new Button(layerButton3Rect, "../img/interface/editor/btn_6.png"/*, tileBtnExecute*/));
+	layerButtons_.push_back(new Button(layerButton4Rect, "../img/interface/editor/btn_7.png"/*, tileBtnExecute*/));
 
 	layerButtons_[0]->setResizable(true);
 	layerButtons_[1]->setResizable(true);
 	layerButtons_[2]->setResizable(true);
 	layerButtons_[3]->setResizable(true);
 
-	collisionButtons_.push_back(new Button(layerButton1Rect, "../img/player.png"/*, tileBtnExecute*/));
+	//                    pq caralhos esse rect vvvvv nao eh alterado??
+	collisionButtons_.emplace_back(new Button(Rect(0,0,32,32), "../img/interface/editor/btn_5.png"/*, tileBtnExecute*/));
 
 	// Add
 	mainPanel_.add(*rightPanel, rightRectProportion);
@@ -127,7 +128,7 @@ void LevelEditorState::initGUI()
 				curRow * (Globals::TILE_HEIGHT + 2) + 2 + tileSetAndObjectsRect.y(),
 				Globals::TILE_WIDTH,
 				Globals::TILE_HEIGHT),
-			"../img/ground.png"//,
+			"../img/maps/test/tile_set.png"//,
 			// tileBtnExecute
 		);
 		btn->setSpriteClip(

@@ -31,9 +31,9 @@ TileSetAndObjectsPanel::TileSetAndObjectsPanel(Rect rect, std::string imgPath) :
 		objectButtonProportions.h() * rect_.h()
 	);
 
-	Button* tileButton   = new Button(tileButtonRect, "../img/lb.png"/*, nullptr*/);
-	Button* collisionButton = new Button(collisionButtonRect, "../img/lp.png"/*, nullptr*/);
-	Button* objectButton = new Button(objectButtonRect, "../img/bgTilePanel.png"/*, nullptr*/);
+	Button* tileButton   = new Button(tileButtonRect, "../img/interface/editor/btn_1.png"/*, nullptr*/);
+	Button* collisionButton = new Button(collisionButtonRect, "../img/interface/editor/btn_2.png"/*, nullptr*/);
+	Button* objectButton = new Button(objectButtonRect, "../img/interface/editor/btn_3.png"/*, nullptr*/);
 
 	tileButton->setResizable(true);
 	collisionButton->setResizable(true);
@@ -124,7 +124,6 @@ void TileSetAndObjectsPanel::update()
 		}
 
 		// resize dos botoes de collision
-
 		curRow = 0;
 		curColumn = 0;
 
@@ -179,7 +178,7 @@ void TileSetAndObjectsPanel::render()
 		objectSp->render(rect_.x() + 30, rect_.y() + 100);
 		objectSp->renderSelection(rect_.x() + 30, rect_.y() + 100);
 	}
-	else
+	else if (selectedTab_ == COLLISION)
 	{
 		for (int i = 0; i < (int)collisionButtons_.size(); i++)
 		{

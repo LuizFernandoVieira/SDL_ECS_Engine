@@ -12,7 +12,7 @@ FirstLevel::FirstLevel(State& state) : bg("../img/bg.png")
 {
 	state_ = &state;
 
-	tileSet_ = new TileSet(Globals::TILE_WIDTH, Globals::TILE_HEIGHT, "../img/ground.png");
+	tileSet_ = new TileSet(Globals::TILE_WIDTH, Globals::TILE_HEIGHT, "../img/maps/test/tile_set.png");
 	tileMap_ = new TileMap("../map/tileMap.txt", tileSet_);
 
 	createPlayer();
