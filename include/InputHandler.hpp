@@ -50,6 +50,7 @@ private:
 	int updateCounter;
 	int mouseX;
 	int mouseY;
+	const int JOYSTICK_DEAD_ZONE = 8000;
 	// int screenWidth;
 	// int screenHeight;
 	bool screenResized;
