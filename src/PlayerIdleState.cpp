@@ -19,7 +19,7 @@ void PlayerIdleState::handle(StateComponent* sc)
 {
 
 	if(InputHandler::getInstance().keyPress(UP_ARROW_KEY)) {
-		std::cout << "UP" << std::endl;
+		// std::cout << "UP" << std::endl;
 		// PlayerJumpingState* pjs = new PlayerJumpingState(*stateMachine_);
 		// stateMachine_->changeState(*pjs);
 	}
@@ -27,16 +27,13 @@ void PlayerIdleState::handle(StateComponent* sc)
 		InputHandler::getInstance().isKeyDown(RIGHT_ARROW_KEY) &&
 		!InputHandler::getInstance().isKeyDown(LEFT_ARROW_KEY)
 	) {
-		std::cout << "RIGHT" << std::endl;
+		// std::cout << "RIGHT" << std::endl;
 		PlayerWalkingState* pws = new PlayerWalkingState(*stateMachine_);
 		stateMachine_->changeState(*pws);
 		sc->setFacingRight(true);
 	}
-	else if(InputHandler::getInstance().keyPress(DOWN_ARROW_KEY)) {
-		std::cout << "DOWN" << std::endl;
-	}
 	else if(InputHandler::getInstance().isKeyDown(LEFT_ARROW_KEY)) {
-		std::cout << "LEFT" << std::endl;
+		// std::cout << "LEFT" << std::endl;
 		PlayerWalkingState* pws = new PlayerWalkingState(*stateMachine_);
 		stateMachine_->changeState(*pws);
 		sc->setFacingRight(false);

@@ -110,16 +110,16 @@ void TileMap::renderLayer(int layer, int cameraX, int cameraY)
 			if (at(j, i, layer) >= 0) {
 				// tileSet_->render( 
 				// 	(unsigned)at(j, i, layer), 
-				// 	(float)(j * tileSet_->getTileWidth()  + cameraX + Camera::getPosition().x() * (layer-1)*0.5), 
-				// 	(float)(i * tileSet_->getTileHeight() + cameraY + Camera::getPosition().y() * (layer-1)*0.5) 
+				// 	(float)(j * tileSet_->getTileWidth()  + cameraX + Camera::pos_.x() * (layer-1)*0.5), 
+				// 	(float)(i * tileSet_->getTileHeight() + cameraY + Camera::pos_.y() * (layer-1)*0.5) 
 				// );
 				switch(layer)
 				{
 					case 0:
 						tileSet_->render( 
 							(unsigned)at(j, i, layer), 
-							(float)(j * tileSet_->getTileWidth()  + cameraX - Camera::getPosition().x() * (double)0.5), 
-							(float)(i * tileSet_->getTileHeight() + cameraY - Camera::getPosition().y() * (double)0.5) 
+							(float)(j * tileSet_->getTileWidth()  + cameraX - Camera::pos_.x() * (double)0.5), 
+							(float)(i * tileSet_->getTileHeight() + cameraY - Camera::pos_.y() * (double)0.5) 
 						);
 						break;
 					case 1:
@@ -132,15 +132,15 @@ void TileMap::renderLayer(int layer, int cameraX, int cameraY)
 					case 2:
 						tileSet_->render( 
 							(unsigned)at(j, i, layer), 
-							(float)(j * tileSet_->getTileWidth()  + cameraX + Camera::getPosition().x() * (double)0.5), 
-							(float)(i * tileSet_->getTileHeight() + cameraY + Camera::getPosition().y() * (double)0.5) 
+							(float)(j * tileSet_->getTileWidth()  + cameraX + Camera::pos_.x() * (double)0.5), 
+							(float)(i * tileSet_->getTileHeight() + cameraY + Camera::pos_.y() * (double)0.5) 
 						);
 						break;
 					case 3:
 						tileSet_->render( 
 							(unsigned)at(j, i, layer), 
-							(float)(j * tileSet_->getTileWidth()  + cameraX + Camera::getPosition().x() * (double)0.75), 
-							(float)(i * tileSet_->getTileHeight() + cameraY + Camera::getPosition().y() * (double)0.75) 
+							(float)(j * tileSet_->getTileWidth()  + cameraX + Camera::pos_.x() * (double)0.75), 
+							(float)(i * tileSet_->getTileHeight() + cameraY + Camera::pos_.y() * (double)0.75) 
 						);
 						break;
 					default:

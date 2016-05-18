@@ -1,25 +1,14 @@
 #include "../include/FirstLevel.hpp"
-#include "../include/Camera.hpp"
-#include "../include/InputHandler.hpp"
-#include "../include/TransformComponent.hpp"
-#include "../include/StateComponent.hpp"
-#include "../include/RenderComponent.hpp"
 #include "../include/Globals.hpp"
 
-unsigned int FirstLevel::nextId_ = 0;
 
-FirstLevel::FirstLevel(State& state) : bg("../img/bg.png")
+FirstLevel::FirstLevel() : 
+	bg("../img/bg.png"),
+	tileSet_(Globals::TILE_WIDTH, Globals::TILE_HEIGHT, "../img/maps/test/tile_set.png"),
+	tileMap_("../map/tileMap.txt", &tileSet_),
+	collisionMap_("../map/collisionMap.txt")
 {
-	state_ = &state;
 
-	tileSet_ = new TileSet(Globals::TILE_WIDTH, Globals::TILE_HEIGHT, "../img/maps/test/tile_set.png");
-	tileMap_ = new TileMap("../map/tileMap.txt", tileSet_);
-
-	createPlayer();
-
-	stateSystem_ = StateSystem();
-	renderSystem_ = RenderSystem();
-	moveSystem_ = MoveSystem();
 }
 
 FirstLevel::~FirstLevel()
@@ -27,40 +16,39 @@ FirstLevel::~FirstLevel()
 
 }
 
-void FirstLevel::create()
-{
+// void FirstLevel::update(float dt)
+// {
 
-}
-
-void FirstLevel::update(float dt)
-{
-	InputHandler::getInstance().update();
-
-	Camera::update(dt);
-
-	stateSystem_.update(mapState_);
-	moveSystem_.update(mapTransform_, mapState_, mapPhysics_);
-
-	if(InputHandler::getInstance().quitRequested()) {
-		state_->setQuit(true);
-	}
-}
+// }
 
 void FirstLevel::render()
 {
 	bg.render(0,0);
-	tileMap_->render(0,0);
-	renderSystem_.update(mapTransform_, mapRender_);
+	tileMap_.render(0,0);
 }
 
-void FirstLevel::createPlayer()
-{
-	player_ = nextId_;
-	nextId_++;
-	mapTransform_.insert(std::pair<int,TransformComponent*> (player_, new TransformComponent(new Rect(512, 300, 32, 32))));
-	mapState_.insert(std::pair<int,StateComponent*> (player_, new StateComponent()));
-	mapPhysics_.insert(std::pair<int,PhysicsComponent*> (player_, new PhysicsComponent()));
-	mapRender_.insert(std::pair<int,RenderComponent*> (player_, new RenderComponent(new Sprite("../img/player.png"))));
 
-	Camera::follow(mapTransform_[player_]);
+std::vector<std::pair<int, TransformComponent*>> FirstLevel::createTerrain(unsigned int& nextId)
+{
+	std::vector<std::pair<int, TransformComponent*>> terrainEntities;
+	for (int y = 0; y < collisionMap_.getHeight(); y++)
+	{
+		for (int x = 0; x < collisionMap_.getWidth(); x++)
+		{
+			if (collisionMap_.at(x, y) == 0)
+			{
+				terrainEntities.emplace_back( std::pair<int, TransformComponent*> (
+					nextId++, 
+					new TransformComponent(Rect(
+						x * Globals::TILE_WIDTH,
+						y * Globals::TILE_HEIGHT,
+						Globals::TILE_WIDTH,
+						Globals::TILE_HEIGHT
+					))
+				));
+			}
+		}
+	}
+
+	return terrainEntities;
 }

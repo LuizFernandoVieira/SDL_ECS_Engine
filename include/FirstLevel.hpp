@@ -1,40 +1,25 @@
 #ifndef FIRSTLEVEL_HPP
 #define FIRSTLEVEL_HPP
 
-#include <map>
-#include <vector>
-
-#include "ILevel.hpp"
-#include "State.hpp"
+#include "Level.hpp"
 #include "TileSet.hpp"
 #include "TileMap.hpp"
-#include "StateSystem.hpp"
-#include "RenderSystem.hpp"
-#include "MoveSystem.hpp"
+#include "CollisionMap.hpp"
+#include "TransformComponent.hpp"
+#include "StaticSprite.hpp"
 
-class FirstLevel : public ILevel
+class FirstLevel : public Level
 {
 public:
-	FirstLevel(State& state);
+	FirstLevel();
 	~FirstLevel();
-	void create();
-	void update(float dt);
 	void render();
+	std::vector<std::pair<int, TransformComponent*>> createTerrain(unsigned int& nextId);
 private:
-	void createPlayer();
-	State* state_;
-	TileSet* tileSet_;
-	TileMap* tileMap_;
-	Sprite bg;
-	unsigned int player_;
-	static unsigned int nextId_;
-	std::map<int, TransformComponent*> mapTransform_;
-	std::map<int, StateComponent*> 	mapState_;
-	std::map<int, RenderComponent*> mapRender_;
-	std::map<int, PhysicsComponent*> mapPhysics_;
-	StateSystem stateSystem_;
-	RenderSystem renderSystem_;
-	MoveSystem moveSystem_;
+	StaticSprite bg;
+	TileSet tileSet_;
+	TileMap tileMap_;
+	CollisionMap collisionMap_;
 };
 
 #endif

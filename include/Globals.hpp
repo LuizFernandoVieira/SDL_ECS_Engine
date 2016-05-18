@@ -8,6 +8,7 @@ public:
 	static int WINDOW_HEIGHT;
 	static int TILE_WIDTH;
 	static int TILE_HEIGHT;
+	static int GRAVITY;
 };
 
 

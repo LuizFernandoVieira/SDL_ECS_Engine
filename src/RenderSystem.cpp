@@ -10,10 +10,10 @@ void RenderSystem::update(std::map<int, TransformComponent*> tc,
 	std::map<int, RenderComponent*> rc)
 {
 	for(auto it = rc.begin(); it != rc.end(); ++it) {
-		Rect* tcRect = tc[it->first]->getRect();
+		Rect tcRect = tc[it->first]->rect_;
 		it->second->getSprite()->render(
-			tcRect->x(),
-			tcRect->y(),
+			tcRect.x(),
+			tcRect.y(),
 			0
 		);
 	}

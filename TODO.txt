@@ -8,16 +8,13 @@ A fazer:
 
 ============ EDITOR DE MAPA ====================
 
-- Add/remover/selecionar objetos;
+Done!
 
 Primeira entrega
 	
 Segunda entrega
 	Scroll dos painéis;
+	Add/remover/selecionar objetos;
 
 Terceira entrega
 	Selecionar tile set / tile map;
-
-
-
-DELETAR TILE NAO FUNCIONA NO MAC K

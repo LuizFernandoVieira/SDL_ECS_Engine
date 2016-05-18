@@ -13,7 +13,7 @@ public:
 	static void follow(TransformComponent* focus);
 	static void unfollow();
 	static void update(float dt);
-	static Vec2 getPosition();
+	
 	static Vec2 pos_;
 	static Vec2 speed_;
 private:

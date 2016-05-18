@@ -51,8 +51,8 @@ void Sprite::render(int x, int y, float angle)
 {
 	SDL_Rect dstRect;
 
-	dstRect.x = x - Camera::getPosition().x();
-	dstRect.y = y - Camera::getPosition().y();
+	dstRect.x = x - Camera::pos_.x();
+	dstRect.y = y - Camera::pos_.y();
 	dstRect.w = clipRect_.w * scaleX_;
 	dstRect.h = clipRect_.h * scaleY_;
 

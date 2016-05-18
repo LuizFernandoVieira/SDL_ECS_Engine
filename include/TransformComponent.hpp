@@ -7,13 +7,11 @@
 class TransformComponent : public Component
 {
 public:
-	TransformComponent() { rect_ = new Rect(); }
-	TransformComponent(Rect* rect) { rect_ = rect; }
-	~TransformComponent() {}
-	Rect* getRect() { return rect_; }
-	void setRect(Rect& rect) { rect_ = &rect; }
-	Rect* rect_;
-// private:
+	TransformComponent() : rect_() { /*rect_ = new Rect();*/ }
+	TransformComponent(Rect rect) { rect_ = rect; }
+	~TransformComponent() { /*delete rect_;*/ }
+
+	Rect rect_;
 };
 
 #endif

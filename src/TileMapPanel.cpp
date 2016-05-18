@@ -64,12 +64,12 @@ void TileMapPanel::update()
 			speedChangePerLayer = 0;
 
 		// Tile da tela q o ponteiro do mouse está em cima
-		int tileX = (int)((InputHandler::getInstance().getMouseX() - rect_.x() + Camera::getPosition().x() - speedChangePerLayer * Camera::getPosition().x() ) / Globals::TILE_WIDTH);
-		int tileY = (int)((InputHandler::getInstance().getMouseY() - rect_.y() + Camera::getPosition().y() - speedChangePerLayer * Camera::getPosition().y() ) / Globals::TILE_HEIGHT);
+		int tileX = (int)((InputHandler::getInstance().getMouseX() - rect_.x() + Camera::pos_.x() - speedChangePerLayer * Camera::pos_.x() ) / Globals::TILE_WIDTH);
+		int tileY = (int)((InputHandler::getInstance().getMouseY() - rect_.y() + Camera::pos_.y() - speedChangePerLayer * Camera::pos_.y() ) / Globals::TILE_HEIGHT);
 
 		// Mover o cursor para este tile
-		cursorPos_.x( tileX * Globals::TILE_WIDTH + rect_.x() + speedChangePerLayer * Camera::getPosition().x() );
-		cursorPos_.y( tileY * Globals::TILE_HEIGHT + rect_.y() + speedChangePerLayer * Camera::getPosition().y() );
+		cursorPos_.x( tileX * Globals::TILE_WIDTH + rect_.x() + speedChangePerLayer * Camera::pos_.x() );
+		cursorPos_.y( tileY * Globals::TILE_HEIGHT + rect_.y() + speedChangePerLayer * Camera::pos_.y() );
 
 		if (InputHandler::getInstance().mousePress(LEFT_MOUSE_BUTTON))
 		{
@@ -162,10 +162,12 @@ void TileMapPanel::render()
 	Panel::render();
 	tileMap_->render(rect_.x(), rect_.y());
 	if (rect_.isInside(InputHandler::getInstance().getMouse()))
+	{
 		if (*selectedTool_ == LevelEditorState::Tools::ADD)
 			tileSet_->render(*selectedTile_, cursorPos_.x(), cursorPos_.y());
 		else
 			cursorBg_.render(cursorPos_.x(), cursorPos_.y());
+	}
 	collisionMap_->render(rect_.x(), rect_.y());
 
 	// Renderizar cursor por cima dos tiles selecionados com drag
@@ -212,11 +214,11 @@ void TileMapPanel::render()
 			for(int y = smallY; y<=bigY; y+=Globals::TILE_HEIGHT) {
 				if (*selectedTool_ == LevelEditorState::Tools::ADD)
 					tileSet_->render(*selectedTile_, 
-					                 x + speedChangePerLayer * Camera::getPosition().x(), 
-					                 y + speedChangePerLayer * Camera::getPosition().y());
+					                 x + speedChangePerLayer * Camera::pos_.x(), 
+					                 y + speedChangePerLayer * Camera::pos_.y());
 				else
-					cursorBg_.render(x + speedChangePerLayer * Camera::getPosition().x(), 
-						             y + speedChangePerLayer * Camera::getPosition().y());
+					cursorBg_.render(x + speedChangePerLayer * Camera::pos_.x(), 
+						             y + speedChangePerLayer * Camera::pos_.y());
 			}
 		}
 	}
