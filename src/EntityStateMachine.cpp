@@ -12,9 +12,9 @@ void EntityStateMachine::changeState(EntityState& state)
 	currentState_ = &state;
 }
 
-void EntityStateMachine::handle(StateComponent* sc)
+void EntityStateMachine::handle(StateComponent* stateComp, SpeedComponent* speedComp)
 {
-	currentState_->handle(sc);
+	currentState_->handle(stateComp, speedComp);
 }
 
 EntityState* EntityStateMachine::getCurrentState()

@@ -10,9 +10,10 @@ public:
 	Rect(float x, float y, float w, float h);
 	// Rect(Rect rect);
 
-	Vec2 getCenter();
+	Vec2 getCenter() const;
 
 	Rect operator+ (const Vec2&);
+	Rect& operator+= (const Vec2&);
 	Rect operator* (const Rect&);
 
 	bool isInside(Vec2 vec2);

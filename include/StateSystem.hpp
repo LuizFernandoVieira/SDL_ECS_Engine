@@ -5,12 +5,16 @@
 
 #include "System.hpp"
 #include "StateComponent.hpp"
+#include "SpeedComponent.hpp"
 
 class StateSystem : public System
 {
 public:
 	StateSystem();
-	void update(std::map<int, StateComponent*> sc);
+	void update(
+		std::map<int, StateComponent*> stateComp, 
+		std::map<int, SpeedComponent*> speedComp
+	);
 };
 
 #endif

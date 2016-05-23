@@ -8,10 +8,13 @@
 #include "StateEventEnum.hpp"
 #include "Level.hpp"
 #include "ColliderComponent.hpp"
+#include "SpeedComponent.hpp"
+#include "InputSystem.hpp"
 #include "StateSystem.hpp"
 #include "RenderSystem.hpp"
 #include "MoveSystem.hpp"
 #include "GravitySystem.hpp"
+#include "CollisionSystem.hpp"
 
 class GameState: public State
 {
@@ -36,11 +39,14 @@ private:
 	std::map<int, RenderComponent*> mapRender_;
 	std::map<int, PhysicsComponent*> mapPhysics_;
 	std::map<int, ColliderComponent*> mapCollider_;
+	std::map<int, SpeedComponent*> mapSpeed_;
 
+	InputSystem inputSystem_;
 	StateSystem stateSystem_;
 	RenderSystem renderSystem_;
 	MoveSystem moveSystem_;
 	GravitySystem gravitySystem_;
+	CollisionSystem collisionSystem_;
 };
 
 #endif

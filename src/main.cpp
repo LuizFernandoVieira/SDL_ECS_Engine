@@ -8,6 +8,7 @@ int Globals::WINDOW_HEIGHT = 600;
 int Globals::TILE_WIDTH = 32;
 int Globals::TILE_HEIGHT = 32;
 int Globals::GRAVITY = 100; // pixels per second
+float Globals::PLAYER_SPEED = 150; // pixels per second
 
 int main(int argc, char *argv[])
 {

@@ -3,13 +3,14 @@
 
 #include "EntityState.hpp"
 #include "StateComponent.hpp"
+#include "SpeedComponent.hpp"
 
 class EntityStateMachine
 {
 public:
 	EntityStateMachine();
 	void changeState(EntityState& state);
-	void handle(StateComponent* sc);
+	void handle(StateComponent* stateComp, SpeedComponent* speedComp);
 	EntityState* getCurrentState();
 	void setCurrentState(EntityState& state);
 private:

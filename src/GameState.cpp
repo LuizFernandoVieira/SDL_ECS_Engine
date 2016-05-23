@@ -22,6 +22,7 @@ GameState::~GameState()
 	mapRender_.clear();
 	mapPhysics_.clear();
 	mapCollider_.clear();
+	mapSpeed_.clear();
 }
 
 void GameState::create(StateMachine& stateMachine)
@@ -45,9 +46,13 @@ void GameState::update(float dt)
 {
 	InputHandler::getInstance().update();
 
+	inputSystem_.update(player_, mapState_, mapSpeed_);
 	gravitySystem_.update(dt, mapTransform_, mapState_, mapPhysics_);
-	stateSystem_.update(mapState_);
-	moveSystem_.update(mapTransform_, mapState_, mapPhysics_);
+
+	std::map<int, TransformComponent*> oldTransform = mapTransform_;
+	moveSystem_.update(dt, mapTransform_, mapSpeed_);
+	collisionSystem_.update(level_->getCollisionMap(), oldTransform, mapTransform_, mapCollider_);
+	stateSystem_.update(mapState_, mapSpeed_);
 
 	Camera::update(dt);
 
@@ -73,10 +78,11 @@ void GameState::createPlayer()
 	player_ = nextId_;
 	nextId_++;
 
-	mapTransform_.emplace(player_, new TransformComponent(Rect(512, 300, 32, 32)));
-	mapCollider_.emplace(player_, new ColliderComponent(Rect(512, 300, 32, 32)));
+	mapTransform_.emplace(player_, new TransformComponent(Rect(352, 300, 32, 32)));
+	mapCollider_.emplace(player_, new ColliderComponent(Rect(0, 0, 32, 32)));
 	mapState_.emplace(player_, new StateComponent());
 	mapPhysics_.emplace(player_, new PhysicsComponent());
+	mapSpeed_.emplace(player_, new SpeedComponent());
 	mapRender_.emplace(player_, new RenderComponent(new Sprite("../img/player.png")));
 
 	Camera::follow(mapTransform_[player_]);

@@ -28,6 +28,20 @@ Vec2 Vec2::operator- (const Vec2& v)
 	return vec2;
 }
 
+Vec2& Vec2::operator+= (const Vec2& v)
+{
+	x_ += v.x();
+	y_ += v.y();
+	return (*this);
+}
+
+Vec2& Vec2::operator-= (const Vec2& v)
+{
+	x_ -= v.x();
+	y_ -= v.y();
+	return (*this);
+}
+
 // Vec2 Vec2::operator* (const Vec2& p)
 // {
 // 	Vec2 vec2;
@@ -94,7 +108,7 @@ bool Vec2::operator!= (const Vec2& v) const
 		return false;
 }
 
-void Vec2::Rotate(float angle)
+void Vec2::rotate(float angle)
 {
 	angle = angle * PI / 180; // converte de graus para radianos
 	float curX = x_;
@@ -104,13 +118,12 @@ void Vec2::Rotate(float angle)
 }
 
 
-void Vec2::Rotate(Vec2 vec2, float module, float angle)
+void Vec2::rotate(Vec2 vec2, float module, float angle)
 {
 	angle = angle * PI / 180;
 	x_ = module * sin(angle) + vec2.x();
 	y_ = module * cos(angle) + vec2.y();
 }
-
 
 float Distance(Vec2 v1, Vec2 v2)
 {
@@ -124,4 +137,19 @@ float LineInclination(Vec2 v1, Vec2 v2)
 	if (v1.x() > v2.x())
 		return angle + 180;
 	return angle;
+}
+
+float Magnitude(const Vec2& p)
+{
+	return std::sqrt(p.x() * p.x() + p.y() * p.y());
+}
+
+Vec2 Normalize(const Vec2& p)
+{
+	return p * (1.f / Magnitude(p));
+}
+
+float Dot(const Vec2& a, const Vec2& b)
+{
+	return a.x() * b.x() + a.y() * b.y();
 }

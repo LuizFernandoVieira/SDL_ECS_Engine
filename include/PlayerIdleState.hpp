@@ -3,13 +3,14 @@
 
 #include "IdleState.hpp"
 #include "StateComponent.hpp"
+#include "SpeedComponent.hpp"
 
 class PlayerIdleState : public IdleState
 {
 public:
 	PlayerIdleState(EntityStateMachine& stateMachine);
 	virtual ~PlayerIdleState();
-	void handle(StateComponent* sc);
+	void handle(StateComponent* stateComp, SpeedComponent* speedComp);
 };
 
 #endif

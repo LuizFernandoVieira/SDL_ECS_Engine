@@ -28,6 +28,12 @@ void FirstLevel::render()
 }
 
 
+CollisionMap& FirstLevel::getCollisionMap()
+{
+	return collisionMap_;
+}
+
+
 std::vector<std::pair<int, TransformComponent*>> FirstLevel::createTerrain(unsigned int& nextId)
 {
 	std::vector<std::pair<int, TransformComponent*>> terrainEntities;

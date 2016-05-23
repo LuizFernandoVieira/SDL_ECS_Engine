@@ -14,10 +14,9 @@ PlayerWalkingState::~PlayerWalkingState()
 
 }
 
-void PlayerWalkingState::handle(StateComponent* sc)
+void PlayerWalkingState::handle(StateComponent* stateComp, SpeedComponent* speedComp)
 {
-
-	if(
+/*	if(
 		InputHandler::getInstance().isKeyDown(RIGHT_ARROW_KEY) && 
 		InputHandler::getInstance().isKeyDown(LEFT_ARROW_KEY)
 	) {
@@ -45,6 +44,35 @@ void PlayerWalkingState::handle(StateComponent* sc)
 		// std::cout << "ELSE WALKING" << std::endl;
 		PlayerIdleState* pis = new PlayerIdleState(*stateMachine_);
 		stateMachine_->changeState(*pis);
-	}
+	}*/
 
+	if (speedComp->speed_.y() > 0)
+	{
+		// stateMachine_->changeState(new PlayerJumpingState(*stateMachine_));
+		// if (speedComp->speed_.x() > 0)
+		// 	stateComp->setFacingRight(true)
+		// else if (speedComp->speed_.x() < 0)
+		// 	stateComp->setFacingRight(false);
+	}
+	else if (speedComp->speed_.y() < 0)
+	{
+		// stateMachine_->changeState(new PlayerFallingState(*stateMachine_));
+		// if (speedComp->speed_.x() > 0)
+		// 	stateComp->setFacingRight(true)
+		// else if (speedComp->speed_.x() < 0)
+		// 	stateComp->setFacingRight(false);
+	}
+	else if (speedComp->speed_.x() > 0)
+	{
+		stateComp->setFacingRight(true);
+	}
+	else if (speedComp->speed_.x() < 0)
+	{
+		stateComp->setFacingRight(false);
+	}
+	else
+	{
+		PlayerIdleState* state = new PlayerIdleState(*stateMachine_);
+		stateMachine_->changeState(*state);
+	}
 }

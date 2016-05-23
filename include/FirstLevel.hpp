@@ -15,6 +15,7 @@ public:
 	~FirstLevel();
 	void render();
 	std::vector<std::pair<int, TransformComponent*>> createTerrain(unsigned int& nextId);
+	CollisionMap& getCollisionMap();
 private:
 	StaticSprite bg;
 	TileSet tileSet_;

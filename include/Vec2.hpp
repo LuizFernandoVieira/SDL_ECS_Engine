@@ -14,6 +14,8 @@ public:
 	// Operações de Point com Point
 	Vec2 operator+ (const Vec2& v);
 	Vec2 operator- (const Vec2& v);
+	Vec2& operator+= (const Vec2& v);
+	Vec2& operator-= (const Vec2& v);
 	// Point operator* (const Point& p);
 	// Point operator/ (const Point& p);
 
@@ -28,9 +30,9 @@ public:
 	bool operator!= (const Vec2& v) const;
 
 	// Rotacionar vetor em torno da origem
-	void Rotate(float angle);
+	void rotate(float angle);
 	// Rotacionar vetor em torno do ponto vec2 enviado
-	void Rotate(Vec2 vec2, float module, float angle);
+	void rotate(Vec2 vec2, float module, float angle);
 
 	float x() const { return x_; }
 	float y() const { return y_; }
@@ -42,11 +44,16 @@ private:
 	float y_;
 };
 
-
+// Distancia entre dois pontos
 float Distance(Vec2 v1, Vec2 v2);
-
 // Inclinação da reta formada por dois pontos
 float LineInclination(Vec2 v1, Vec2 v2);
+// Magnitude de vetor
+float Magnitude(const Vec2& p);
+// Normalizar vetor (magnitude 1)
+Vec2 Normalize(const Vec2& p);
+// Produto escalar de vetores
+float Dot(const Vec2& a, const Vec2& b);
 
 
 #endif

@@ -24,7 +24,7 @@ Rect::Rect(float x, float y, float w, float h)
 // 	h_ = rect.h;
 // }
 
-Vec2 Rect::getCenter()
+Vec2 Rect::getCenter() const
 {
 	return Vec2( x_+(w_ /2), y_+(h_ /2) );
 }
@@ -38,6 +38,13 @@ Rect Rect::operator+ (const Vec2& vec2)
 	rect.w(w_);
 	rect.h(h_);
 	return rect;
+}
+
+Rect& Rect::operator+= (const Vec2& vec2)
+{
+	x_ += vec2.x();
+	y_ += vec2.y();
+	return (*this);
 }
 
 Rect Rect::operator* (const Rect& r)
