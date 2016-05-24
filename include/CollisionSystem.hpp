@@ -10,6 +10,7 @@
 #include "System.hpp"
 #include "TransformComponent.hpp"
 #include "ColliderComponent.hpp"
+#include "SpeedComponent.hpp"
 #include "CollisionMap.hpp"
 
 class CollisionSystem : public System
@@ -20,12 +21,16 @@ public:
 		CollisionMap& collisionMap,
 		std::map<int, TransformComponent*> oldTransfComp,
 		std::map<int, TransformComponent*> transfComp,
-		std::map<int, ColliderComponent*> colComp
+		std::map<int, ColliderComponent*> colComp,
+		std::map<int, SpeedComponent*> speedComp
 	);
+	// void render();
 private:
 	bool isColliding(const Rect& a, const Rect& b, float angleOfA, float angleOfB);
 
-	void correctPosition(Rect& entityPos, Rect oldPos, Rect terrain);
+	void correctPosition(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed);
+
+	// std::vector<Rect> coisaFeia; // para renderizar colisores q estao colidindo
 };
 
 #endif

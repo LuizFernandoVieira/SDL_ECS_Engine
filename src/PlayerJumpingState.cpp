@@ -1,7 +1,6 @@
 #include "../include/PlayerJumpingState.hpp"
 #include "../include/InputHandler.hpp"
-
-#include <iostream>
+#include "../include/PlayerFallingState.hpp"
 
 PlayerJumpingState::PlayerJumpingState(EntityStateMachine& stateMachine) : EntityState(stateMachine) 
 {
@@ -13,20 +12,24 @@ PlayerJumpingState::~PlayerJumpingState()
 
 }
 
-void PlayerJumpingState::handle(StateComponent* sc)
+void PlayerJumpingState::handle(StateComponent* stateComp, SpeedComponent* speedComp)
 {
-
-	if(InputHandler::getInstance().keyPress(UP_ARROW_KEY)) {
-		std::cout << "UP JUMPING" << std::endl;
+	if (speedComp->speed_.y() > 0)
+	{
+		PlayerFallingState* state = new PlayerFallingState(*stateMachine_);
+		stateMachine_->changeState(*state);
+		if (speedComp->speed_.x() > 0)
+			stateComp->setFacingRight(true);
+		else if (speedComp->speed_.x() < 0)
+			stateComp->setFacingRight(false);
 	}
-	if(InputHandler::getInstance().keyPress(RIGHT_ARROW_KEY)) {
-		std::cout << "RIGHT JUMPING" << std::endl;
+	else if (speedComp->speed_.x() > 0)
+	{
+		stateComp->setFacingRight(true);
 	}
-	if(InputHandler::getInstance().keyPress(DOWN_ARROW_KEY)) {
-		std::cout << "DOWN JUMPING" << std::endl;
-	}
-	if(InputHandler::getInstance().keyPress(LEFT_ARROW_KEY)) {
-		std::cout << "LEFT JUMPING" << std::endl;
+	else if (speedComp->speed_.x() < 0)
+	{
+		stateComp->setFacingRight(false);
 	}
 
 }

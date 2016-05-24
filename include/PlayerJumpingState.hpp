@@ -9,7 +9,7 @@ class PlayerJumpingState : public EntityState
 public:
 	PlayerJumpingState(EntityStateMachine& stateMachine);
 	virtual ~PlayerJumpingState();
-	void handle(StateComponent* sc);
+	void handle(StateComponent* stateComp, SpeedComponent* speedComp);
 	
 	bool is(std::string type)
 	{ 

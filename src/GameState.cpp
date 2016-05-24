@@ -35,11 +35,11 @@ void GameState::create(StateMachine& stateMachine)
 	createPlayer();
 
 	// Criar colisores do terreno
-	std::vector<std::pair<int, TransformComponent*>> terrainEntities = level_->createTerrain(nextId_);
+	/*std::vector<std::pair<int, TransformComponent*>> terrainEntities = level_->createTerrain(nextId_);
 	for (int i = 0; i < (int)terrainEntities.size(); i++)
 	{
 		mapTransform_.emplace(terrainEntities[i].first, terrainEntities[i].second);
-	}
+	}*/
 }
 
 void GameState::update(float dt)
@@ -47,14 +47,17 @@ void GameState::update(float dt)
 	InputHandler::getInstance().update();
 
 	inputSystem_.update(player_, mapState_, mapSpeed_);
-	gravitySystem_.update(dt, mapTransform_, mapState_, mapPhysics_);
+	gravitySystem_.update(dt, mapSpeed_, mapPhysics_);
 
 	std::map<int, TransformComponent*> oldTransform = mapTransform_;
 	moveSystem_.update(dt, mapTransform_, mapSpeed_);
-	collisionSystem_.update(level_->getCollisionMap(), oldTransform, mapTransform_, mapCollider_);
+	collisionSystem_.update(level_->getCollisionMap(), oldTransform, mapTransform_, mapCollider_, mapSpeed_);
 	stateSystem_.update(mapState_, mapSpeed_);
 
 	Camera::update(dt);
+
+	// std::cout << "Pos  : " << mapTransform_[player_]->rect_.x() << ", " << mapTransform_[player_]->rect_.y() << std::endl;
+	// std::cout << "Speed: " << mapSpeed_[player_]->speed_.x() << ", " << mapSpeed_[player_]->speed_.y() << std::endl;
 
 	if(InputHandler::getInstance().quitRequested()) {
 		quit = true;
@@ -64,7 +67,8 @@ void GameState::update(float dt)
 void GameState::render()
 {
 	level_->render();
-	renderSystem_.update(mapTransform_, mapRender_);
+	renderSystem_.render(mapTransform_, mapRender_);
+	// collisionSystem_.render();
 }
 
 void GameState::handle(StateEventEnum& event)

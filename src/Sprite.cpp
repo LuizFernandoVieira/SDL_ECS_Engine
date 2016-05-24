@@ -12,7 +12,9 @@ Sprite::Sprite()
 	frameTime_ = 1;
 	timeElapsed_ = 0.0;
 	currentFrame_ = 0;
-	setClip(0, 0, width_ / frameCount_, height_);
+	width_ = 0;
+	height_ = 0;
+	setClip(0, 0, 0, 0);
 }
 
 Sprite::Sprite(const char* file, int frameCount, float frameTime)

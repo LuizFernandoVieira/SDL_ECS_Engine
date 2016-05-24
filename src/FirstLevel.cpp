@@ -25,6 +25,7 @@ void FirstLevel::render()
 {
 	bg.render(0,0);
 	tileMap_.render(0,0);
+	// collisionMap_.render(0,0);
 }
 
 
@@ -34,7 +35,7 @@ CollisionMap& FirstLevel::getCollisionMap()
 }
 
 
-std::vector<std::pair<int, TransformComponent*>> FirstLevel::createTerrain(unsigned int& nextId)
+/*std::vector<std::pair<int, TransformComponent*>> FirstLevel::createTerrain(unsigned int& nextId)
 {
 	std::vector<std::pair<int, TransformComponent*>> terrainEntities;
 	for (int y = 0; y < collisionMap_.getHeight(); y++)
@@ -57,4 +58,4 @@ std::vector<std::pair<int, TransformComponent*>> FirstLevel::createTerrain(unsig
 	}
 
 	return terrainEntities;
-}
+}*/

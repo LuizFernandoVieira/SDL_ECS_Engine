@@ -11,7 +11,8 @@ public:
 
 	static int GRAVITY;
 
-	static float PLAYER_SPEED;
+	static float PLAYER_WALK_SPEED;
+	static float PLAYER_JUMP_SPEED;
 };
 
 

@@ -5,13 +5,14 @@
 
 #include "System.hpp"
 #include "TransformComponent.hpp"
+#include "StateComponent.hpp"
 #include "RenderComponent.hpp"
 
 class RenderSystem : public System
 {
 public:
 	RenderSystem();
-	void update(
+	void render(
 		std::map<int, TransformComponent*> tc,
 		std::map<int, RenderComponent*> rc
 	);
