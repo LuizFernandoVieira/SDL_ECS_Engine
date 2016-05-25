@@ -8,14 +8,14 @@
 class WalkingState : public EntityState
 {
 public:
-	WalkingState(EntityStateMachine& stateMachine) : EntityState(stateMachine) {}
-	bool is(std::string type)
-	{ 
-		if (type == "WalkingState") 
-			return true; 
-		else
-			return false;
-	}
+	WalkingState(EntityStateMachine& stateMachine) : EntityState(stateMachine, "WalkingState") {}
+	// bool is(std::string type)
+	// { 
+	// 	if (type == "WalkingState") 
+	// 		return true; 
+	// 	else
+	// 		return false;
+	// }
 };
 
 #endif

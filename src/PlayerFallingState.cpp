@@ -3,7 +3,7 @@
 #include "../include/PlayerIdleState.hpp"
 #include "../include/PlayerWalkingState.hpp"
 
-PlayerFallingState::PlayerFallingState(EntityStateMachine& stateMachine) : EntityState(stateMachine) 
+PlayerFallingState::PlayerFallingState(EntityStateMachine& stateMachine) : FallingState(stateMachine) 
 {
 
 }

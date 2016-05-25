@@ -1,7 +1,11 @@
 #include "../include/StateComponent.hpp"
 
-StateComponent::StateComponent()
+StateComponent::StateComponent() : facingRight_(true)
 {
 	stateMachine_ = new EntityStateMachine();
-	facingRight_ = true;
+}
+
+EntityState* StateComponent::getState()
+{
+	return stateMachine_->getCurrentState();
 }

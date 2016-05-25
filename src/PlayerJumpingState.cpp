@@ -2,7 +2,7 @@
 #include "../include/InputHandler.hpp"
 #include "../include/PlayerFallingState.hpp"
 
-PlayerJumpingState::PlayerJumpingState(EntityStateMachine& stateMachine) : EntityState(stateMachine) 
+PlayerJumpingState::PlayerJumpingState(EntityStateMachine& stateMachine) : JumpingState(stateMachine) 
 {
 
 }
