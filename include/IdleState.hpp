@@ -9,14 +9,14 @@
 class IdleState : public EntityState
 {
 public:
-	IdleState(EntityStateMachine& stateMachine) : EntityState(stateMachine) {}
-	bool is(std::string type)
-	{ 
-		if (type == "IdleState") 
-			return true; 
-		else
-			return false;
-	}
+	IdleState(EntityStateMachine& stateMachine) : EntityState(stateMachine, "IdleState") {}
+	// bool is(std::string type)
+	// { 
+	// 	if (type == "IdleState") 
+	// 		return true; 
+	// 	else
+	// 		return false;
+	// }
 };
 
 #endif

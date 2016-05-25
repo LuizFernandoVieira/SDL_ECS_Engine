@@ -13,8 +13,10 @@ public:
 	void handle(StateComponent* stateComp, SpeedComponent* speedComp);
 	EntityState* getCurrentState();
 	void setCurrentState(EntityState& state);
+	bool hasChanged();
 private:
 	EntityState* currentState_;
+	bool changed_;
 };
 
 

@@ -15,7 +15,7 @@ public:
 	StaticSprite();
 	StaticSprite(const char* file, int frameCount = 1, float frameTime = 1);
 	~StaticSprite();
-	void render(int x, int y, float angle = 0);
+	void render(int x, int y, float angle = 0, bool flip = false);
 };
 
 #endif

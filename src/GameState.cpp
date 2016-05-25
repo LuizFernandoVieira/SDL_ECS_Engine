@@ -1,4 +1,5 @@
 #include <vector>
+#include <unordered_map>
 
 #include "../include/GameState.hpp"
 #include "../include/Camera.hpp"
@@ -53,11 +54,9 @@ void GameState::update(float dt)
 	moveSystem_.update(dt, mapTransform_, mapSpeed_);
 	collisionSystem_.update(level_->getCollisionMap(), oldTransform, mapTransform_, mapCollider_, mapSpeed_);
 	stateSystem_.update(mapState_, mapSpeed_);
+	renderSystem_.update(dt, mapState_, mapRender_);
 
 	Camera::update(dt);
-
-	// std::cout << "Pos  : " << mapTransform_[player_]->rect_.x() << ", " << mapTransform_[player_]->rect_.y() << std::endl;
-	// std::cout << "Speed: " << mapSpeed_[player_]->speed_.x() << ", " << mapSpeed_[player_]->speed_.y() << std::endl;
 
 	if(InputHandler::getInstance().quitRequested()) {
 		quit = true;
@@ -67,7 +66,7 @@ void GameState::update(float dt)
 void GameState::render()
 {
 	level_->render();
-	renderSystem_.render(mapTransform_, mapRender_);
+	renderSystem_.render(mapTransform_, mapState_, mapRender_);
 	// collisionSystem_.render();
 }
 
@@ -87,7 +86,16 @@ void GameState::createPlayer()
 	mapState_.emplace(player_, new StateComponent());
 	mapPhysics_.emplace(player_, new PhysicsComponent());
 	mapSpeed_.emplace(player_, new SpeedComponent());
-	mapRender_.emplace(player_, new RenderComponent(new Sprite("../img/player.png")));
+
+	// mapRender_.emplace(player_, new RenderComponent(new Sprite("../img/player.png")));
+	std::unordered_map<std::string, Sprite> playerSprites;
+
+	playerSprites.emplace("IdleState", Sprite("../img/characters/player_parado_32x32.png", 16, 0.1));
+	playerSprites.emplace("WalkingState", Sprite("../img/characters/player_correndo_32x32.png", 8, 0.1));
+	playerSprites.emplace("JumpingState", Sprite("../img/characters/player_pulando_32x64.png", 5, 0.1));
+	playerSprites.emplace("FallingState", Sprite("../img/characters/player_caindo_34x40.png"));
+
+	mapRender_.emplace(player_, new RenderComponent(playerSprites));
 
 	Camera::follow(mapTransform_[player_]);
 }

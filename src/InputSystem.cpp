@@ -34,8 +34,8 @@ void InputSystem::update(
 	{
 		// PULO
 		// Checar se pode pular no estado atual
-		if ( !stateComp[player]->getStateMachine()->getCurrentState()->is("PlayerJumpingState") &&
-			!stateComp[player]->getStateMachine()->getCurrentState()->is("PlayerFallingState"))
+		if ( !stateComp[player]->getState()->is("JumpingState") &&
+			!stateComp[player]->getState()->is("FallingState"))
 			speedComp[player]->speed_.y(-Globals::PLAYER_JUMP_SPEED);
 	}
 }

@@ -17,7 +17,7 @@ public:
 	~Sprite();
 	void open(const char* file);
 	void setClip(int x, int y, int w, int h);
-	virtual void render(int x, int y, float angle = 0);
+	virtual void render(int x, int y, float angle = 0, bool flip = false);
 	void renderSelection(int x, int y);
 	void update(float dt);
 	int getWidth();

@@ -17,7 +17,7 @@ StaticSprite::~StaticSprite()
 
 }
 
-void StaticSprite::render(int x, int y, float angle)
+void StaticSprite::render(int x, int y, float angle, bool flip)
 {
 	SDL_Rect dstRect;
 
@@ -26,6 +26,6 @@ void StaticSprite::render(int x, int y, float angle)
 	dstRect.w = clipRect_.w * scaleX_;
 	dstRect.h = clipRect_.h * scaleY_;
 
-	SDL_RenderCopyEx ( Game::getInstance().getRenderer(), texture_.get(), &clipRect_, &dstRect, (double)angle, NULL, SDL_FLIP_NONE );
+	SDL_RenderCopyEx ( Game::getInstance().getRenderer(), texture_.get(), &clipRect_, &dstRect, (double)angle, NULL, flip ?  SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE );
 
 }
