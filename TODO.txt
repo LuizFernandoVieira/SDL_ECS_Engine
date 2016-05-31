@@ -8,13 +8,56 @@ A fazer:
 
 ============ EDITOR DE MAPA ====================
 
-Done!
+Segunda entrega / 17
 
-Primeira entrega
-	
-Segunda entrega
-	Scroll dos painéis;
-	Add/remover/selecionar objetos;
+	Luiz
+		Particle System
+			Chuva
+			Vento
+		Inimigos
+				IA
+				Boss
+		NPC
+		Exception
+		Boiar na agua
+		Text
 
-Terceira entrega
+	Victor
+		Editor de Mapa
+			Objetos
+			Scroll dos painéis :)
+		Colisao
+			Colisores Diagonais
+		Triggers
+		Atravessar plataformas
+			(de baixo para cima)
+		Timer
+
+	Thales
+		Sons
+			Efeitos
+			Musicas
+		Objetos quebraveis
+		Checkpoints
+		Globals
+		Switchs
+
+	Victor & Thales
+			Player
+				Zip line
+
+	Victor & Thales feat Luiz
+			Menu
+				Muitas telas
+			Gamepad
+			Coletaveis
+			Player
+				Ataque
+				Dano de Queda
+				Planar
+
+
+===
+
+Terceira entrega / 6
 	Selecionar tile set / tile map;

@@ -97,5 +97,7 @@ void GameState::createPlayer()
 
 	mapRender_.emplace(player_, new RenderComponent(playerSprites));
 
+	mapRender_[player_]->setCurrentSprite("IdleState");
+
 	Camera::follow(mapTransform_[player_]);
 }
