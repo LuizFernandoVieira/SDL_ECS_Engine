@@ -163,7 +163,7 @@ void TileMapPanel::render()
 	tileMap_->render(rect_.x(), rect_.y());
 	if (rect_.isInside(InputHandler::getInstance().getMouse()))
 	{
-		if (*selectedTool_ == LevelEditorState::Tools::ADD)
+		if (*selectedTab_ != 1 && *selectedTool_ == LevelEditorState::Tools::ADD)
 			tileSet_->render(*selectedTile_, cursorPos_.x(), cursorPos_.y());
 		else
 			cursorBg_.render(cursorPos_.x(), cursorPos_.y());
@@ -212,7 +212,7 @@ void TileMapPanel::render()
 
 		for(int x = smallX; x<=bigX; x+=Globals::TILE_WIDTH) {
 			for(int y = smallY; y<=bigY; y+=Globals::TILE_HEIGHT) {
-				if (*selectedTool_ == LevelEditorState::Tools::ADD)
+				if (*selectedTab_ != 1 && *selectedTool_ == LevelEditorState::Tools::ADD)
 					tileSet_->render(*selectedTile_, 
 					                 x + speedChangePerLayer * Camera::pos_.x(), 
 					                 y + speedChangePerLayer * Camera::pos_.y());

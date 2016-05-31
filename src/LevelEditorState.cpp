@@ -74,9 +74,9 @@ void LevelEditorState::initGUI()
 	Panel* layersPanel = new Panel(layersRect, "../img/interface/editor/tile_set_panel.png");
 
 	// Button
-	addTilesBtn_ 		= new Button(addTilesRect, "../img/addTilesBtn.png"/*, tileBtnExecute*/);
-	selectTilesBtn_ = new Button(selectTilesRect, "../img/addTilesBtn.png"/*, tileBtnExecute*/);
-	deleteTilesBtn_ = new Button(deleteTilesRect, "../img/addTilesBtn.png"/*, tileBtnExecute*/);
+	addTilesBtn_ 		= new Button(addTilesRect, "../img/interface/editor/icone_03.png"/*, tileBtnExecute*/);
+	selectTilesBtn_ = new Button(selectTilesRect, "../img/interface/editor/icone_04.png"/*, tileBtnExecute*/);
+	deleteTilesBtn_ = new Button(deleteTilesRect, "../img/interface/editor/icone_05.png"/*, tileBtnExecute*/);
 
 	addTilesBtn_->setResizable(true);
 	selectTilesBtn_->setResizable(true);
