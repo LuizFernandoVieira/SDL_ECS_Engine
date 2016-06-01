@@ -1,6 +1,5 @@
 #ifndef RESOURCES_HPP
 #define RESOURCES_HPP
-#define Globals Resources
 
 #ifdef __APPLE__
 	#include <SDL2/SDL.h>
@@ -41,6 +40,10 @@ public:
 	//IMAGES
 	static std::shared_ptr<SDL_Texture> GetImage(std::string file);
 	static void ClearImages();
+
+	//AUDIO
+	static std::unordered_map<std::string, Mix_Chunk*> 		soundTable;
+	static void ClearAudio();
 
 
 private:
