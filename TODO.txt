@@ -12,12 +12,6 @@ GameState
         map TimerComponent
 
 
-	  // pega a posicao do emitter
-	  // pega o componente emitter do emitter
-	  // percorre os transform atualizando a posicao
-	  //
-	  // percorre os timers atualizando o tempo
-
 A fazer:
 
 - Acrescentar largura, altura, escala e rotação na transform component;
@@ -51,7 +45,6 @@ Segunda entrega / 17
 		Triggers
 		Atravessar plataformas
 			(de baixo para cima)
-		Timer
 
 	Thales
 		Sons
