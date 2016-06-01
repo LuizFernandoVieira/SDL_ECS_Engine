@@ -20,6 +20,16 @@
 #define LEFT_MOUSE_BUTTON SDL_BUTTON_LEFT
 #define RIGHT_MOUSE_BUTTON SDL_BUTTON_RIGHT
 #define SPACE_BAR SDLK_SPACE
+#define GAMEPAD_A 0
+#define GAMEPAD_B 1
+#define GAMEPAD_X 2
+#define GAMEPAD_Y 3
+#define GAMEPAD_LB 4
+#define GAMEPAD_RB 5
+#define GAMEPAD_ARROW_UP 11
+#define GAMEPAD_ARROW_DOWN 12
+#define GAMEPAD_ARROW_LEFT 13
+#define GAMEPAD_ARROW_RIGHT 14
 
 class InputHandler
 {
@@ -32,6 +42,9 @@ public:
 	bool mousePress(int button);
 	bool mouseRelease(int button);
 	bool isMouseDown(int button);
+	bool gamePadPress(int button);
+	bool gamePadRelease(int button);
+	bool isGamePadDown(int button);
 	int getMouseX();
 	int getMouseY();
 	Vec2 getMouse();
@@ -46,6 +59,8 @@ private:
 	int mouseUpdate[6];
 	bool keyState[416];
 	int keyUpdate[416];
+	bool gamePadState[15];
+	int gamePadUpdate[15];
 	bool quit;
 	int updateCounter;
 	int mouseX;
