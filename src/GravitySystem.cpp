@@ -1,5 +1,5 @@
 #include "../include/GravitySystem.hpp"
-#include "../include/Globals.hpp"
+#include "../include/Resources.hpp"
 
 GravitySystem::GravitySystem()
 {
@@ -14,8 +14,8 @@ void GravitySystem::update(
 	for (auto it = pc.begin(); it != pc.end(); ++it)
 	{
 		if (sc[it->first]->speed_.y() < 0)
-			sc[it->first]->speed_ += Vec2(0, Globals::GRAVITY * it->second->gravityScale_ * 0.2); // diminuir velocidade pra cima do pulo
+			sc[it->first]->speed_ += Vec2(0, Resources::GRAVITY * it->second->gravityScale_ * 0.2); // diminuir velocidade pra cima do pulo
 		else
-			sc[it->first]->speed_.y(Globals::GRAVITY * it->second->gravityScale_);
+			sc[it->first]->speed_.y(Resources::GRAVITY * it->second->gravityScale_);
 	}
 }

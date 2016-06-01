@@ -1,13 +1,13 @@
 #include "../include/LevelEditorState.hpp"
 #include "../include/TileMapPanel.hpp"
 #include "../include/InputHandler.hpp"
-#include "../include/Globals.hpp"
+#include "../include/Resources.hpp"
 #include "../include/Camera.hpp"
 
 LevelEditorState::LevelEditorState() :
-mainPanel_(Rect(0, 0, Globals::WINDOW_WIDTH, Globals::WINDOW_HEIGHT), "../img/bgTilePanel.png")
+mainPanel_(Rect(0, 0, Resources::WINDOW_WIDTH, Resources::WINDOW_HEIGHT), "../img/bgTilePanel.png")
 {
-	tileSet_ = new TileSet(Globals::TILE_WIDTH, Globals::TILE_HEIGHT, "../img/maps/test/tile_set.png");
+	tileSet_ = new TileSet(Resources::TILE_WIDTH, Resources::TILE_HEIGHT, "../img/maps/test/tile_set.png");
 	tileMap_ = new TileMap("../map/tileMap.txt", tileSet_);
 	collisionMap_ = new CollisionMap("../map/collisionMap.txt");
 	selectedTile_ = 0;
@@ -111,7 +111,7 @@ void LevelEditorState::initGUI()
 	layersPanel->add(*layerButtons_[3], layerButton4RectProportion);
 
 	// Tile Buttons
-	int nTilesRow = tileSetAndObjectsRect.w() / (Globals::TILE_WIDTH + 2);
+	int nTilesRow = tileSetAndObjectsRect.w() / (Resources::TILE_WIDTH + 2);
 	int curRow = 0;
 	int curColumn = 0;
 
@@ -124,19 +124,19 @@ void LevelEditorState::initGUI()
 		}
 		Button* btn = new Button(
 			Rect(
-				curColumn * (Globals::TILE_WIDTH + 2) + 2 + tileSetAndObjectsRect.x(),
-				curRow * (Globals::TILE_HEIGHT + 2) + 2 + tileSetAndObjectsRect.y(),
-				Globals::TILE_WIDTH,
-				Globals::TILE_HEIGHT),
+				curColumn * (Resources::TILE_WIDTH + 2) + 2 + tileSetAndObjectsRect.x(),
+				curRow * (Resources::TILE_HEIGHT + 2) + 2 + tileSetAndObjectsRect.y(),
+				Resources::TILE_WIDTH,
+				Resources::TILE_HEIGHT),
 			"../img/maps/test/tile_set.png"//,
 			// tileBtnExecute
 		);
 		btn->setSpriteClip(
 			Rect(
-				(i%tileSet_->getNumberOfColumns()) * Globals::TILE_WIDTH,
-				(int)(i/tileSet_->getNumberOfColumns()) * Globals::TILE_HEIGHT,
-				Globals::TILE_WIDTH,
-				Globals::TILE_HEIGHT )
+				(i%tileSet_->getNumberOfColumns()) * Resources::TILE_WIDTH,
+				(int)(i/tileSet_->getNumberOfColumns()) * Resources::TILE_HEIGHT,
+				Resources::TILE_WIDTH,
+				Resources::TILE_HEIGHT )
 		);
 		tileSetAndObjectsPanel_->addButton(*btn, TileSetAndObjectsPanel::Tab::TILES);
 		tileButtons_.push_back(btn);
@@ -154,10 +154,10 @@ void LevelEditorState::initGUI()
 		}
 		collisionButtons_[i]->setRect(
 			Rect(
-				curColumn * (Globals::TILE_WIDTH + 2) + 2 + tileSetAndObjectsRect.x(),
-				curRow * (Globals::TILE_HEIGHT + 2) + 2 + tileSetAndObjectsRect.y(),
-				Globals::TILE_WIDTH,
-				Globals::TILE_HEIGHT)
+				curColumn * (Resources::TILE_WIDTH + 2) + 2 + tileSetAndObjectsRect.x(),
+				curRow * (Resources::TILE_HEIGHT + 2) + 2 + tileSetAndObjectsRect.y(),
+				Resources::TILE_WIDTH,
+				Resources::TILE_HEIGHT)
 		);
 
 		tileSetAndObjectsPanel_->addButton(*collisionButtons_[i], TileSetAndObjectsPanel::Tab::COLLISION);
@@ -170,7 +170,7 @@ void LevelEditorState::update(float dt)
 
 	if (InputHandler::getInstance().getScreenResized())
 	{
-		mainPanel_.setRect(Rect(0, 0, Globals::WINDOW_WIDTH, Globals::WINDOW_HEIGHT));
+		mainPanel_.setRect(Rect(0, 0, Resources::WINDOW_WIDTH, Resources::WINDOW_HEIGHT));
 	}
 
 	Camera::update(dt);

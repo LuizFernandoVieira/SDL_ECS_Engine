@@ -20,8 +20,6 @@ void ParticleEmitterSystem::update(
   emissionRateSystem_.update(dt, timerComponent);
 
   if(timerComponent->time_ > 0.1){
-    std::cout << timerComponent->time_ << ": Coloca nova particula" << std::endl;
-
     int particle_ = nextId_;
     nextId_++;
 

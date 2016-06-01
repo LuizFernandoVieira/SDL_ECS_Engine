@@ -1,7 +1,7 @@
 #include "../include/Globals.hpp"
+/*
 
-
-bool PRINTITALL = false;
+#define PRINTITALL false
 
 
 void Globals::Read(std::string filename_){
@@ -44,7 +44,6 @@ void Globals::Read(std::string filename_){
 			}
 		}
 
-		// std::cout << tempName << std::endl;
 		//Parsing: Tipo da Variável
 		if (tempName == "#FLOAT")
 		{
@@ -91,3 +90,5 @@ void Globals::Read(std::string filename_){
 	intValues.clear();
 	floatValues.clear();
 }
+
+*/

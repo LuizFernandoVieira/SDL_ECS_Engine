@@ -1,3 +1,4 @@
+/*
 #ifndef GLOBALSPANEL_HPP
 #define GLOBALSPANEL_HPP
 
@@ -5,8 +6,6 @@
 #include <memory>
 #include <fstream>
 #include <unordered_map>
-
-//#define WINDOW_WIDTH Globals::intValues["WINDOW_WIDTH"];
 
 #define WINDOW_WIDTH_ int_values[0]
 
@@ -28,3 +27,5 @@ public:
 
 
 #endif
+
+*/

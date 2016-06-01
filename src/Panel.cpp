@@ -1,6 +1,6 @@
 #include "../include/Panel.hpp"
 #include "../include/InputHandler.hpp"
-#include "../include/Globals.hpp"
+#include "../include/Resources.hpp"
 
 Panel::Panel(Rect rect, std::string imgPath) : rect_(rect), bg_(imgPath.c_str())
 {
@@ -31,7 +31,7 @@ void Panel::update()
 			it->first->setRect(newPanelSize);
 		}
 
-		int nTilesRow = rect_.w() / (Globals::TILE_WIDTH + 2);
+		int nTilesRow = rect_.w() / (Resources::TILE_WIDTH + 2);
 		int curRow = 0;
 		int curColumn = 0;
 		int i = 0;
@@ -57,10 +57,10 @@ void Panel::update()
 				}
 				it->first->setRect(
 					Rect( 
-						curColumn * (Globals::TILE_WIDTH + 2) + 2 + rect_.x(),
-						curRow * (Globals::TILE_HEIGHT + 2) + 2 + rect_.y(),
-						Globals::TILE_WIDTH, 
-						Globals::TILE_HEIGHT)
+						curColumn * (Resources::TILE_WIDTH + 2) + 2 + rect_.x(),
+						curRow * (Resources::TILE_HEIGHT + 2) + 2 + rect_.y(),
+						Resources::TILE_WIDTH, 
+						Resources::TILE_HEIGHT)
 				);
 			}
 		}

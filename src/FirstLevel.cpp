@@ -1,12 +1,14 @@
 #include "../include/FirstLevel.hpp"
-#include "../include/Globals.hpp"
+#include "../include/Resources.hpp"
 
 
 FirstLevel::FirstLevel() : 
 	bg("../img/bg.png"),
-	tileSet_(Globals::TILE_WIDTH, Globals::TILE_HEIGHT, "../img/maps/test/tile_set.png"),
+	tileSet_(Resources::TILE_WIDTH, Resources::TILE_HEIGHT, "../img/maps/test/tile_set.png"),
 	tileMap_("../map/tileMap.txt", &tileSet_),
 	collisionMap_("../map/collisionMap.txt")
+
+	//TODO: Inserir elementos acima em config.txt, carregar dinamicamente
 {
 
 }
@@ -47,10 +49,10 @@ CollisionMap& FirstLevel::getCollisionMap()
 				terrainEntities.emplace_back( std::pair<int, TransformComponent*> (
 					nextId++, 
 					new TransformComponent(Rect(
-						x * Globals::TILE_WIDTH,
-						y * Globals::TILE_HEIGHT,
-						Globals::TILE_WIDTH,
-						Globals::TILE_HEIGHT
+						x * Resources::TILE_WIDTH,
+						y * Resources::TILE_HEIGHT,
+						Resources::TILE_WIDTH,
+						Resources::TILE_HEIGHT
 					))
 				));
 			}

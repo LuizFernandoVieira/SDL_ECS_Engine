@@ -1,5 +1,5 @@
 #include "../include/CollisionSystem.hpp"
-#include "../include/Globals.hpp"
+#include "../include/Resources.hpp"
 
 #include "../include/Camera.hpp"
 #include "../include/Sprite.hpp"
@@ -24,19 +24,19 @@ void CollisionSystem::update(
 	{
 		Rect collider = col.second->rect_ + Vec2(transfComp[col.first]->rect_.x(), transfComp[col.first]->rect_.y() );
 		
-		for (int y = collider.y() / Globals::TILE_HEIGHT/* - 1*/;
-			y <= (collider.y() + collider.h()) / Globals::TILE_HEIGHT/* + 1*/;
+		for (int y = collider.y() / Resources::TILE_HEIGHT/* - 1*/;
+			y <= (collider.y() + collider.h()) / Resources::TILE_HEIGHT/* + 1*/;
 			y++)
 		{
-			for (int x = collider.x() / Globals::TILE_WIDTH/* - 1*/;
-				x <= (collider.x() + collider.w()) / Globals::TILE_WIDTH/* + 1*/;
+			for (int x = collider.x() / Resources::TILE_WIDTH/* - 1*/;
+				x <= (collider.x() + collider.w()) / Resources::TILE_WIDTH/* + 1*/;
 				x++)
 			{
 				Rect terrain = Rect(
-					x * Globals::TILE_WIDTH, 
-					y * Globals::TILE_HEIGHT, 
-					Globals::TILE_WIDTH, 
-					Globals::TILE_HEIGHT
+					x * Resources::TILE_WIDTH, 
+					y * Resources::TILE_HEIGHT, 
+					Resources::TILE_WIDTH, 
+					Resources::TILE_HEIGHT
 				);
 
 				if (collisionMap.at(x,y) == 0 && isColliding(collider, terrain, 0, 0))

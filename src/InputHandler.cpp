@@ -1,5 +1,5 @@
 #include "../include/InputHandler.hpp"
-#include "../include/Globals.hpp"
+#include "../include/Resources.hpp"
 
 InputHandler::InputHandler()
 {
@@ -11,6 +11,11 @@ InputHandler::InputHandler()
 	for (int i = 0; i < 416; i++) {
 		keyState[i] = false;
 		keyUpdate[i] = 0;
+	}
+
+	for (int i=0; i < 16; i++) {
+		gamePadState[i] = false;
+		gamePadUpdate[i] = 0;
 	}
 
 	quit = false;
@@ -90,8 +95,8 @@ void InputHandler::update()
 			{
 				// screenWidth = event.window.data1,
 				// screenHeight = event.window.data2;
-				Globals::WINDOW_WIDTH = event.window.data1;
-				Globals::WINDOW_HEIGHT = event.window.data2;
+				Resources::WINDOW_WIDTH = event.window.data1;
+				Resources::WINDOW_HEIGHT = event.window.data2;
 				screenResized = true;
 			}
 		}
@@ -131,47 +136,16 @@ void InputHandler::update()
 		// BUTTON EVENTS (LB RB ARROWS YXBA)
 		if (event.type == SDL_JOYBUTTONDOWN )
 		{
-			if (event.jbutton.button == 0) // A
-			{
-				std::cout << "A" << std::endl;
-			}
-			if (event.jbutton.button == 1) // B
-			{
-				std::cout << "B" << std::endl;
-			}
-			if (event.jbutton.button == 2) // X
-			{
-				std::cout << "X" << std::endl;
-			}
-			if (event.jbutton.button == 3) // Y
-			{
-				std::cout << "Y" << std::endl;
-			}
-			if (event.jbutton.button == 4) // LB
-			{
-				std::cout << "LB" << std::endl;
-			}
-			if (event.jbutton.button == 5) // RB
-			{
-				std::cout << "RB" << std::endl;
-			}
-			if (event.jbutton.button == 11) // A UP
-			{
-				std::cout << "ARROW UP" << std::endl;
-			}
-			if (event.jbutton.button == 12) // A DOWN
-			{
-				std::cout << "ARROW DOWN" << std::endl;
-			}
-			if (event.jbutton.button == 13) // A LEFT
-			{
-				std::cout << "ARROW LEFT" << std::endl;
-			}
-			if (event.jbutton.button == 14) // A RIGHT
-			{
-				std::cout << "ARROW RIGHT" << std::endl;
-			}
+				gamePadState[event.jbutton.button] = true;
+				gamePadUpdate[event.jbutton.button] = updateCounter;
 		}
+
+		if (event.type == SDL_JOYBUTTONUP )
+		{
+				gamePadState[event.jbutton.button] = false;
+				gamePadUpdate[event.jbutton.button] = updateCounter;
+		}
+
 		// if (event.type == SDL_JOYBUTTONUP )
 		// {
 		// 	std::cout << "SDL_JOYBUTTONUP" << std::endl;
@@ -252,6 +226,33 @@ bool InputHandler::mouseRelease(int button)
 bool InputHandler::isMouseDown(int button)
 {
 	if (mouseState[button]) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+bool InputHandler::gamePadPress(int button)
+{
+	if ( gamePadState[button] && gamePadUpdate[button] == updateCounter ) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+bool InputHandler::gamePadRelease(int button)
+{
+	if ( !gamePadState[button] && gamePadUpdate[button] == updateCounter ) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+bool InputHandler::isGamePadDown(int button)
+{
+	if (gamePadState[button]) {
 		return true;
 	} else {
 		return false;
