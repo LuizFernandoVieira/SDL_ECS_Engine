@@ -1,6 +1,6 @@
 #include "../include/InputSystem.hpp"
 #include "../include/InputHandler.hpp"
-#include "../include/Globals.hpp"
+#include "../include/Resources.hpp"
 
 InputSystem::InputSystem()
 {
@@ -18,12 +18,12 @@ void InputSystem::update(
 	if (inputHandler.isKeyDown(LEFT_ARROW_KEY) &&
 		!inputHandler.isKeyDown(RIGHT_ARROW_KEY))
 	{
-		speedComp[player]->speed_.x(-Globals::PLAYER_WALK_SPEED);
+		speedComp[player]->speed_.x(-Resources::PLAYER_WALK_SPEED);
 	}
 	else if (inputHandler.isKeyDown(RIGHT_ARROW_KEY) &&
 		!inputHandler.isKeyDown(LEFT_ARROW_KEY))
 	{
-		speedComp[player]->speed_.x(Globals::PLAYER_WALK_SPEED);
+		speedComp[player]->speed_.x(Resources::PLAYER_WALK_SPEED);
 	}
 	else
 	{
@@ -36,6 +36,6 @@ void InputSystem::update(
 		// Checar se pode pular no estado atual
 		if ( !stateComp[player]->getState()->is("JumpingState") &&
 			!stateComp[player]->getState()->is("FallingState"))
-			speedComp[player]->speed_.y(-Globals::PLAYER_JUMP_SPEED);
+			speedComp[player]->speed_.y(-Resources::PLAYER_JUMP_SPEED);
 	}
 }

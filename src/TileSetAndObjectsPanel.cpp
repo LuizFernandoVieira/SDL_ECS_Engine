@@ -1,5 +1,5 @@
 #include "../include/TileSetAndObjectsPanel.hpp"
-#include "../include/Globals.hpp"
+#include "../include/Resources.hpp"
 #include "../include/InputHandler.hpp"
 
 TileSetAndObjectsPanel::TileSetAndObjectsPanel(Rect rect, std::string imgPath) :
@@ -98,7 +98,7 @@ void TileSetAndObjectsPanel::update()
 		));
 
 		// resize dos botoes de tiles
-		int nTilesRow = rect_.w() / (Globals::TILE_WIDTH + 2);
+		int nTilesRow = rect_.w() / (Resources::TILE_WIDTH + 2);
 		// if (nTilesRow == 0)
 		// 	nTilesRow = 1;
 		int curRow = 0;
@@ -116,10 +116,10 @@ void TileSetAndObjectsPanel::update()
 			}
 			tileButtons_[i].setRect(
 				Rect(
-					curColumn * (Globals::TILE_WIDTH + 2) + 2 + rect_.x(),
-					curRow * (Globals::TILE_HEIGHT + 2) + 2 + rect_.y() + tabButtonHeight,
-					Globals::TILE_WIDTH,
-					Globals::TILE_HEIGHT)
+					curColumn * (Resources::TILE_WIDTH + 2) + 2 + rect_.x(),
+					curRow * (Resources::TILE_HEIGHT + 2) + 2 + rect_.y() + tabButtonHeight,
+					Resources::TILE_WIDTH,
+					Resources::TILE_HEIGHT)
 			);
 		}
 
@@ -136,10 +136,10 @@ void TileSetAndObjectsPanel::update()
 			}
 			collisionButtons_[i].setRect(
 				Rect(
-					curColumn * (Globals::TILE_WIDTH + 2) + 2 + rect_.x(),
-					curRow * (Globals::TILE_HEIGHT + 2) + 2 + rect_.y() + tabButtonHeight,
-					Globals::TILE_WIDTH,
-					Globals::TILE_HEIGHT)
+					curColumn * (Resources::TILE_WIDTH + 2) + 2 + rect_.x(),
+					curRow * (Resources::TILE_HEIGHT + 2) + 2 + rect_.y() + tabButtonHeight,
+					Resources::TILE_WIDTH,
+					Resources::TILE_HEIGHT)
 			);
 		}
 	}

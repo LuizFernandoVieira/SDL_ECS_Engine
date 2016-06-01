@@ -1,5 +1,5 @@
 #include "../include/InputHandler.hpp"
-#include "../include/Globals.hpp"
+#include "../include/Resources.hpp"
 
 InputHandler::InputHandler()
 {
@@ -90,8 +90,8 @@ void InputHandler::update()
 			{
 				// screenWidth = event.window.data1,
 				// screenHeight = event.window.data2;
-				Globals::WINDOW_WIDTH = event.window.data1;
-				Globals::WINDOW_HEIGHT = event.window.data2;
+				Resources::WINDOW_WIDTH = event.window.data1;
+				Resources::WINDOW_HEIGHT = event.window.data2;
 				screenResized = true;
 			}
 		}

@@ -1,6 +1,6 @@
 #include "../include/Camera.hpp"
 #include "../include/InputHandler.hpp"
-#include "../include/Globals.hpp"
+#include "../include/Resources.hpp"
 
 // InputHandler* Camera::inputHandler_;
 TransformComponent* Camera::focus_;
@@ -21,7 +21,7 @@ void Camera::update(float dt)
 {
 	if(focus_ != NULL)
 	{
-		pos_ = focus_->rect_.getCenter() - Vec2(Globals::WINDOW_WIDTH / 2, Globals::WINDOW_HEIGHT / 2);
+		pos_ = focus_->rect_.getCenter() - Vec2(Resources::WINDOW_WIDTH / 2, Resources::WINDOW_HEIGHT / 2);
 	} 
 	else 
 	{

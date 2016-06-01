@@ -1,14 +1,14 @@
 #include <sstream>
 
 #include "../include/TileMapPanel.hpp"
-#include "../include/Globals.hpp"
+#include "../include/Resources.hpp"
 #include "../include/Vec2.hpp"
 #include "../include/InputHandler.hpp"
 #include "../include/Camera.hpp"
 
 TileMapPanel::TileMapPanel(TileSet& tileSet, TileMap& tileMap, CollisionMap& collisionMap, Rect rect, std::string imgPath, int& selectedTile, int& selectedLayer, int& selectedCollision, int* selectedTab, LevelEditorState::Tools& selectedTool) :
 	Panel(rect, imgPath),
-	cursorPos_(rect.x(), rect.y(), Globals::TILE_WIDTH, Globals::TILE_HEIGHT),
+	cursorPos_(rect.x(), rect.y(), Resources::TILE_WIDTH, Resources::TILE_HEIGHT),
 	cursorBg_("../img/interface/editor/btn_1.png"),
 	firstDragClick_(),
 	curDragClick_()
@@ -64,12 +64,12 @@ void TileMapPanel::update()
 			speedChangePerLayer = 0;
 
 		// Tile da tela q o ponteiro do mouse está em cima
-		int tileX = (int)((InputHandler::getInstance().getMouseX() - rect_.x() + Camera::pos_.x() - speedChangePerLayer * Camera::pos_.x() ) / Globals::TILE_WIDTH);
-		int tileY = (int)((InputHandler::getInstance().getMouseY() - rect_.y() + Camera::pos_.y() - speedChangePerLayer * Camera::pos_.y() ) / Globals::TILE_HEIGHT);
+		int tileX = (int)((InputHandler::getInstance().getMouseX() - rect_.x() + Camera::pos_.x() - speedChangePerLayer * Camera::pos_.x() ) / Resources::TILE_WIDTH);
+		int tileY = (int)((InputHandler::getInstance().getMouseY() - rect_.y() + Camera::pos_.y() - speedChangePerLayer * Camera::pos_.y() ) / Resources::TILE_HEIGHT);
 
 		// Mover o cursor para este tile
-		cursorPos_.x( tileX * Globals::TILE_WIDTH + rect_.x() + speedChangePerLayer * Camera::pos_.x() );
-		cursorPos_.y( tileY * Globals::TILE_HEIGHT + rect_.y() + speedChangePerLayer * Camera::pos_.y() );
+		cursorPos_.x( tileX * Resources::TILE_WIDTH + rect_.x() + speedChangePerLayer * Camera::pos_.x() );
+		cursorPos_.y( tileY * Resources::TILE_HEIGHT + rect_.y() + speedChangePerLayer * Camera::pos_.y() );
 
 		if (InputHandler::getInstance().mousePress(LEFT_MOUSE_BUTTON))
 		{
@@ -88,8 +88,8 @@ void TileMapPanel::update()
 		else if (InputHandler::getInstance().isMouseDown(LEFT_MOUSE_BUTTON))
 		{
 			Vec2 v = Vec2(
-				tileX * Globals::TILE_WIDTH + rect_.x(),
-				tileY * Globals::TILE_HEIGHT + rect_.y()
+				tileX * Resources::TILE_WIDTH + rect_.x(),
+				tileY * Resources::TILE_HEIGHT + rect_.y()
 			);
 			if (firstDragClick_ == Vec2()) {
 				firstDragClick_ = v;
@@ -116,29 +116,29 @@ void TileMapPanel::update()
 				bigY = firstDragClick_.y();
 			}
 
-			for(int x = smallX; x<=bigX; x+=Globals::TILE_WIDTH) {
-				for(int y = smallY; y<=bigY; y+=Globals::TILE_HEIGHT) {
+			for(int x = smallX; x<=bigX; x+=Resources::TILE_WIDTH) {
+				for(int y = smallY; y<=bigY; y+=Resources::TILE_HEIGHT) {
 					if(*selectedTool_ == LevelEditorState::Tools::ADD) {
 						if (*selectedTab_ == 0)
 							placeTile(
-								((x - rect_.x()) / Globals::TILE_WIDTH) + 1, // nao me pergunte por que + 1
-								(y - rect_.y()) / Globals::TILE_HEIGHT
+								((x - rect_.x()) / Resources::TILE_WIDTH) + 1, // nao me pergunte por que + 1
+								(y - rect_.y()) / Resources::TILE_HEIGHT
 							);
 						else if (*selectedTab_ == 1)
 							placeCollisionTile(
-								((x - rect_.x()) / Globals::TILE_WIDTH) + 1, // nao me pergunte por que + 1
-								(y - rect_.y()) / Globals::TILE_HEIGHT
+								((x - rect_.x()) / Resources::TILE_WIDTH) + 1, // nao me pergunte por que + 1
+								(y - rect_.y()) / Resources::TILE_HEIGHT
 							);
 					} else if (*selectedTool_ == LevelEditorState::Tools::DELETE) {
 						if (*selectedTab_ == 0)
 							deleteTile(
-								((x - rect_.x()) / Globals::TILE_WIDTH) + 1,
-								(y - rect_.y()) / Globals::TILE_HEIGHT
+								((x - rect_.x()) / Resources::TILE_WIDTH) + 1,
+								(y - rect_.y()) / Resources::TILE_HEIGHT
 							);
 						else if (*selectedTab_ == 1)
 							deleteCollisionTile(
-								((x - rect_.x()) / Globals::TILE_WIDTH) + 1, // nao me pergunte por que + 1
-								(y - rect_.y()) / Globals::TILE_HEIGHT
+								((x - rect_.x()) / Resources::TILE_WIDTH) + 1, // nao me pergunte por que + 1
+								(y - rect_.y()) / Resources::TILE_HEIGHT
 							);
 					}
 				}
@@ -210,8 +210,8 @@ void TileMapPanel::render()
 		if (*selectedTab_ == 1)
 			speedChangePerLayer = 0;
 
-		for(int x = smallX; x<=bigX; x+=Globals::TILE_WIDTH) {
-			for(int y = smallY; y<=bigY; y+=Globals::TILE_HEIGHT) {
+		for(int x = smallX; x<=bigX; x+=Resources::TILE_WIDTH) {
+			for(int y = smallY; y<=bigY; y+=Resources::TILE_HEIGHT) {
 				if (*selectedTab_ != 1 && *selectedTool_ == LevelEditorState::Tools::ADD)
 					tileSet_->render(*selectedTile_, 
 					                 x + speedChangePerLayer * Camera::pos_.x(), 
