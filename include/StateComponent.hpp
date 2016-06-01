@@ -6,14 +6,21 @@
 class EntityStateMachine;
 class EntityState;
 
+enum StateMachineType
+{
+	PLAYER,
+	ENEMY,
+	OBJECT
+};
+
 class StateComponent : public Component
 {
 public:
-	StateComponent();
+	StateComponent(StateMachineType type = PLAYER);
 	~StateComponent() {}
 
 	EntityStateMachine* getStateMachine() { return stateMachine_; }
-	void setStateMachine(EntityStateMachine& stateMachine) { stateMachine_ = &stateMachine; }
+	void setStateMachine(EntityStateMachine& stateMachine, StateMachineType type = PLAYER) { stateMachine_ = &stateMachine; }
 	EntityState* getState();
 
 	bool isFacingRight() { return facingRight_; }

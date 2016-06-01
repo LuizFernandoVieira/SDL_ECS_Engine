@@ -136,8 +136,6 @@ void Resources::Read(std::string filename_){
 			config >> tempName;	//Nome da primeira variável
 			while (tempName[0] != LINE_BREAK)
 			{
-				if (GetImage(tempName) != nullptr)
-				else std::cout << tempName << "Could not be loaded" << std::endl;
 				config >> tempName;			//Nome da próxima variável
 			}
 
