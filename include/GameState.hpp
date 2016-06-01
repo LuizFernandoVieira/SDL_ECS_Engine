@@ -9,12 +9,15 @@
 #include "Level.hpp"
 #include "ColliderComponent.hpp"
 #include "SpeedComponent.hpp"
+#include "EmitterComponent.hpp"
+#include "TimerComponent.hpp"
 #include "InputSystem.hpp"
 #include "StateSystem.hpp"
 #include "RenderSystem.hpp"
 #include "MoveSystem.hpp"
 #include "GravitySystem.hpp"
 #include "CollisionSystem.hpp"
+#include "ParticleEmitterSystem.hpp"
 
 class GameState: public State
 {
@@ -27,12 +30,15 @@ public:
 	void handle(StateEventEnum& event);
 private:
 	void createPlayer();
-	
+	void createParticleEmitter();
+
 	// FirstLevel firstLevel_;
 	Level* level_;
 
 	static unsigned int nextId_;
+
 	unsigned int player_;
+	unsigned int particleEmitter_;
 
 	std::map<int, TransformComponent*> mapTransform_;
 	std::map<int, StateComponent*> 	mapState_;
@@ -40,6 +46,8 @@ private:
 	std::map<int, PhysicsComponent*> mapPhysics_;
 	std::map<int, ColliderComponent*> mapCollider_;
 	std::map<int, SpeedComponent*> mapSpeed_;
+	std::map<int, EmitterComponent*> mapEmitter_;
+	std::map<int, TimerComponent*> mapTimer_;
 
 	InputSystem inputSystem_;
 	StateSystem stateSystem_;
@@ -47,6 +55,7 @@ private:
 	MoveSystem moveSystem_;
 	GravitySystem gravitySystem_;
 	CollisionSystem collisionSystem_;
+	ParticleEmitterSystem particleEmitterSystem_;
 };
 
 #endif

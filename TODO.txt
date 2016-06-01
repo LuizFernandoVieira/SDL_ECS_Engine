@@ -1,3 +1,23 @@
+Fazendo:
+
+GameState
+  ParticleEmitterSystem
+    ParticleEmitter
+      TransformComponent
+      EmitterComponent
+			Timer
+        int Particle
+        map TransformComponent
+        map RenderComponent
+        map TimerComponent
+
+
+	  // pega a posicao do emitter
+	  // pega o componente emitter do emitter
+	  // percorre os transform atualizando a posicao
+	  //
+	  // percorre os timers atualizando o tempo
+
 A fazer:
 
 - Acrescentar largura, altura, escala e rotação na transform component;

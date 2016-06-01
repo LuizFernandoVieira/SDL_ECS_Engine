@@ -30,10 +30,10 @@ void GameState::create(StateMachine& stateMachine)
 {
 	stateMachine_ = &stateMachine;
 	quit = false;
-	// firstLevel_	= new FirstLevel();
 	level_ = new FirstLevel();
 
 	createPlayer();
+	createParticleEmitter();
 
 	// Criar colisores do terreno
 	/*std::vector<std::pair<int, TransformComponent*>> terrainEntities = level_->createTerrain(nextId_);
@@ -47,14 +47,47 @@ void GameState::update(float dt)
 {
 	InputHandler::getInstance().update();
 
-	inputSystem_.update(player_, mapState_, mapSpeed_);
-	gravitySystem_.update(dt, mapSpeed_, mapPhysics_);
+	inputSystem_.update(
+		player_,
+		mapState_,
+		mapSpeed_
+	);
+	gravitySystem_.update(
+		dt,
+		mapSpeed_,
+		mapPhysics_
+	);
+
+	particleEmitterSystem_.update(
+		dt,
+		mapTransform_[particleEmitter_],
+		mapEmitter_[particleEmitter_],
+		mapTimer_[particleEmitter_]
+	);
 
 	std::map<int, TransformComponent*> oldTransform = mapTransform_;
-	moveSystem_.update(dt, mapTransform_, mapSpeed_);
-	collisionSystem_.update(level_->getCollisionMap(), oldTransform, mapTransform_, mapCollider_, mapSpeed_);
-	stateSystem_.update(mapState_, mapSpeed_);
-	renderSystem_.update(dt, mapState_, mapRender_);
+
+	moveSystem_.update(
+		dt,
+		mapTransform_,
+		mapSpeed_
+	);
+	collisionSystem_.update(
+		level_->getCollisionMap(),
+		oldTransform,
+		mapTransform_,
+		mapCollider_,
+		mapSpeed_
+	);
+	stateSystem_.update(
+		mapState_,
+		mapSpeed_
+	);
+	renderSystem_.update(
+		dt,
+		mapState_,
+		mapRender_
+	);
 
 	Camera::update(dt);
 
@@ -67,6 +100,7 @@ void GameState::render()
 {
 	level_->render();
 	renderSystem_.render(mapTransform_, mapState_, mapRender_);
+	particleEmitterSystem_.render();
 	// collisionSystem_.render();
 }
 
@@ -81,7 +115,7 @@ void GameState::createPlayer()
 	player_ = nextId_;
 	nextId_++;
 
-	mapTransform_.emplace(player_, new TransformComponent(Rect(352, 300, 32, 32)));
+	mapTransform_.emplace(player_, new TransformComponent(Rect(352, 100, 32, 32)));
 	mapCollider_.emplace(player_, new ColliderComponent(Rect(0, 0, 32, 32)));
 	mapState_.emplace(player_, new StateComponent());
 	mapPhysics_.emplace(player_, new PhysicsComponent());
@@ -100,4 +134,14 @@ void GameState::createPlayer()
 	mapRender_[player_]->setCurrentSprite("IdleState");
 
 	Camera::follow(mapTransform_[player_]);
+}
+
+void GameState::createParticleEmitter()
+{
+	particleEmitter_ = nextId_;
+	nextId_++;
+
+	mapTransform_.emplace(particleEmitter_, new TransformComponent(Rect(300, 250, 32, 32)));
+	mapEmitter_.emplace(particleEmitter_, new EmitterComponent());
+	mapTimer_.emplace(particleEmitter_, new TimerComponent());
 }
