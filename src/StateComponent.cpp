@@ -1,8 +1,8 @@
 #include "../include/StateComponent.hpp"
 
-StateComponent::StateComponent() : facingRight_(true)
+StateComponent::StateComponent(StateMachineType type) : facingRight_(true)
 {
-	stateMachine_ = new EntityStateMachine();
+	stateMachine_ = new EntityStateMachine(type);
 }
 
 EntityState* StateComponent::getState()

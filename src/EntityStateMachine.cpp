@@ -1,9 +1,20 @@
 #include "../include/EntityStateMachine.hpp"
 #include "../include/PlayerIdleState.hpp"
 
-EntityStateMachine::EntityStateMachine() : changed_(false)
+EntityStateMachine::EntityStateMachine(StateMachineType type) : changed_(false)
 {
-	currentState_ = new PlayerIdleState(*this);
+	switch(type)
+	{
+		case PLAYER:
+			currentState_ = new PlayerIdleState(*this);
+			break;
+		case ENEMY:
+			currentState_ = new PlayerIdleState(*this);
+			break;
+		case OBJECT:
+			currentState_ = new PlayerIdleState(*this);
+			break;
+	}
 }
 
 void EntityStateMachine::changeState(EntityState& state)

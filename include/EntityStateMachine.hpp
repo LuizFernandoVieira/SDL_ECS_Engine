@@ -8,7 +8,7 @@
 class EntityStateMachine
 {
 public:
-	EntityStateMachine();
+	EntityStateMachine(StateMachineType type = PLAYER);
 	void changeState(EntityState& state);
 	void handle(StateComponent* stateComp, SpeedComponent* speedComp);
 	EntityState* getCurrentState();
