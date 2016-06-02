@@ -1,11 +1,12 @@
 #ifndef RESOURCES_HPP
 #define RESOURCES_HPP
-#define Globals Resources
 
 #ifdef __APPLE__
 	#include <SDL2/SDL.h>
+	#include <SDL2_mixer/SDL_mixer.h>
 #else
 	#include "SDL.h"
+	#include "SDL_mixer.h"
 #endif
 
 #include <unordered_map>
@@ -41,6 +42,10 @@ public:
 	//IMAGES
 	static std::shared_ptr<SDL_Texture> GetImage(std::string file);
 	static void ClearImages();
+
+	//AUDIO
+	static std::unordered_map<std::string, Mix_Chunk*> 		soundTable;
+	static void ClearAudio();
 
 
 private:
