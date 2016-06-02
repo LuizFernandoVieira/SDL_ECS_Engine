@@ -1,6 +1,6 @@
-// #include <iostream>
+#include <iostream>
 
-// #include "../include/Game.hpp"
+#include "../include/Game.hpp"
 #include "../include/Resources.hpp"
 #define		CONFIG_FILE	"../config.txt"
 
@@ -13,7 +13,7 @@ float Resources::PLAYER_WALK_SPEED 	= 0; // pixels per second
 float Resources::PLAYER_JUMP_SPEED 	= 0; // pixels per second
 
 
-/*int main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	Resources::Read(CONFIG_FILE);
 	Game game = Game(Globals::WINDOW_WIDTH,Globals::WINDOW_HEIGHT);
@@ -21,8 +21,8 @@ float Resources::PLAYER_JUMP_SPEED 	= 0; // pixels per second
 	
 	return 0;
 }
-*/
-#include "Json.hpp"
+
+/*#include "Json.hpp"
 
 using json = nlohmann::json;
 
@@ -57,4 +57,4 @@ int main(int argc, char *argv[])
 
     // pretty print with indent of 4 spaces
     std::cout << std::setw(4) << j << '\n';
-}
+}*/
