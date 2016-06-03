@@ -4,9 +4,11 @@
 #ifdef __APPLE__
 	#include <SDL2/SDL.h>
 	#include <SDL2/SDL_gamecontroller.h>
+	#include <SDL2/SDL_mixer.h>
 #else
 	#include "SDL.h"
 	#include "SDL_gamecontroller.h"
+	#include "SDL_mixer.h"
 #endif
 
 #include <iostream>
@@ -29,6 +31,7 @@ private:
 	void initWindow(int width, int height);
 	void initRenderer();
 	void initControllers();
+	void initAudio();
 	void calculateDeltaTime();
 	SDL_Window* window_;
 	SDL_Renderer* renderer_;

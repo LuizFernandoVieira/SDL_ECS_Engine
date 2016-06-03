@@ -17,6 +17,7 @@ Game::Game(int width, int height)
 	initWindow(width, height);
 	initRenderer();
 	initControllers();
+	initAudio();
 
 	stateMachine_ = new StateMachine();
 	stateMachine_->create();
@@ -24,6 +25,7 @@ Game::Game(int width, int height)
 
 Game::~Game()
 {
+	Mix_Quit();
 	SDL_DestroyRenderer(renderer_);
 	SDL_DestroyWindow(window_);
 	SDL_Quit();
@@ -115,6 +117,27 @@ void Game::initControllers()
 		}
 	}
 }
+
+void Game::initAudio(){
+	//Initialize Audio
+	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024)){
+		printf( "SDL_mixer could not Open Audio! SDL_mixer Error: %s\n", Mix_GetError() );
+		//system("PAUSE");
+		exit(1);		
+	}
+
+	/*	Como nossa música será simulada por áudio, não há sentido na inicialização
+
+	//Initialize Music
+	if (Mix_Init(MIX_INIT_OGG) != MIX_INIT_OGG){
+		printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
+		system("PAUSE");
+		exit(ERROR_INIT);	
+	}
+	*/
+}
+
+
 
 void Game::calculateDeltaTime()
 {

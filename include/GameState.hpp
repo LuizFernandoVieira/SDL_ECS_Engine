@@ -18,6 +18,7 @@
 #include "GravitySystem.hpp"
 #include "CollisionSystem.hpp"
 #include "ParticleEmitterSystem.hpp"
+#include "Music.hpp"
 
 class GameState: public State
 {
@@ -39,6 +40,8 @@ private:
 
 	unsigned int player_;
 	unsigned int particleEmitter_;
+
+	Music	music;
 
 	std::map<int, TransformComponent*> mapTransform_;
 	std::map<int, StateComponent*> 	mapState_;

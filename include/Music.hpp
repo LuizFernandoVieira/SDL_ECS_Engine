@@ -25,8 +25,13 @@ public:
 	void Open(std::string file);
 	bool IsOpen();
 
+	void Update();
+
 private:
 	Mix_Chunk* 	layer[AUDIO_MAXLAYERS];
-	float 		vloume[AUDIO_MAXLAYERS];
+	int			channel[AUDIO_MAXLAYERS];
+
+	float 		volume[AUDIO_MAXLAYERS];
+	float 		volumeCurrent[AUDIO_MAXLAYERS];
 	
 };
