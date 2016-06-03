@@ -1,5 +1,7 @@
 #include <iostream>
 
+#include <libxml/parser.h>
+
 #include "../include/Game.hpp"
 #include "../include/Resources.hpp"
 #define		CONFIG_FILE	"../config.txt"

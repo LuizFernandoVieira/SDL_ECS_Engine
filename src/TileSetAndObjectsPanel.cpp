@@ -175,6 +175,7 @@ void TileSetAndObjectsPanel::render()
 	{
 		previousObject->render();
 		nextObject->render();
+		
 		objectSp->render(rect_.x() + 30, rect_.y() + 100);
 		objectSp->renderSelection(rect_.x() + 30, rect_.y() + 100);
 	}
