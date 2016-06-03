@@ -12,7 +12,7 @@
 // #include <vector>
 #include <fstream>
 
-#include "Json.hpp"
+#include "pugixml.hpp"
 // #include "Rect.hpp"
 
 class ObjectMap
@@ -27,7 +27,6 @@ public:
 	// int getHeight() const;
 
 	// std::vector<int> collisionMatrix_;
-	nlohmann::json objectMap_;
 private:
 
 	std::string filename_;

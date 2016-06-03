@@ -2,11 +2,9 @@
 
 #include "../include/ObjectMap.hpp"
 
-using json = nlohmann::json;
-
 ObjectMap::ObjectMap(const char* file) : filename_(file)
 {
-	// load();
+	load();
 }
 
 
@@ -26,6 +24,12 @@ void ObjectMap::load()
 	// ifs.close();
 
 	// std::cout << std::setw(4) << objectMap_ << std::endl;
+
+	pugi::xml_document doc;
+	// pugi::xml_parse_result result = doc.load_file("../map/objectMap.xml");
+	// std::cout << "Load result: " << result.description() << ", object name: " << doc.child("object").value() << std::endl;
+	pugi::xml_parse_result result = doc.load_file("../pugixml-1.7/docs/samples/tree.xml");
+	std::cout << "Load result: " << result.description() << ", mesh name: " << doc.child("mesh").attribute("name").value() << std::endl;
 }
 
 
