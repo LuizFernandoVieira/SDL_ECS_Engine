@@ -34,6 +34,7 @@ public:
 	static float PLAYER_JUMP_SPEED;
 
 	static void Read(std::string filename_);
+	static void xmlRead(std::string filename_);
 
 	//Global Values
 	static std::unordered_map<std::string, int>			intTable;

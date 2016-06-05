@@ -1,0 +1,102 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<config>
+	<globals>
+		<WINDOW_WIDTH 	= "1024">
+		<WINDOW_HEIGHT	= "600">
+		<TILE_WIDTH		= "32">
+		<TILE_HEIGHT 	= "32">
+		<GRAVITY 		= "200">
+
+		<PLAYER_WALK_SPEED	= "200">
+		<PLAYER_JUMP_SPEED 	= "500">
+	</globals>
+</config>
+
+<!------------------------------------------------------->
+
+<!-------------------USING ASTTRIBUTES------------------->
+<!--
+	Forma de Acesso:
+		
+-->
+
+<State name="prototype">
+	<music>
+		<assets>
+			<layer channel="1">"umbra_test_bass.wav"</layer>
+			<layer channel="2">"umbra_test_flute.wav"</layer>
+			<layer channel="3">"umbra_test_piano.wav"</layer>
+			<layer channel="4">"umbra_test_synth.wav"</layer>
+			<layer channel="5">"umbra_test_violin.wav"</layer>
+			<layer channel="6">null</layer>
+			<layer channel="7">null</layer>
+			<layer channel="8">null</layer>
+		</assets>
+
+
+
+		<volume state="default">
+			<layer channel="1">128</layer>
+			<layer channel="2">128</layer>
+			<layer channel="3">128</layer>
+			<layer channel="4">128</layer>
+			<layer channel="5">128</layer>
+			<layer channel="6">128</layer>
+			<layer channel="7">128</layer>
+			<layer channel="8">128</layer>
+		</volume>
+
+		<volume state="walking">
+			<layer channel="1">0</layer>
+			<layer channel="2">0</layer>
+			<layer channel="3">0</layer>
+			<layer channel="4">0</layer>
+			<layer channel="5">0</layer>
+			<layer channel="6">0</layer>
+			<layer channel="7">0</layer>
+			<layer channel="8">0</layer>
+		</volume>
+	</music>
+</State>
+
+
+<!------------------------------------------------------->
+
+<!----------------USING CONTAINED ELEMENTS--------------->
+
+<States>
+	<State name="prototype">
+		<Music>
+			<layer channel="1">
+				<file>"umbra_test_bass.wav"</file>
+				<volume>128</volume>
+			</layer>
+
+			<layer channel="2">
+				<file>"umbra_test_flute.wav"</file>
+				<volume>128</volume>
+			</layer>
+
+			<layer channel="3">
+				<file>"umbra_test_flute.wav"</file>
+				<volume>128</volume>
+			</layer>
+		</Music>
+	</State>
+</States>
+
+
+3="umbra_test_piano.wav"
+<volume>128</volume>
+
+4="umbra_test_synth.wav"
+<volume>128</volume>
+
+5="umbra_test_violin.wav"
+<volume>128</volume>
+
+1="umbra_test_bass.wav"
+2="umbra_test_flute.wav"
+3="umbra_test_piano.wav"
+4="umbra_test_synth.wav"
+5="umbra_test_violin.wav"
