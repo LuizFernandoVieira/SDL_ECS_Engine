@@ -2,11 +2,25 @@
 #include "../include/Resources.hpp"
 #include "../include/InputHandler.hpp"
 
-TileSetAndObjectsPanel::TileSetAndObjectsPanel(Rect rect, std::string imgPath) :
-	Panel(rect, imgPath)
+TileSetAndObjectsPanel::TileSetAndObjectsPanel(Rect rect, std::string imgPath, ObjectMap* objectMap, int& selectedObject) :
+	Panel(rect, imgPath), selectedObject_(selectedObject)
 {
 	selectedTab_ = TILES;
+	objectMap_ = objectMap;
 
+	createButtons();
+	createObjectSprite();
+}
+
+
+TileSetAndObjectsPanel::~TileSetAndObjectsPanel()
+{
+	tileButtons_.clear();
+}
+
+
+void TileSetAndObjectsPanel::createButtons()
+{
 	// Criar botoes das abas
 	Rect tileButtonProportions = Rect(0.05, 0.0, 0.3, 0.05);
 	Rect collisionButtonProportions = Rect(0.35, 0.0, 0.3, 0.05);
@@ -44,7 +58,7 @@ TileSetAndObjectsPanel::TileSetAndObjectsPanel(Rect rect, std::string imgPath) :
 	add(*objectButton, objectButtonProportions);
 
 	// Somar a altura dos botoes de tabs aos outros botoes
-	tabButtonHeight = tileButtonRect.y();
+	tabButtonHeight_ = tileButtonRect.y();
 
 	// Criar botoes de previous e next object
 	previousObjectProportions = Rect(0.05, 0.5, 0.1, 0.04);
@@ -69,97 +83,69 @@ TileSetAndObjectsPanel::TileSetAndObjectsPanel(Rect rect, std::string imgPath) :
 	previousObject->setResizable(true);
 	nextObject->setResizable(true);
 
-	objectSp = new StaticSprite("../img/addTilesBtn.png");
+	objectSp_ = new StaticSprite("../img/addTilesBtn.png");
 }
 
-TileSetAndObjectsPanel::~TileSetAndObjectsPanel()
+
+void TileSetAndObjectsPanel::createObjectSprite()
 {
-	tileButtons_.clear();
+	if (objectSp_ != NULL)
+		delete objectSp_;
+
+	ObjectInfo objectInfo = objectMap_->getGlobalObject(selectedObject_);
+	objectName_ = objectInfo.name;
+	objectSp_ = new StaticSprite(objectInfo.filename.c_str(), objectInfo.frameCount, objectInfo.frameTime);
+
+	// escala do sprite, sem mudar proporcao largura/altura
+	objectSp_->setScaleX(1.0);
+	objectSp_->setScaleY(1.0);
+	float proportion = (float)objectSp_->getWidth() / (float)objectSp_->getHeight();
+	float scaleX = 0.9 * rect_.w() / (float)objectSp_->getWidth();
+	objectSp_->setScaleX(scaleX);
+	objectSp_->setScaleY(scaleX / proportion);
 }
+
 
 void TileSetAndObjectsPanel::update()
 {
 	Panel::update();
+	InputHandler& input = InputHandler::getInstance();
 
-	if (InputHandler::getInstance().getScreenResized())
+	if (input.getScreenResized())
 	{
-		// resize dos botoes previous e next
-		previousObject->setRect(Rect(
-				previousObjectProportions.x() * rect_.w() + rect_.x(),
-				previousObjectProportions.y() * rect_.h() + rect_.y(),
-				previousObjectProportions.w() * rect_.w(),
-				previousObjectProportions.h() * rect_.h()
-		));
-		nextObject->setRect(Rect(
-				nextObjectProportions.x() * rect_.w() + rect_.x(),
-				nextObjectProportions.y() * rect_.h() + rect_.y(),
-				nextObjectProportions.w() * rect_.w(),
-				nextObjectProportions.h() * rect_.h()
-		));
-
-		// resize dos botoes de tiles
-		int nTilesRow = rect_.w() / (Resources::TILE_WIDTH + 2);
-		// if (nTilesRow == 0)
-		// 	nTilesRow = 1;
-		int curRow = 0;
-		int curColumn = 0;
-
-		// Gambiarra pra atualizar a altura dos botoes
-		tabButtonHeight = buttons_[0].first->getRect().y();
-
-		for(int i = 0; i < (int)tileButtons_.size(); i++, curColumn++ )
-		{
-			if (i % nTilesRow == 0 && i != 0)
-			{
-				curRow++;
-				curColumn = 0;
-			}
-			tileButtons_[i].setRect(
-				Rect(
-					curColumn * (Resources::TILE_WIDTH + 2) + 2 + rect_.x(),
-					curRow * (Resources::TILE_HEIGHT + 2) + 2 + rect_.y() + tabButtonHeight,
-					Resources::TILE_WIDTH,
-					Resources::TILE_HEIGHT)
-			);
-		}
-
-		// resize dos botoes de collision
-		curRow = 0;
-		curColumn = 0;
-
-		for(int i = 0; i < (int)collisionButtons_.size(); i++, curColumn++ )
-		{
-			if (i % nTilesRow == 0 && i != 0)
-			{
-				curRow++;
-				curColumn = 0;
-			}
-			collisionButtons_[i].setRect(
-				Rect(
-					curColumn * (Resources::TILE_WIDTH + 2) + 2 + rect_.x(),
-					curRow * (Resources::TILE_HEIGHT + 2) + 2 + rect_.y() + tabButtonHeight,
-					Resources::TILE_WIDTH,
-					Resources::TILE_HEIGHT)
-			);
-		}
+		resize();
 	}
 
-	if (InputHandler::getInstance().mousePress(LEFT_MOUSE_BUTTON))
+	if (input.mousePress(LEFT_MOUSE_BUTTON))
 	{
-		if (buttons_[0].first->getRect().isInside(InputHandler::getInstance().getMouse()))
+		if (buttons_[0].first->getRect().isInside(input.getMouse()))
 		{
 			selectedTab_ = TILES;
 		}
-		else if (buttons_[1].first->getRect().isInside(InputHandler::getInstance().getMouse()))
+		else if (buttons_[1].first->getRect().isInside(input.getMouse()))
 		{
 			selectedTab_ = COLLISION;
 		}
-		else if (buttons_[2].first->getRect().isInside(InputHandler::getInstance().getMouse()))
+		else if (buttons_[2].first->getRect().isInside(input.getMouse()))
 		{
 			selectedTab_ = OBJECTS;
 		}
+		else if (selectedTab_ == OBJECTS)
+		{
+			if (previousObject->getRect().isInside(input.getMouse()))
+			{
+				selectedObject_ = ((selectedObject_ - 1 + objectMap_->globalSize()) % objectMap_->globalSize());	// decrementa dentro do range
+				createObjectSprite();
+			}
+			else if (nextObject->getRect().isInside(input.getMouse()))
+			{
+				selectedObject_ = ((selectedObject_ + 1) % objectMap_->globalSize());	// incrementa dentro do range
+				createObjectSprite();
+			}
+		}
 	}
 }
+
 
 void TileSetAndObjectsPanel::render()
 {
@@ -173,11 +159,10 @@ void TileSetAndObjectsPanel::render()
 	}
 	else if (selectedTab_ == OBJECTS)
 	{
+		objectSp_->render(rect_.x() + 10, rect_.y() + 50);
+
 		previousObject->render();
 		nextObject->render();
-		
-		objectSp->render(rect_.x() + 30, rect_.y() + 100);
-		objectSp->renderSelection(rect_.x() + 30, rect_.y() + 100);
 	}
 	else if (selectedTab_ == COLLISION)
 	{
@@ -191,11 +176,11 @@ void TileSetAndObjectsPanel::render()
 // void TileSetAndObjectsPanel::addButton(Button& button, Tab tab)
 // {
 // 	tileButtons_.emplace_back(std::pair<Button*, Tab>(&button, tab));
-// 	button.setRect(button.getRect() + Vec2(0, tabButtonHeight));
+// 	button.setRect(button.getRect() + Vec2(0, tabButtonHeight_));
 // }
 void TileSetAndObjectsPanel::addButton(Button& button, Tab tab)
 {
-	button.setRect(button.getRect() + Vec2(0, tabButtonHeight));
+	button.setRect(button.getRect() + Vec2(0, tabButtonHeight_));
 	if (tab == TILES)
 		tileButtons_.emplace_back(button);
 	else if (tab == COLLISION)
@@ -206,4 +191,68 @@ void TileSetAndObjectsPanel::addButton(Button& button, Tab tab)
 TileSetAndObjectsPanel::Tab& TileSetAndObjectsPanel::getSelectedTab()
 {
 	return selectedTab_;
+}
+
+
+void TileSetAndObjectsPanel::resize()
+{
+	// resize dos botoes previous e next
+	previousObject->setRect(Rect(
+			previousObjectProportions.x() * rect_.w() + rect_.x(),
+			previousObjectProportions.y() * rect_.h() + rect_.y(),
+			previousObjectProportions.w() * rect_.w(),
+			previousObjectProportions.h() * rect_.h()
+	));
+	nextObject->setRect(Rect(
+			nextObjectProportions.x() * rect_.w() + rect_.x(),
+			nextObjectProportions.y() * rect_.h() + rect_.y(),
+			nextObjectProportions.w() * rect_.w(),
+			nextObjectProportions.h() * rect_.h()
+	));
+
+	// resize dos botoes de tiles
+	int nTilesRow = rect_.w() / (Resources::TILE_WIDTH + 2);
+	// if (nTilesRow == 0)
+	// 	nTilesRow = 1;
+	int curRow = 0;
+	int curColumn = 0;
+
+	// Gambiarra pra atualizar a altura dos botoes
+	tabButtonHeight_ = buttons_[0].first->getRect().y();
+
+	for(int i = 0; i < (int)tileButtons_.size(); i++, curColumn++ )
+	{
+		if (i % nTilesRow == 0 && i != 0)
+		{
+			curRow++;
+			curColumn = 0;
+		}
+		tileButtons_[i].setRect(
+			Rect(
+				curColumn * (Resources::TILE_WIDTH + 2) + 2 + rect_.x(),
+				curRow * (Resources::TILE_HEIGHT + 2) + 2 + rect_.y() + tabButtonHeight_,
+				Resources::TILE_WIDTH,
+				Resources::TILE_HEIGHT)
+		);
+	}
+
+	// resize dos botoes de collision
+	curRow = 0;
+	curColumn = 0;
+
+	for(int i = 0; i < (int)collisionButtons_.size(); i++, curColumn++ )
+	{
+		if (i % nTilesRow == 0 && i != 0)
+		{
+			curRow++;
+			curColumn = 0;
+		}
+		collisionButtons_[i].setRect(
+			Rect(
+				curColumn * (Resources::TILE_WIDTH + 2) + 2 + rect_.x(),
+				curRow * (Resources::TILE_HEIGHT + 2) + 2 + rect_.y() + tabButtonHeight_,
+				Resources::TILE_WIDTH,
+				Resources::TILE_HEIGHT)
+		);
+	}
 }

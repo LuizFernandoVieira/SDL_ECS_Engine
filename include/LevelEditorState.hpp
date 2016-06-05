@@ -54,6 +54,7 @@ private:
 	TileSetAndObjectsPanel::Tab* selectedTab_;
 	int selectedCollision_;
 	Tools selectedTool_;
+	int selectedObject_;
 
 	TileSetAndObjectsPanel* tileSetAndObjectsPanel_;
 };

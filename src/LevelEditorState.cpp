@@ -10,12 +10,16 @@ mainPanel_(Rect(0, 0, Resources::WINDOW_WIDTH, Resources::WINDOW_HEIGHT), "../im
 	tileSet_ = new TileSet(Resources::TILE_WIDTH, Resources::TILE_HEIGHT, "../img/maps/test/tile_set.png");
 	tileMap_ = new TileMap("../map/tileMap.txt", tileSet_);
 	collisionMap_ = new CollisionMap("../map/collisionMap.txt");
-	objectMap_ = new ObjectMap("../map/objectMap.txt");
+	objectMap_ = new ObjectMap("../map/globalObjectMap.xml", "../map/objectMap.xml");
 	selectedTile_ = 0;
 	selectedTool_ = ADD;
 	selectedLayer_ = 1;
 	selectedCollision_ = 0;
 	selectedTab_ = NULL;
+	selectedObject_ = 0;
+
+	// objectMap_->addObject(1, 0, 10, 20);
+	// objectMap_->save();
 }
 
 LevelEditorState::~LevelEditorState()
@@ -23,6 +27,7 @@ LevelEditorState::~LevelEditorState()
 	delete tileMap_;
 	delete tileSet_;
 	delete collisionMap_;
+	delete objectMap_;
 	delete addTilesBtn_;
 	delete selectTilesBtn_;
 	delete deleteTilesBtn_;
@@ -68,9 +73,9 @@ void LevelEditorState::initGUI()
 
 	// Panel
 	Panel* leftPanel  = new Panel(leftRect, "../img/interface/editor/left_panel.png");
-	tileSetAndObjectsPanel_ = new TileSetAndObjectsPanel(tileSetAndObjectsRect, "../img/interface/editor/tile_set_panel.png");
+	tileSetAndObjectsPanel_ = new TileSetAndObjectsPanel(tileSetAndObjectsRect, "../img/interface/editor/tile_set_panel.png", objectMap_, selectedObject_);
 	selectedTab_ = &tileSetAndObjectsPanel_->getSelectedTab();
-	Panel* rightPanel = new TileMapPanel(*tileSet_, *tileMap_, *collisionMap_, rightRect, "../img/interface/editor/tile_map_panel.png", selectedTile_, selectedLayer_, selectedCollision_, (int*)selectedTab_, selectedTool_);
+	Panel* rightPanel = new TileMapPanel(*tileSet_, *tileMap_, *collisionMap_, *objectMap_, rightRect, "../img/interface/editor/tile_map_panel.png", selectedTile_, selectedLayer_, selectedCollision_, (int*)selectedTab_, selectedObject_, selectedTool_);
 
 	Panel* layersPanel = new Panel(layersRect, "../img/interface/editor/tile_set_panel.png");
 

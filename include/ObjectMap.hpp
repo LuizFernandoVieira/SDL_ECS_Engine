@@ -15,21 +15,34 @@
 #include "pugixml.hpp"
 // #include "Rect.hpp"
 
+typedef struct tpObjectInfo
+{
+	std::string name;
+	std::string filename;
+	int frameCount;
+	float frameTime;
+} ObjectInfo;
+
 class ObjectMap
 {
 public:
-	ObjectMap(const char* file);
+	ObjectMap(std::string globalObjects, std::string localObjects);
 	void save();
-	void load();
-	// void render(int x, int y);
-	// int& at(int x, int y);
-	// int getWidth() const;
-	// int getHeight() const;
+	void loadGlobals();
+	void loadLocals();
 
-	// std::vector<int> collisionMatrix_;
+	ObjectInfo getGlobalObject(int index);
+	int globalSize();
+	void addObject(int index, int id, int x, int y);
+	int getLastObjectId();
+
 private:
+	pugi::xml_node getGlobalObjectNode(int index);
 
-	std::string filename_;
+	pugi::xml_document globalObjects_;	// temporario?
+	pugi::xml_document localObjects_;
+	std::string globalFilename_;
+	std::string localFilename_;
 };
 
 
