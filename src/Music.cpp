@@ -1,6 +1,4 @@
 #include <iostream>
-#include "SDL.h"
-#include "SDL_mixer.h"
 
 #include "../include/music.hpp"
 #include "../include/resources.hpp"
@@ -21,7 +19,7 @@ void Music::Stop(){
 }
 
 void Music::Open(std::string file){
-	
+
 
 	if (!IsOpen())
 		std::cout << "ERROR RETRIEVING FILE" << std::endl;
@@ -50,6 +48,6 @@ public:
 private:
 	SDL_Chunk* 	layer[AUDIO_MAXLAYERS];
 	float 		vloume[AUDIO_MAXLAYERS];
-	
+
 };
 */

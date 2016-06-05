@@ -28,5 +28,5 @@ public:
 private:
 	Mix_Chunk* 	layer[AUDIO_MAXLAYERS];
 	float 		vloume[AUDIO_MAXLAYERS];
-	
+
 };

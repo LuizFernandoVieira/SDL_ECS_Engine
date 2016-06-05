@@ -12,6 +12,7 @@ ParticleEmitterSystem::ParticleEmitterSystem()
 
 void ParticleEmitterSystem::update(
   float dt,
+  CollisionMap levelCollisionMap,
   TransformComponent* tc,
   EmitterComponent* ec,
   TimerComponent* timerComponent
@@ -37,6 +38,25 @@ void ParticleEmitterSystem::update(
     int yAux = rand() % 5;
     mapSpeed_.emplace(particle_, new SpeedComponent(Vec2(0, yAux+1)));
 
+    mapCollider_.emplace(particle_, new ColliderComponent(
+      Rect(
+        mapTransform_[particle_]->rect_.x(),
+        mapTransform_[particle_]->rect_.y(),
+        16,
+        16
+      )
+    ));
+
+    std::map<int, TransformComponent*> oldTransform = mapTransform_;
+
+    // collisionSystem_.update(
+    //   levelCollisionMap,
+  	// 	oldTransform,
+  	// 	mapTransform_,
+  	// 	mapCollider_,
+  	// 	mapSpeed_
+    // );
+
     timerComponent->time_ = 0.0;
   }
 
@@ -44,6 +64,11 @@ void ParticleEmitterSystem::update(
   for(auto& transform : mapTransform_)
   {
     transform.second->rect_ += mapSpeed_[transform.first]->speed_;
+  }
+
+  for(auto& collider : mapCollider_)
+  {
+    collider.second->rect_ = mapTransform_[collider.first]->rect_;
   }
 
   for(auto& timer : mapTimer_)
@@ -54,9 +79,11 @@ void ParticleEmitterSystem::update(
       std::map<int, RenderComponent*>::iterator itRender = mapRender_.find (timer.first);
       std::map<int, TimerComponent*>::iterator itTimer = mapTimer_.find (timer.first);
       std::map<int, SpeedComponent*>::iterator itSpeed = mapSpeed_.find (timer.first);
+      std::map<int, ColliderComponent*>::iterator itCollider = mapCollider_.find(timer.first);
       mapTransform_.erase(itTransform);
       mapRender_.erase(itRender);
       mapSpeed_.erase(itSpeed);
+      mapCollider_.erase(itCollider);
       mapTimer_.erase(itTimer); // o iterador do tempo deve ser o ultimo a ser deletado
     }
   }

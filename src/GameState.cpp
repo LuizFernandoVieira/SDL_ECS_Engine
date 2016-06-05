@@ -60,6 +60,7 @@ void GameState::update(float dt)
 
 	particleEmitterSystem_.update(
 		dt,
+		level_->getCollisionMap(),
 		mapTransform_[particleEmitter_],
 		mapEmitter_[particleEmitter_],
 		mapTimer_[particleEmitter_]
