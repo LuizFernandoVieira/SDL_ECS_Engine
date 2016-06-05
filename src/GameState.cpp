@@ -12,7 +12,8 @@
 
 unsigned int GameState::nextId_ = 0;
 
-GameState::GameState() : music()
+GameState::GameState()
+: music()
 {
 	//testando componente de música, não há necessidade de se carregar um arquivo
 	//A própria music está carregando um arquivo teste

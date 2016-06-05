@@ -14,7 +14,7 @@ class Sprite
 public:
 	Sprite();
 	Sprite(const char* file, int frameCount = 1, float frameTime = 1);
-	~Sprite();
+	virtual ~Sprite();
 	void open(const char* file);
 	void setClip(int x, int y, int w, int h);
 	virtual void render(int x, int y, float angle = 0, bool flip = false);

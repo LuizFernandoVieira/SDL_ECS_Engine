@@ -75,23 +75,11 @@ void ParticleEmitterSystem::update(
   {
     emissionRateSystem_.update(dt, timer.second);
     if (timer.second->time_  > 8) {
-<<<<<<< HEAD
-      std::map<int, TransformComponent*>::iterator itTransform = mapTransform_.find (timer.first);
-      std::map<int, RenderComponent*>::iterator itRender = mapRender_.find (timer.first);
-      std::map<int, TimerComponent*>::iterator itTimer = mapTimer_.find (timer.first);
-      std::map<int, SpeedComponent*>::iterator itSpeed = mapSpeed_.find (timer.first);
-      std::map<int, ColliderComponent*>::iterator itCollider = mapCollider_.find(timer.first);
-      mapTransform_.erase(itTransform);
-      mapRender_.erase(itRender);
-      mapSpeed_.erase(itSpeed);
-      mapCollider_.erase(itCollider);
-      mapTimer_.erase(itTimer); // o iterador do tempo deve ser o ultimo a ser deletado
-=======
       mapTransform_.erase(timer.first);
       mapRender_.erase(timer.first);
       mapSpeed_.erase(timer.first);
+      mapCollider_.erase(timer.first);
       mapTimer_.erase(timer.first); // o iterador do tempo deve ser o ultimo a ser deletado
->>>>>>> b94383a2aee857ed770b7c6cdb9aa55954e1d72b
     }
   }
 }

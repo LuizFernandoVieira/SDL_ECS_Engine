@@ -87,46 +87,53 @@ void Music::Update(){
 	//Teste de Canais
 	InputHandler& In = InputHandler::getInstance();
 
-	if (In.keyPress(NUMKEY_1))
+	if (In.keyPress(NUMKEY_1)) {
 		if (volumeCurrent[0] == 0)
 			volumeCurrent[0] = MIX_MAX_VOLUME;
 		else volumeCurrent[0] = 0;
+	}
 
-	if (In.keyPress(NUMKEY_2))
+	if (In.keyPress(NUMKEY_2)) {
 		if (volumeCurrent[1] == 0)
 			volumeCurrent[1] = MIX_MAX_VOLUME;
 		else volumeCurrent[1] = 0;
+	}
 
-	if (In.keyPress(NUMKEY_3))
+	if (In.keyPress(NUMKEY_3)) {
 		if (volumeCurrent[2] == 0)
 			volumeCurrent[2] = MIX_MAX_VOLUME;
 		else volumeCurrent[2] = 0;
+	}
 
-	if (In.keyPress(NUMKEY_4))
+	if (In.keyPress(NUMKEY_4)) {
 		if (volumeCurrent[3] == 0)
 			volumeCurrent[3] = MIX_MAX_VOLUME;
 		else volumeCurrent[3] = 0;
+	}
 
-	if (In.keyPress(NUMKEY_5))
+	if (In.keyPress(NUMKEY_5)) {
 		if (volumeCurrent[4] == 0)
 			volumeCurrent[4] = MIX_MAX_VOLUME;
 		else volumeCurrent[4] = 0;
+	}
 
-	if (In.keyPress(NUMKEY_6))
+	if (In.keyPress(NUMKEY_6)) {
 		if (volumeCurrent[5] == 0)
 			volumeCurrent[5] = MIX_MAX_VOLUME;
 		else volumeCurrent[5] = 0;
+	}
 
-	if (In.keyPress(NUMKEY_7))
+	if (In.keyPress(NUMKEY_7)) {
 		if (volumeCurrent[6] == 0)
 			volumeCurrent[6] = MIX_MAX_VOLUME;
 		else volumeCurrent[6] = 0;
+	}
 
-	if (In.keyPress(NUMKEY_8))
+	if (In.keyPress(NUMKEY_8)) {
 		if (volumeCurrent[7] == 0)
 			volumeCurrent[7] = MIX_MAX_VOLUME;
 		else volumeCurrent[7] = 0;
-
+	}
 
 	//Volume Setting
 	int i;
@@ -155,16 +162,16 @@ void Music::SetVolumes(int*){
 
 		//volume increase
 		if (volume_diff == 0)
-			continue;	
+			continue;
 
-<<<<<<< HEAD
+
 private:
 	SDL_Chunk* 	layer[AUDIO_MAXLAYERS];
 	float 		vloume[AUDIO_MAXLAYERS];
 
 };
-*/
-=======
+
+
 		//Volume Decrease (Volume Increase is Standard Case)
 		if (volume_diff < 0)
 			volumeSlide * (-1);
@@ -181,4 +188,3 @@ private:
 	}
 }
 */
->>>>>>> b94383a2aee857ed770b7c6cdb9aa55954e1d72b
