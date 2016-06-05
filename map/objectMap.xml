@@ -1,17 +1,1 @@
 <?xml version="1.0"?>
-<object name="canil" id="1">
-	<transform x="361" y="350" w="96" h="128" />
-	<render>
-		<sprite state_name="IdleState" filename="../img/maps/test/canil_prpl_96x128.png" frame_count="1" frame_time="1.0" />
-	</render>
-	<collider x="0" y="0" w="96" h="128" />
-	<physics gravity_scale="1.0" />
-</object>
-<object name="fonte" id="2">
-	<transform x="458" y="13" w="320" h="384" />
-	<render>
-		<sprite state_name="IdleState" filename="../img/maps/test/fountain_320x384.png" frame_count="10" frame_time="0.2" />
-	</render>
-	<collider x="0" y="0" w="320" h="384" />
-	<physics gravity_scale="1.0" />
-</object>

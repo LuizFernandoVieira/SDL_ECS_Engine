@@ -20,7 +20,14 @@ A fazer:
 - Tirar create dos states;
 
 
-============ EDITOR DE MAPA ====================
+==========================================
+
+	Menu
+
+
+
+
+=============== ENTREGAS ====================
 
 Segunda entrega / 17
 
@@ -33,18 +40,18 @@ Segunda entrega / 17
 				Boss
 		NPC
 		Exception
-		Boiar na agua
+		// Boiar na agua
 		Text
 
 	Victor
 		Editor de Mapa
 			Objetos
-			Scroll dos painéis :)
+			// Scroll dos painéis :)
 		Colisao
 			Colisores Diagonais
-		Triggers
-		Atravessar plataformas
-			(de baixo para cima)
+			Triggers
+			Atravessar plataformas
+				(de baixo para cima)
 
 	Thales
 		Sons

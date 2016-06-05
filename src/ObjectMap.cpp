@@ -109,3 +109,32 @@ int ObjectMap::getLastObjectId()
 {
 	return localObjects_.last_child().attribute("id").as_int();
 }
+
+
+std::vector<LocalObjectInfo> ObjectMap::getLocalObjects()
+{
+	std::vector<LocalObjectInfo> infos;
+	for (auto object : localObjects_.children())
+	{
+		LocalObjectInfo info;
+		info.id = object.attribute("id").as_int();
+		pugi::xml_node sprite = object.child("render").find_child_by_attribute("sprite", "state_name", "IdleState");
+		info.filename = sprite.attribute("filename").value();
+		info.frameCount = sprite.attribute("frame_count").as_int();
+		info.frameTime = sprite.attribute("frame_time").as_float();
+		pugi::xml_node transf = object.child("transform");
+		info.x = transf.attribute("x").as_int();
+		info.y = transf.attribute("y").as_int();
+
+		infos.emplace_back(info);
+	}
+
+	return infos;
+}
+
+void ObjectMap::deleteObject(int id)
+{
+	std::ostringstream temp;
+	temp << id;
+	localObjects_.remove_child( localObjects_.find_child_by_attribute("object", "id", temp.str().c_str()) );
+}

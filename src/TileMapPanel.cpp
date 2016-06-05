@@ -32,6 +32,7 @@ TileMapPanel::TileMapPanel(TileSet& tileSet, TileMap& tileMap, CollisionMap& col
 	objectSp_ = new Sprite(info.filename.c_str(), info.frameCount, info.frameTime);
 
 	nextId = objectMap_->getLastObjectId() + 1;
+	loadObjects();
 }
 
 
@@ -107,6 +108,8 @@ void TileMapPanel::update()
 					deleteTile(tileX, tileY);
 				else if (*selectedTab_ == 1)
 					deleteCollisionTile(tileX, tileY);
+				else
+					deleteObject(InputHandler::getInstance().getMouseX(), InputHandler::getInstance().getMouseY());
 			}
 		}
 		else if (*selectedTab_ != 2 && InputHandler::getInstance().isMouseDown(LEFT_MOUSE_BUTTON))
@@ -121,7 +124,7 @@ void TileMapPanel::update()
 				curDragClick_ = v;
 			}
 		}
-		else if (InputHandler::getInstance().mouseRelease(LEFT_MOUSE_BUTTON))
+		else if (*selectedTab_ != 2 && InputHandler::getInstance().mouseRelease(LEFT_MOUSE_BUTTON))
 		{
 			int bigX, smallX;
 			int bigY, smallY;
@@ -199,12 +202,12 @@ void TileMapPanel::render()
 	{
 		if (*selectedTab_ == 0 && *selectedTool_ == LevelEditorState::Tools::ADD)
 			tileSet_->render(*selectedTile_, cursorPos_.x(), cursorPos_.y());
-		else if (*selectedTab_ == 2)
+		else if (*selectedTab_ == 2 && *selectedTool_ == LevelEditorState::Tools::ADD)
 			objectSp_->render(
 				InputHandler::getInstance().getMouseX() - objectSp_->getWidth() / 2, 
 				InputHandler::getInstance().getMouseY() - objectSp_->getHeight() / 2
 			);
-		else
+		else if (*selectedTab_ != 2)
 			cursorBg_.render(cursorPos_.x(), cursorPos_.y());
 	}
 
@@ -306,15 +309,38 @@ void TileMapPanel::placeObject(int x, int y)
 	object.sprite = *objectSp_;
 	object.pos = Rect(x, y, object.sprite.getWidth(), object.sprite.getHeight());
 
-	objects_.push_back(object);
+	objects_.emplace_back(object);
 
 	objectMap_->addObject(*selectedObject_, object.id, x, y);
 }
 
-// void TileMapPanel::deleteObject(int x, int y)
-// {
-// 	for (auto object : objects_)
-// 	{
-		
-// 	}
-// }
+void TileMapPanel::deleteObject(int x, int y)
+{
+	int lastFound;
+	for (int i = 0; i < (int)objects_.size(); i++)
+	{
+		if (objects_[i].pos.isInside(Vec2(x, y)))
+			lastFound = i;
+	}
+
+	if (lastFound < (int)objects_.size())
+	{
+		objectMap_->deleteObject(objects_[lastFound].id);
+		objects_.erase(objects_.begin() + lastFound);
+	}
+}
+
+void TileMapPanel::loadObjects()
+{
+	std::vector<LocalObjectInfo> info = objectMap_->getLocalObjects();
+
+	for (auto objInfo : info)
+	{
+		Object object;
+		object.id = objInfo.id;
+		object.sprite = Sprite(objInfo.filename.c_str(), objInfo.frameCount, objInfo.frameTime);
+		object.pos = Rect(objInfo.x, objInfo.y, object.sprite.getWidth(), object.sprite.getHeight());
+
+		objects_.emplace_back(object);
+	}
+}

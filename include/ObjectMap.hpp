@@ -7,21 +7,30 @@
 	#include "SDL.h"
 #endif
 
-// #include <sstream>
+#include <sstream>
 #include <string>
-// #include <vector>
+#include <vector>
 #include <fstream>
 
 #include "pugixml.hpp"
 // #include "Rect.hpp"
 
-typedef struct tpObjectInfo
+struct ObjectInfo
 {
 	std::string name;
 	std::string filename;
 	int frameCount;
 	float frameTime;
-} ObjectInfo;
+};
+
+struct LocalObjectInfo
+{
+	int id;
+	std::string filename;
+	int frameCount;
+	float frameTime;
+	int x, y;
+};
 
 class ObjectMap
 {
@@ -33,8 +42,11 @@ public:
 
 	ObjectInfo getGlobalObject(int index);
 	int globalSize();
+
 	void addObject(int index, int id, int x, int y);
+	std::vector<LocalObjectInfo> getLocalObjects();
 	int getLastObjectId();
+	void deleteObject(int id);
 
 private:
 	pugi::xml_node getGlobalObjectNode(int index);

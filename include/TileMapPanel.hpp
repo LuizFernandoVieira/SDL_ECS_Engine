@@ -36,6 +36,9 @@ private:
 	void placeCollisionTile(int x, int y);
 	void deleteCollisionTile(int x, int y);
 	void placeObject(int x, int y);
+	void deleteObject(int x, int y);
+
+	void loadObjects();
 
 	TileSet* tileSet_;
 	TileMap* tileMap_;
