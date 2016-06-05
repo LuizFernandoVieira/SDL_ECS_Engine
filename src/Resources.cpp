@@ -54,6 +54,34 @@ void Resources::ClearImages()
 
 
 
+
+
+//Sound
+Mix_Chunk* Resources::GetSound(std::string file){
+	std::unordered_map<std::string, Mix_Chunk*>::iterator asset;
+	asset = soundTable.find(file);
+
+	if (asset == soundTable.end()){
+		asset = (soundTable.emplace(file, Mix_LoadWAV(file.c_str()))).first;
+		std::cout << "new sound loaded: " << file << std::endl;
+	}
+
+	if (asset->second == nullptr){
+		std::cout << "Error while loading \"" << file << "\": file could not be retrieved!" << std::endl;
+		std::cout << "\t SDL_mixer error: " << Mix_GetError() << std::endl;
+	}
+	return asset->second;
+}
+
+void	Resources::ClearSounds(){
+	soundTable.clear();
+}
+
+
+
+
+// ----------------------------------------------------------
+
 void Resources::Read(std::string filename_){
 	std::ifstream config;
 	config.open(filename_, std::ifstream::in);
@@ -183,6 +211,8 @@ void Resources::Read(std::string filename_){
 		}
 		std::cout << std::endl;
 	}
+
+	std::cout << std::endl << "Resources Loaded Successfully" << std::endl;
 
 	//image_names.clear();
 }

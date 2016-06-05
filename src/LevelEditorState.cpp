@@ -10,6 +10,7 @@ mainPanel_(Rect(0, 0, Resources::WINDOW_WIDTH, Resources::WINDOW_HEIGHT), "../im
 	tileSet_ = new TileSet(Resources::TILE_WIDTH, Resources::TILE_HEIGHT, "../img/maps/test/tile_set.png");
 	tileMap_ = new TileMap("../map/tileMap.txt", tileSet_);
 	collisionMap_ = new CollisionMap("../map/collisionMap.txt");
+	objectMap_ = new ObjectMap("../map/objectMap.txt");
 	selectedTile_ = 0;
 	selectedTool_ = ADD;
 	selectedLayer_ = 1;

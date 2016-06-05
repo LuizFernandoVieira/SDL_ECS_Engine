@@ -20,7 +20,7 @@ void ParticleEmitterSystem::update(
 {
   emissionRateSystem_.update(dt, timerComponent);
 
-  if(timerComponent->time_ > 0.1){
+  if(timerComponent->time_ > ec->emissionRate_){
     int particle_ = nextId_;
     nextId_++;
 
@@ -35,8 +35,8 @@ void ParticleEmitterSystem::update(
 
     mapTimer_.emplace(particle_, new TimerComponent());
 
-    int yAux = rand() % 5;
-    mapSpeed_.emplace(particle_, new SpeedComponent(Vec2(0, yAux+1)));
+    int yAux = rand() % 20;
+    mapSpeed_.emplace(particle_, new SpeedComponent(Vec2(0, yAux+10)));
 
     mapCollider_.emplace(particle_, new ColliderComponent(
       Rect(
@@ -75,6 +75,7 @@ void ParticleEmitterSystem::update(
   {
     emissionRateSystem_.update(dt, timer.second);
     if (timer.second->time_  > 8) {
+<<<<<<< HEAD
       std::map<int, TransformComponent*>::iterator itTransform = mapTransform_.find (timer.first);
       std::map<int, RenderComponent*>::iterator itRender = mapRender_.find (timer.first);
       std::map<int, TimerComponent*>::iterator itTimer = mapTimer_.find (timer.first);
@@ -85,6 +86,12 @@ void ParticleEmitterSystem::update(
       mapSpeed_.erase(itSpeed);
       mapCollider_.erase(itCollider);
       mapTimer_.erase(itTimer); // o iterador do tempo deve ser o ultimo a ser deletado
+=======
+      mapTransform_.erase(timer.first);
+      mapRender_.erase(timer.first);
+      mapSpeed_.erase(timer.first);
+      mapTimer_.erase(timer.first); // o iterador do tempo deve ser o ultimo a ser deletado
+>>>>>>> b94383a2aee857ed770b7c6cdb9aa55954e1d72b
     }
   }
 }

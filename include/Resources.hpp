@@ -44,12 +44,13 @@ public:
 	static void ClearImages();
 
 	//AUDIO
-	static std::unordered_map<std::string, Mix_Chunk*> 		soundTable;
-	static void ClearAudio();
+	static Mix_Chunk*					GetSound(std::string file);
+	static void ClearSounds();
 
 
 private:
-	static std::unordered_map<std::string, std::shared_ptr<SDL_Texture>> imageTable;
+	static std::unordered_map<std::string, std::shared_ptr<SDL_Texture>> 	imageTable;
+	static std::unordered_map<std::string, Mix_Chunk*> 						soundTable;
 };
 
 #endif

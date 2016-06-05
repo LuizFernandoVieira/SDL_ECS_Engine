@@ -8,12 +8,14 @@
 #include "../include/TransformComponent.hpp"
 #include "../include/StateComponent.hpp"
 #include "../include/RenderComponent.hpp"
+//#include "../include/Music.hpp"
 
 unsigned int GameState::nextId_ = 0;
 
-GameState::GameState()
+GameState::GameState() : music()
 {
-
+	//testando componente de música, não há necessidade de se carregar um arquivo
+	//A própria music está carregando um arquivo teste
 }
 
 GameState::~GameState()
@@ -46,6 +48,7 @@ void GameState::create(StateMachine& stateMachine)
 void GameState::update(float dt)
 {
 	InputHandler::getInstance().update();
+	music.Update();
 
 	inputSystem_.update(
 		player_,
@@ -143,6 +146,6 @@ void GameState::createParticleEmitter()
 	nextId_++;
 
 	mapTransform_.emplace(particleEmitter_, new TransformComponent(Rect(300, 250, 32, 32)));
-	mapEmitter_.emplace(particleEmitter_, new EmitterComponent());
+	mapEmitter_.emplace(particleEmitter_, new EmitterComponent(0.01));
 	mapTimer_.emplace(particleEmitter_, new TimerComponent());
 }
