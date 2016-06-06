@@ -108,19 +108,19 @@ bool CollisionSystem::isColliding(const Rect& a, const Rect& b, float angleOfA, 
 void CollisionSystem::correctPosition(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed, StateComponent* state)
 {
 	float angle = LineInclination(oldPos.getCenter(), terrain.getCenter());
-	if (angle >= -45 && angle < 45) // entity colidiu à direita
+	if (angle >= -55 && angle < 55) // entity colidiu à direita
 	{
 		// std::cout << "COLIDIU A DIREITA" << std::endl;
 		entityPos.x( terrain.x() - entityPos.w() );
 	}
-	else if (angle >= 45 && angle <= 135) // entity estava acima do colisor
+	else if (angle >= 55 && angle <= 125) // entity estava acima do colisor
 	{
 		// std::cout << "COLIDIU EMBAIXO" << std::endl;
 		entityPos.y( terrain.y() - entityPos.h() );
 		speed.y(0.0);
 		state->state_ = speed.x() == 0 ? State::IDLE : State::WALKING;
 	}
-	else if (angle > 135 && angle < 225) // entity colidiu à esquerda
+	else if (angle > 125 && angle < 235) // entity colidiu à esquerda
 	{
 		// std::cout << "COLIDIU A ESQUERDA" << std::endl;
 		entityPos.x( terrain.x() + terrain.w() );

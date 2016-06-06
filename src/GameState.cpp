@@ -52,7 +52,7 @@ void GameState::update(float dt)
 	#endif
 	inputSystem_.update( mapState_[player_],	mapSpeed_[player_] );
 	gravitySystem_.update( dt, mapSpeed_, mapPhysics_, mapState_ );
-	particleEmitterSystem_.update( dt, level_->getCollisionMap(), mapTransform_[particleEmitter_], mapEmitter_[particleEmitter_], mapTimer_[particleEmitter_] );
+	// particleEmitterSystem_.update( dt, level_->getCollisionMap(), mapTransform_[particleEmitter_], mapEmitter_[particleEmitter_], mapTimer_[particleEmitter_] );
 	moveSystem_.update( dt, mapTransform_, mapSpeed_ );
 	collisionSystem_.update( level_->getCollisionMap(), oldTransform, mapTransform_, mapCollider_, mapSpeed_, mapState_ );
 	// stateSystem_.update( mapState_, mapSpeed_ );
@@ -73,7 +73,7 @@ void GameState::render()
 	renderSystem_.render(mapTransform_, mapState_, mapRender_);
 	playerRenderSystem_.render(mapTransform_[player_], (PlayerStateComponent*)mapState_[player_], &playerRenderComponent_); // ai q feio
 
-	particleEmitterSystem_.render();
+	// particleEmitterSystem_.render();
 
 	#ifdef _DEBUG
 	collisionSystem_.render();

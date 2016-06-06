@@ -23,8 +23,9 @@ void InputSystem::update(
 	{
 		// WALKING LEFT
 		speedComp->speed_.x(-Resources::PLAYER_WALK_SPEED);
-		stateComp->state_ = State::WALKING;
 		stateComp->facingRight_ = false;
+		if (stateComp->state_ != State::JUMPING && stateComp->state_ != State::FALLING)
+			stateComp->state_ = State::WALKING;
 	}
 	else if (
 		(input.isKeyDown('d') &&
@@ -34,14 +35,16 @@ void InputSystem::update(
 	{
 		// WALKING RIGHT
 		speedComp->speed_.x(Resources::PLAYER_WALK_SPEED);
-		stateComp->state_ = State::WALKING;
 		stateComp->facingRight_ = true;
+		if (stateComp->state_ != State::JUMPING && stateComp->state_ != State::FALLING)
+			stateComp->state_ = State::WALKING;
 	}
 	else
 	{
 		// BACK TO IDLE
 		speedComp->speed_.x(0.0);
-		stateComp->state_ = State::IDLE;
+		if (stateComp->state_ != State::JUMPING && stateComp->state_ != State::FALLING)
+			stateComp->state_ = State::IDLE;
 	}
 
 	if (input.keyPress('w') || input.gamePadPress(GAMEPAD_A))

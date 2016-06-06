@@ -26,7 +26,11 @@ public:
 		std::map<int, SpeedComponent*> speed,
 		std::map<int, StateComponent*> state
 	);
-	// void render();
+	
+	#ifdef _DEBUG
+	void render();
+	#endif
+
 private:
 	bool isColliding(const Rect& a, const Rect& b, float angleOfA, float angleOfB);
 
