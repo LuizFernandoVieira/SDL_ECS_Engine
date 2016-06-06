@@ -1,16 +1,20 @@
-#include "../include/CollisionSystem.hpp"
+#include "../include/CollisionRainTerrainSystem.hpp"
 #include "../include/Resources.hpp"
 
 #include "../include/Camera.hpp"
 #include "../include/Sprite.hpp"
-#include <iostream>
 
-CollisionSystem::CollisionSystem()
+#include <iostream>
+#include <algorithm>
+
+
+CollisionRainTerrainSystem::CollisionRainTerrainSystem()
 {
 
 }
 
-void CollisionSystem::update(
+void CollisionRainTerrainSystem::update(
+  ParticleEmitterSystem& particleEmitterSystem,
 	CollisionMap& collisionMap,
 	std::map<int, TransformComponent*> oldTransfComp,
 	std::map<int, TransformComponent*> transfComp,
@@ -19,10 +23,12 @@ void CollisionSystem::update(
 {
 	// coisaFeia.clear();
 
+  std::vector<int> toDelete;
+
 	// Colisao com o terreno
 	for (auto& col : colComp)
 	{
-		Rect collider = col.second->rect_ + Vec2(transfComp[col.first]->rect_.x(), transfComp[col.first]->rect_.y() );
+    Rect collider = col.second->rect_;
 
 		for (int y = collider.y() / Resources::TILE_HEIGHT/* - 1*/;
 			y <= (collider.y() + collider.h()) / Resources::TILE_HEIGHT/* + 1*/;
@@ -41,16 +47,24 @@ void CollisionSystem::update(
 
 				if (collisionMap.at(x,y) == 0 && isColliding(collider, terrain, 0, 0))
 				{
-					correctPosition(transfComp[col.first]->rect_, oldTransfComp[col.first]->rect_, terrain, speedComp[col.first]->speed_);
+          if(std::find(toDelete.begin(), toDelete.end(), col.first) == toDelete.end())
+          {
+            toDelete.emplace_back(col.first);
+          }
 					// coisaFeia.emplace_back(terrain);
 				}
 			}
 		}
 	}
+
+  for(auto d : toDelete)
+  {
+    particleEmitterSystem.destroyParticle(d);
+  }
 }
 
 
-bool CollisionSystem::isColliding(const Rect& a, const Rect& b, float angleOfA, float angleOfB)
+bool CollisionRainTerrainSystem::isColliding(const Rect& a, const Rect& b, float angleOfA, float angleOfB)
 {
 	Vec2 A[] = { Vec2( a.x(), a.y() + a.h() ),
 		Vec2( a.x() + a.w(), a.y() + a.h() ),
@@ -99,40 +113,19 @@ bool CollisionSystem::isColliding(const Rect& a, const Rect& b, float angleOfA, 
 	return true;
 }
 
-
-void CollisionSystem::correctPosition(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed)
+void CollisionRainTerrainSystem::render(std::map<int, ColliderComponent*> collidersForRendering)
 {
-	float angle = LineInclination(oldPos.getCenter(), terrain.getCenter());
-	if (angle >= -45 && angle < 45) // entity colidiu à direita
-	{
-		// std::cout << "COLIDIU A DIREITA" << std::endl;
-		entityPos.x( terrain.x() - entityPos.w() );
-	}
-	else if (angle >= 45 && angle <= 135) // entity estava acima do colisor
-	{
-		// std::cout << "COLIDIU EMBAIXO" << std::endl;
-		entityPos.y( terrain.y() - entityPos.h() );
-		speed.y(0.0);
-	}
-	else if (angle > 135 && angle < 225) // entity colidiu à esquerda
-	{
-		// std::cout << "COLIDIU A ESQUERDA" << std::endl;
-		entityPos.x( terrain.x() + terrain.w() );
-	}
-	else // entity estava abaixo do colisor
-	{
-		// std::cout << "COLIDIU EM CIMA" << std::endl;
-		entityPos.y( terrain.y() + terrain.h() );
-		speed.y(0.0);
-	}
+  for(auto col : collidersForRendering)
+  {
+    Sprite sp = Sprite();
+    sp.setClip(col.second->rect_.x(), col.second->rect_.y(), col.second->rect_.w(), col.second->rect_.h());
+    sp.renderSelection(col.second->rect_.x() - Camera::pos_.x(), col.second->rect_.y() - Camera::pos_.y());
+  }
+
+	// for (int i = 0; i < (int)coisaFeia.size(); i++)
+	// {
+	// 	Sprite sp = Sprite();
+	// 	sp.setClip(coisaFeia[i].x(), coisaFeia[i].y(), coisaFeia[i].w(), coisaFeia[i].h());
+	// 	sp.renderSelection(coisaFeia[i].x() - Camera::pos_.x(), coisaFeia[i].y() - Camera::pos_.y());
+	// }
 }
-
-/*void CollisionSystem::render()
-{
-	for (int i = 0; i < (int)coisaFeia.size(); i++)
-	{
-		Sprite sp = Sprite();
-		sp.setClip(coisaFeia[i].x(), coisaFeia[i].y(), coisaFeia[i].w(), coisaFeia[i].h());
-		sp.renderSelection(coisaFeia[i].x() - Camera::pos_.x(), coisaFeia[i].y() - Camera::pos_.y());
-	}
-}*/

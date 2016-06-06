@@ -41,7 +41,7 @@ private:
 	unsigned int player_;
 	unsigned int particleEmitter_;
 
-	Music	music;
+	// Music	music;
 
 	std::map<int, TransformComponent*> mapTransform_;
 	std::map<int, StateComponent*> 	mapState_;

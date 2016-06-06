@@ -20,12 +20,13 @@ A fazer:
 - Tirar create dos states;
 
 
-==========================================
+============== ESSA SEMANA ==================
 
-	Menu
-
-
-
+Player
+Layer Dos Objetos
+Colisores Diagonais
+Inimigos
+Particle System
 
 =============== ENTREGAS ====================
 
@@ -34,6 +35,7 @@ Segunda entrega / 17
 	Luiz
 		Particle System
 			Chuva
+      Neve
 			Vento
 
 		Inimigos
@@ -48,9 +50,6 @@ Segunda entrega / 17
       Moça da Musica -> Chuva + Movimento de NPC + GC
       Cachorro -> Dorme
 
-
-		Exception
-		// Boiar na agua
 		Text
 
 	Victor
@@ -69,7 +68,6 @@ Segunda entrega / 17
 			Musicas
 		Objetos quebraveis
 		Checkpoints
-		Globals
 		Switchs
 
 	Victor & Thales
