@@ -29,9 +29,10 @@ public:
 
 private:
 	Mix_Chunk* 	layer[AUDIO_MAXLAYERS];
+
 	int			channel[AUDIO_MAXLAYERS];
 
 	float 		volume[AUDIO_MAXLAYERS];
 	float 		volumeCurrent[AUDIO_MAXLAYERS];
-	
+
 };

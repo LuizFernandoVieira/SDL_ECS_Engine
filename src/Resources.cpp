@@ -1,6 +1,6 @@
 #ifdef __APPLE__
 	#include <SDL2_image/SDL_image.h>
-	#include <SDL2_mixer/SDL_mixer.h>	
+	#include <SDL2_mixer/SDL_mixer.h>
 #else
 	#include "SDL_image.h"
 	#include "SDL_mixer.h"
@@ -115,7 +115,7 @@ void Resources::Read(std::string filename_){
 	config >> tempName;
 	while(config.good())
 	{
-	
+
 		//Parsing: Comentários
 		if (tempName[0] != LINE_BREAK){
 			std::getline(config, tempName);
@@ -175,7 +175,7 @@ void Resources::Read(std::string filename_){
 
 			continue;
 		}
-		
+
 		config >> tempName;
 	}
 
@@ -190,7 +190,7 @@ void Resources::Read(std::string filename_){
 
 	PLAYER_JUMP_SPEED 	= floatTable["PLAYER_JUMP_SPEED"];
 	PLAYER_WALK_SPEED 	= floatTable["PLAYER_WALK_SPEED"];
-	
+
 
 
 	//Test Printing
@@ -200,14 +200,14 @@ void Resources::Read(std::string filename_){
 		for ( auto it = floatTable.begin(); it != floatTable.end(); ++it)
 			std::cout << "\t" << it->first << " : " << it->second << std::endl;
 		std::cout << std::endl;
-	
+
 
 		std::cout << "Int Values:" << std::endl;
 		for ( auto it = intTable.begin(); it != intTable.end(); ++it)
 			std::cout << "\t" << it->first << " : " << it->second << std::endl;
 		std::cout << std::endl;
 
-		
+
 		std::cout << "Images:" << std::endl;
 		for ( auto it = imageTable.begin(); it != imageTable.end(); ++it){
 			std::cout << "\t" << it->first;
@@ -260,7 +260,7 @@ void Resources::xmlRead(std::string filename_){
 	config >> tempName;
 	while(config.good())
 	{
-	
+
 		//Parsing: Comentários
 		if (tempName[0] != LINE_BREAK){
 			std::getline(config, tempName);
@@ -320,7 +320,7 @@ void Resources::xmlRead(std::string filename_){
 
 			continue;
 		}
-		
+
 		config >> tempName;
 	}
 
@@ -335,7 +335,7 @@ void Resources::xmlRead(std::string filename_){
 
 	PLAYER_JUMP_SPEED 	= floatTable["PLAYER_JUMP_SPEED"];
 	PLAYER_WALK_SPEED 	= floatTable["PLAYER_WALK_SPEED"];
-	
+
 
 
 	//Test Printing
@@ -345,14 +345,14 @@ void Resources::xmlRead(std::string filename_){
 		for ( auto it = floatTable.begin(); it != floatTable.end(); ++it)
 			std::cout << "\t" << it->first << " : " << it->second << std::endl;
 		std::cout << std::endl;
-	
+
 
 		std::cout << "Int Values:" << std::endl;
 		for ( auto it = intTable.begin(); it != intTable.end(); ++it)
 			std::cout << "\t" << it->first << " : " << it->second << std::endl;
 		std::cout << std::endl;
 
-		
+
 		std::cout << "Images:" << std::endl;
 		for ( auto it = imageTable.begin(); it != imageTable.end(); ++it){
 			std::cout << "\t" << it->first;

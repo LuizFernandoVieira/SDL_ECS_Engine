@@ -35,10 +35,20 @@ Segunda entrega / 17
 		Particle System
 			Chuva
 			Vento
+
 		Inimigos
 				IA
+          Coisa -> Zip Zag -> Distancia
+          Coisa -> Segue e para depois de uma distancia
+          Serberus -> Bloca a passagem
+          Macaco -> Inimigo
 				Boss
+          Bicho que segue
 		NPC
+      Moça da Musica -> Chuva + Movimento de NPC + GC
+      Cachorro -> Dorme
+
+
 		Exception
 		// Boiar na agua
 		Text
