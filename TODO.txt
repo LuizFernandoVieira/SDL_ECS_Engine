@@ -53,6 +53,7 @@ Segunda entrega / 17
 		Text
 
 	Victor
+		Layers pros objetos
 		Editor de Mapa
 			Objetos
 			// Scroll dos painéis :)

@@ -12,24 +12,27 @@ CollisionSystem::CollisionSystem()
 
 void CollisionSystem::update(
 	CollisionMap& collisionMap,
-	std::map<int, TransformComponent*> oldTransfComp,
-	std::map<int, TransformComponent*> transfComp,
-	std::map<int, ColliderComponent*> colComp,
-	std::map<int, SpeedComponent*> speedComp)
+	std::map<int, TransformComponent*> oldTransform,
+	std::map<int, TransformComponent*> transform,
+	std::map<int, ColliderComponent*> collider,
+	std::map<int, SpeedComponent*> speed,
+	std::map<int, StateComponent*> state)
 {
-	// coisaFeia.clear();
+	#ifdef _DEBUG
+	collidersToRender.clear();
+	#endif
 
 	// Colisao com o terreno
-	for (auto& col : colComp)
+	for (auto& col : collider)
 	{
-		Rect collider = col.second->rect_ + Vec2(transfComp[col.first]->rect_.x(), transfComp[col.first]->rect_.y() );
+		Rect finalCollider = col.second->rect_ + Vec2(transform[col.first]->rect_.x(), transform[col.first]->rect_.y() );
 
-		for (int y = collider.y() / Resources::TILE_HEIGHT/* - 1*/;
-			y <= (collider.y() + collider.h()) / Resources::TILE_HEIGHT/* + 1*/;
+		for (int y = finalCollider.y() / Resources::TILE_HEIGHT/* - 1*/;
+			y <= (finalCollider.y() + finalCollider.h()) / Resources::TILE_HEIGHT/* + 1*/;
 			y++)
 		{
-			for (int x = collider.x() / Resources::TILE_WIDTH/* - 1*/;
-				x <= (collider.x() + collider.w()) / Resources::TILE_WIDTH/* + 1*/;
+			for (int x = finalCollider.x() / Resources::TILE_WIDTH/* - 1*/;
+				x <= (finalCollider.x() + finalCollider.w()) / Resources::TILE_WIDTH/* + 1*/;
 				x++)
 			{
 				Rect terrain = Rect(
@@ -39,10 +42,12 @@ void CollisionSystem::update(
 					Resources::TILE_HEIGHT
 				);
 
-				if (collisionMap.at(x,y) == 0 && isColliding(collider, terrain, 0, 0))
+				if (collisionMap.at(x,y) == 0 && isColliding(finalCollider, terrain, 0, 0))
 				{
-					correctPosition(transfComp[col.first]->rect_, oldTransfComp[col.first]->rect_, terrain, speedComp[col.first]->speed_);
-					// coisaFeia.emplace_back(terrain);
+					correctPosition(transform[col.first]->rect_, oldTransform[col.first]->rect_, terrain, speed[col.first]->speed_, state[col.first]);
+					#ifdef _DEBUG
+					collidersToRender.emplace_back(terrain);
+					#endif
 				}
 			}
 		}
@@ -100,7 +105,7 @@ bool CollisionSystem::isColliding(const Rect& a, const Rect& b, float angleOfA, 
 }
 
 
-void CollisionSystem::correctPosition(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed)
+void CollisionSystem::correctPosition(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed, StateComponent* state)
 {
 	float angle = LineInclination(oldPos.getCenter(), terrain.getCenter());
 	if (angle >= -45 && angle < 45) // entity colidiu à direita
@@ -113,6 +118,7 @@ void CollisionSystem::correctPosition(Rect& entityPos, Rect oldPos, Rect terrain
 		// std::cout << "COLIDIU EMBAIXO" << std::endl;
 		entityPos.y( terrain.y() - entityPos.h() );
 		speed.y(0.0);
+		state->state_ = speed.x() == 0 ? State::IDLE : State::WALKING;
 	}
 	else if (angle > 135 && angle < 225) // entity colidiu à esquerda
 	{
@@ -124,15 +130,18 @@ void CollisionSystem::correctPosition(Rect& entityPos, Rect oldPos, Rect terrain
 		// std::cout << "COLIDIU EM CIMA" << std::endl;
 		entityPos.y( terrain.y() + terrain.h() );
 		speed.y(0.0);
+		state->state_ = State::FALLING;
 	}
 }
 
-/*void CollisionSystem::render()
+#ifdef _DEBUG
+void CollisionSystem::render()
 {
-	for (int i = 0; i < (int)coisaFeia.size(); i++)
+	for (int i = 0; i < (int)collidersToRender.size(); i++)
 	{
 		Sprite sp = Sprite();
-		sp.setClip(coisaFeia[i].x(), coisaFeia[i].y(), coisaFeia[i].w(), coisaFeia[i].h());
-		sp.renderSelection(coisaFeia[i].x() - Camera::pos_.x(), coisaFeia[i].y() - Camera::pos_.y());
+		sp.setClip(collidersToRender[i].x(), collidersToRender[i].y(), collidersToRender[i].w(), collidersToRender[i].h());
+		sp.renderSelection(collidersToRender[i].x() - Camera::pos_.x(), collidersToRender[i].y() - Camera::pos_.y());
 	}
-}*/
+}
+#endif

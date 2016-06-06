@@ -8,14 +8,23 @@ GravitySystem::GravitySystem()
 
 void GravitySystem::update( 
 	float dt,
-	std::map<int, SpeedComponent*> sc,
-	std::map<int, PhysicsComponent*> pc)
+	std::map<int, SpeedComponent*> speed,
+	std::map<int, PhysicsComponent*> physics,
+	std::map<int, StateComponent*> state)
 {
-	for (auto it = pc.begin(); it != pc.end(); ++it)
+	for (auto& phys : physics)
 	{
-		if (sc[it->first]->speed_.y() < 0)
-			sc[it->first]->speed_ += Vec2(0, Resources::GRAVITY * it->second->gravityScale_ * 0.2); // diminuir velocidade pra cima do pulo
+		if (speed[phys.first]->speed_.y() < 0)
+		{
+			// TA PULANDO
+			// Diminui a escala da gravidade
+			speed[phys.first]->speed_ += Vec2(0, Resources::GRAVITY * phys.second->gravityScale_ * 0.2);
+		}
 		else
-			sc[it->first]->speed_.y(Resources::GRAVITY * it->second->gravityScale_);
+		{
+			// TA CAINDO (A MENOS QUE ESTEJA COLIDINDO)
+			speed[phys.first]->speed_.y(Resources::GRAVITY * phys.second->gravityScale_);
+			state[phys.first]->state_ = State::FALLING;
+		}
 	}
 }

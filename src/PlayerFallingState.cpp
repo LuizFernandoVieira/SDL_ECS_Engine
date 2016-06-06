@@ -1,4 +1,4 @@
-#include "../include/PlayerFallingState.hpp"
+/*#include "../include/PlayerFallingState.hpp"
 #include "../include/InputHandler.hpp"
 #include "../include/PlayerIdleState.hpp"
 #include "../include/PlayerWalkingState.hpp"
@@ -44,4 +44,4 @@ void PlayerFallingState::handle(StateComponent* stateComp, SpeedComponent* speed
 		stateComp->setFacingRight(false);
 	}
 
-}
+}*/

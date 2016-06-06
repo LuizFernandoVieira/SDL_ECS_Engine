@@ -1,4 +1,4 @@
-#ifndef PLAYERWALKINGSTATE_HPP
+/*#ifndef PLAYERWALKINGSTATE_HPP
 #define PLAYERWALKINGSTATE_HPP
 
 #include "WalkingState.hpp"
@@ -13,4 +13,4 @@ public:
 	void handle(StateComponent* stateComp, SpeedComponent* speedComp);
 };
 
-#endif
+#endif*/

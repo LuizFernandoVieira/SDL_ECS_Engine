@@ -1,4 +1,4 @@
-#include "../include/PlayerJumpingState.hpp"
+/*#include "../include/PlayerJumpingState.hpp"
 #include "../include/InputHandler.hpp"
 #include "../include/PlayerFallingState.hpp"
 
@@ -32,4 +32,4 @@ void PlayerJumpingState::handle(StateComponent* stateComp, SpeedComponent* speed
 		stateComp->setFacingRight(false);
 	}
 
-}
+}*/

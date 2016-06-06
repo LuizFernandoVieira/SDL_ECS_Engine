@@ -1,4 +1,4 @@
-#ifndef ENTITYSTATE_HPP
+/*#ifndef ENTITYSTATE_HPP
 #define ENTITYSTATE_HPP
 
 #include <string>
@@ -28,4 +28,4 @@ protected:
 #include "StateComponent.hpp"
 #include "SpeedComponent.hpp"
 
-#endif
+#endif*/

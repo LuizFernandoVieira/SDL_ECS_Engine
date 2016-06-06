@@ -3,7 +3,7 @@
 
 #include <map>
 
-#include "State.hpp"
+#include "IState.hpp"
 #include "StateMachine.hpp"
 #include "StateEventEnum.hpp"
 #include "Level.hpp"
@@ -12,7 +12,8 @@
 #include "EmitterComponent.hpp"
 #include "TimerComponent.hpp"
 #include "InputSystem.hpp"
-#include "StateSystem.hpp"
+// #include "StateSystem.hpp"
+#include "PlayerRenderSystem.hpp"
 #include "RenderSystem.hpp"
 #include "MoveSystem.hpp"
 #include "GravitySystem.hpp"
@@ -20,7 +21,7 @@
 #include "ParticleEmitterSystem.hpp"
 #include "Music.hpp"
 
-class GameState: public State
+class GameState: public IState
 {
 public:
 	GameState();
@@ -33,7 +34,6 @@ private:
 	void createPlayer();
 	void createParticleEmitter();
 
-	// FirstLevel firstLevel_;
 	Level* level_;
 
 	static unsigned int nextId_;
@@ -41,7 +41,9 @@ private:
 	unsigned int player_;
 	unsigned int particleEmitter_;
 
-	// Music	music;
+	#ifndef _DEBUG
+	Music music;
+	#endif
 
 	std::map<int, TransformComponent*> mapTransform_;
 	std::map<int, StateComponent*> 	mapState_;
@@ -51,10 +53,12 @@ private:
 	std::map<int, SpeedComponent*> mapSpeed_;
 	std::map<int, EmitterComponent*> mapEmitter_;
 	std::map<int, TimerComponent*> mapTimer_;
+	PlayerRenderComponent playerRenderComponent_;
 
 	InputSystem inputSystem_;
-	StateSystem stateSystem_;
+	// StateSystem stateSystem_;
 	RenderSystem renderSystem_;
+	PlayerRenderSystem playerRenderSystem_;
 	MoveSystem moveSystem_;
 	GravitySystem gravitySystem_;
 	CollisionSystem collisionSystem_;

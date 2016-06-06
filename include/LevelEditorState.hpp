@@ -1,7 +1,7 @@
 #ifndef LEVELEDITORSTATE_HPP
 #define LEVELEDITORSTATE_HPP
 
-#include "State.hpp"
+#include "IState.hpp"
 #include "StateMachine.hpp"
 #include "StateEventEnum.hpp"
 #include "Panel.hpp"
@@ -15,7 +15,7 @@
 
 class TilesPanel;
 
-class LevelEditorState: public State
+class LevelEditorState: public IState
 {
 public:
 	LevelEditorState();
@@ -59,7 +59,7 @@ private:
 	TileSetAndObjectsPanel* tileSetAndObjectsPanel_;
 };
 
-void tileBtnExecute(State* state);
+// void tileBtnExecute(IState* state);
 
 
 #endif

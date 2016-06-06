@@ -6,7 +6,6 @@
 #include "System.hpp"
 #include "TransformComponent.hpp"
 #include "SpeedComponent.hpp"
-// #include "PhysicsComponent.hpp"
 
 class MoveSystem : public System
 {
@@ -14,8 +13,8 @@ public:
 	MoveSystem();
 	void update(
 		float dt,
-		std::map<int, TransformComponent*> tc,
-		std::map<int, SpeedComponent*> sc
+		std::map<int, TransformComponent*> transform,
+		std::map<int, SpeedComponent*> speed
 	);
 };
 

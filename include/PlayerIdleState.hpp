@@ -1,4 +1,4 @@
-#ifndef PLAYERIDLESTATE_HPP
+/*#ifndef PLAYERIDLESTATE_HPP
 #define PLAYERIDLESTATE_HPP
 
 #include "IdleState.hpp"
@@ -13,4 +13,4 @@ public:
 	void handle(StateComponent* stateComp, SpeedComponent* speedComp);
 };
 
-#endif
+#endif*/

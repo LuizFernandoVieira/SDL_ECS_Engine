@@ -6,24 +6,112 @@
 #include <string>
 
 #include "Component.hpp"
+#include "StateComponent.hpp"
 #include "Sprite.hpp"
+
+
+
+struct SpriteKey
+{
+	State state;
+	UmbrellaState umbrellaState;
+	UmbrellaDirection umbrellaDirection;
+
+	bool operator==(const SpriteKey& other) const {
+		return (
+			state == other.state && 
+			umbrellaState == other.umbrellaState && 
+			umbrellaDirection == other.umbrellaDirection
+		);
+	}
+};
+
+
+namespace std
+{
+	template <>
+	struct hash<State>
+	{
+		std::size_t operator()(const State& k) const
+		{
+			using std::size_t;
+			using std::hash;
+
+			return ((hash<int>()((int)k)
+					 ^ (hash<int>()((int)k) << 1)));
+		}
+	};
+
+	template <>
+	struct hash<SpriteKey>
+	{
+		std::size_t operator()(const SpriteKey& k) const
+		{
+			using std::size_t;
+			using std::hash;
+
+			return ((hash<int>()((int)k.state)
+					 ^ (hash<int>()((int)k.umbrellaState) << 1)) >> 1)
+					 ^ (hash<int>()((int)k.umbrellaDirection) << 1);
+		}
+	};
+}
 
 class RenderComponent : public Component
 {
 public:
-	RenderComponent(std::unordered_map<std::string, Sprite> sprites) : sprites_(sprites) { currentSprite_ = NULL; }
-	// RenderComponent(Sprite* sprite) { sprite_ = sprite; }
+	RenderComponent() : sprites_() {}
+	RenderComponent(std::unordered_map<State, Sprite> sprites) : sprites_(sprites) {}
 	~RenderComponent() {}
-	// Sprite* getSprite() { return sprite_; }
-	// void setSprite(Sprite& sprite) { sprite_ = &sprite; }
-	void addSprite(std::string state, Sprite sprite) { sprites_.emplace(state, sprite); }
-	Sprite* getCurrentSprite() { return currentSprite_; }
-	void setCurrentSprite(std::string state) { currentSprite_ = &sprites_[state]; }
+
+	void addSprite(State state, Sprite sprite) { sprites_.emplace(state, sprite); }
+	Sprite& getSprite(State state) {
+		if (sprites_.find(state) != sprites_.end()) return sprites_[state];
+		else return sprites_[State::IDLE];
+	}
 
 private:
-	// Sprite* sprite_;
-	std::unordered_map<std::string, Sprite> sprites_;
-	Sprite* currentSprite_;
+	std::unordered_map<State, Sprite> sprites_;
+};
+
+
+
+class PlayerRenderComponent : public Component
+{
+public:
+	PlayerRenderComponent() : sprites_() {}
+	PlayerRenderComponent(std::unordered_map<SpriteKey, Sprite> sprites) : sprites_(sprites) {}
+	~PlayerRenderComponent() {}
+
+	void addSprite(SpriteKey spriteKey, Sprite sprite)
+	{
+		sprites_.emplace(spriteKey, sprite);
+	}
+
+	void addSprite(State state, UmbrellaState umbrellaState, UmbrellaDirection umbrellaDirection, Sprite sprite)
+	{
+		SpriteKey spriteKey;
+		spriteKey.state = state;
+		spriteKey.umbrellaState = umbrellaState;
+		spriteKey.umbrellaDirection = umbrellaDirection;
+		sprites_.emplace(spriteKey, sprite);
+	}
+
+	Sprite& getSprite(SpriteKey spriteKey)
+	{
+		if (sprites_.find(spriteKey) != sprites_.end())
+			return sprites_[spriteKey];
+		else 
+		{
+			spriteKey.state = State::IDLE;
+			spriteKey.umbrellaState = UmbrellaState::CLOSED;
+			spriteKey.umbrellaDirection = UmbrellaDirection::DOWN;
+			return sprites_[spriteKey];
+		}
+	}
+
+private:
+	std::unordered_map<SpriteKey, Sprite> sprites_;
 };
 
 #endif

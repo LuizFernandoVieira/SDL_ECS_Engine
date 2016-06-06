@@ -1,4 +1,4 @@
-#include "../include/PlayerWalkingState.hpp"
+/*#include "../include/PlayerWalkingState.hpp"
 #include "../include/InputHandler.hpp"
 #include "../include/PlayerIdleState.hpp"
 #include "../include/PlayerJumpingState.hpp"
@@ -47,4 +47,4 @@ void PlayerWalkingState::handle(StateComponent* stateComp, SpeedComponent* speed
 		PlayerIdleState* state = new PlayerIdleState(*stateMachine_);
 		stateMachine_->changeState(*state);
 	}
-}
+}*/

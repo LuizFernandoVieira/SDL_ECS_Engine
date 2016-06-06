@@ -1,4 +1,4 @@
-#include "../include/StateComponent.hpp"
+/*#include "../include/StateComponent.hpp"
 
 StateComponent::StateComponent(StateMachineType type) : facingRight_(true)
 {
@@ -8,4 +8,4 @@ StateComponent::StateComponent(StateMachineType type) : facingRight_(true)
 EntityState* StateComponent::getState()
 {
 	return stateMachine_->getCurrentState();
-}
+}*/

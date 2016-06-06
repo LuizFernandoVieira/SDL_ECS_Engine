@@ -1,4 +1,4 @@
-#ifndef IDLESTATE_HPP
+/*#ifndef IDLESTATE_HPP
 #define IDLESTATE_HPP
 
 #include <string>
@@ -19,4 +19,4 @@ public:
 	// }
 };
 
-#endif
+#endif*/

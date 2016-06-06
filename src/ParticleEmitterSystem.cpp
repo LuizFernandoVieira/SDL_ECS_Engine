@@ -1,4 +1,5 @@
 #include "../include/ParticleEmitterSystem.hpp"
+#include "../include/StateComponent.hpp"
 
 #include <iostream>
 #include <time.h>
@@ -30,10 +31,10 @@ void ParticleEmitterSystem::update(
     mapTransform_.emplace(particle_, new TransformComponent(Rect(xRand, 100, 16, 16)));
 
     // Exemplo soh pra testar, nao esquecer de mudar depois
-    std::unordered_map<std::string, Sprite> particleSprite;
-  	particleSprite.emplace("IdleState", Sprite("../img/gota.png", 1, 0.1));
+    std::unordered_map<State, Sprite> particleSprite;
+  	particleSprite.emplace(State::IDLE, Sprite("../img/gota.png", 1, 0.1));
     mapRender_.emplace(particle_, new RenderComponent(particleSprite));
-    mapRender_[particle_]->setCurrentSprite("IdleState");
+    // mapRender_[particle_]->setCurrentSprite("IdleState");
 
     mapTimer_.emplace(particle_, new TimerComponent());
 
@@ -104,7 +105,7 @@ void ParticleEmitterSystem::render()
   for(auto& render : mapRender_)
   {
     Rect transform = mapTransform_[render.first]->rect_;
-    render.second->getCurrentSprite()->render(
+    render.second->getSprite(State::IDLE).render(
       transform.x(),
       transform.y(),
       0,
@@ -122,10 +123,9 @@ void ParticleEmitterSystem::destroyParticle(int particle)
 
   mapTransform_.emplace(rainSplat, new TransformComponent(mapTransform_[particle]->rect_));
 
-  std::unordered_map<std::string, Sprite> rainSplatSprite;
-  rainSplatSprite.emplace("IdleState", Sprite("../img/gota.png", 1, 0.1));
+  std::unordered_map<State, Sprite> rainSplatSprite;
+  rainSplatSprite.emplace(State::IDLE, Sprite("../img/gota.png", 1, 0.1));
   mapRender_.emplace(rainSplat, new RenderComponent(rainSplatSprite));
-  mapRender_[rainSplat]->setCurrentSprite("IdleState");
 
   mapT_.emplace(rainSplat, Timer());
 
