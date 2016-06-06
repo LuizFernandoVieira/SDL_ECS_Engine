@@ -13,7 +13,7 @@
 unsigned int GameState::nextId_ = 0;
 
 GameState::GameState()
-: music()
+// : music()
 {
 	//testando componente de música, não há necessidade de se carregar um arquivo
 	//A própria music está carregando um arquivo teste
@@ -49,7 +49,7 @@ void GameState::create(StateMachine& stateMachine)
 void GameState::update(float dt)
 {
 	InputHandler::getInstance().update();
-	music.Update();
+	// music.Update();
 
 	inputSystem_.update(
 		player_,

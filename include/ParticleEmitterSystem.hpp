@@ -10,7 +10,8 @@
 #include "SpeedComponent.hpp"
 #include "ColliderComponent.hpp"
 #include "EmissionRateSystem.hpp"
-#include "CollisionSystem.hpp"
+#include "CollisionRainTerrainSystem.hpp"
+#include "Timer.hpp"
 
 class ParticleEmitterSystem : public System
 {
@@ -24,6 +25,7 @@ public:
     TimerComponent* timerComponent
 	);
   void render();
+	void destroyParticle(int particle);
 private:
   static unsigned int nextId_;
 
@@ -33,8 +35,10 @@ private:
 	std::map<int, SpeedComponent*> mapSpeed_;
 	std::map<int, ColliderComponent*> mapCollider_;
 
+	std::map<int, Timer> mapT_;
+
   EmissionRateSystem emissionRateSystem_;
-	CollisionSystem collisionSystem_;
+	CollisionRainTerrainSystem collisionRainTerrainSystem_;
 };
 
 #endif
