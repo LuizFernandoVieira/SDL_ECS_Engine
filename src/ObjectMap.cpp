@@ -10,6 +10,11 @@ ObjectMap::ObjectMap(std::string globalObjects, std::string localObjects) :
 	loadLocals();
 }
 
+ObjectMap::ObjectMap(std::string localObjects) : localFilename_(localObjects)
+{
+	loadLocals();
+}
+
 
 void ObjectMap::loadGlobals()
 {
@@ -46,8 +51,7 @@ ObjectInfo ObjectMap::getGlobalObject(int index)
 		// throw aqui
 	}
 
-	pugi::xml_node sprite = object.child("render").first_child();
-	while (std::string(sprite.attribute("state_name").value()) != "IdleState") sprite = sprite.next_sibling();
+	pugi::xml_node sprite = object.child("render").find_child_by_attribute("sprite", "state", "0");
 
 	ObjectInfo info;
 	info.name = object.name();
@@ -118,10 +122,15 @@ std::vector<LocalObjectInfo> ObjectMap::getLocalObjects()
 	{
 		LocalObjectInfo info;
 		info.id = object.attribute("id").as_int();
-		pugi::xml_node sprite = object.child("render").find_child_by_attribute("sprite", "state_name", "IdleState");
-		info.filename = sprite.attribute("filename").value();
-		info.frameCount = sprite.attribute("frame_count").as_int();
-		info.frameTime = sprite.attribute("frame_time").as_float();
+		if (object.child("render"))
+		{
+			pugi::xml_node sprite = object.child("render").find_child_by_attribute("sprite", "state", "0");
+			info.filename = sprite.attribute("filename").value();
+			info.frameCount = sprite.attribute("frame_count").as_int();
+			info.frameTime = sprite.attribute("frame_time").as_float();
+		}
+		else
+			info.filename = "";
 		pugi::xml_node transf = object.child("transform");
 		info.x = transf.attribute("x").as_int();
 		info.y = transf.attribute("y").as_int();
@@ -130,6 +139,12 @@ std::vector<LocalObjectInfo> ObjectMap::getLocalObjects()
 	}
 
 	return infos;
+}
+
+
+pugi::xml_document& ObjectMap::getLocalXML()
+{
+	return localObjects_;
 }
 
 void ObjectMap::deleteObject(int id)

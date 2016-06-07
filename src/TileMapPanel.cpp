@@ -100,8 +100,8 @@ void TileMapPanel::update()
 					placeCollisionTile(tileX, tileY);
 				else
 					placeObject(
-						InputHandler::getInstance().getMouseX() - objectSp_->getWidth() / 2, 
-						InputHandler::getInstance().getMouseY() - objectSp_->getHeight() / 2
+						InputHandler::getInstance().getMouseX() - objectSp_->getWidth() / 2 + Camera::pos_.x() - rect_.x(), 
+						InputHandler::getInstance().getMouseY() - objectSp_->getHeight() / 2 + Camera::pos_.y() - rect_.y()
 					);
 			} else if (*selectedTool_ == LevelEditorState::Tools::DELETE) {
 				if (*selectedTab_ == 0)
@@ -109,7 +109,9 @@ void TileMapPanel::update()
 				else if (*selectedTab_ == 1)
 					deleteCollisionTile(tileX, tileY);
 				else
-					deleteObject(InputHandler::getInstance().getMouseX(), InputHandler::getInstance().getMouseY());
+					deleteObject(
+						InputHandler::getInstance().getMouseX() + Camera::pos_.x(), 
+						InputHandler::getInstance().getMouseY() + Camera::pos_.y());
 			}
 		}
 		else if (*selectedTab_ != 2 && InputHandler::getInstance().isMouseDown(LEFT_MOUSE_BUTTON))
@@ -195,7 +197,7 @@ void TileMapPanel::render()
 
 	// Renderizar objetos
 	for (auto object : objects_)
-		object.sprite.render(object.pos.x(), object.pos.y());
+		object.sprite.render(object.pos.x() + rect_.x(), object.pos.y() + rect_.y());
 
 	// Cursor quando tá só hover
 	if (rect_.isInside(InputHandler::getInstance().getMouse()))
@@ -204,8 +206,8 @@ void TileMapPanel::render()
 			tileSet_->render(*selectedTile_, cursorPos_.x(), cursorPos_.y());
 		else if (*selectedTab_ == 2 && *selectedTool_ == LevelEditorState::Tools::ADD)
 			objectSp_->render(
-				InputHandler::getInstance().getMouseX() - objectSp_->getWidth() / 2, 
-				InputHandler::getInstance().getMouseY() - objectSp_->getHeight() / 2
+				InputHandler::getInstance().getMouseX() - objectSp_->getWidth() / 2 + Camera::pos_.x(), 
+				InputHandler::getInstance().getMouseY() - objectSp_->getHeight() / 2 + Camera::pos_.y()
 			);
 		else if (*selectedTab_ != 2)
 			cursorBg_.render(cursorPos_.x(), cursorPos_.y());
@@ -319,7 +321,7 @@ void TileMapPanel::deleteObject(int x, int y)
 	int lastFound;
 	for (int i = 0; i < (int)objects_.size(); i++)
 	{
-		if (objects_[i].pos.isInside(Vec2(x, y)))
+		if ((objects_[i].pos + Vec2(rect_.x(), rect_.y())).isInside(Vec2(x, y)))
 			lastFound = i;
 	}
 
@@ -338,7 +340,10 @@ void TileMapPanel::loadObjects()
 	{
 		Object object;
 		object.id = objInfo.id;
-		object.sprite = Sprite(objInfo.filename.c_str(), objInfo.frameCount, objInfo.frameTime);
+		if (objInfo.filename.empty())
+			object.sprite = Sprite("../img/interface/editor/btn_4.png");
+		else
+			object.sprite = Sprite(objInfo.filename.c_str(), objInfo.frameCount, objInfo.frameTime);
 		object.pos = Rect(objInfo.x, objInfo.y, object.sprite.getWidth(), object.sprite.getHeight());
 
 		objects_.emplace_back(object);

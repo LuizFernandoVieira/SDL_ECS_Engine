@@ -1,38 +1,68 @@
+<!-- 
+
+========= MODELO:
+
+<object name="nome">
+	<transform x="0" y="0" w="10" h="10" />
+	<render>
+		<sprite state="0" filename="../img/img.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<collider x="0" y="0" w="10" h="10" />
+	<speed />
+	<state />
+	<physics gravity_scale="1.0" />
+	<emitter emission_rate="0.01" />
+	<timer />
+</object>
+
+
+======= DEPENDENCIAS
+
+* TODO OBJETO PRECISA DE UMA TRANSFORM
+* RENDER PRECISA DE STATE, MAS NÃO PRECISA DE UM SPRITE PARA CADA ESTADO, BASTA UM PARA O IDLE
+* PHYSICS PRECISA DE SPEED
+
+ -->
 <?xml version="1.0" encoding="UTF-8"?>
 
 
 <object name="canil">
 	<transform x="0" y="0" w="96" h="128" />
 	<render>
-		<sprite state_name="IdleState" filename="../img/maps/test/canil_prpl_96x128.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/maps/test/canil_prpl_96x128.png" frame_count="1" frame_time="1.0" />
 	</render>
+	<state />
 	<collider x="0" y="0" w="96" h="128" />
 	<physics gravity_scale="1.0" />
+	<speed />
 </object>
 
 <object name="pedra">
 	<transform x="0" y="0" w="80" h="64" />
 	<render>
-		<sprite state_name="IdleState" filename="../img/maps/test/pedra_80x64.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/maps/test/pedra_80x64.png" frame_count="1" frame_time="1.0" />
 	</render>
+	<state />
 	<collider x="0" y="0" w="80" h="64" />
 	<physics gravity_scale="1.0" />
+	<speed />
 </object>
 
 <object name="cerca">
 	<transform x="0" y="0" w="252" h="52" />
 	<render>
-		<sprite state_name="IdleState" filename="../img/maps/test/cerquinha_252x52.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/maps/test/cerquinha_252x52.png" frame_count="1" frame_time="1.0" />
 	</render>
+	<state />
 	<collider x="0" y="0" w="252" h="52" />
 	<physics gravity_scale="1.0" />
+	<speed />
 </object>
 
 <object name="fonte">
 	<transform x="0" y="0" w="320" h="384" />
 	<render>
-		<sprite state_name="IdleState" filename="../img/maps/test/fountain_320x384.png" frame_count="10" frame_time="0.2" />
+		<sprite state="0" filename="../img/maps/test/fountain_320x384.png" frame_count="10" frame_time="0.2" />
 	</render>
-	<collider x="0" y="0" w="320" h="384" />
-	<physics gravity_scale="1.0" />
+	<state />
 </object>

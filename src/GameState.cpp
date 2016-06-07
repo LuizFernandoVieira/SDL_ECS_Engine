@@ -37,7 +37,8 @@ void GameState::create(StateMachine& stateMachine)
 	level_ = new FirstLevel();
 
 	createPlayer();
-	createParticleEmitter();
+	createMapObjects();
+	// createParticleEmitter();
 }
 
 void GameState::update(float dt)
@@ -97,14 +98,6 @@ void GameState::createPlayer()
 	mapPhysics_.emplace(player_, new PhysicsComponent());
 	mapSpeed_.emplace(player_, new SpeedComponent());
 
-	// std::unordered_map<std::string, Sprite> playerSprites;
-
-	// playerSprites.emplace("IdleState", Sprite("../img/characters/player_parado_32x32.png", 16, 0.1));
-	// playerSprites.emplace("WalkingState", Sprite("../img/characters/player_correndo_32x32.png", 8, 0.1));
-	// playerSprites.emplace("JumpingState", Sprite("../img/characters/player_pulando_32x64.png", 5, 0.1));
-	// playerSprites.emplace("FallingState", Sprite("../img/characters/player_caindo_34x40.png"));
-
-	// mapRender_.emplace(player_, new RenderComponent(playerSprites));
 	playerRenderComponent_.addSprite(State::IDLE, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
 		Sprite("../img/characters/player/idle.png"));
 	playerRenderComponent_.addSprite(State::WALKING, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
@@ -125,4 +118,81 @@ void GameState::createParticleEmitter()
 	mapTransform_.emplace(particleEmitter_, new TransformComponent(Rect(300, 250, 32, 32)));
 	mapEmitter_.emplace(particleEmitter_, new EmitterComponent(0.01));
 	mapTimer_.emplace(particleEmitter_, new TimerComponent());
+}
+
+
+void GameState::createMapObjects()
+{
+	pugi::xml_document& objects = level_->getObjectMap();
+
+	for (auto obj : objects.children())
+	{
+		pugi::xml_node aux;
+
+		// TRANSFORM
+		aux = obj.child("transform");
+		mapTransform_.emplace(nextId_, new TransformComponent(Rect(
+			aux.attribute("x").as_float(),
+			aux.attribute("y").as_float(),
+			aux.attribute("w").as_float(),
+			aux.attribute("h").as_float()
+		)));
+
+		// RENDER
+		if ((aux = obj.child("render")))
+		{
+			mapRender_.emplace(nextId_, new RenderComponent());
+
+			for (auto sprite : aux.children())
+			{
+				State state = (State)sprite.attribute("state").as_int();
+				mapRender_[nextId_]->addSprite(state, Sprite(sprite.attribute("filename").value(), 
+				                                             sprite.attribute("frame_count").as_int(),
+				                                             sprite.attribute("frame_time").as_float()));
+			}
+		}
+
+		// COLLIDER
+		if ((aux = obj.child("collider")))
+		{
+			mapCollider_.emplace(nextId_, new ColliderComponent(Rect(
+				aux.attribute("x").as_float(),
+				aux.attribute("y").as_float(),
+				aux.attribute("w").as_float(),
+				aux.attribute("h").as_float()
+			)));
+		}
+
+		// SPEED
+		if ((aux = obj.child("speed")))
+		{
+			mapSpeed_.emplace(nextId_, new SpeedComponent());
+		}
+
+		// STATE
+		if ((aux = obj.child("state")))
+		{
+			mapState_.emplace(nextId_, new StateComponent());
+		}
+
+		// PHYSICS
+		if ((aux = obj.child("physics")))
+		{
+			mapPhysics_.emplace(nextId_, new PhysicsComponent(aux.attribute("gravity_scale").as_float()));
+		}
+
+		// EMITTER
+		if ((aux = obj.child("emitter")))
+		{
+			mapEmitter_.emplace(nextId_, new EmitterComponent(aux.attribute("emission_rate").as_float()));
+		}
+
+		// TIMER
+		if ((aux = obj.child("timer")))
+		{
+			mapTimer_.emplace(nextId_, new TimerComponent());
+		}
+
+		nextId_++;
+	}
 }

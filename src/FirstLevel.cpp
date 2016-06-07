@@ -6,6 +6,7 @@ FirstLevel::FirstLevel() :
 	bg("../img/bg.png"),
 	tileSet_(Resources::TILE_WIDTH, Resources::TILE_HEIGHT, "../img/maps/test/tile_set.png"),
 	tileMap_("../map/tileMap.txt", &tileSet_),
+	objectMap_("../map/objectMap.xml"),
 	collisionMap_("../map/collisionMap.txt")
 
 	//TODO: Inserir elementos acima em config.txt, carregar dinamicamente
@@ -34,6 +35,11 @@ void FirstLevel::render()
 CollisionMap& FirstLevel::getCollisionMap()
 {
 	return collisionMap_;
+}
+
+pugi::xml_document& FirstLevel::getObjectMap()
+{
+	return objectMap_.getLocalXML();
 }
 
 

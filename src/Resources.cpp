@@ -35,8 +35,7 @@ std::shared_ptr<SDL_Texture> Resources::GetImage(std::string file)
 		SDL_Texture* texture = IMG_LoadTexture ( Game::getInstance().getRenderer() , file.c_str() );
 
 		if (texture == NULL) {
-			std::cout << "Erro no carregamento da textura" << std::endl;
-			std::string imgError = IMG_GetError();
+			std::cout << "Erro no carregamento da textura " << file << ": " << IMG_GetError() << std::endl;
 		}
 
 		std::shared_ptr<SDL_Texture> ptr (texture, deleteTexture);

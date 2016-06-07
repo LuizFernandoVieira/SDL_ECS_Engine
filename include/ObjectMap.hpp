@@ -35,7 +35,11 @@ struct LocalObjectInfo
 class ObjectMap
 {
 public:
+	// Construtor pro editor
 	ObjectMap(std::string globalObjects, std::string localObjects);
+	// Construtor pro jogo
+	ObjectMap(std::string localObjects);
+
 	void save();
 	void loadGlobals();
 	void loadLocals();
@@ -45,6 +49,9 @@ public:
 
 	void addObject(int index, int id, int x, int y);
 	std::vector<LocalObjectInfo> getLocalObjects();
+
+	pugi::xml_document& getLocalXML();
+
 	int getLastObjectId();
 	void deleteObject(int id);
 

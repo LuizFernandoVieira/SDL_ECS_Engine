@@ -30,9 +30,11 @@ public:
 	void update(float dt);
 	void render();
 	void handle(StateEventEnum& event);
+
 private:
 	void createPlayer();
 	void createParticleEmitter();
+	void createMapObjects();
 
 	Level* level_;
 

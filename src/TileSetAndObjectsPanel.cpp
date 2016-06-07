@@ -95,7 +95,7 @@ void TileSetAndObjectsPanel::createObjectSprite()
 	ObjectInfo objectInfo = objectMap_->getGlobalObject(selectedObject_);
 	objectName_ = objectInfo.name;
 	objectSp_ = new StaticSprite(objectInfo.filename.c_str(), objectInfo.frameCount, objectInfo.frameTime);
-
+	
 	// escala do sprite, sem mudar proporcao largura/altura
 	objectSp_->setScaleX(1.0);
 	objectSp_->setScaleY(1.0);
