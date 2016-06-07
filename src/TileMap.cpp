@@ -2,6 +2,7 @@
 
 #include "../include/TileMap.hpp"
 #include "../include/Camera.hpp"
+#include "../include/Resources.hpp"
 
 TileMap::TileMap(const char* file, TileSet* tileSet) : filename_(file)
 {
@@ -105,14 +106,22 @@ void TileMap::render(int cameraX, int cameraY)
 
 void TileMap::renderLayer(int layer, int cameraX, int cameraY)
 {
-	for (int i = 0; i < mapHeight_; i++) {
-		for (int j = 0; j < mapWidth_; j++) {
-			if (at(j, i, layer) >= 0) {
-				// tileSet_->render( 
-				// 	(unsigned)at(j, i, layer), 
-				// 	(float)(j * tileSet_->getTileWidth()  + cameraX + Camera::pos_.x() * (layer-1)*0.5), 
-				// 	(float)(i * tileSet_->getTileHeight() + cameraY + Camera::pos_.y() * (layer-1)*0.5) 
-				// );
+
+	int tileX = (Camera::pos_.x() / tileSet_->getTileWidth()) - 2;
+	int tileY = (Camera::pos_.y() / tileSet_->getTileHeight()) - 2;
+	int tileW = ((Camera::pos_.x() + Resources::WINDOW_WIDTH) / tileSet_->getTileWidth()) + 2;
+	int tileH = ((Camera::pos_.y() + Resources::WINDOW_HEIGHT) / tileSet_->getTileHeight()) + 2;
+
+	for (int i = tileY >= 0 ? tileY : 0; 
+		i < (tileH < mapHeight_ ? tileH : mapHeight_); 
+		i++)
+	{
+		for (int j = tileX >= 0 ? tileX : 0; 
+			j < (tileW < mapWidth_ ? tileW : mapWidth_); 
+			j++)
+		{
+			if (at(j, i, layer) >= 0)
+			{
 				switch(layer)
 				{
 					case 0:

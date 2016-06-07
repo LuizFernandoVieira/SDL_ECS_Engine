@@ -17,8 +17,8 @@ void GravitySystem::update(
 		if (speed[phys.first]->speed_.y() < 0)
 		{
 			// TA PULANDO
-			// Diminui a escala da gravidade
-			speed[phys.first]->speed_ += Vec2(0, Resources::GRAVITY * phys.second->gravityScale_ * 0.2);
+			// Agora sim gravidade funciona como uma aceleracao (desaceleracao do pulo nesse caso)
+			speed[phys.first]->speed_ += Vec2(0, Resources::GRAVITY * phys.second->gravityScale_ * dt * 4);
 		}
 		else
 		{
