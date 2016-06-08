@@ -24,10 +24,11 @@ FirstLevel::~FirstLevel()
 
 // }
 
-void FirstLevel::render()
+void FirstLevel::render(int layer)
 {
-	bg.render(0,0);
-	tileMap_.render(0,0);
+	if (layer == 3)
+		bg.render(0,0);
+	tileMap_.renderLayer(layer, 0, 0);
 	// collisionMap_.render(0,0);
 }
 

@@ -55,9 +55,9 @@ ObjectInfo ObjectMap::getGlobalObject(int index)
 
 	ObjectInfo info;
 	info.name = object.name();
-	info.filename = sprite.attribute("filename").value();
-	info.frameCount = sprite.attribute("frame_count").as_int();
-	info.frameTime = sprite.attribute("frame_time").as_float();
+	info.filename = sprite ? sprite.attribute("filename").value() : "";
+	info.frameCount = sprite ? sprite.attribute("frame_count").as_int() : 1;
+	info.frameTime = sprite ? sprite.attribute("frame_time").as_float() : 0;
 	return info;
 }
 
@@ -84,12 +84,13 @@ pugi::xml_node ObjectMap::getGlobalObjectNode(int index)
 }
 
 
-void ObjectMap::addObject(int index, int id, int x, int y)
+void ObjectMap::addObject(int index, int id, int x, int y, int layer)
 {
 	pugi::xml_node object = getGlobalObjectNode(index);
 
 	pugi::xml_node newObject = localObjects_.append_copy(object);
 	newObject.append_attribute("id").set_value(id);
+	newObject.append_attribute("layer").set_value(layer);
 
 	pugi::xml_node transf;
 	if (!newObject.child("transform"))
@@ -134,6 +135,7 @@ std::vector<LocalObjectInfo> ObjectMap::getLocalObjects()
 		pugi::xml_node transf = object.child("transform");
 		info.x = transf.attribute("x").as_int();
 		info.y = transf.attribute("y").as_int();
+		info.layer = object.attribute("layer") ? object.attribute("layer").as_int() : 1;
 
 		infos.emplace_back(info);
 	}

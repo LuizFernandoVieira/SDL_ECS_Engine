@@ -1,4 +1,7 @@
+#include <cmath>
+
 #include "../include/TileSet.hpp"
+
 
 TileSet::TileSet(int tileWidth, int tileHeight, const char* file)
 {
@@ -29,7 +32,7 @@ void TileSet::render(unsigned index, float x, float y)
 		(int)(index/columns_) * tileHeight_,
 	 	tileWidth_, tileHeight_ 
 	);
-	tileSet_->render(x, y);
+	tileSet_->render(std::round(x), std::round(y));
 }
 
 int TileSet::getTileWidth() const

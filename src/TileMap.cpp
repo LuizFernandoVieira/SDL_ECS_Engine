@@ -97,20 +97,37 @@ int& TileMap::at(int x, int y, int z)
 	return tileMatrix_[ x + y*mapWidth_ + z*mapWidth_*mapHeight_ ];
 }
 
-void TileMap::render(int cameraX, int cameraY)
+void TileMap::render(int x, int y)
 {
 	for (int i = mapDepth_ - 1; i >= 0; i--) {
-		renderLayer(i, cameraX, cameraY);
+		renderLayer(i, x, y);
 	}
 }
 
-void TileMap::renderLayer(int layer, int cameraX, int cameraY)
+void TileMap::renderLayer(int layer, int x, int y)
 {
+	Vec2 layerSpeed;
+	switch (layer)
+	{
+		case 0:
+			layerSpeed = Camera::pos_ * -0.5;
+			break;
+		default:
+		case 1:
+			layerSpeed = Vec2(0,0);
+			break;
+		case 2:
+			layerSpeed = Camera::pos_ * 0.5;
+			break;
+		case 3:
+			layerSpeed = Camera::pos_ * 0.75;
+			break;
+	}
 
-	int tileX = (Camera::pos_.x() / tileSet_->getTileWidth()) - 2;
-	int tileY = (Camera::pos_.y() / tileSet_->getTileHeight()) - 2;
-	int tileW = ((Camera::pos_.x() + Resources::WINDOW_WIDTH) / tileSet_->getTileWidth()) + 2;
-	int tileH = ((Camera::pos_.y() + Resources::WINDOW_HEIGHT) / tileSet_->getTileHeight()) + 2;
+	int tileX = (Camera::pos_.x()/* - layerSpeed.x()*/ / tileSet_->getTileWidth()) - 2;
+	int tileY = (Camera::pos_.y() /*- layerSpeed.y()*/ / tileSet_->getTileHeight()) - 2;
+	int tileW = ((Camera::pos_.x()/* + layerSpeed.x()*/ + Resources::WINDOW_WIDTH) / tileSet_->getTileWidth()) + 2;
+	int tileH = ((Camera::pos_.y() /*+ layerSpeed.y()*/ + Resources::WINDOW_HEIGHT) / tileSet_->getTileHeight()) + 2;
 
 	for (int i = tileY >= 0 ? tileY : 0; 
 		i < (tileH < mapHeight_ ? tileH : mapHeight_); 
@@ -122,39 +139,11 @@ void TileMap::renderLayer(int layer, int cameraX, int cameraY)
 		{
 			if (at(j, i, layer) >= 0)
 			{
-				switch(layer)
-				{
-					case 0:
-						tileSet_->render( 
-							(unsigned)at(j, i, layer), 
-							(float)(j * tileSet_->getTileWidth()  + cameraX - Camera::pos_.x() * (double)0.5), 
-							(float)(i * tileSet_->getTileHeight() + cameraY - Camera::pos_.y() * (double)0.5) 
-						);
-						break;
-					case 1:
-						tileSet_->render( 
-							(unsigned)at(j, i, layer), 
-							(float)(j * tileSet_->getTileWidth()  + cameraX), 
-							(float)(i * tileSet_->getTileHeight() + cameraY) 
-						);
-						break;
-					case 2:
-						tileSet_->render( 
-							(unsigned)at(j, i, layer), 
-							(float)(j * tileSet_->getTileWidth()  + cameraX + Camera::pos_.x() * (double)0.5), 
-							(float)(i * tileSet_->getTileHeight() + cameraY + Camera::pos_.y() * (double)0.5) 
-						);
-						break;
-					case 3:
-						tileSet_->render( 
-							(unsigned)at(j, i, layer), 
-							(float)(j * tileSet_->getTileWidth()  + cameraX + Camera::pos_.x() * (double)0.75), 
-							(float)(i * tileSet_->getTileHeight() + cameraY + Camera::pos_.y() * (double)0.75) 
-						);
-						break;
-					default:
-						break;
-				}
+				tileSet_->render( 
+					(unsigned)at(j, i, layer), 
+					(float)(j * tileSet_->getTileWidth() + x + layerSpeed.x()), 
+					(float)(i * tileSet_->getTileHeight() + y + layerSpeed.y())
+				);
 			}
 		}
 	}

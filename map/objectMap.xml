@@ -1,33 +1,34 @@
 <?xml version="1.0"?>
-<object name="canil" id="6">
-	<transform x="130" y="96" w="96" h="128" />
+<object name="cerca" id="11" layer="0">
+	<transform x="385" y="522" w="252" h="52" />
 	<render>
-		<sprite state="0" filename="../img/maps/test/canil_prpl_96x128.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/maps/test/cerquinha_252x52.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
-	<collider x="0" y="0" w="96" h="128" />
-	<physics gravity_scale="1.0" />
-	<speed />
 </object>
-<object name="pedra" id="7">
-	<transform x="420" y="138" w="80" h="64" />
+<object name="cerca" id="12" layer="0">
+	<transform x="638" y="522" w="252" h="52" />
 	<render>
-		<sprite state="0" filename="../img/maps/test/pedra_80x64.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/maps/test/cerquinha_252x52.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
-	<collider x="0" y="0" w="80" h="64" />
-	<physics gravity_scale="1.0" />
-	<speed />
 </object>
-<object name="fonte" id="9">
-	<transform x="511" y="64" w="320" h="384" />
+<object name="fonte" id="13" layer="2">
+	<transform x="249" y="0" w="320" h="384" />
 	<render>
 		<sprite state="0" filename="../img/maps/test/fountain_320x384.png" frame_count="10" frame_time="0.2" />
 	</render>
 	<state />
 </object>
-<object name="pedra" id="10">
-	<transform x="332" y="33" w="80" h="64" />
+<object name="canil" id="14" layer="3">
+	<transform x="141" y="64" w="96" h="128" />
+	<render>
+		<sprite state="0" filename="../img/maps/test/canil_prpl_96x128.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="pedra" id="15" layer="1">
+	<transform x="542" y="226" w="80" h="64" />
 	<render>
 		<sprite state="0" filename="../img/maps/test/pedra_80x64.png" frame_count="1" frame_time="1.0" />
 	</render>

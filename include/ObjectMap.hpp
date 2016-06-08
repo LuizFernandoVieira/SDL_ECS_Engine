@@ -30,6 +30,7 @@ struct LocalObjectInfo
 	int frameCount;
 	float frameTime;
 	int x, y;
+	int layer;
 };
 
 class ObjectMap
@@ -47,7 +48,7 @@ public:
 	ObjectInfo getGlobalObject(int index);
 	int globalSize();
 
-	void addObject(int index, int id, int x, int y);
+	void addObject(int index, int id, int x, int y, int layer);
 	std::vector<LocalObjectInfo> getLocalObjects();
 
 	pugi::xml_document& getLocalXML();

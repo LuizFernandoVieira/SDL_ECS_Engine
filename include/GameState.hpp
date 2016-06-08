@@ -12,7 +12,6 @@
 #include "EmitterComponent.hpp"
 #include "TimerComponent.hpp"
 #include "InputSystem.hpp"
-// #include "StateSystem.hpp"
 #include "PlayerRenderSystem.hpp"
 #include "RenderSystem.hpp"
 #include "MoveSystem.hpp"
@@ -49,16 +48,15 @@ private:
 
 	std::map<int, TransformComponent*> mapTransform_;
 	std::map<int, StateComponent*> 	mapState_;
-	std::map<int, RenderComponent*> mapRender_;
 	std::map<int, PhysicsComponent*> mapPhysics_;
 	std::map<int, ColliderComponent*> mapCollider_;
 	std::map<int, SpeedComponent*> mapSpeed_;
 	std::map<int, EmitterComponent*> mapEmitter_;
 	std::map<int, TimerComponent*> mapTimer_;
+	std::map<int, std::map<int, RenderComponent*>> mapRender_;
 	PlayerRenderComponent playerRenderComponent_;
 
 	InputSystem inputSystem_;
-	// StateSystem stateSystem_;
 	RenderSystem renderSystem_;
 	PlayerRenderSystem playerRenderSystem_;
 	MoveSystem moveSystem_;

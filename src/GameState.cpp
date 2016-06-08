@@ -16,18 +16,32 @@ GameState::GameState()
 : music()
 #endif
 {
+	mapRender_[0] = std::map<int, RenderComponent*>();
+	mapRender_[1] = std::map<int, RenderComponent*>();
+	mapRender_[2] = std::map<int, RenderComponent*>();
+	mapRender_[3] = std::map<int, RenderComponent*>();
 	//testando componente de música, não há necessidade de se carregar um arquivo
 	//A própria music está carregando um arquivo teste
 }
 
 GameState::~GameState()
 {
+	delete level_;
+	nextId_ = 0;
+
 	mapTransform_.clear();
 	mapState_.clear();
-	mapRender_.clear();
 	mapPhysics_.clear();
 	mapCollider_.clear();
 	mapSpeed_.clear();
+	mapEmitter_.clear();
+	mapTimer_.clear();
+
+	mapRender_[0].clear();
+	mapRender_[1].clear();
+	mapRender_[2].clear();
+	mapRender_[3].clear();
+	mapRender_.clear();
 }
 
 void GameState::create(StateMachine& stateMachine)
@@ -56,7 +70,6 @@ void GameState::update(float dt)
 	// particleEmitterSystem_.update( dt, level_->getCollisionMap(), mapTransform_[particleEmitter_], mapEmitter_[particleEmitter_], mapTimer_[particleEmitter_] );
 	moveSystem_.update( dt, mapTransform_, mapSpeed_ );
 	collisionSystem_.update( level_->getCollisionMap(), oldTransform, mapTransform_, mapCollider_, mapSpeed_, mapState_ );
-	// stateSystem_.update( mapState_, mapSpeed_ );
 	renderSystem_.update( dt, oldState, mapState_, mapRender_ );
 	playerRenderSystem_.update( dt, (PlayerStateComponent*)oldState[player_], (PlayerStateComponent*)mapState_[player_], &playerRenderComponent_ ); // ai q feio
 
@@ -69,9 +82,16 @@ void GameState::update(float dt)
 
 void GameState::render()
 {
-	level_->render(); // dividir isso em layers depois
+	level_->render(3);
+	renderSystem_.render(3, mapTransform_, mapState_, mapRender_[3]);
 
-	renderSystem_.render(mapTransform_, mapState_, mapRender_);
+	level_->render(2);
+	renderSystem_.render(2, mapTransform_, mapState_, mapRender_[2]);
+
+	level_->render(1);
+	renderSystem_.render(1, mapTransform_, mapState_, mapRender_[1]);
+
+	// renderSystem_.render(mapTransform_, mapState_, mapRender_);
 	playerRenderSystem_.render(mapTransform_[player_], (PlayerStateComponent*)mapState_[player_], &playerRenderComponent_); // ai q feio
 
 	// particleEmitterSystem_.render();
@@ -79,6 +99,9 @@ void GameState::render()
 	#ifdef _DEBUG
 	collisionSystem_.render();
 	#endif
+
+	level_->render(0);
+	renderSystem_.render(0, mapTransform_, mapState_, mapRender_[0]);
 }
 
 void GameState::handle(StateEventEnum& event)
@@ -141,15 +164,20 @@ void GameState::createMapObjects()
 		// RENDER
 		if ((aux = obj.child("render")))
 		{
-			mapRender_.emplace(nextId_, new RenderComponent());
+			RenderComponent* renderComp = new RenderComponent();
 
 			for (auto sprite : aux.children())
 			{
 				State state = (State)sprite.attribute("state").as_int();
-				mapRender_[nextId_]->addSprite(state, Sprite(sprite.attribute("filename").value(), 
-				                                             sprite.attribute("frame_count").as_int(),
-				                                             sprite.attribute("frame_time").as_float()));
+				renderComp->addSprite(state, Sprite(sprite.attribute("filename").value(), 
+				                                    sprite.attribute("frame_count").as_int(),
+				                                    sprite.attribute("frame_time").as_float()));
 			}
+
+			if (obj.attribute("layer"))
+				mapRender_[obj.attribute("layer").as_int()].emplace(nextId_, renderComp);
+			else
+				mapRender_[1].emplace(nextId_, renderComp);
 		}
 
 		// COLLIDER
