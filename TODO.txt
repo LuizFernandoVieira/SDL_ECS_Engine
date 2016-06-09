@@ -35,20 +35,20 @@ Segunda entrega / 17
 	Luiz
 		Particle System
 			Chuva
-      Neve
+			Neve
 			Vento
 
 		Inimigos
-				IA
-          Coisa -> Zip Zag -> Distancia
-          Coisa -> Segue e para depois de uma distancia
-          Serberus -> Bloca a passagem
-          Macaco -> Inimigo
+			IA
+				Coisa -> Zip Zag -> Distancia
+				Coisa -> Segue e para depois de uma distancia
+				Cerberus -> Bloca a passagem
+				Macaco -> Inimigo
 				Boss
-          Bicho que segue
+				Bicho que segue
 		NPC
-      Moça da Musica -> Chuva + Movimento de NPC + GC
-      Cachorro -> Dorme
+			Moça da Musica -> Chuva + Movimento de NPC + GC
+			Cachorro -> Dorme
 
 		Text
 

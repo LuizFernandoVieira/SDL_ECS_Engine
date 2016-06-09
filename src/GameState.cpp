@@ -97,7 +97,7 @@ void GameState::render()
 	// particleEmitterSystem_.render();
 
 	#ifdef _DEBUG
-	collisionSystem_.render();
+	// collisionSystem_.render();
 	#endif
 
 	level_->render(0);

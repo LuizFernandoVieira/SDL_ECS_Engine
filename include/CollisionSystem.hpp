@@ -34,7 +34,9 @@ public:
 private:
 	bool isColliding(const Rect& a, const Rect& b, float angleOfA, float angleOfB);
 
-	void correctPosition(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed, StateComponent* state);
+	void correctPosSolid(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed, StateComponent* state);
+	void correctPosDiagonalUp(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed, StateComponent* state);
+	void correctPosDiagonalDown(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed, StateComponent* state);
 
 	#ifdef _DEBUG
 	std::vector<Rect> collidersToRender; // para renderizar colisores q estao colidindo
