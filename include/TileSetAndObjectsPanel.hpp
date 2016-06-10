@@ -35,8 +35,8 @@ private:
 
 	TileSetAndObjectsPanel::Tab selectedTab_;
 
-	std::vector<Button> tileButtons_;
-	std::vector<Button> collisionButtons_;
+	std::vector<Button*> tileButtons_;
+	std::vector<Button*> collisionButtons_;
 
 	int tabButtonHeight_;
 

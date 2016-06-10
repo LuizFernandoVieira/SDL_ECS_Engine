@@ -28,11 +28,11 @@ void CollisionSystem::update(
 		Rect finalCollider = col.second->rect_ + Vec2(transform[col.first]->rect_.x(), transform[col.first]->rect_.y() );
 
 		for (int y = finalCollider.y() / Resources::TILE_HEIGHT/* - 1*/;
-			y <= (finalCollider.y() + finalCollider.h()) / Resources::TILE_HEIGHT/* + 1*/;
+			y <= (finalCollider.y() + finalCollider.h()) / Resources::TILE_HEIGHT && y < collisionMap.getHeight()/* + 1*/;
 			y++)
 		{
 			for (int x = finalCollider.x() / Resources::TILE_WIDTH/* - 1*/;
-				x <= (finalCollider.x() + finalCollider.w()) / Resources::TILE_WIDTH/* + 1*/;
+				x <= (finalCollider.x() + finalCollider.w()) / Resources::TILE_WIDTH && x < collisionMap.getWidth()/* + 1*/;
 				x++)
 			{
 				Rect terrain = Rect(

@@ -157,7 +157,7 @@ void TileSetAndObjectsPanel::render()
 	{
 		for(int i = 0; i < (int)tileButtons_.size(); i++)
 		{
-			tileButtons_[i].render();
+			tileButtons_[i]->render();
 		}
 	}
 	else if (selectedTab_ == OBJECTS)
@@ -171,7 +171,7 @@ void TileSetAndObjectsPanel::render()
 	{
 		for (int i = 0; i < (int)collisionButtons_.size(); i++)
 		{
-			collisionButtons_[i].render();
+			collisionButtons_[i]->render();
 		}
 	}
 }
@@ -185,9 +185,9 @@ void TileSetAndObjectsPanel::addButton(Button& button, Tab tab)
 {
 	button.setRect(button.getRect() + Vec2(0, tabButtonHeight_));
 	if (tab == TILES)
-		tileButtons_.emplace_back(button);
+		tileButtons_.emplace_back(&button);
 	else if (tab == COLLISION)
-		collisionButtons_.emplace_back(button);
+		collisionButtons_.emplace_back(&button);
 }
 
 
@@ -230,7 +230,7 @@ void TileSetAndObjectsPanel::resize()
 			curRow++;
 			curColumn = 0;
 		}
-		tileButtons_[i].setRect(
+		tileButtons_[i]->setRect(
 			Rect(
 				curColumn * (Resources::TILE_WIDTH + 2) + 2 + rect_.x(),
 				curRow * (Resources::TILE_HEIGHT + 2) + 2 + rect_.y() + tabButtonHeight_,
@@ -250,7 +250,7 @@ void TileSetAndObjectsPanel::resize()
 			curRow++;
 			curColumn = 0;
 		}
-		collisionButtons_[i].setRect(
+		collisionButtons_[i]->setRect(
 			Rect(
 				curColumn * (Resources::TILE_WIDTH + 2) + 2 + rect_.x(),
 				curRow * (Resources::TILE_HEIGHT + 2) + 2 + rect_.y() + tabButtonHeight_,

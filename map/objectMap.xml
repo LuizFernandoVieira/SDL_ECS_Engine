@@ -37,3 +37,10 @@
 	<physics gravity_scale="1.0" />
 	<speed />
 </object>
+<object name="canil" id="16" layer="2">
+	<transform x="631" y="256" w="96" h="128" />
+	<render>
+		<sprite state="0" filename="../img/maps/test/canil_prpl_96x128.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>

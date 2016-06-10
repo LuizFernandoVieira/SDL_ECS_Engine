@@ -107,6 +107,8 @@ void TileMap::render(int x, int y)
 void TileMap::renderLayer(int layer, int x, int y)
 {
 	Vec2 layerSpeed;
+	int tileX = 0, tileY = 0, tileW = mapWidth_, tileH = mapHeight_;
+
 	switch (layer)
 	{
 		case 0:
@@ -114,6 +116,10 @@ void TileMap::renderLayer(int layer, int x, int y)
 			break;
 		default:
 		case 1:
+			tileX = (Camera::pos_.x()/* - layerSpeed.x()*/ / tileSet_->getTileWidth()) - 2;
+			tileY = (Camera::pos_.y() /*- layerSpeed.y()*/ / tileSet_->getTileHeight()) - 2;
+			tileW = ((Camera::pos_.x()/* + layerSpeed.x()*/ + Resources::WINDOW_WIDTH) / tileSet_->getTileWidth()) + 2;
+			tileH = ((Camera::pos_.y() /*+ layerSpeed.y()*/ + Resources::WINDOW_HEIGHT) / tileSet_->getTileHeight()) + 2;
 			layerSpeed = Vec2(0,0);
 			break;
 		case 2:
@@ -124,10 +130,6 @@ void TileMap::renderLayer(int layer, int x, int y)
 			break;
 	}
 
-	int tileX = (Camera::pos_.x()/* - layerSpeed.x()*/ / tileSet_->getTileWidth()) - 2;
-	int tileY = (Camera::pos_.y() /*- layerSpeed.y()*/ / tileSet_->getTileHeight()) - 2;
-	int tileW = ((Camera::pos_.x()/* + layerSpeed.x()*/ + Resources::WINDOW_WIDTH) / tileSet_->getTileWidth()) + 2;
-	int tileH = ((Camera::pos_.y() /*+ layerSpeed.y()*/ + Resources::WINDOW_HEIGHT) / tileSet_->getTileHeight()) + 2;
 
 	for (int i = tileY >= 0 ? tileY : 0; 
 		i < (tileH < mapHeight_ ? tileH : mapHeight_); 

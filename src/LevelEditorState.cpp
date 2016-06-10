@@ -147,7 +147,7 @@ void LevelEditorState::initGUI()
 				Resources::TILE_HEIGHT )
 		);
 		tileSetAndObjectsPanel_->addButton(*btn, TileSetAndObjectsPanel::Tab::TILES);
-		tileButtons_.push_back(btn);
+		tileButtons_.emplace_back(btn);
 	}
 
 	// Collision buttons
@@ -182,6 +182,10 @@ void LevelEditorState::update(float dt)
 	}
 
 	Camera::update(dt);
+
+	std::cout << tileButtons_[0]->getRect().x() << ", " << tileButtons_[0]->getRect().y() << ", " << tileButtons_[0]->getRect().w() << ", " << tileButtons_[0]->getRect().h() << std::endl;
+
+	mainPanel_.update();
 
 	if (InputHandler::getInstance().mousePress(LEFT_MOUSE_BUTTON))
 	{
@@ -227,8 +231,6 @@ void LevelEditorState::update(float dt)
 			}
 		}
 	}
-
-	mainPanel_.update();
 
 	if(InputHandler::getInstance().quitRequested()) {
 		setQuit(true);
