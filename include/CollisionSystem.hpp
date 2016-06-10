@@ -37,6 +37,7 @@ private:
 	void correctPosSolid(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed, StateComponent* state);
 	void correctPosDiagonalUp(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed, StateComponent* state);
 	void correctPosDiagonalDown(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed, StateComponent* state);
+	void correctPosCorner(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed, StateComponent* state);
 
 	#ifdef _DEBUG
 	std::vector<Rect> collidersToRender; // para renderizar colisores q estao colidindo

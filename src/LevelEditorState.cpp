@@ -99,9 +99,10 @@ void LevelEditorState::initGUI()
 	layerButtons_[3]->setResizable(true);
 
 	//                    pq caralhos esse rect vvvvv nao eh alterado??
-	collisionButtons_.emplace_back(new Button(Rect(0,0,32,32), "../img/interface/editor/btn_5.png"));
+	collisionButtons_.emplace_back(new Button(Rect(0,0,32,32), "../img/interface/editor/btn_6.png"));
 	collisionButtons_.emplace_back(new Button(Rect(0,0,32,32), "../img/interface/editor/btn_collision_1.png"));
 	collisionButtons_.emplace_back(new Button(Rect(0,0,32,32), "../img/interface/editor/btn_collision_2.png"));
+	collisionButtons_.emplace_back(new Button(Rect(0,0,32,32), "../img/interface/editor/btn_collision_3.png"));
 
 	// Add
 	mainPanel_.add(*rightPanel, rightRectProportion);

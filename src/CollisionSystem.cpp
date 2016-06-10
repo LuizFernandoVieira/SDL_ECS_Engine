@@ -57,6 +57,10 @@ void CollisionSystem::update(
 					{
 						correctPosDiagonalDown(transform[col.first]->rect_, oldTransform[col.first]->rect_, terrain, speed[col.first]->speed_, state[col.first]);
 					}
+					else if (collisionType == 3)
+					{
+						correctPosCorner(transform[col.first]->rect_, oldTransform[col.first]->rect_, terrain, speed[col.first]->speed_, state[col.first]);
+					}
 
 					// Atualizar colisor que foi movido
 					finalCollider = col.second->rect_ + Vec2(transform[col.first]->rect_.x(), transform[col.first]->rect_.y() );
@@ -144,9 +148,12 @@ void CollisionSystem::correctPosSolid(Rect& entityPos, Rect oldPos, Rect terrain
 	else // entity estava abaixo do colisor
 	{
 		// std::cout << "COLIDIU EM CIMA" << std::endl;
-		entityPos.y( terrain.y() + terrain.h() );
-		speed.y(0.0);
-		state->state_ = State::FALLING;
+		if (state->state_ != JUMPING)
+		{
+			entityPos.y( terrain.y() + terrain.h() );
+			speed.y(0.0);
+			state->state_ = State::FALLING;
+		}
 	}
 }
 
@@ -234,6 +241,38 @@ void CollisionSystem::correctPosDiagonalDown(Rect& entityPos, Rect oldPos, Rect 
 		state->state_ = State::FALLING;
 	}*/
 }
+
+
+void CollisionSystem::correctPosCorner(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed, StateComponent* state)
+{
+	float angle = LineInclination(oldPos.getCenter(), terrain.getCenter());
+	if (angle >= -55 && angle < 55) // entity colidiu à direita
+	{
+		// std::cout << "COLIDIU A DIREITA" << std::endl;
+		// entityPos.x( terrain.x() - entityPos.w() );
+	}
+	else if (angle >= 55 && angle <= 125) // entity estava acima do colisor
+	{
+		// std::cout << "COLIDIU EMBAIXO" << std::endl;
+		entityPos.y( terrain.y() - entityPos.h() );
+		speed.y(0.0);
+		state->state_ = speed.x() == 0 ? State::IDLE : State::WALKING;
+	}
+	else if (angle > 125 && angle < 235) // entity colidiu à esquerda
+	{
+		// std::cout << "COLIDIU A ESQUERDA" << std::endl;
+		// entityPos.x( terrain.x() + terrain.w() );
+	}
+	else // entity estava abaixo do colisor
+	{
+		// std::cout << "COLIDIU EM CIMA" << std::endl;
+		entityPos.y( terrain.y() + terrain.h() );
+		speed.y(0.0);
+		state->state_ = State::FALLING;
+	}
+}
+
+
 
 #ifdef _DEBUG
 void CollisionSystem::render()

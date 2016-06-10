@@ -27,16 +27,6 @@
 	</render>
 	<state />
 </object>
-<object name="pedra" id="15" layer="1">
-	<transform x="542" y="226" w="80" h="64" />
-	<render>
-		<sprite state="0" filename="../img/maps/test/pedra_80x64.png" frame_count="1" frame_time="1.0" />
-	</render>
-	<state />
-	<collider x="0" y="0" w="80" h="64" />
-	<physics gravity_scale="1.0" />
-	<speed />
-</object>
 <object name="canil" id="16" layer="2">
 	<transform x="631" y="256" w="96" h="128" />
 	<render>

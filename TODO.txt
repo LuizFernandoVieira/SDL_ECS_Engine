@@ -23,10 +23,10 @@ A fazer:
 ============== ESSA SEMANA ==================
 
 Player
-Layer Dos Objetos
-Colisores Diagonais
 Inimigos
 Particle System
+Colisao especial pros diagonais
+menu
 
 =============== ENTREGAS ====================
 
@@ -53,11 +53,8 @@ Segunda entrega / 17
 		Text
 
 	Victor
-		Layers pros objetos
-		Editor de Mapa
-			Objetos
-			// Scroll dos painéis :)
 		Colisao
+			Colisao entre objetos / entities
 			Colisores Diagonais
 			Triggers
 			Atravessar plataformas
@@ -79,7 +76,6 @@ Segunda entrega / 17
 			Menu
 				Muitas telas
 			Gamepad
-			Coletaveis
 			Player
 				Ataque
 				Dano de Queda
