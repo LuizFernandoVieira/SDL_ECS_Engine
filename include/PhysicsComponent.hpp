@@ -7,13 +7,11 @@
 class PhysicsComponent : public Component
 {
 public:
-	PhysicsComponent() : gravityScale_(1.0) { /*speed_ = new Vec2();*/ }
+	PhysicsComponent() : gravityScale_(1.0) {}
+	PhysicsComponent(float gravityScale) : gravityScale_(gravityScale) {}
 	~PhysicsComponent() {}
-	// Vec2* getSpeed() { return speed_; }
-	// void setSpeed(Vec2& speed) { speed_ = &speed; }4
+
 	float gravityScale_;
-private:
-	// Vec2* speed_;
 };
 
 #endif

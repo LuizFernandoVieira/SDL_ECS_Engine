@@ -3,7 +3,7 @@
 
 #include "StateEventEnum.hpp"
 
-class State;
+class IState;
 
 class StateMachine
 {
@@ -13,14 +13,14 @@ public:
 	void create();
 	void update(float dt);
 	void render();
-	void changeState(State& state);
+	void changeState(IState& state);
 	void handle(StateEventEnum& event);
-	State* getState();
-	void setState(State& state);
+	IState* getState();
+	void setState(IState& state);
 private:
-	State* state_;
+	IState* state_;
 };
 
-#include "State.hpp"
+#include "IState.hpp"
 
 #endif

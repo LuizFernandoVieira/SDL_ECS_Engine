@@ -1,4 +1,4 @@
-#ifndef ENTITYSTATEMACHINE_HPP
+/*#ifndef ENTITYSTATEMACHINE_HPP
 #define ENTITYSTATEMACHINE_HPP
 
 #include "EntityState.hpp"
@@ -20,4 +20,4 @@ private:
 };
 
 
-#endif
+#endif*/

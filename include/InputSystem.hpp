@@ -12,9 +12,8 @@ class InputSystem : public System
 public:
 	InputSystem();
 	void update(
-		unsigned player,
-		std::map<int, StateComponent*> stateComp,
-		std::map<int, SpeedComponent*> speedComp
+		StateComponent* stateComp,
+		SpeedComponent* speedComp
 	);
 };
 

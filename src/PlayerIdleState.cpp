@@ -1,4 +1,4 @@
-#include "../include/PlayerIdleState.hpp"
+/*#include "../include/PlayerIdleState.hpp"
 #include "../include/InputHandler.hpp"
 #include "../include/PlayerWalkingState.hpp"
 #include "../include/PlayerJumpingState.hpp"
@@ -46,4 +46,4 @@ void PlayerIdleState::handle(StateComponent* stateComp, SpeedComponent* speedCom
 		stateMachine_->changeState(*state);
 		stateComp->setFacingRight(false);
 	}
-}
+}*/

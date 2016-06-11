@@ -20,31 +20,45 @@ A fazer:
 - Tirar create dos states;
 
 
-============ EDITOR DE MAPA ====================
+============== ESSA SEMANA ==================
+
+Player
+Inimigos
+Particle System
+Colisao especial pros diagonais
+menu
+
+=============== ENTREGAS ====================
 
 Segunda entrega / 17
 
 	Luiz
 		Particle System
 			Chuva
+			Neve
 			Vento
+
 		Inimigos
-				IA
+			IA
+				Coisa -> Zip Zag -> Distancia
+				Coisa -> Segue e para depois de uma distancia
+				Cerberus -> Bloca a passagem
+				Macaco -> Inimigo
 				Boss
+				Bicho que segue
 		NPC
-		Exception
-		Boiar na agua
+			Moça da Musica -> Chuva + Movimento de NPC + GC
+			Cachorro -> Dorme
+
 		Text
 
 	Victor
-		Editor de Mapa
-			Objetos
-			Scroll dos painéis :)
 		Colisao
+			Colisao entre objetos / entities
 			Colisores Diagonais
-		Triggers
-		Atravessar plataformas
-			(de baixo para cima)
+			Triggers
+			Atravessar plataformas
+				(de baixo para cima)
 
 	Thales
 		Sons
@@ -52,7 +66,6 @@ Segunda entrega / 17
 			Musicas
 		Objetos quebraveis
 		Checkpoints
-		Globals
 		Switchs
 
 	Victor & Thales
@@ -63,7 +76,6 @@ Segunda entrega / 17
 			Menu
 				Muitas telas
 			Gamepad
-			Coletaveis
 			Player
 				Ataque
 				Dano de Queda
@@ -74,3 +86,80 @@ Segunda entrega / 17
 
 Terceira entrega / 6
 	Selecionar tile set / tile map;
+
+
+===========================================================
+
+
+
+StateComponent
+{
+	State* state; // Idle, Walking, Jumping, Attacking -> igual para player, inimigos e objetos 
+}
+
+PlayerStateComponent : StateComponent
+{
+	State* umbrellaState // Open, closed -> só pro player
+	State* umbrellaDirection // Up, down, left, right
+}
+
+
+
+InputSystem::update
+{
+	if (input.keyPress(RIGHT))
+		if (state == Falling)
+			speed.x = SPEED
+		else
+			speed.x = SPEED_JUMPING
+			state.changeState(Walking)
+
+	if (input.keyPress(UP))
+		umbrellaState = UP;
+}
+
+PlayerSystem::update
+{
+	if (player.state == Falling AND player.umbrellaState == Open | Up)
+		player.physics.gravityScale = GRAVITY_SCALE * 0.2
+	if (player.state == Zipline)
+		player.speed = Vec2(compX, compY)
+}
+
+GravitySystem::update
+{
+	if speed.y < 0
+		speed.y -= GRAVITY * fator
+	else
+		speed.y = GRAVITY
+		state.changeState(Falling) (?)
+}
+
+MoveSystem::update
+{
+	transform += speed * dt;
+}
+
+CollisionSystem::update
+{
+	if (isColliding(TERRENO))
+		arruma transform
+		speed.y = 0
+		if (speed.x == 0)
+			state.changeState(Idle)
+		else
+			state.changeState(Walking)
+	else
+		if (speed.y > 0)
+			state.changeState(Falling)
+}
+
+RenderSystem::update
+{
+	if (player)
+		if (state.hasChanged OR umbrellaState.hasChanged)
+			render.setSprite(state, umbrellaState)
+	else
+		if (state.hasChanged)
+			render.setSprite(state)
+}

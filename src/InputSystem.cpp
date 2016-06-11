@@ -8,41 +8,69 @@ InputSystem::InputSystem()
 }
 
 void InputSystem::update(
-	unsigned player,
-	std::map<int, StateComponent*> stateComp,
-	std::map<int, SpeedComponent*> speedComp)
+	StateComponent* stateComp,
+	SpeedComponent* speedComp)
 {
-	InputHandler& inputHandler = InputHandler::getInstance();
+	InputHandler& input = InputHandler::getInstance();
 
 
 	if (
-		(inputHandler.isKeyDown(LEFT_ARROW_KEY) &&
-		!inputHandler.isKeyDown(RIGHT_ARROW_KEY)) ||
-		(inputHandler.isGamePadDown(GAMEPAD_ARROW_LEFT) &&
-		!inputHandler.isGamePadDown(GAMEPAD_ARROW_RIGHT))
+		(input.isKeyDown('a') &&
+		!input.isKeyDown('d')) ||
+		(input.isGamePadDown(GAMEPAD_ARROW_LEFT) &&
+		!input.isGamePadDown(GAMEPAD_ARROW_RIGHT))
 	)
 	{
-		speedComp[player]->speed_.x(-Resources::PLAYER_WALK_SPEED);
+		// WALKING LEFT
+		speedComp->speed_.x(-Resources::PLAYER_WALK_SPEED);
+		stateComp->facingRight_ = false;
+		if (stateComp->state_ != State::JUMPING && stateComp->state_ != State::FALLING)
+			stateComp->state_ = State::WALKING;
 	}
 	else if (
-		(inputHandler.isKeyDown(RIGHT_ARROW_KEY) &&
-		!inputHandler.isKeyDown(LEFT_ARROW_KEY)) ||
-		(inputHandler.isGamePadDown(GAMEPAD_ARROW_RIGHT) &&
-		!inputHandler.isGamePadDown(GAMEPAD_ARROW_LEFT)))
+		(input.isKeyDown('d') &&
+		!input.isKeyDown('a')) ||
+		(input.isGamePadDown(GAMEPAD_ARROW_RIGHT) &&
+		!input.isGamePadDown(GAMEPAD_ARROW_LEFT)))
 	{
-		speedComp[player]->speed_.x(Resources::PLAYER_WALK_SPEED);
+		// WALKING RIGHT
+		speedComp->speed_.x(Resources::PLAYER_WALK_SPEED);
+		stateComp->facingRight_ = true;
+		if (stateComp->state_ != State::JUMPING && stateComp->state_ != State::FALLING)
+			stateComp->state_ = State::WALKING;
 	}
 	else
 	{
-		speedComp[player]->speed_.x(0.0);
+		// BACK TO IDLE
+		speedComp->speed_.x(0.0);
+		if (stateComp->state_ != State::JUMPING && stateComp->state_ != State::FALLING)
+			stateComp->state_ = State::IDLE;
 	}
 
-	if (inputHandler.keyPress(SPACE_BAR) || inputHandler.gamePadPress(GAMEPAD_A))
+	if (input.keyPress('w') || input.gamePadPress(GAMEPAD_A))
 	{
-		// PULO
-		// Checar se pode pular no estado atual
-		if ( !stateComp[player]->getState()->is("JumpingState") &&
-			!stateComp[player]->getState()->is("FallingState"))
-			speedComp[player]->speed_.y(-Resources::PLAYER_JUMP_SPEED);
+		if ( stateComp->state_ != State::JUMPING &&
+			stateComp->state_ != State::FALLING)
+		{
+			// PULO
+			speedComp->speed_.y(-Resources::PLAYER_JUMP_SPEED);
+			stateComp->state_ = State::JUMPING;
+		}
 	}
+
+	if (input.keyPress(SPACE_BAR))
+	{
+		if ( stateComp->state_ == State::JUMPING ||
+			stateComp->state_ == State::FALLING)
+		{
+			// ZIPLINE
+		}
+		else
+		{
+			// ATAQUE
+		}
+	}
+
+	// GUARDA CHUVA
+	// sei nem como
 }

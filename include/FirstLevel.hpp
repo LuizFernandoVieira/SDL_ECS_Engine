@@ -13,13 +13,16 @@ class FirstLevel : public Level
 public:
 	FirstLevel();
 	~FirstLevel();
-	void render();
+	void render(int layer);
 	// std::vector<std::pair<int, TransformComponent*>> createTerrain(unsigned int& nextId);
 	CollisionMap& getCollisionMap();
+	pugi::xml_document& getObjectMap();
+
 private:
 	StaticSprite bg;
 	TileSet tileSet_;
 	TileMap tileMap_;
+	ObjectMap objectMap_;
 	CollisionMap collisionMap_;
 };
 

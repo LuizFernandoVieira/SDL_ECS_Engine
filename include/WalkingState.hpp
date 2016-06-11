@@ -1,4 +1,4 @@
-#ifndef WALKINGSTATE_HPP
+/*#ifndef WALKINGSTATE_HPP
 #define WALKINGSTATE_HPP
 
 #include <string>
@@ -18,4 +18,4 @@ public:
 	// }
 };
 
-#endif
+#endif*/

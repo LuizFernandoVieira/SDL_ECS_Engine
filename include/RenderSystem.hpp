@@ -14,10 +14,12 @@ public:
 	RenderSystem();
 	void update(
 		float dt,
+		std::map<int, StateComponent*> oldState,
 		std::map<int, StateComponent*> stateComp,
-		std::map<int, RenderComponent*> renderComp
+		std::map<int, std::map<int, RenderComponent*>> renderComp
 	);
 	void render(
+		int layer,
 		std::map<int, TransformComponent*> transfComp,
 		std::map<int, StateComponent*> stateComp,
 		std::map<int, RenderComponent*> renderComp

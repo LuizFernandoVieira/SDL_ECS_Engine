@@ -6,7 +6,7 @@
 
 #include "StaticSprite.hpp"
 #include "Rect.hpp"
-#include "State.hpp"
+// #include "IState.hpp"
 
 class Button
 {

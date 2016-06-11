@@ -1,4 +1,4 @@
-#ifndef FALLINGSTATE_HPP
+/*#ifndef FALLINGSTATE_HPP
 #define FALLINGSTATE_HPP
 
 #include <string>
@@ -11,4 +11,4 @@ public:
 	FallingState(EntityStateMachine& stateMachine) : EntityState(stateMachine, "FallingState") {}
 };
 
-#endif
+#endif*/

@@ -1,4 +1,4 @@
-#ifndef STATESYSTEM_HPP
+/*#ifndef STATESYSTEM_HPP
 #define STATESYSTEM_HPP
 
 #include <map>
@@ -17,4 +17,4 @@ public:
 	);
 };
 
-#endif
+#endif*/

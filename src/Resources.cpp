@@ -1,6 +1,6 @@
 #ifdef __APPLE__
 	#include <SDL2_image/SDL_image.h>
-	#include <SDL2_mixer/SDL_mixer.h>	
+	#include <SDL2_mixer/SDL_mixer.h>
 #else
 	#include "SDL_image.h"
 	#include "SDL_mixer.h"
@@ -42,8 +42,7 @@ std::shared_ptr<SDL_Texture> Resources::GetImage(std::string file)
 		SDL_Texture* texture = IMG_LoadTexture ( Game::getInstance().getRenderer() , file.c_str() );
 
 		if (texture == NULL) {
-			std::cout << "Erro no carregamento da textura" << std::endl;
-			std::string imgError = IMG_GetError();
+			std::cout << "Erro no carregamento da textura " << file << ": " << IMG_GetError() << std::endl;
 		}
 
 		std::shared_ptr<SDL_Texture> ptr (texture, deleteTexture);
@@ -106,9 +105,9 @@ void Resources::Read(std::string _filename){
 		std::cout << "Error Reading CONFIG_FILE: " << config.description() << std::endl;
 		std::cout << "\tStatus code: " << config.status << std::endl;
 	}
-
 	else std::cout << "Load result: " << config.description() << std::endl;
 	std::cout << std::endl;
+
 
 	_node node = doc.first_child();
 
@@ -144,4 +143,34 @@ void Resources::Read(std::string _filename){
 
 	PLAYER_JUMP_SPEED 	= floatTable["PLAYER_JUMP_SPEED"];
 	PLAYER_WALK_SPEED 	= floatTable["PLAYER_WALK_SPEED"];
+
+
+
+	//Test Printing
+	if (PRINTITALL){
+
+		std::cout << "Float Values:" << std::endl;
+		for ( auto it = floatTable.begin(); it != floatTable.end(); ++it)
+			std::cout << "\t" << it->first << " : " << it->second << std::endl;
+		std::cout << std::endl;
+
+
+		std::cout << "Int Values:" << std::endl;
+		for ( auto it = intTable.begin(); it != intTable.end(); ++it)
+			std::cout << "\t" << it->first << " : " << it->second << std::endl;
+		std::cout << std::endl;
+
+
+		std::cout << "Images:" << std::endl;
+		for ( auto it = imageTable.begin(); it != imageTable.end(); ++it){
+			std::cout << "\t" << it->first;
+			if (it->second == nullptr)
+				std::cout << "Failure" << std::endl;
+			else std::cout << "Success" << std::endl;
+		}
+		std::cout << std::endl;
+	}
+
+	std::cout << std::endl << "Resources Loaded Successfully" << std::endl;
+
 }

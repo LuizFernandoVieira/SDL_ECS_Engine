@@ -1,4 +1,4 @@
-#ifndef PLAYERJUMPINGSTATE_HPP
+/*#ifndef PLAYERJUMPINGSTATE_HPP
 #define PLAYERJUMPINGSTATE_HPP
 
 #include "JumpingState.hpp"
@@ -20,4 +20,4 @@ public:
 	// }
 };
 
-#endif
+#endif*/

@@ -1,4 +1,4 @@
-#include "../include/EntityStateMachine.hpp"
+/*#include "../include/EntityStateMachine.hpp"
 #include "../include/PlayerIdleState.hpp"
 
 EntityStateMachine::EntityStateMachine(StateMachineType type) : changed_(false)
@@ -43,4 +43,4 @@ void EntityStateMachine::setCurrentState(EntityState& state)
 bool EntityStateMachine::hasChanged()
 {
 	return changed_;
-}
+}*/

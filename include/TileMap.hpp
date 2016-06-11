@@ -16,8 +16,8 @@ public:
 	void save();
 	void setTileSet(TileSet* tileSet);
 	int& at(int x, int y, int z=0);
-	void render(int cameraX, int cameraY);
-	void renderLayer(int layer, int cameraX, int cameraY);
+	void render(int x, int y);
+	void renderLayer(int layer, int x, int y);
 	int getWidth() const;
 	int getHeight() const;
 	int getDepth() const;

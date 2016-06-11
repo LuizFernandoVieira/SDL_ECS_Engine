@@ -14,8 +14,8 @@ StateMachine::~StateMachine()
 
 void StateMachine::create()
 {
-	 state_ = new GameState();
-	//state_ = new LevelEditorState();
+	state_ = new GameState();
+	// state_ = new LevelEditorState();
 	state_->create(*this);
 }
 
@@ -29,7 +29,7 @@ void StateMachine::render()
 	state_->render();
 }
 
-void StateMachine::changeState(State& state)
+void StateMachine::changeState(IState& state)
 {
 	state_ = &state;
 	state_->create(*this);
@@ -40,12 +40,12 @@ void StateMachine::handle(StateEventEnum& event)
 	state_->handle(event);
 }
 
-State* StateMachine::getState()
+IState* StateMachine::getState()
 {
 	return state_;
 }
 
-void StateMachine::setState(State& state)
+void StateMachine::setState(IState& state)
 {
 	state_ = &state;
 }

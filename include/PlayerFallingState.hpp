@@ -1,4 +1,4 @@
-#ifndef PLAYERFALLINGSTATE_HPP
+/*#ifndef PLAYERFALLINGSTATE_HPP
 #define PLAYERFALLINGSTATE_HPP
 
 #include "FallingState.hpp"
@@ -12,4 +12,4 @@ public:
 	void handle(StateComponent* stateComp, SpeedComponent* speedComp);
 };
 
-#endif
+#endif*/

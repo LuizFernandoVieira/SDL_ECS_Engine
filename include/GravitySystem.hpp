@@ -5,6 +5,7 @@
 
 #include "System.hpp"
 #include "SpeedComponent.hpp"
+#include "StateComponent.hpp"
 #include "PhysicsComponent.hpp"
 
 class GravitySystem : public System
@@ -13,8 +14,9 @@ public:
 	GravitySystem();
 	void update(
 		float dt,
-		std::map<int, SpeedComponent*> sc,
-		std::map<int, PhysicsComponent*> pc
+		std::map<int, SpeedComponent*> speed,
+		std::map<int, PhysicsComponent*> physics,
+		std::map<int, StateComponent*> state
 	);
 };
 

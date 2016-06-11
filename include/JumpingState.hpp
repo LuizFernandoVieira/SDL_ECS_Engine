@@ -1,4 +1,4 @@
-#ifndef JUMPINGSTATE_HPP
+/*#ifndef JUMPINGSTATE_HPP
 #define JUMPINGSTATE_HPP
 
 #include <string>
@@ -11,4 +11,4 @@ public:
 	JumpingState(EntityStateMachine& stateMachine) : EntityState(stateMachine, "JumpingState") {}
 };
 
-#endif
+#endif*/

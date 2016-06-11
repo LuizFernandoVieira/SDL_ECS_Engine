@@ -7,9 +7,9 @@
 class SpeedComponent : public Component
 {
 public:
-	SpeedComponent() : speed_() { /*rect_ = new Rect();*/ }
+	SpeedComponent() : speed_() {}
 	SpeedComponent(Vec2 speed) { speed_ = speed; }
-	~SpeedComponent() { /*delete rect_;*/ }
+	~SpeedComponent() {}
 
 	Vec2 speed_;
 };

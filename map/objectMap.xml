@@ -1,42 +1,36 @@
-<!-- // {
-// 	"name": "Object",
-// 	"file_name": "img/file_name",
-// 	"components": {
-// 		"render": {
-// 			"sprite": {
-// 				"stateName": "name",
-// 				"file_name": "name"
-// 				// "frameCount": 0,
-// 				// "frameTime": 0.0
-// 			}
-// 		},
-// 		"collider": { 
-// 			"x": 0, 
-// 			"y": 0, 
-// 			"w": 0, 
-// 			"h": 0 
-// 		},
-// 		"physics": { 
-// 			"gravityScale": 1.0 
-// 		}
-// 	}
-// } -->
-<?xml version="1.0" encoding="UTF-8"?>
-<object>
-	<name>Object</name>
-	<file_name>img/coisa.png</file_name>
-	<components>
-		<render>
-			<sprite>
-				<state_name>name</state_name>
-				<file_name>name</file_name>
-				<frame_count>1</frame_count>
-				<frame_time>1.0</frame_time>
-			</sprite>
-		</render>
-		<collider x=0 y=0 w=0 h=0 />
-		<physics>
-			<gravity_scale>1.0</gravity_scale>
-		</physics>
-	</components>
+<?xml version="1.0"?>
+<object name="cerca" id="11" layer="0">
+	<transform x="385" y="522" w="252" h="52" />
+	<render>
+		<sprite state="0" filename="../img/maps/test/cerquinha_252x52.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="cerca" id="12" layer="0">
+	<transform x="638" y="522" w="252" h="52" />
+	<render>
+		<sprite state="0" filename="../img/maps/test/cerquinha_252x52.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="fonte" id="13" layer="2">
+	<transform x="249" y="0" w="320" h="384" />
+	<render>
+		<sprite state="0" filename="../img/maps/test/fountain_320x384.png" frame_count="10" frame_time="0.2" />
+	</render>
+	<state />
+</object>
+<object name="canil" id="14" layer="3">
+	<transform x="141" y="64" w="96" h="128" />
+	<render>
+		<sprite state="0" filename="../img/maps/test/canil_prpl_96x128.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="canil" id="16" layer="2">
+	<transform x="631" y="256" w="96" h="128" />
+	<render>
+		<sprite state="0" filename="../img/maps/test/canil_prpl_96x128.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
 </object>

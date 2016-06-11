@@ -12,8 +12,6 @@
 
 #define AUDIO_MAXLAYERS 8
 
-//typedef float values[AUDIO_MAXLAYERS] volume;
-
 class Music
 {
 public:
@@ -29,9 +27,9 @@ public:
 
 private:
 	Mix_Chunk* 	layer[AUDIO_MAXLAYERS];
+
 	int			channel[AUDIO_MAXLAYERS];
 
 	float 		volume[AUDIO_MAXLAYERS];
 	float 		volumeCurrent[AUDIO_MAXLAYERS];
-	
 };

@@ -1,4 +1,4 @@
-#include "../include/StateSystem.hpp"
+/*#include "../include/StateSystem.hpp"
 
 #include <iostream>
 
@@ -15,3 +15,4 @@ void StateSystem::update(
 		it->second->getStateMachine()->handle(it->second, speedComp[it->first]);
 	}
 }
+*/

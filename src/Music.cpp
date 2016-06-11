@@ -99,8 +99,7 @@ void Music::Open(std::string file){
 bool Music::IsOpen(){
 	for (int i = 0; i < AUDIO_MAXLAYERS; ++i)
 		if (layer[i] != nullptr)
-			return true; 
-
+			return true;
 
 	return false;
 }
@@ -111,10 +110,8 @@ void Music::Update(){
 	short int i;
 	short int volume_diff;
 
-	//std::string GetPlayerState
+	//GetPlayerState
 	//GetVolume
-
-	//GetVolume(GetPlayerState());
 
 	//Volume Setting
 	if (In.keyPress(NUMKEY_1))

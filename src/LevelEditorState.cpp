@@ -10,12 +10,16 @@ mainPanel_(Rect(0, 0, Resources::WINDOW_WIDTH, Resources::WINDOW_HEIGHT), "../im
 	tileSet_ = new TileSet(Resources::TILE_WIDTH, Resources::TILE_HEIGHT, "../img/maps/test/tile_set.png");
 	tileMap_ = new TileMap("../map/tileMap.txt", tileSet_);
 	collisionMap_ = new CollisionMap("../map/collisionMap.txt");
-	objectMap_ = new ObjectMap("../map/objectMap.txt");
+	objectMap_ = new ObjectMap("../map/globalObjectMap.xml", "../map/objectMap.xml");
 	selectedTile_ = 0;
 	selectedTool_ = ADD;
 	selectedLayer_ = 1;
 	selectedCollision_ = 0;
 	selectedTab_ = NULL;
+	selectedObject_ = 0;
+
+	// objectMap_->addObject(1, 0, 10, 20);
+	// objectMap_->save();
 }
 
 LevelEditorState::~LevelEditorState()
@@ -23,6 +27,7 @@ LevelEditorState::~LevelEditorState()
 	delete tileMap_;
 	delete tileSet_;
 	delete collisionMap_;
+	delete objectMap_;
 	delete addTilesBtn_;
 	delete selectTilesBtn_;
 	delete deleteTilesBtn_;
@@ -68,9 +73,9 @@ void LevelEditorState::initGUI()
 
 	// Panel
 	Panel* leftPanel  = new Panel(leftRect, "../img/interface/editor/left_panel.png");
-	tileSetAndObjectsPanel_ = new TileSetAndObjectsPanel(tileSetAndObjectsRect, "../img/interface/editor/tile_set_panel.png");
+	tileSetAndObjectsPanel_ = new TileSetAndObjectsPanel(tileSetAndObjectsRect, "../img/interface/editor/tile_set_panel.png", objectMap_, selectedObject_);
 	selectedTab_ = &tileSetAndObjectsPanel_->getSelectedTab();
-	Panel* rightPanel = new TileMapPanel(*tileSet_, *tileMap_, *collisionMap_, rightRect, "../img/interface/editor/tile_map_panel.png", selectedTile_, selectedLayer_, selectedCollision_, (int*)selectedTab_, selectedTool_);
+	Panel* rightPanel = new TileMapPanel(*tileSet_, *tileMap_, *collisionMap_, *objectMap_, rightRect, "../img/interface/editor/tile_map_panel.png", selectedTile_, selectedLayer_, selectedCollision_, (int*)selectedTab_, selectedObject_, selectedTool_);
 
 	Panel* layersPanel = new Panel(layersRect, "../img/interface/editor/tile_set_panel.png");
 
@@ -94,7 +99,10 @@ void LevelEditorState::initGUI()
 	layerButtons_[3]->setResizable(true);
 
 	//                    pq caralhos esse rect vvvvv nao eh alterado??
-	collisionButtons_.emplace_back(new Button(Rect(0,0,32,32), "../img/interface/editor/btn_5.png"/*, tileBtnExecute*/));
+	collisionButtons_.emplace_back(new Button(Rect(0,0,32,32), "../img/interface/editor/btn_6.png"));
+	collisionButtons_.emplace_back(new Button(Rect(0,0,32,32), "../img/interface/editor/btn_collision_1.png"));
+	collisionButtons_.emplace_back(new Button(Rect(0,0,32,32), "../img/interface/editor/btn_collision_2.png"));
+	collisionButtons_.emplace_back(new Button(Rect(0,0,32,32), "../img/interface/editor/btn_collision_3.png"));
 
 	// Add
 	mainPanel_.add(*rightPanel, rightRectProportion);
@@ -140,7 +148,7 @@ void LevelEditorState::initGUI()
 				Resources::TILE_HEIGHT )
 		);
 		tileSetAndObjectsPanel_->addButton(*btn, TileSetAndObjectsPanel::Tab::TILES);
-		tileButtons_.push_back(btn);
+		tileButtons_.emplace_back(btn);
 	}
 
 	// Collision buttons
@@ -175,6 +183,10 @@ void LevelEditorState::update(float dt)
 	}
 
 	Camera::update(dt);
+
+	std::cout << tileButtons_[0]->getRect().x() << ", " << tileButtons_[0]->getRect().y() << ", " << tileButtons_[0]->getRect().w() << ", " << tileButtons_[0]->getRect().h() << std::endl;
+
+	mainPanel_.update();
 
 	if (InputHandler::getInstance().mousePress(LEFT_MOUSE_BUTTON))
 	{
@@ -220,8 +232,6 @@ void LevelEditorState::update(float dt)
 			}
 		}
 	}
-
-	mainPanel_.update();
 
 	if(InputHandler::getInstance().quitRequested()) {
 		setQuit(true);
