@@ -13,6 +13,12 @@
 #include <string>
 #include <sstream>
 #include <memory>
+#include "pugixml.hpp"
+
+#define _attribute	pugi::xml_attribute
+#define _node		pugi::xml_node
+#define _document	pugi::xml_document
+#define _parse		pugi::xml_parse_result
 
 auto deleteTexture = [] (SDL_Texture* texture)
 {
@@ -34,7 +40,6 @@ public:
 	static float PLAYER_JUMP_SPEED;
 
 	static void Read(std::string filename_);
-	static void xmlRead(std::string filename_);
 
 	//Global Values
 	static std::unordered_map<std::string, int>			intTable;
@@ -52,6 +57,8 @@ public:
 private:
 	static std::unordered_map<std::string, std::shared_ptr<SDL_Texture>> 	imageTable;
 	static std::unordered_map<std::string, Mix_Chunk*> 						soundTable;
+
+	//static _document config;
 };
 
 #endif
