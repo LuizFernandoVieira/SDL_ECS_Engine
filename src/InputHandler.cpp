@@ -1,7 +1,7 @@
 #include "../include/InputHandler.hpp"
 #include "../include/Resources.hpp"
 
-InputHandler::InputHandler()
+InputHandler::InputHandler() : inputText()
 {
 	for (int i = 0; i < 6; i++) {
 		mouseState[i] = false;
@@ -38,6 +38,7 @@ void InputHandler::update()
 	updateCounter++;
 	quit = false;
 	screenResized = false;
+	inputText.erase();
 
 	// Obtenha as coordenadas do mouse
 	SDL_GetMouseState(&mouseX, &mouseY);
@@ -49,19 +50,19 @@ void InputHandler::update()
 			quit = true;
 		}
 
-		if (event.type == SDL_MOUSEBUTTONDOWN)
+		else if (event.type == SDL_MOUSEBUTTONDOWN)
 		{
 			mouseState[event.button.button] = true;
 			mouseUpdate[event.button.button] = updateCounter;
 		}
 
-		if (event.type == SDL_MOUSEBUTTONUP)
+		else if (event.type == SDL_MOUSEBUTTONUP)
 		{
 			mouseState[event.button.button] = false;
 			mouseUpdate[event.button.button] = updateCounter;
 		}
 
-		if (event.type == SDL_KEYDOWN && !event.key.repeat)
+		else if (event.type == SDL_KEYDOWN && !event.key.repeat)
 		{
 			if (event.key.keysym.sym < 0x40000000)
 			{
@@ -75,7 +76,7 @@ void InputHandler::update()
 			}
 		}
 
-		if (event.type == SDL_KEYUP && !event.key.repeat)
+		else if (event.type == SDL_KEYUP && !event.key.repeat)
 		{
 			if (event.key.keysym.sym < 0x40000000)
 			{
@@ -89,12 +90,15 @@ void InputHandler::update()
 			}
 		}
 
-		if (event.type == SDL_WINDOWEVENT)
+		else if (event.type == SDL_TEXTINPUT)
+		{
+			inputText += event.text.text;
+		}
+
+		else if (event.type == SDL_WINDOWEVENT)
 		{
 			if (event.window.event == SDL_WINDOWEVENT_RESIZED)
 			{
-				// screenWidth = event.window.data1,
-				// screenHeight = event.window.data2;
 				Resources::WINDOW_WIDTH = event.window.data1;
 				Resources::WINDOW_HEIGHT = event.window.data2;
 				screenResized = true;
@@ -102,8 +106,8 @@ void InputHandler::update()
 		}
 
 		// ANALOGICO (LA RA)
-		if (event.type == SDL_JOYAXISMOTION )
-    {
+		else if (event.type == SDL_JOYAXISMOTION )
+		{
 			if( event.jaxis.which == 0 )
 			{
 				//X axis motion
@@ -120,30 +124,30 @@ void InputHandler::update()
 				}
 				//Y axis motion
 				if( event.jaxis.axis == 1 )
-        {
-            if( event.jaxis.value < -JOYSTICK_DEAD_ZONE )
-            {
-							std::cout << "arrow up" << std::endl;
-            }
-            else if( event.jaxis.value > JOYSTICK_DEAD_ZONE )
-            {
-							std::cout << "arrow down" << std::endl;
-            }
-        }
+				{
+					if( event.jaxis.value < -JOYSTICK_DEAD_ZONE )
+					{
+						std::cout << "arrow up" << std::endl;
+					}
+					else if( event.jaxis.value > JOYSTICK_DEAD_ZONE )
+					{
+						std::cout << "arrow down" << std::endl;
+					}
+				}
 			}
 		}
 
 		// BUTTON EVENTS (LB RB ARROWS YXBA)
-		if (event.type == SDL_JOYBUTTONDOWN )
+		else if (event.type == SDL_JOYBUTTONDOWN )
 		{
 				gamePadState[event.jbutton.button] = true;
 				gamePadUpdate[event.jbutton.button] = updateCounter;
 		}
 
-		if (event.type == SDL_JOYBUTTONUP )
+		else if (event.type == SDL_JOYBUTTONUP )
 		{
-				gamePadState[event.jbutton.button] = false;
-				gamePadUpdate[event.jbutton.button] = updateCounter;
+			gamePadState[event.jbutton.button] = false;
+			gamePadUpdate[event.jbutton.button] = updateCounter;
 		}
 
 		// if (event.type == SDL_JOYBUTTONUP )
@@ -284,12 +288,12 @@ bool InputHandler::getScreenResized()
 	return screenResized;
 }
 
-// int InputHandler::getScreenWidth()
-// {
-// 	return screenWidth;
-// }
+bool InputHandler::textInput()
+{
+	return !inputText.empty();
+}
 
-// int InputHandler::getScreenHeight()
-// {
-// 	return screenHeight;
-// }
+std::string InputHandler::getText()
+{
+	return inputText;
+}

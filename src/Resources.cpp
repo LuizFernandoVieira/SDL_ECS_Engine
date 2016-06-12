@@ -1,13 +1,7 @@
-#ifdef __APPLE__
-	#include <SDL2_image/SDL_image.h>
-	#include <SDL2_mixer/SDL_mixer.h>
-#else
-	#include "SDL_image.h"
-	#include "SDL_mixer.h"
-#endif
-
 #include <fstream>
 #include <string>
+#include <sstream>
+
 #include "../include/Resources.hpp"
 #include "../include/Game.hpp"
 #include "../include/pugixml.hpp"
@@ -20,11 +14,15 @@
 #define _node		pugi::xml_node
 #define _document	pugi::xml_document
 
+
+
 std::unordered_map<std::string, float> Resources::floatTable;
 std::unordered_map<std::string, int> 	Resources::intTable;
 
 std::unordered_map<std::string, std::shared_ptr<SDL_Texture>> 	Resources::imageTable;
 std::unordered_map<std::string, Mix_Chunk*> 					Resources::soundTable;
+std::unordered_map<std::string, std::shared_ptr<TTF_Font>> 		Resources::fontTable;
+
 
 std::shared_ptr<SDL_Texture> Resources::GetImage(std::string file)
 {
@@ -38,6 +36,10 @@ std::shared_ptr<SDL_Texture> Resources::GetImage(std::string file)
 			std::cout << "Erro no carregamento da textura " << file << ": " << IMG_GetError() << std::endl;
 		}
 
+		auto deleteTexture = [] (SDL_Texture* texture)
+		{
+			SDL_DestroyTexture(texture);
+		};
 		std::shared_ptr<SDL_Texture> ptr (texture, deleteTexture);
 
 		imageTable.emplace(file, ptr);
@@ -80,6 +82,50 @@ Mix_Chunk* Resources::GetSound(std::string file){
 
 void	Resources::ClearSounds(){
 	soundTable.clear();
+}
+
+
+
+
+std::shared_ptr<TTF_Font> Resources::GetFont(std::string file, int fontSize)
+{
+	std::ostringstream ss;
+	ss << fontSize;
+	auto it = fontTable.find(file + ss.str());
+
+	if ( it == fontTable.end() )
+	{
+		// Nao achou musica na tabela, carrega
+		TTF_Font* font = TTF_OpenFont(file.c_str(), fontSize);
+		if (font == NULL)
+		{
+			std::cout << "Erro no carregamento da fonte " << file << ": " << TTF_GetError() << std::endl;
+		}
+
+		auto deleteFont = [] (TTF_Font* font)
+		{
+			TTF_CloseFont(font);
+		};
+		std::shared_ptr<TTF_Font> ptr (font, deleteFont);
+
+		fontTable.emplace(file + ss.str(), ptr);
+		return ptr;
+	}
+	else
+	{
+		// Musica ja está carregada, retorna ponteiro para ela
+		std::shared_ptr<TTF_Font> font = it->second;
+		return font;
+	}
+}
+
+void Resources::ClearFonts()
+{
+	for ( auto it = fontTable.begin() ; it != fontTable.end(); ++it )
+	{
+		if (it->second.unique())
+			fontTable.erase(it);
+	}
 }
 
 

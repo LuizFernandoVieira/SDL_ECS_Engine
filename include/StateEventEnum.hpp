@@ -1,9 +1,10 @@
-#ifndef STATEEVENTENUM_HPP
-#define STATEEVENTENUM_HPP
+// #ifndef STATEEVENTENUM_HPP
+// #define STATEEVENTENUM_HPP
 
-enum StateEventEnum
-{
-	BLA
-};
+// enum StateEventEnum
+// {
+// 	START_GAME,
+// 	START_EDITOR
+// };
 
-#endif
+// #endif

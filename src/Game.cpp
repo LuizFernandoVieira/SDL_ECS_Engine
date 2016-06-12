@@ -1,8 +1,9 @@
 #include "../include/Game.hpp"
+#include "../include/Resources.hpp"
 
 Game* Game::instance_;
 
-Game::Game(int width, int height)
+Game::Game(const char* name, int width, int height) : stateStack_()
 {
 	dt_ = 0.0;
 	frameStart_ = 0;
@@ -14,21 +15,27 @@ Game::Game(int width, int height)
 	instance_ = this;
 
 	initSDL();
-	initWindow(width, height);
+	initWindow(name, width, height);
 	initRenderer();
 	initControllers();
 	initAudio();
+	initTTF();
 
-	stateMachine_ = new StateMachine();
-	stateMachine_->create();
+	storedState_ = NULL;
 }
 
 Game::~Game()
 {
+	if (storedState_ != NULL)
+		delete storedState_;
+
+	TTF_Quit();
 	Mix_Quit();
 	SDL_DestroyRenderer(renderer_);
 	SDL_DestroyWindow(window_);
 	SDL_Quit();
+
+	instance_ = NULL;
 }
 
 Game& Game::getInstance()
@@ -36,19 +43,74 @@ Game& Game::getInstance()
 	return *instance_;
 }
 
+void Game::push(IState* state)
+{
+	storedState_ = state;
+}
+
+IState& Game::getCurrentState()
+{
+	return *stateStack_.top();
+}
+
+SDL_Renderer* Game::getRenderer()
+{
+	return renderer_;
+}
+
+
+void Game::calculateDeltaTime()
+{
+	int lastFrameStart = frameStart_;
+	frameStart_ = SDL_GetTicks();
+	dt_ = (float)(frameStart_ - lastFrameStart) / 1000.0;
+}
+
+
 void Game::run()
 {
-	while(!stateMachine_->getState()->quitRequested())
+	if (storedState_ != NULL)
+	{
+		stateStack_.emplace(storedState_);
+		storedState_ = NULL;
+	}
+
+	while(!stateStack_.empty() && !stateStack_.top()->quitRequested())
 	{
 		calculateDeltaTime();
-		stateMachine_->update(dt_);
-		stateMachine_->render();
+
+		stateStack_.top()->update(dt_);
+		stateStack_.top()->render();
 		SDL_RenderPresent(renderer_);
+
+		if (stateStack_.top()->popRequested())
+		{
+			stateStack_.pop();
+			// Destruir todos os recursos carregados
+			Resources::ClearImages();
+			Resources::ClearSounds();
+			Resources::ClearFonts();
+			stateStack_.top()->resume();
+		}
+		if (storedState_ != NULL)
+		{
+			stateStack_.top()->pause();
+			stateStack_.emplace(storedState_);
+			storedState_ = NULL;
+		}
+
 		if ( (float)(SDL_GetTicks() - frameStart_) < 1000.0 / 60.0 )
 		{
 			SDL_Delay( (1000.0/60.0) - (frameStart_ - SDL_GetTicks()) );
 		}
 	}
+
+	while (!stateStack_.empty())
+		stateStack_.pop();
+
+	Resources::ClearImages();
+	Resources::ClearSounds();
+	Resources::ClearFonts();
 }
 
 void Game::initSDL()
@@ -60,7 +122,7 @@ void Game::initSDL()
 	}
 }
 
-void Game::initWindow(int width, int height)
+void Game::initWindow(const char* name, int width, int height)
 {
 	SDL_DisplayMode mode;
 	if (SDL_GetDesktopDisplayMode(0, &mode) != 0) {
@@ -71,7 +133,7 @@ void Game::initWindow(int width, int height)
 
 	window_ = SDL_CreateWindow 
 	( 	
-		"title", 
+		name, 
 		SDL_WINDOWPOS_CENTERED, 
 		SDL_WINDOWPOS_CENTERED, 
 		/*mode.w*/width, /*mode.h*/height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE 
@@ -137,15 +199,11 @@ void Game::initAudio(){
 	*/
 }
 
-
-
-void Game::calculateDeltaTime()
+void Game::initTTF()
 {
-	dt_ = (float)(SDL_GetTicks() - frameStart_) / 1000.0;
-	frameStart_ = SDL_GetTicks();
-}
-
-SDL_Renderer* Game::getRenderer()
-{
-	return renderer_;
+	if ( TTF_Init() != 0 )
+	{
+		std::cerr << "Erro na inicializacao da SDL_ttf: " << TTF_GetError() << std::endl;
+		exit(1);
+	}
 }

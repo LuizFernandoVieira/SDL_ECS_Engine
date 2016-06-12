@@ -2,8 +2,6 @@
 #define LEVELEDITORSTATE_HPP
 
 #include "IState.hpp"
-#include "StateMachine.hpp"
-#include "StateEventEnum.hpp"
 #include "Panel.hpp"
 #include "TileSet.hpp"
 #include "TileMap.hpp"
@@ -20,11 +18,14 @@ class LevelEditorState: public IState
 public:
 	LevelEditorState();
 	~LevelEditorState();
-	void create(StateMachine& stateMachine);
+
 	void initGUI();
+
 	void update(float dt);
 	void render();
-	void handle(StateEventEnum& event);
+
+	void pause();
+	void resume();
 
 	enum Tools {
 		ADD,

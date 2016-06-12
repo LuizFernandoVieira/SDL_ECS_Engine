@@ -1,26 +1,26 @@
-#ifndef STATEMACHINE_HPP
-#define STATEMACHINE_HPP
+// #ifndef STATEMACHINE_HPP
+// #define STATEMACHINE_HPP
 
-#include "StateEventEnum.hpp"
+// #include "StateEventEnum.hpp"
 
-class IState;
+// class IState;
 
-class StateMachine
-{
-public:
-	StateMachine();
-	~StateMachine();
-	void create();
-	void update(float dt);
-	void render();
-	void changeState(IState& state);
-	void handle(StateEventEnum& event);
-	IState* getState();
-	void setState(IState& state);
-private:
-	IState* state_;
-};
+// class StateMachine
+// {
+// public:
+// 	StateMachine();
+// 	~StateMachine();
+// 	void create();
+// 	void update(float dt);
+// 	void render();
+// 	void changeState(IState& state);
+// 	void handle(StateEventEnum& event);
+// 	IState* getState();
+// 	void setState(IState& state);
+// private:
+// 	IState* state_;
+// };
 
-#include "IState.hpp"
+// #include "IState.hpp"
 
-#endif
+// #endif

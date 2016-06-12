@@ -4,8 +4,6 @@
 #include <map>
 
 #include "IState.hpp"
-#include "StateMachine.hpp"
-#include "StateEventEnum.hpp"
 #include "Level.hpp"
 #include "ColliderComponent.hpp"
 #include "SpeedComponent.hpp"
@@ -25,10 +23,12 @@ class GameState: public IState
 public:
 	GameState();
 	~GameState();
-	void create(StateMachine& stateMachine);
+
 	void update(float dt);
 	void render();
-	void handle(StateEventEnum& event);
+
+	void pause();
+	void resume();
 
 private:
 	void createPlayer();

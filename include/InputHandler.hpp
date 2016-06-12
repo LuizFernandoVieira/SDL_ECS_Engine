@@ -9,6 +9,7 @@
 
 #include <iostream>
 #include <vector>
+#include <string>
 
 #include "Vec2.hpp"
 
@@ -20,6 +21,7 @@
 #define LEFT_MOUSE_BUTTON 	SDL_BUTTON_LEFT
 #define RIGHT_MOUSE_BUTTON 	SDL_BUTTON_RIGHT
 #define SPACE_BAR 			SDLK_SPACE
+#define BACKSPACE			SDLK_BACKSPACE
 #define NUMKEY_1			SDLK_1
 #define NUMKEY_2			SDLK_2
 #define NUMKEY_3			SDLK_3
@@ -44,40 +46,55 @@ class InputHandler
 {
 public:
 	static InputHandler& getInstance();
+
 	void update();
+
 	bool keyPress(int key);
 	bool keyRelease(int key);
 	bool isKeyDown(int key);
+
+	bool textInput();
+	std::string getText();
+
 	bool mousePress(int button);
 	bool mouseRelease(int button);
 	bool isMouseDown(int button);
-	bool gamePadPress(int button);
-	bool gamePadRelease(int button);
-	bool isGamePadDown(int button);
+
 	int getMouseX();
 	int getMouseY();
 	Vec2 getMouse();
+
+	bool gamePadPress(int button);
+	bool gamePadRelease(int button);
+	bool isGamePadDown(int button);
+
 	bool getScreenResized();
-	// int getScreenWidth();
-	// int getScreenHeight();
 	bool quitRequested();
+
 private:
 	InputHandler();
 	~InputHandler(){}
+
 	bool mouseState[6];
 	int mouseUpdate[6];
-	bool keyState[416];
-	int keyUpdate[416];
-	bool gamePadState[15];
-	int gamePadUpdate[15];
-	bool quit;
-	int updateCounter;
+
 	int mouseX;
 	int mouseY;
+
+	bool keyState[416];
+	int keyUpdate[416];
+
+	bool gamePadState[15];
+	int gamePadUpdate[15];
+
+	bool quit;
+	int updateCounter;
+
 	const int JOYSTICK_DEAD_ZONE = 8000;
-	// int screenWidth;
-	// int screenHeight;
+
 	bool screenResized;
+
+	std::string inputText;
 };
 
 #endif

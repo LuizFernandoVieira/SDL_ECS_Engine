@@ -18,8 +18,7 @@ mainPanel_(Rect(0, 0, Resources::WINDOW_WIDTH, Resources::WINDOW_HEIGHT), "../im
 	selectedTab_ = NULL;
 	selectedObject_ = 0;
 
-	// objectMap_->addObject(1, 0, 10, 20);
-	// objectMap_->save();
+	initGUI();
 }
 
 LevelEditorState::~LevelEditorState()
@@ -32,13 +31,6 @@ LevelEditorState::~LevelEditorState()
 	delete selectTilesBtn_;
 	delete deleteTilesBtn_;
 	tileButtons_.clear();
-}
-
-void LevelEditorState::create(StateMachine& stateMachine)
-{
-	stateMachine_ = &stateMachine;
-	quit = false;
-	initGUI();
 }
 
 void LevelEditorState::initGUI()
@@ -184,8 +176,6 @@ void LevelEditorState::update(float dt)
 
 	Camera::update(dt);
 
-	std::cout << tileButtons_[0]->getRect().x() << ", " << tileButtons_[0]->getRect().y() << ", " << tileButtons_[0]->getRect().w() << ", " << tileButtons_[0]->getRect().h() << std::endl;
-
 	mainPanel_.update();
 
 	if (InputHandler::getInstance().mousePress(LEFT_MOUSE_BUTTON))
@@ -233,8 +223,11 @@ void LevelEditorState::update(float dt)
 		}
 	}
 
+	if (InputHandler::getInstance().keyPress(ESCAPE_KEY)) {
+		pop_ = true;
+	}
 	if(InputHandler::getInstance().quitRequested()) {
-		setQuit(true);
+		quit_ = true;
 	}
 }
 
@@ -243,7 +236,14 @@ void LevelEditorState::render()
 	mainPanel_.render();
 }
 
-void LevelEditorState::handle(StateEventEnum& event)
+
+
+void LevelEditorState::pause()
+{
+
+}
+
+void LevelEditorState::resume()
 {
 
 }
