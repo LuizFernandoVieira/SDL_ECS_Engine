@@ -12,8 +12,6 @@
 
 #define AUDIO_MAXLAYERS 8
 
-//typedef float values[AUDIO_MAXLAYERS] volume;
-
 class Music
 {
 public:
@@ -34,5 +32,4 @@ private:
 
 	float 		volume[AUDIO_MAXLAYERS];
 	float 		volumeCurrent[AUDIO_MAXLAYERS];
-
 };

@@ -16,6 +16,12 @@
 #include <unordered_map>
 #include <string>
 #include <memory>
+#include "pugixml.hpp"
+
+#define _attribute	pugi::xml_attribute
+#define _node		pugi::xml_node
+#define _document	pugi::xml_document
+#define _parse		pugi::xml_parse_result
 
 
 class Resources
@@ -33,7 +39,6 @@ public:
 	static float PLAYER_JUMP_SPEED;
 
 	static void Read(std::string filename_);
-	static void xmlRead(std::string filename_);
 
 	// Global Values
 	static std::unordered_map<std::string, int>			intTable;
@@ -55,6 +60,8 @@ private:
 	static std::unordered_map<std::string, std::shared_ptr<SDL_Texture>> 	imageTable;
 	static std::unordered_map<std::string, Mix_Chunk*> 						soundTable;
 	static std::unordered_map<std::string, std::shared_ptr<TTF_Font>> 		fontTable;
+
+	//static _document config;
 };
 
 #endif
