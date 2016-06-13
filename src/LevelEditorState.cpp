@@ -23,6 +23,7 @@ mainPanel_(Rect(0, 0, Resources::WINDOW_WIDTH, Resources::WINDOW_HEIGHT), "../im
 
 LevelEditorState::~LevelEditorState()
 {
+	Camera::pos_ = Vec2(0,0);
 	delete tileMap_;
 	delete tileSet_;
 	delete collisionMap_;

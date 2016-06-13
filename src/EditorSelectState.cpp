@@ -75,7 +75,7 @@ void EditorSelectState::update(float dt)
 
 				textLabels.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Imagem tile set:", Colors::black));
 				textLabels[1]->setPos(200, 250, false, false);
-				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "../img/maps/test/tile_set.png", Colors::blue));
+				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "../img/maps/test/tile_set.png", Colors::black));
 				textAreas[1]->setPos(400, 250, false, false);
 
 				textLabels.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Largura:", Colors::black));
@@ -115,6 +115,10 @@ void EditorSelectState::update(float dt)
 				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "../map/objectMap.xml", Colors::black));
 				textAreas[3]->setPos(400, 450, false, false);
 
+			}
+			else if (btnReturnPos.isInside(input.getMouse()))
+			{
+				pop_ = true;
 			}
 		}
 	}
@@ -186,9 +190,10 @@ void EditorSelectState::render()
 
 		btnAccept.render(btnAcceptPos.x(), btnAcceptPos.y());
 		btnAcceptText.render();
-		btnReturn.render(btnReturnPos.x(), btnReturnPos.y());
-		btnReturnText.render();
 	}
+
+	btnReturn.render(btnReturnPos.x(), btnReturnPos.y());
+	btnReturnText.render();
 }
 
 
