@@ -114,45 +114,53 @@ void Music::Update(){
 	//GetVolume
 
 	//Volume Setting
-	if (In.keyPress(NUMKEY_1))
+	if (In.keyPress(NUMKEY_1)) {
 		if (volume[0] == 0)
 			volume[0] = MIX_MAX_VOLUME - 20;
 		else volume[0] = 0;
+	}
 
-	if (In.keyPress(NUMKEY_2))
+	if (In.keyPress(NUMKEY_2)) {
 		if (volume[1] == 0)
 			volume[1] = MIX_MAX_VOLUME - 20;
 		else volume[1] = 0;
+	}
 
-	if (In.keyPress(NUMKEY_3))
+	if (In.keyPress(NUMKEY_3)) {
 		if (volume[2] == 0)
 			volume[2] = MIX_MAX_VOLUME - 20;
 		else volume[2] = 0;
+	}
 
-	if (In.keyPress(NUMKEY_4))
+	if (In.keyPress(NUMKEY_4)) {
 		if (volume[3] == 0)
 			volume[3] = MIX_MAX_VOLUME - 20;
 		else volume[3] = 0;
+	}
 
-	if (In.keyPress(NUMKEY_5))
+	if (In.keyPress(NUMKEY_5)) {
 		if (volume[4] == 0)
 			volume[4] = MIX_MAX_VOLUME - 20;
 		else volume[4] = 0;
+	}
 
-	if (In.keyPress(NUMKEY_6))
+	if (In.keyPress(NUMKEY_6)) {
 		if (volume[5] == 0)
 			volume[5] = MIX_MAX_VOLUME - 20;
 		else volume[5] = 0;
+	}
 
-	if (In.keyPress(NUMKEY_7))
+	if (In.keyPress(NUMKEY_7)) {
 		if (volume[6] == 0)
 			volume[6] = MIX_MAX_VOLUME - 20;
 		else volume[6] = 0;
+	}
 
-	if (In.keyPress(NUMKEY_8))
+	if (In.keyPress(NUMKEY_8)) {
 		if (volume[7] == 0)
 			volume[7] = MIX_MAX_VOLUME - 20;
 		else volume[7] = 0;
+	}
 
 	//Fading Loop
 	for (i = 0; i < AUDIO_MAXLAYERS; i++){

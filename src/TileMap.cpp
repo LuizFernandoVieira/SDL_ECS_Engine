@@ -10,6 +10,33 @@ TileMap::TileMap(const char* file, TileSet* tileSet) : filename_(file)
 	tileSet_ = tileSet;
 }
 
+TileMap::TileMap(const char* file, int width, int height) : filename_(file)
+{
+	newTileMap(width, height);
+}
+
+void TileMap::newTileMap(int width, int height)
+{
+	tileMatrix_.clear();
+
+	mapWidth_ = width;
+	mapHeight_ = height;
+	mapDepth_ = 4;
+
+	for (int z = 0; z < 4; z++)
+	{
+		for (int y = 0; y < height; y++)
+		{
+			for (int x = 0; x < width; x++)
+			{
+				tileMatrix_.emplace_back(-1);
+			}
+		}
+	}
+
+	save();
+}
+
 void TileMap::load()
 {
 	tileMatrix_.clear();
@@ -41,6 +68,9 @@ void TileMap::load()
 	}
 
 	ifs.close();
+
+	Resources::MAP_WIDTH = mapWidth_ * Resources::TILE_WIDTH;
+	Resources::MAP_HEIGHT = mapWidth_ * Resources::TILE_HEIGHT;
 }
 
 void TileMap::save()

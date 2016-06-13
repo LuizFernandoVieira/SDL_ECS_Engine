@@ -49,6 +49,7 @@ GameState::~GameState()
 	mapRender_[3].clear();
 	mapRender_.clear();
 
+	Camera::unfollow();
 	Camera::pos_ = Vec2(0,0);
 }
 

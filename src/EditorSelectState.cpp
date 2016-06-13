@@ -1,6 +1,13 @@
 #include "../include/EditorSelectState.hpp"
 #include "../include/InputHandler.hpp"
 #include "../include/Resources.hpp"
+#include "../include/Game.hpp"
+#include "../include/LevelEditorState.hpp"
+#include "../include/TileMap.hpp"
+#include "../include/CollisionMap.hpp"
+
+#include <sstream>
+
 
 EditorSelectState::EditorSelectState() : 
 	bg_("../img/bg.png"), 
@@ -66,15 +73,20 @@ void EditorSelectState::update(float dt)
 				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Fase", Colors::blue));
 				textAreas[0]->setPos(400, 150, false, false);
 
-				textLabels.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Largura:", Colors::black));
+				textLabels.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Imagem tile set:", Colors::black));
 				textLabels[1]->setPos(200, 250, false, false);
-				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "50", Colors::black));
+				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "../img/maps/test/tile_set.png", Colors::blue));
 				textAreas[1]->setPos(400, 250, false, false);
 
-				textLabels.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Altura:", Colors::black));
+				textLabels.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Largura:", Colors::black));
 				textLabels[2]->setPos(200, 350, false, false);
-				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "30", Colors::black));
+				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "50", Colors::black));
 				textAreas[2]->setPos(400, 350, false, false);
+
+				textLabels.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Altura:", Colors::black));
+				textLabels[3]->setPos(200, 450, false, false);
+				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "30", Colors::black));
+				textAreas[3]->setPos(400, 450, false, false);
 			}
 			else if (btnEditMapPos.isInside(input.getMouse()))
 			{
@@ -85,7 +97,7 @@ void EditorSelectState::update(float dt)
 
 				textLabels.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Imagem tile set:", Colors::black));
 				textLabels[0]->setPos(200, 150, false, false);
-				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "../img/maps/tile_set.png", Colors::blue));
+				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "../img/maps/test/tile_set.png", Colors::blue));
 				textAreas[0]->setPos(400, 150, false, false);
 
 				textLabels.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Tile map:", Colors::black));
@@ -182,7 +194,33 @@ void EditorSelectState::render()
 
 void EditorSelectState::accept()
 {
-	// check info
+	if (mode == NEW_MAP)
+	{
+		Resources::TILE_SET_IMG = textAreas[1]->getText();
+		Resources::TILE_MAP_TXT = "../map/" + textAreas[0]->getText() + "_tilemap.txt";
+		Resources::COLLISION_MAP_TXT = "../map/" + textAreas[0]->getText() + "_colmap.txt";
+		Resources::OBJECT_MAP_XML = "../map/" + textAreas[0]->getText() + "_objmap.xml";
+
+		// criar novos mapas
+		int tempW, tempH;
+		std::istringstream(textAreas[2]->getText()) >> tempW;
+		std::istringstream(textAreas[3]->getText()) >> tempH;
+		TileMap tileMap(Resources::TILE_MAP_TXT.c_str(), tempW, tempH);
+		CollisionMap collisionMap(Resources::COLLISION_MAP_TXT.c_str(), tempW, tempH);
+
+		pop_ = true;
+		Game::getInstance().push(new LevelEditorState());
+	}
+	else if (mode == EDIT_MAP)
+	{
+		Resources::TILE_SET_IMG = textAreas[0]->getText();
+		Resources::TILE_MAP_TXT = textAreas[1]->getText();
+		Resources::COLLISION_MAP_TXT = textAreas[2]->getText();
+		Resources::OBJECT_MAP_XML = textAreas[3]->getText();
+
+		pop_ = true;
+		Game::getInstance().push(new LevelEditorState());
+	}
 }
 
 

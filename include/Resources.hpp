@@ -38,6 +38,15 @@ public:
 	static float PLAYER_WALK_SPEED;
 	static float PLAYER_JUMP_SPEED;
 
+	static int MAP_WIDTH;
+	static int MAP_HEIGHT;
+
+	static std::string TILE_SET_IMG;
+	static std::string TILE_MAP_TXT;
+	static std::string COLLISION_MAP_TXT;
+	static std::string OBJECT_MAP_XML;
+	static std::string GLOBAL_OBJECT_MAP_XML;
+
 	static void Read(std::string filename_);
 
 	// Global Values

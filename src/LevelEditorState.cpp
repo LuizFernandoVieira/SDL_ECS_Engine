@@ -7,10 +7,10 @@
 LevelEditorState::LevelEditorState() :
 mainPanel_(Rect(0, 0, Resources::WINDOW_WIDTH, Resources::WINDOW_HEIGHT), "../img/bgTilePanel.png")
 {
-	tileSet_ = new TileSet(Resources::TILE_WIDTH, Resources::TILE_HEIGHT, "../img/maps/test/tile_set.png");
-	tileMap_ = new TileMap("../map/tileMap.txt", tileSet_);
-	collisionMap_ = new CollisionMap("../map/collisionMap.txt");
-	objectMap_ = new ObjectMap("../map/globalObjectMap.xml", "../map/objectMap.xml");
+	tileSet_ = new TileSet(Resources::TILE_WIDTH, Resources::TILE_HEIGHT, Resources::TILE_SET_IMG.c_str());
+	tileMap_ = new TileMap(Resources::TILE_MAP_TXT.c_str(), tileSet_);
+	collisionMap_ = new CollisionMap(Resources::COLLISION_MAP_TXT.c_str());
+	objectMap_ = new ObjectMap(Resources::GLOBAL_OBJECT_MAP_XML.c_str(), Resources::OBJECT_MAP_XML.c_str());
 	selectedTile_ = 0;
 	selectedTool_ = ADD;
 	selectedLayer_ = 1;
@@ -36,27 +36,27 @@ LevelEditorState::~LevelEditorState()
 void LevelEditorState::initGUI()
 {
 	// Proportion
-	Rect leftRectProportion  							= Rect(0.00, 0.000, 0.20, 1.00);
-	Rect rightRectProportion 							= Rect(0.20, 0.050, 0.80, 0.95);
-	Rect tileSetAndObjectsRectProportion 	= Rect(0.05, 0.100, 0.90, 0.80);
-	Rect addTilesRectProportion 					= Rect(0.10, 0.025, 0.15, 0.05);
-	Rect selectTilesRectProportion 				= Rect(0.30, 0.025, 0.15, 0.05);
-	Rect deleteTilesRectProportion				= Rect(0.50, 0.025, 0.15, 0.05);
-	Rect layersRectProportion   					= Rect(0.20, 0.000, 0.80, 0.05);
+	Rect leftRectProportion               = Rect(0.00, 0.000, 0.20, 1.00);
+	Rect rightRectProportion              = Rect(0.20, 0.050, 0.80, 0.95);
+	Rect tileSetAndObjectsRectProportion  = Rect(0.05, 0.100, 0.90, 0.80);
+	Rect addTilesRectProportion           = Rect(0.10, 0.025, 0.15, 0.05);
+	Rect selectTilesRectProportion        = Rect(0.30, 0.025, 0.15, 0.05);
+	Rect deleteTilesRectProportion        = Rect(0.50, 0.025, 0.15, 0.05);
+	Rect layersRectProportion             = Rect(0.20, 0.000, 0.80, 0.05);
 
 	Rect layerButton1RectProportion = Rect(0.1, 0.100, 0.10, 0.80);
 	Rect layerButton2RectProportion = Rect(0.3, 0.100, 0.10, 0.80);
-	Rect layerButton3RectProportion =	Rect(0.5, 0.100, 0.10, 0.80);
+	Rect layerButton3RectProportion = Rect(0.5, 0.100, 0.10, 0.80);
 	Rect layerButton4RectProportion = Rect(0.7, 0.100, 0.10, 0.80);
 
 	// Rect
-	Rect leftRect  							= getPanelRect(mainPanel_.getRect(), leftRectProportion);
-	Rect rightRect 							= getPanelRect(mainPanel_.getRect(), rightRectProportion);
+	Rect leftRect               = getPanelRect(mainPanel_.getRect(), leftRectProportion);
+	Rect rightRect              = getPanelRect(mainPanel_.getRect(), rightRectProportion);
 	Rect tileSetAndObjectsRect	= getPanelRect(leftRect, tileSetAndObjectsRectProportion);
-	Rect addTilesRect 					= getPanelRect(leftRect, addTilesRectProportion);
-	Rect selectTilesRect 				= getPanelRect(leftRect, selectTilesRectProportion);
-	Rect deleteTilesRect 				= getPanelRect(leftRect, deleteTilesRectProportion);
-	Rect layersRect 						= getPanelRect(mainPanel_.getRect(), layersRectProportion);
+	Rect addTilesRect           = getPanelRect(leftRect, addTilesRectProportion);
+	Rect selectTilesRect        = getPanelRect(leftRect, selectTilesRectProportion);
+	Rect deleteTilesRect        = getPanelRect(leftRect, deleteTilesRectProportion);
+	Rect layersRect             = getPanelRect(mainPanel_.getRect(), layersRectProportion);
 
 	Rect layerButton1Rect = getPanelRect(layersRect, layerButton1RectProportion);
 	Rect layerButton2Rect = getPanelRect(layersRect, layerButton2RectProportion);
@@ -64,15 +64,15 @@ void LevelEditorState::initGUI()
 	Rect layerButton4Rect = getPanelRect(layersRect, layerButton4RectProportion);
 
 	// Panel
-	Panel* leftPanel  = new Panel(leftRect, "../img/interface/editor/left_panel.png");
+	Panel* leftPanel        = new Panel(leftRect, "../img/interface/editor/left_panel.png");
 	tileSetAndObjectsPanel_ = new TileSetAndObjectsPanel(tileSetAndObjectsRect, "../img/interface/editor/tile_set_panel.png", objectMap_, selectedObject_);
 	selectedTab_ = &tileSetAndObjectsPanel_->getSelectedTab();
-	Panel* rightPanel = new TileMapPanel(*tileSet_, *tileMap_, *collisionMap_, *objectMap_, rightRect, "../img/interface/editor/tile_map_panel.png", selectedTile_, selectedLayer_, selectedCollision_, (int*)selectedTab_, selectedObject_, selectedTool_);
+	Panel* rightPanel       = new TileMapPanel(*tileSet_, *tileMap_, *collisionMap_, *objectMap_, rightRect, "../img/interface/editor/tile_map_panel.png", selectedTile_, selectedLayer_, selectedCollision_, (int*)selectedTab_, selectedObject_, selectedTool_);
 
 	Panel* layersPanel = new Panel(layersRect, "../img/interface/editor/tile_set_panel.png");
 
 	// Button
-	addTilesBtn_ 		= new Button(addTilesRect, "../img/interface/editor/icone_03.png"/*, tileBtnExecute*/);
+	addTilesBtn_    = new Button(addTilesRect, "../img/interface/editor/icone_03.png"/*, tileBtnExecute*/);
 	selectTilesBtn_ = new Button(selectTilesRect, "../img/interface/editor/icone_04.png"/*, tileBtnExecute*/);
 	deleteTilesBtn_ = new Button(deleteTilesRect, "../img/interface/editor/icone_05.png"/*, tileBtnExecute*/);
 
