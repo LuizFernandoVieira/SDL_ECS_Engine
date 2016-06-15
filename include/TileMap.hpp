@@ -12,6 +12,8 @@ class TileMap
 {
 public:
 	TileMap(const char* file, TileSet* tileSet);
+	TileMap(const char* file, int width, int height); // para criar novo mapa
+	void newTileMap(int width, int height);
 	void load();
 	void save();
 	void setTileSet(TileSet* tileSet);

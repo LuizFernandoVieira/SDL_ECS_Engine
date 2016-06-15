@@ -20,7 +20,7 @@ void ObjectMap::loadGlobals()
 {
 	pugi::xml_parse_result result = globalObjects_.load_file(globalFilename_.c_str());
 	if (!result)
-		std::cout << "Erros ao carregar o mapa de objetos: " << result.description() << std::endl;
+		std::cout << "Mapa de objetos não carregado: " << result.description() << std::endl;
 
 	// globalObjects_.print(std::cout);
 }

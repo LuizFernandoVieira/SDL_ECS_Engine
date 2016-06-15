@@ -8,6 +8,29 @@ CollisionMap::CollisionMap(const char* file) : filename_(file)
 	load();
 }
 
+CollisionMap::CollisionMap(const char* file, int width, int height) : filename_(file)
+{
+	newMap(width, height);
+}
+
+
+void CollisionMap::newMap(int width, int height)
+{
+	collisionMatrix_.clear();
+
+	mapWidth_ = width;
+	mapHeight_ = height;
+
+	for (int y = 0; y < height; y++)
+	{
+		for (int x = 0; x < width; x++)
+		{
+			collisionMatrix_.emplace_back(-1);
+		}
+	}
+
+	save();
+}
 
 void CollisionMap::load()
 {

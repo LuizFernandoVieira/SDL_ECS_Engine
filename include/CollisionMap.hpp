@@ -18,6 +18,9 @@ class CollisionMap
 {
 public:
 	CollisionMap(const char* file);
+	CollisionMap(const char* file, int width, int height);
+
+	void newMap(int width, int height);
 	void save();
 	void load();
 	void render(int x, int y);

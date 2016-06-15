@@ -1,16 +1,9 @@
-#ifdef __APPLE__
-	#include <SDL2_image/SDL_image.h>
-	#include <SDL2_mixer/SDL_mixer.h>
-#else
-	#include "SDL_image.h"
-	#include "SDL_mixer.h"
-#endif
-
 #include <fstream>
 #include <string>
+#include <sstream>
+
 #include "../include/Resources.hpp"
 #include "../include/Game.hpp"
-//#include "../include/pugixml.hpp"
 
 #define PRINTITALL 	true
 
@@ -23,11 +16,23 @@ int Resources::GRAVITY 				= 0; // pixels per second
 float Resources::PLAYER_WALK_SPEED 	= 0; // pixels per second
 float Resources::PLAYER_JUMP_SPEED 	= 0; // pixels per second
 
+int Resources::MAP_WIDTH            = 0;
+int Resources::MAP_HEIGHT           = 0;
+
+std::string Resources::TILE_SET_IMG           = "../img/maps/test/tile_set.png";
+std::string Resources::TILE_MAP_TXT           = "../map/tileMap.txt";
+std::string Resources::COLLISION_MAP_TXT      = "../map/collisionMap.txt";
+std::string Resources::OBJECT_MAP_XML         = "../map/objectMap.xml";
+std::string Resources::GLOBAL_OBJECT_MAP_XML  = "../map/globalObjectMap.xml";
+
+
 std::unordered_map<std::string, float> Resources::floatTable;
 std::unordered_map<std::string, int> 	Resources::intTable;
 
 std::unordered_map<std::string, std::shared_ptr<SDL_Texture>> 	Resources::imageTable;
 std::unordered_map<std::string, Mix_Chunk*> 					Resources::soundTable;
+std::unordered_map<std::string, std::shared_ptr<TTF_Font>> 		Resources::fontTable;
+
 
 
 
@@ -45,6 +50,10 @@ std::shared_ptr<SDL_Texture> Resources::GetImage(std::string file)
 			std::cout << "Erro no carregamento da textura " << file << ": " << IMG_GetError() << std::endl;
 		}
 
+		auto deleteTexture = [] (SDL_Texture* texture)
+		{
+			SDL_DestroyTexture(texture);
+		};
 		std::shared_ptr<SDL_Texture> ptr (texture, deleteTexture);
 
 		imageTable.emplace(file, ptr);
@@ -88,6 +97,51 @@ Mix_Chunk* Resources::GetSound(std::string file){
 void	Resources::ClearSounds(){
 	soundTable.clear();
 }
+
+
+// FONT
+std::shared_ptr<TTF_Font> Resources::GetFont(std::string file, int fontSize)
+{
+	std::ostringstream ss;
+	ss << fontSize;
+	auto it = fontTable.find(file + ss.str());
+
+	if ( it == fontTable.end() )
+	{
+		// Nao achou musica na tabela, carrega
+		TTF_Font* font = TTF_OpenFont(file.c_str(), fontSize);
+		if (font == NULL)
+		{
+			std::cout << "Erro no carregamento da fonte " << file << ": " << TTF_GetError() << std::endl;
+		}
+
+		auto deleteFont = [] (TTF_Font* font)
+		{
+			TTF_CloseFont(font);
+		};
+		std::shared_ptr<TTF_Font> ptr (font, deleteFont);
+
+		fontTable.emplace(file + ss.str(), ptr);
+		return ptr;
+	}
+	else
+	{
+		// Musica ja está carregada, retorna ponteiro para ela
+		std::shared_ptr<TTF_Font> font = it->second;
+		return font;
+	}
+}
+
+void Resources::ClearFonts()
+{
+	for ( auto it = fontTable.begin() ; it != fontTable.end(); ++it )
+	{
+		if (it->second.unique())
+			fontTable.erase(it);
+	}
+}
+
+
 
 
 void Resources::Read(std::string _filename){

@@ -22,6 +22,12 @@ GameState::GameState()
 	mapRender_[3] = std::map<int, RenderComponent*>();
 	//testando componente de música, não há necessidade de se carregar um arquivo
 	//A própria music está carregando um arquivo teste
+
+	level_ = new FirstLevel();
+
+	createPlayer();
+	createMapObjects();
+	// createParticleEmitter();
 }
 
 GameState::~GameState()
@@ -42,18 +48,12 @@ GameState::~GameState()
 	mapRender_[2].clear();
 	mapRender_[3].clear();
 	mapRender_.clear();
+
+	Camera::unfollow();
+	Camera::pos_ = Vec2(0,0);
 }
 
-void GameState::create(StateMachine& stateMachine)
-{
-	stateMachine_ = &stateMachine;
-	quit = false;
-	level_ = new FirstLevel();
 
-	createPlayer();
-	createMapObjects();
-	// createParticleEmitter();
-}
 
 void GameState::update(float dt)
 {
@@ -75,8 +75,12 @@ void GameState::update(float dt)
 
 	Camera::update(dt);
 
-	if(InputHandler::getInstance().quitRequested()) {
-		quit = true;
+
+	if (InputHandler::getInstance().keyPress(ESCAPE_KEY)) {
+		pop_ = true;
+	}
+	if (InputHandler::getInstance().quitRequested()) {
+		quit_ = true;
 	}
 }
 
@@ -104,7 +108,14 @@ void GameState::render()
 	renderSystem_.render(0, mapTransform_, mapState_, mapRender_[0]);
 }
 
-void GameState::handle(StateEventEnum& event)
+
+
+void GameState::pause()
+{
+
+}
+
+void GameState::resume()
 {
 
 }

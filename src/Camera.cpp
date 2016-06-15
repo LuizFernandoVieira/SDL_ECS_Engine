@@ -22,7 +22,7 @@ void Camera::update(float dt)
 	if(focus_ != NULL)
 	{
 		pos_ = focus_->rect_.getCenter() - Vec2(Resources::WINDOW_WIDTH / 2, Resources::WINDOW_HEIGHT / 2);
-	} 
+	}
 	else 
 	{
 		if(InputHandler::getInstance().isKeyDown(LEFT_ARROW_KEY))
@@ -49,5 +49,9 @@ void Camera::update(float dt)
 			pos_   = pos_ + speed_;
 		}
 	}
-	
+
+	if (pos_.x() < 0) pos_.x(0);
+	else if (pos_.x() > Resources::MAP_WIDTH - Resources::WINDOW_WIDTH) pos_.x(Resources::MAP_WIDTH - Resources::WINDOW_WIDTH);
+	if (pos_.y() < 0) pos_.y(0);
+	else if (pos_.y() > Resources::MAP_HEIGHT - Resources::WINDOW_HEIGHT) pos_.y(Resources::MAP_HEIGHT - Resources::WINDOW_HEIGHT);
 }

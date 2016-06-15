@@ -1,16 +1,16 @@
-#include "../include/IState.hpp"
+// #include "../include/IState.hpp"
 
-bool IState::quitRequested()
-{
-	return quit;
-}
+// bool IState::quitRequested()
+// {
+// 	return quit;
+// }
 
-StateMachine* IState::getStateMachine()
-{
-	return stateMachine_;
-}
+// StateMachine* IState::getStateMachine()
+// {
+// 	return stateMachine_;
+// }
 
-void IState::setStateMachine(StateMachine& stateMachine)
-{
-	stateMachine_ = &stateMachine;
-}
+// void IState::setStateMachine(StateMachine& stateMachine)
+// {
+// 	stateMachine_ = &stateMachine;
+// }
