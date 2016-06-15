@@ -7,7 +7,7 @@
 LevelEditorState::LevelEditorState() :
 mainPanel_(Rect(0, 0, Resources::WINDOW_WIDTH, Resources::WINDOW_HEIGHT), "../img/bgTilePanel.png")
 {
-	tileSet_ = new TileSet(Resources::TILE_WIDTH, Resources::TILE_HEIGHT, "../img/maps/test/tile_set.png");
+	tileSet_ = new TileSet(Resources::TILE_WIDTH, Resources::TILE_HEIGHT, "../img/maps/tilesetcidade1.png");
 	tileMap_ = new TileMap("../map/tileMap.txt", tileSet_);
 	collisionMap_ = new CollisionMap("../map/collisionMap.txt");
 	objectMap_ = new ObjectMap("../map/globalObjectMap.xml", "../map/objectMap.xml");
@@ -137,7 +137,7 @@ void LevelEditorState::initGUI()
 				curRow * (Resources::TILE_HEIGHT + 2) + 2 + tileSetAndObjectsRect.y(),
 				Resources::TILE_WIDTH,
 				Resources::TILE_HEIGHT),
-			"../img/maps/test/tile_set.png"//,
+			"../img/maps/tilesetcidade1.png"//,
 			// tileBtnExecute
 		);
 		btn->setSpriteClip(
