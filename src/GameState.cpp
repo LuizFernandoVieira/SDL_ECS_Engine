@@ -71,11 +71,13 @@ void GameState::update(float dt)
 	// particleEmitterSystem_.update( dt, level_->getCollisionMap(), mapTransform_[particleEmitter_], mapEmitter_[particleEmitter_], mapTimer_[particleEmitter_] );
 	moveSystem_.update( dt, mapTransform_, mapSpeed_ );
 	collisionSystem_.update( player_, level_->getCollisionMap(), oldTransform, mapTransform_, mapCollider_, mapSpeed_, oldState, mapState_, mapZipline_ );
-	renderSystem_.update( dt, mapTransform_, oldState, mapState_, mapRender_ );
-	playerRenderSystem_.update( dt, mapTransform_[player_], (PlayerStateComponent*)oldState[player_], (PlayerStateComponent*)mapState_[player_], &playerRenderComponent_ ); // ai q feio
+	renderSystem_.update( dt, oldState, mapState_, mapRender_ );
+	playerRenderSystem_.update( dt, (PlayerStateComponent*)oldState[player_], (PlayerStateComponent*)mapState_[player_], &playerRenderComponent_ ); // ai q feio
 	soundSystem_.update(oldState, mapState_, mapSound_);
 
 	Camera::update(dt);
+
+	std::cout << mapTransform_[player_]->scale_.x() << std::endl;
 
 
 	if (InputHandler::getInstance().keyPress(ESCAPE_KEY)) {
@@ -127,30 +129,30 @@ void GameState::createPlayer()
 	nextId_++;
 
 
-	mapTransform_.emplace(player_, new TransformComponent(Rect(352, 100, 52, 90), Vec2(0.2, 0.2), 0));
+	mapTransform_.emplace(player_, new TransformComponent(Rect(352, 100, 52, 90), Vec2(0.3, 0.3), 0));
 	mapCollider_.emplace(player_, new ColliderComponent(Rect(0, 0, 52, 90)));
 	mapState_.emplace(player_, new PlayerStateComponent());
 	mapPhysics_.emplace(player_, new PhysicsComponent());
 	mapSpeed_.emplace(player_, new SpeedComponent());
 	mapSound_.emplace(player_, new SoundComponent());
 
-/*	playerRenderComponent_.addSprite(State::IDLE, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
+	playerRenderComponent_.addSprite(State::IDLE, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
 		Sprite("../img/characters/player/idle.png", 24, 0.01));
 	playerRenderComponent_.addSprite(State::WALKING, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
-		Sprite("../img/characters/player/run_front_closed.png", 24, 0.01));
+		Sprite("../img/characters/player/running_front_closed.png", 24, 0.01));
 	playerRenderComponent_.addSprite(State::JUMPING, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
-		Sprite("../img/characters/player/jump_front_closed.png", 23, 0.01));
+		Sprite("../img/characters/player/jumping_front_closed.png", 23, 0.01));
 	playerRenderComponent_.addSprite(State::FALLING, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
-		Sprite("../img/characters/player/falling_front_closed.png", 11, 0.01));*/
+		Sprite("../img/characters/player/falling_front_closed.png", 11, 0.01));
 
-	playerRenderComponent_.addSprite(State::IDLE, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
+/*	playerRenderComponent_.addSprite(State::IDLE, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
 		Sprite("../img/characters/idle.png"));
 	playerRenderComponent_.addSprite(State::WALKING, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
 		Sprite("../img/characters/idle.png"));
 	playerRenderComponent_.addSprite(State::JUMPING, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
 		Sprite("../img/characters/idle.png"));
 	playerRenderComponent_.addSprite(State::FALLING, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
-		Sprite("../img/characters/idle.png"));
+		Sprite("../img/characters/idle.png"));*/
 
 	mapSound_[player_]->addSound(State::JUMPING, Sound("../audio/character_jump.wav"));
 	mapSound_[player_]->addSound(State::FALLING, Sound("../audio/character_fall.wav"));	//Mudar para ("estado: colidindo com o chão")

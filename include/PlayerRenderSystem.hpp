@@ -14,7 +14,6 @@ public:
 	PlayerRenderSystem();
 	void update(
 		float dt,
-		TransformComponent* transfComp,
 		PlayerStateComponent* oldState,
 		PlayerStateComponent* stateComp,
 		PlayerRenderComponent* renderComp
