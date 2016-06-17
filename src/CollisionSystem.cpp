@@ -27,7 +27,7 @@ void CollisionSystem::update(
 
 	updateTerrain(collisionMap, oldTransform, transform, collider, speed, state);
 	updateCollider(collisionMap, oldTransform, transform, collider, speed, state);
-	updateZipline(player, collisionMap, transform, collider, oldState, state, zipline);
+	updateZipline(player, collisionMap, transform, collider, speed, oldState, state, zipline);
 }
 
 
@@ -127,6 +127,7 @@ void CollisionSystem::updateZipline(
 	CollisionMap& collisionMap,
 	std::map<int, TransformComponent*> transform,
 	std::map<int, ColliderComponent*> collider,
+	std::map<int, SpeedComponent*> speed,
 	std::map<int, StateComponent*> oldState,
 	std::map<int, StateComponent*> state,
 	std::map<int, ZiplineComponent*> zipline)
@@ -139,6 +140,8 @@ void CollisionSystem::updateZipline(
 		                 transform[zip.first]->rotation_ ))
 		{
 			state[player]->state_ = State::ZIPLINE;
+			speed[player]->speed_ = Vec2( ProjectX(transform[zip.first]->rect_.x(), transform[zip.first]->rotation_),
+			                              ProjectY(transform[zip.first]->rect_.x(), transform[zip.first]->rotation_) );
 		}
 		else if (oldState[player]->state_ == State::ZIPLINE)
 		{

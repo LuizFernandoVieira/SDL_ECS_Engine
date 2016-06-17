@@ -153,3 +153,15 @@ float Dot(const Vec2& a, const Vec2& b)
 {
 	return a.x() * b.x() + a.y() * b.y();
 }
+
+float ProjectX(float module, float angle)
+{
+	angle = angle * PI / 180; // converte de graus para radianos
+	return cos(angle) * module;
+}
+
+float ProjectY(float module, float angle)
+{
+	angle = angle * PI / 180; // converte de graus para radianos
+	return sin(angle) * module;
+}

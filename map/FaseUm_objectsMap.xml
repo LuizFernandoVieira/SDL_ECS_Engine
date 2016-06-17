@@ -1,1 +1,22 @@
 <?xml version="1.0"?>
+
+<object name="zipline">
+	<transform>
+		<rect x="0" y="0" w="217" h="9" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/img.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<collider x="0" y="0" w="10" h="10" />
+	<speed />
+	<state />
+	<physics gravity_scale="1.0" />
+	<emitter emission_rate="0.01" />
+	<timer />
+	<zipline>
+		<start x="0" y="0" />
+		<end x="0" y="0" />
+	</zipline>
+</object>

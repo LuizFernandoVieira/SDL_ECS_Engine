@@ -55,5 +55,7 @@ Vec2 Normalize(const Vec2& p);
 // Produto escalar de vetores
 float Dot(const Vec2& a, const Vec2& b);
 
+float ProjectX(float module, float angle);
+float ProjectY(float module, float angle);
 
 #endif

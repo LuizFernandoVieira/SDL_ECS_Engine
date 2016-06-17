@@ -59,6 +59,7 @@ private:
 		CollisionMap& collisionMap,
 		std::map<int, TransformComponent*> transform,
 		std::map<int, ColliderComponent*> collider,
+		std::map<int, SpeedComponent*> speed,
 		std::map<int, StateComponent*> oldState,
 		std::map<int, StateComponent*> state,
 		std::map<int, ZiplineComponent*> zipline

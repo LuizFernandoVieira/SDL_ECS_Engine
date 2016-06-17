@@ -1,6 +1,12 @@
+#ifdef __APPLE__
+	#include <SDL2/SDL.h>
+#else
+	#include "SDL.h"
+#endif
 #include <vector>
 #include <unordered_map>
 
+#include "../include/Game.hpp"
 #include "../include/GameState.hpp"
 #include "../include/Camera.hpp"
 #include "../include/InputHandler.hpp"
@@ -9,13 +15,17 @@
 #include "../include/StateComponent.hpp"
 #include "../include/RenderComponent.hpp"
 #include "../include/SoundComponent.hpp"
-
+#include "../include/StaticSprite.hpp"
 
 unsigned int GameState::nextId_ = 0;
 
 GameState::GameState()
 : music()
 {
+	StaticSprite loadScreen("../img/bg.png");
+	loadScreen.render(0,0);
+	SDL_RenderPresent(Game::getInstance().getRenderer());
+	
 	mapRender_[0] = std::map<int, RenderComponent*>();
 	mapRender_[1] = std::map<int, RenderComponent*>();
 	mapRender_[2] = std::map<int, RenderComponent*>();

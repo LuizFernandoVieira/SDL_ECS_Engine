@@ -3,7 +3,11 @@
 ========= MODELO:
 
 <object name="nome">
-	<transform x="0" y="0" w="10" h="10" />
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
 	<render>
 		<sprite state="0" filename="../img/img.png" frame_count="1" frame_time="1.0" />
 	</render>
