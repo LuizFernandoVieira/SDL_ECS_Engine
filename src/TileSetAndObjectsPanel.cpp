@@ -1,9 +1,10 @@
 #include "../include/TileSetAndObjectsPanel.hpp"
 #include "../include/Resources.hpp"
 #include "../include/InputHandler.hpp"
+#include "../include/Game.hpp"
 
 TileSetAndObjectsPanel::TileSetAndObjectsPanel(Rect rect, std::string imgPath, ObjectMap* objectMap, int& selectedObject) :
-	Panel(rect, imgPath), selectedObject_(selectedObject)
+	Panel(rect, imgPath), scroll_(0), selectedObject_(selectedObject)
 {
 	selectedTab_ = TILES;
 	objectMap_ = objectMap;
@@ -114,6 +115,12 @@ void TileSetAndObjectsPanel::update()
 	Panel::update();
 	InputHandler& input = InputHandler::getInstance();
 
+	if (input.mouseWheelScroll() && rect_.isInside(input.getMouse()))
+	{
+		scroll_ += input.mouseWheelAmount() * SCROLL_SPEED * Game::getInstance().getDeltaTime();
+		if (scroll_ < 0) scroll_ = 0;
+	}
+
 	if (input.getScreenResized())
 	{
 		resize();
@@ -157,7 +164,8 @@ void TileSetAndObjectsPanel::render()
 	{
 		for(int i = 0; i < (int)tileButtons_.size(); i++)
 		{
-			tileButtons_[i]->render();
+			if ( (rect_ + Vec2(0,scroll_)).isInside(tileButtons_[i]->getRect().getCenter()) )
+			tileButtons_[i]->render(-scroll_);
 		}
 	}
 	else if (selectedTab_ == OBJECTS)
@@ -194,6 +202,11 @@ void TileSetAndObjectsPanel::addButton(Button& button, Tab tab)
 TileSetAndObjectsPanel::Tab& TileSetAndObjectsPanel::getSelectedTab()
 {
 	return selectedTab_;
+}
+
+int& TileSetAndObjectsPanel::getScroll()
+{
+	return scroll_;
 }
 
 

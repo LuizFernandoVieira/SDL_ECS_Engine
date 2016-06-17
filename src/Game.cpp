@@ -58,6 +58,10 @@ SDL_Renderer* Game::getRenderer()
 	return renderer_;
 }
 
+float Game::getDeltaTime()
+{
+	return dt_;
+}
 
 void Game::calculateDeltaTime()
 {

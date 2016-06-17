@@ -20,6 +20,7 @@ GameState::GameState()
 	mapRender_[1] = std::map<int, RenderComponent*>();
 	mapRender_[2] = std::map<int, RenderComponent*>();
 	mapRender_[3] = std::map<int, RenderComponent*>();
+	
 	//testando componente de música, não há necessidade de se carregar um arquivo
 	//A própria music está carregando um arquivo teste
 
@@ -69,7 +70,7 @@ void GameState::update(float dt)
 	gravitySystem_.update( dt, mapSpeed_, mapPhysics_, mapState_ );
 	// particleEmitterSystem_.update( dt, level_->getCollisionMap(), mapTransform_[particleEmitter_], mapEmitter_[particleEmitter_], mapTimer_[particleEmitter_] );
 	moveSystem_.update( dt, mapTransform_, mapSpeed_ );
-	collisionSystem_.update( level_->getCollisionMap(), oldTransform, mapTransform_, mapCollider_, mapSpeed_, mapState_ );
+	collisionSystem_.update( level_->getCollisionMap(), oldTransform, mapTransform_, mapCollider_, mapSpeed_, mapState_, mapZipline_ );
 	renderSystem_.update( dt, oldState, mapState_, mapRender_ );
 	playerRenderSystem_.update( dt, (PlayerStateComponent*)oldState[player_], (PlayerStateComponent*)mapState_[player_], &playerRenderComponent_ ); // ai q feio
 

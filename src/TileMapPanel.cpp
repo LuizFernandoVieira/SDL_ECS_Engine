@@ -12,8 +12,8 @@ TileMapPanel::TileMapPanel(TileSet& tileSet, TileMap& tileMap, CollisionMap& col
 	Panel(rect, imgPath),
 	cursorPos_(rect.x(), rect.y(), Resources::TILE_WIDTH, Resources::TILE_HEIGHT),
 	cursorBg_("../img/interface/editor/btn_1.png"),
-	firstDragClick_(),
-	curDragClick_(),
+	firstDragClick_(-1,-1),
+	curDragClick_(-1,-1),
 	previousSelectedObject_(selectedObject)
 {
 	tileSet_ = &tileSet;
@@ -128,13 +128,13 @@ void TileMapPanel::update()
 				tileX * Resources::TILE_WIDTH + rect_.x(),
 				tileY * Resources::TILE_HEIGHT + rect_.y()
 			);
-			if (firstDragClick_ == Vec2()) {
+			if (firstDragClick_ == Vec2(-1,-1)) {
 				firstDragClick_ = v;
 			} else {
 				curDragClick_ = v;
 			}
 		}
-		else if (*selectedTab_ != 2 && InputHandler::getInstance().mouseRelease(LEFT_MOUSE_BUTTON))
+		else if (*selectedTab_ != 2 && firstDragClick_ != Vec2(-1,-1) && InputHandler::getInstance().mouseRelease(LEFT_MOUSE_BUTTON))
 		{
 			int bigX, smallX;
 			int bigY, smallY;
@@ -181,8 +181,8 @@ void TileMapPanel::update()
 				}
 			}
 
-			firstDragClick_ = Vec2();
-			curDragClick_ = Vec2();
+			firstDragClick_ = Vec2(-1,-1);
+			curDragClick_ = Vec2(-1,-1);
 		}
 	}
 
@@ -246,7 +246,7 @@ void TileMapPanel::render()
 	}
 
 	// Cursor com drag
-	if (firstDragClick_ != Vec2() && *selectedTab_ != 2) {
+	if (firstDragClick_ != Vec2(-1,-1) && *selectedTab_ != 2) {
 		int bigX, smallX;
 		int bigY, smallY;
 		if(firstDragClick_.x() <= curDragClick_.x()) {

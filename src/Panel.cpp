@@ -70,7 +70,7 @@ void Panel::update()
 		it->first->update();
 	}
 	for(auto it=buttons_.begin(); it!=buttons_.end(); ++it ) {
-		it->first->update();	
+		it->first->update();
 	}
 }
 

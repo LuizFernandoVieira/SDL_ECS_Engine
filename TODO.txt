@@ -12,12 +12,11 @@ GameState
         map TimerComponent
 
 
-A fazer:
+Probleminhas a resolver:
 
 - Acrescentar largura, altura, escala e rotação na transform component;
-- Acrescentar argumentos nos construtores dos components;
 - DELETAR PONTEIROS!!!!!!!!!!!!!!!!!!!
-- Tirar create dos states;
+- Bug do editor, mousePress e isMouseDown;
 
 
 ============== ESSA SEMANA ==================
@@ -25,8 +24,7 @@ A fazer:
 Player
 Inimigos
 Particle System
-Colisao especial pros diagonais
-menu
+Menu
 
 =============== ENTREGAS ====================
 
@@ -55,7 +53,6 @@ Segunda entrega / 17
 	Victor
 		Colisao
 			Colisao entre objetos / entities
-			Colisores Diagonais
 			Triggers
 			Atravessar plataformas
 				(de baixo para cima)

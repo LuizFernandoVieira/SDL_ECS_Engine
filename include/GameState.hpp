@@ -9,6 +9,7 @@
 #include "SpeedComponent.hpp"
 #include "EmitterComponent.hpp"
 #include "TimerComponent.hpp"
+#include "ZiplineComponent.hpp"
 #include "InputSystem.hpp"
 #include "PlayerRenderSystem.hpp"
 #include "RenderSystem.hpp"
@@ -53,6 +54,7 @@ private:
 	std::map<int, SpeedComponent*> mapSpeed_;
 	std::map<int, EmitterComponent*> mapEmitter_;
 	std::map<int, TimerComponent*> mapTimer_;
+	std::map<int, ZiplineComponent*> mapZipline_;
 	std::map<int, std::map<int, RenderComponent*>> mapRender_;
 	PlayerRenderComponent playerRenderComponent_;
 

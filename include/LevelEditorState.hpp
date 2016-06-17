@@ -57,7 +57,7 @@ private:
 	Tools selectedTool_;
 	int selectedObject_;
 
-	TileSetAndObjectsPanel* tileSetAndObjectsPanel_;
+	int* tilesScroll_;
 };
 
 // void tileBtnExecute(IState* state);

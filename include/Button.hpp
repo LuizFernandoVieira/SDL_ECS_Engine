@@ -14,7 +14,7 @@ public:
 	Button(Rect rect, std::string imgPath/*, std::function<void(State*)> execute*/);
 	~Button();
 	void update();
-	void render();
+	void render(int scroll = 0);
 	Rect& getRect();
 	void setRect(Rect rect);
 	bool isResizable();

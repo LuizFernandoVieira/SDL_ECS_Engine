@@ -26,9 +26,9 @@ void Button::update()
 	// }
 }
 
-void Button::render()
+void Button::render(int scroll)
 {
-	sprite_.render(rect_.x(), rect_.y());
+	sprite_.render(rect_.x(), rect_.y() + scroll);
 }
 
 Rect& Button::getRect() {

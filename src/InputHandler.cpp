@@ -22,6 +22,7 @@ InputHandler::InputHandler() : inputText()
 	updateCounter = 0;
 	mouseX = 0;
 	mouseY = 0;
+	mouseWheel = 0;
 	screenResized = false;
 }
 
@@ -38,6 +39,7 @@ void InputHandler::update()
 	updateCounter++;
 	quit = false;
 	screenResized = false;
+	mouseWheel = 0;
 	inputText.erase();
 
 	// Obtenha as coordenadas do mouse
@@ -60,6 +62,11 @@ void InputHandler::update()
 		{
 			mouseState[event.button.button] = false;
 			mouseUpdate[event.button.button] = updateCounter;
+		}
+
+		else if (event.type == SDL_MOUSEWHEEL)
+		{
+			mouseWheel = -event.wheel.y;
 		}
 
 		else if (event.type == SDL_KEYDOWN && !event.key.repeat)
@@ -296,4 +303,14 @@ bool InputHandler::textInput()
 std::string InputHandler::getText()
 {
 	return inputText;
+}
+
+bool InputHandler::mouseWheelScroll()
+{
+	return mouseWheel != 0;
+}
+
+int InputHandler::mouseWheelAmount()
+{
+	return mouseWheel;
 }

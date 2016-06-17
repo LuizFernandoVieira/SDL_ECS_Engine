@@ -34,6 +34,7 @@ public:
 
 	static Game& getInstance();
 	SDL_Renderer* getRenderer();
+	float getDeltaTime();
 
 	void run();
 

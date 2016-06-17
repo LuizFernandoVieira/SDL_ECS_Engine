@@ -10,6 +10,8 @@
 #include "Sprite.hpp"
 #include "ObjectMap.hpp"
 
+#define SCROLL_SPEED 400
+
 class TileSetAndObjectsPanel : public Panel
 {
 public:
@@ -27,11 +29,14 @@ public:
 	void addButton(Button& button, Tab tab);
 	// void addButton(Button& button);
 	TileSetAndObjectsPanel::Tab& getSelectedTab();
+	int& getScroll();
 
 private:
 	void createButtons();
 	void createObjectSprite();
 	void resize();
+
+	int scroll_;
 
 	TileSetAndObjectsPanel::Tab selectedTab_;
 

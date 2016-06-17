@@ -17,6 +17,7 @@ mainPanel_(Rect(0, 0, Resources::WINDOW_WIDTH, Resources::WINDOW_HEIGHT), "../im
 	selectedCollision_ = 0;
 	selectedTab_ = NULL;
 	selectedObject_ = 0;
+	tilesScroll_ = NULL;
 
 	initGUI();
 }
@@ -66,8 +67,9 @@ void LevelEditorState::initGUI()
 
 	// Panel
 	Panel* leftPanel        = new Panel(leftRect, "../img/interface/editor/left_panel.png");
-	tileSetAndObjectsPanel_ = new TileSetAndObjectsPanel(tileSetAndObjectsRect, "../img/interface/editor/tile_set_panel.png", objectMap_, selectedObject_);
+	TileSetAndObjectsPanel* tileSetAndObjectsPanel_ = new TileSetAndObjectsPanel(tileSetAndObjectsRect, "../img/interface/editor/tile_set_panel.png", objectMap_, selectedObject_);
 	selectedTab_ = &tileSetAndObjectsPanel_->getSelectedTab();
+	tilesScroll_ = &tileSetAndObjectsPanel_->getScroll();
 	Panel* rightPanel       = new TileMapPanel(*tileSet_, *tileMap_, *collisionMap_, *objectMap_, rightRect, "../img/interface/editor/tile_map_panel.png", selectedTile_, selectedLayer_, selectedCollision_, (int*)selectedTab_, selectedObject_, selectedTool_);
 
 	Panel* layersPanel = new Panel(layersRect, "../img/interface/editor/tile_set_panel.png");
@@ -168,9 +170,10 @@ void LevelEditorState::initGUI()
 
 void LevelEditorState::update(float dt)
 {
-	InputHandler::getInstance().update();
+	InputHandler& input = InputHandler::getInstance();
+	input.update();
 
-	if (InputHandler::getInstance().getScreenResized())
+	if (input.getScreenResized())
 	{
 		mainPanel_.setRect(Rect(0, 0, Resources::WINDOW_WIDTH, Resources::WINDOW_HEIGHT));
 	}
@@ -179,21 +182,21 @@ void LevelEditorState::update(float dt)
 
 	mainPanel_.update();
 
-	if (InputHandler::getInstance().mousePress(LEFT_MOUSE_BUTTON))
+	if (input.mousePress(LEFT_MOUSE_BUTTON))
 	{
-		if (addTilesBtn_->getRect().isInside(InputHandler::getInstance().getMouse()))
+		if (addTilesBtn_->getRect().isInside(input.getMouse()))
 		{
 			selectedTool_ = ADD;
-		} else if (selectTilesBtn_->getRect().isInside(InputHandler::getInstance().getMouse())) {
+		} else if (selectTilesBtn_->getRect().isInside(input.getMouse())) {
 			selectedTool_ = SELECT;
-		} else if (deleteTilesBtn_->getRect().isInside(InputHandler::getInstance().getMouse())) {
+		} else if (deleteTilesBtn_->getRect().isInside(input.getMouse())) {
 			selectedTool_ = DELETE;
 		} else {
 			if (*selectedTab_ == TileSetAndObjectsPanel::Tab::TILES)
 			{
 				for (int i = 0; i < (int)tileButtons_.size(); i++)
 				{
-					if (tileButtons_[i]->getRect().isInside(InputHandler::getInstance().getMouse()))
+					if (tileButtons_[i]->getRect().isInside(input.getMouse() + Vec2(0,*tilesScroll_)))
 					{
 						// tileButtons_[i]->execute_(this);
 						selectedTile_ = i;
@@ -205,7 +208,7 @@ void LevelEditorState::update(float dt)
 			{
 				for (int i = 0; i < (int)collisionButtons_.size(); i++)
 				{
-					if (collisionButtons_[i]->getRect().isInside(InputHandler::getInstance().getMouse()))
+					if (collisionButtons_[i]->getRect().isInside(input.getMouse()))
 					{
 						selectedCollision_ = i;
 						break;
@@ -214,7 +217,7 @@ void LevelEditorState::update(float dt)
 			}
 			for (int i = 0; i < (int)layerButtons_.size(); i++)
 			{
-				if (layerButtons_[i]->getRect().isInside(InputHandler::getInstance().getMouse()))
+				if (layerButtons_[i]->getRect().isInside(input.getMouse()))
 				{
 					// layerButtons_[i]->execute_(this);
 					selectedLayer_ = i;
@@ -224,10 +227,10 @@ void LevelEditorState::update(float dt)
 		}
 	}
 
-	if (InputHandler::getInstance().keyPress(ESCAPE_KEY)) {
+	if (input.keyPress(ESCAPE_KEY)) {
 		pop_ = true;
 	}
-	if(InputHandler::getInstance().quitRequested()) {
+	if(input.quitRequested()) {
 		quit_ = true;
 	}
 }

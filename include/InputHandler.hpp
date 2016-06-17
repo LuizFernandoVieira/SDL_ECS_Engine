@@ -60,6 +60,9 @@ public:
 	bool mouseRelease(int button);
 	bool isMouseDown(int button);
 
+	bool mouseWheelScroll();
+	int mouseWheelAmount();
+
 	int getMouseX();
 	int getMouseY();
 	Vec2 getMouse();
@@ -77,6 +80,8 @@ private:
 
 	bool mouseState[6];
 	int mouseUpdate[6];
+
+	int mouseWheel;
 
 	int mouseX;
 	int mouseY;

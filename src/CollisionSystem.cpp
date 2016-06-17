@@ -16,12 +16,25 @@ void CollisionSystem::update(
 	std::map<int, TransformComponent*> transform,
 	std::map<int, ColliderComponent*> collider,
 	std::map<int, SpeedComponent*> speed,
-	std::map<int, StateComponent*> state)
+	std::map<int, StateComponent*> state,
+	std::map<int, ZiplineComponent*> zipline)
 {
 	#ifdef _DEBUG
 	collidersToRender.clear();
 	#endif
 
+	updateTerrain(collisionMap, oldTransform, transform, collider, speed, state);
+}
+
+
+void CollisionSystem::updateTerrain(
+	CollisionMap& collisionMap,
+	std::map<int, TransformComponent*> oldTransform,
+	std::map<int, TransformComponent*> transform,
+	std::map<int, ColliderComponent*> collider,
+	std::map<int, SpeedComponent*> speed,
+	std::map<int, StateComponent*> state)
+{
 	// Colisao com o terreno
 	for (auto& col : collider)
 	{
