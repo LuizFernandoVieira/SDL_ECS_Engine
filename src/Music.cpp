@@ -1,6 +1,12 @@
 #include <iostream>
+
+#ifdef __APPLE__
+#include <SDL2/SDL.h>
+#include <SDL2_mixer/SDL_mixer.h>
+#else
 #include "SDL.h"
 #include "SDL_mixer.h"
+#endif
 
 #include "../include/music.hpp"
 #include "../include/inputhandler.hpp"
@@ -56,7 +62,7 @@ Music::Music(){
 
 		Resources::GetVolume(std::string playerState, int*)
 
-			-	Recebe nome do estado atual do player e 
+			-	Recebe nome do estado atual do player e
 	*/
 
 	for (i = 0; i < AUDIO_MAXLAYERS; i++){
@@ -169,7 +175,7 @@ void Music::Update(){
 
 		//Volume Check
 		if (volume_diff == 0)
-			continue;	
+			continue;
 
 		//Volume Apply
 		if (volume_diff > 0)

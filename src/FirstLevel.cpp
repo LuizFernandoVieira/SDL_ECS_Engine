@@ -4,7 +4,7 @@
 
 FirstLevel::FirstLevel() : 
 	bg("../img/bg.png"),
-	tileSet_(Resources::TILE_WIDTH, Resources::TILE_HEIGHT, "../img/maps/test/tile_set.png"),
+	tileSet_(Resources::TILE_WIDTH, Resources::TILE_HEIGHT, "../img/maps/tilesetcidade1.png"),
 	tileMap_("../map/tileMap.txt", &tileSet_),
 	objectMap_("../map/objectMap.xml"),
 	collisionMap_("../map/collisionMap.txt")

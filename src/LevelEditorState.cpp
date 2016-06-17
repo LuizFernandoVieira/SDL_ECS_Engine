@@ -132,7 +132,7 @@ void LevelEditorState::initGUI()
 				curRow * (Resources::TILE_HEIGHT + 2) + 2 + tileSetAndObjectsRect.y(),
 				Resources::TILE_WIDTH,
 				Resources::TILE_HEIGHT),
-			"../img/maps/test/tile_set.png"//,
+			"../img/maps/tilesetcidade1.png"//,
 			// tileBtnExecute
 		);
 		btn->setSpriteClip(
