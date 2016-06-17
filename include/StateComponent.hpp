@@ -28,10 +28,27 @@ enum UmbrellaDirection
 	BACK
 };
 
+namespace std
+{
+	template <>
+	struct hash<State>
+	{
+		std::size_t operator()(const State& k) const
+		{
+			using std::size_t;
+			using std::hash;
+
+			return ((hash<int>()((int)k)
+					 ^ (hash<int>()((int)k) << 1)));
+		}
+	};
+}
+
+
 class StateComponent : public Component
 {
 public:
-	StateComponent() : state_(IDLE) {}
+	StateComponent() : state_(IDLE), facingRight_(true) {}
 
 	State state_;
 	bool facingRight_;

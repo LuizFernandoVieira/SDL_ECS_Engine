@@ -20,11 +20,13 @@ class CollisionSystem : public System
 public:
 	CollisionSystem();
 	void update(
+		int player,
 		CollisionMap& collisionMap,
 		std::map<int, TransformComponent*> oldTransform,
 		std::map<int, TransformComponent*> transform,
 		std::map<int, ColliderComponent*> collider,
 		std::map<int, SpeedComponent*> speed,
+		std::map<int, StateComponent*> oldState,
 		std::map<int, StateComponent*> state,
 		std::map<int, ZiplineComponent*> zipline
 	);
@@ -44,8 +46,23 @@ private:
 		std::map<int, SpeedComponent*> speed,
 		std::map<int, StateComponent*> state
 	);
-	void updateCollider();
-	void updateZipline();
+	void updateCollider(
+		CollisionMap& collisionMap,
+		std::map<int, TransformComponent*> oldTransform,
+		std::map<int, TransformComponent*> transform,
+		std::map<int, ColliderComponent*> collider,
+		std::map<int, SpeedComponent*> speed,
+		std::map<int, StateComponent*> state
+	);
+	void updateZipline(
+		int player,
+		CollisionMap& collisionMap,
+		std::map<int, TransformComponent*> transform,
+		std::map<int, ColliderComponent*> collider,
+		std::map<int, StateComponent*> oldState,
+		std::map<int, StateComponent*> state,
+		std::map<int, ZiplineComponent*> zipline
+	);
 	void updateWind();
 
 	void correctPosSolid(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed, StateComponent* state);

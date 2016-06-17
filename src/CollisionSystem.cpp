@@ -11,11 +11,13 @@ CollisionSystem::CollisionSystem()
 }
 
 void CollisionSystem::update(
+	int player,
 	CollisionMap& collisionMap,
 	std::map<int, TransformComponent*> oldTransform,
 	std::map<int, TransformComponent*> transform,
 	std::map<int, ColliderComponent*> collider,
 	std::map<int, SpeedComponent*> speed,
+	std::map<int, StateComponent*> oldState,
 	std::map<int, StateComponent*> state,
 	std::map<int, ZiplineComponent*> zipline)
 {
@@ -24,6 +26,8 @@ void CollisionSystem::update(
 	#endif
 
 	updateTerrain(collisionMap, oldTransform, transform, collider, speed, state);
+	updateCollider(collisionMap, oldTransform, transform, collider, speed, state);
+	updateZipline(player, collisionMap, transform, collider, oldState, state, zipline);
 }
 
 
@@ -38,7 +42,7 @@ void CollisionSystem::updateTerrain(
 	// Colisao com o terreno
 	for (auto& col : collider)
 	{
-		Rect finalCollider = col.second->rect_ + Vec2(transform[col.first]->rect_.x(), transform[col.first]->rect_.y() );
+		Rect finalCollider = col.second->hurtbox_ + Vec2(transform[col.first]->rect_.x(), transform[col.first]->rect_.y() );
 
 		for (int y = finalCollider.y() / Resources::TILE_HEIGHT/* - 1*/;
 			y <= (finalCollider.y() + finalCollider.h()) / Resources::TILE_HEIGHT && y < collisionMap.getHeight()/* + 1*/;
@@ -76,13 +80,69 @@ void CollisionSystem::updateTerrain(
 					}
 
 					// Atualizar colisor que foi movido
-					finalCollider = col.second->rect_ + Vec2(transform[col.first]->rect_.x(), transform[col.first]->rect_.y() );
+					finalCollider = col.second->hurtbox_ + Vec2(transform[col.first]->rect_.x(), transform[col.first]->rect_.y() );
 
 					#ifdef _DEBUG
 					collidersToRender.emplace_back(terrain);
 					#endif
 				}
 			}
+		}
+	}
+}
+
+void CollisionSystem::updateCollider(
+	CollisionMap& collisionMap,
+	std::map<int, TransformComponent*> oldTransform,
+	std::map<int, TransformComponent*> transform,
+	std::map<int, ColliderComponent*> collider,
+	std::map<int, SpeedComponent*> speed,
+	std::map<int, StateComponent*> state)
+{
+/*	for (auto col = collider.begin(); col != collider.end(); ++col)
+	{
+		for (auto col2 = col + 1; col2 != collider.end(); ++col2)
+		{
+			if (isColliding( col.second->hurtbox_ + Vec2(transform[col.first]->rect_.x(), transform[col.first]->rect_.y()),
+			                 col2.second->hurtbox_ + Vec2(transform[col2.first]->rect_.x(), transform[col2.first]->rect_.y()),
+			                 transform[col.first]->rotation_,
+			                 transform[col2.first]->rotation_))
+			{
+				if (speed.find(col.first) != speed.end())
+				{
+					correctPosSolid(transform[col.first], oldTransform[col.first], transform[col2.first], speed[col.first]->speed_, state[col.first]);
+				}
+				else if (speed.find(col2.first) != speed.end())
+				{
+					correctPosSolid(transform[col2.first], oldTransform[col2.first], transform[col.first], speed[col2.first]->speed_, state[col2.first]);
+				}
+			}
+		}
+	}*/
+}
+
+
+void CollisionSystem::updateZipline(
+	int player,
+	CollisionMap& collisionMap,
+	std::map<int, TransformComponent*> transform,
+	std::map<int, ColliderComponent*> collider,
+	std::map<int, StateComponent*> oldState,
+	std::map<int, StateComponent*> state,
+	std::map<int, ZiplineComponent*> zipline)
+{
+	for (auto& zip : zipline)
+	{
+		if (isColliding( collider[player]->hitbox_ + Vec2(transform[player]->rect_.x(), transform[player]->rect_.y() ),
+		                 transform[zip.first]->rect_,
+		                 transform[player]->rotation_,
+		                 transform[zip.first]->rotation_ ))
+		{
+			state[player]->state_ = State::ZIPLINE;
+		}
+		else if (oldState[player]->state_ == State::ZIPLINE)
+		{
+			state[player]->state_ = State::FALLING;
 		}
 	}
 }

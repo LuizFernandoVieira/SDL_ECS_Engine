@@ -8,13 +8,13 @@
 #include "../include/TransformComponent.hpp"
 #include "../include/StateComponent.hpp"
 #include "../include/RenderComponent.hpp"
+#include "../include/SoundComponent.hpp"
+
 
 unsigned int GameState::nextId_ = 0;
 
 GameState::GameState()
-#ifndef _DEBUG
 : music()
-#endif
 {
 	mapRender_[0] = std::map<int, RenderComponent*>();
 	mapRender_[1] = std::map<int, RenderComponent*>();
@@ -43,6 +43,8 @@ GameState::~GameState()
 	mapSpeed_.clear();
 	mapEmitter_.clear();
 	mapTimer_.clear();
+	mapZipline_.clear();
+	mapSound_.clear();
 
 	mapRender_[0].clear();
 	mapRender_[1].clear();
@@ -63,16 +65,15 @@ void GameState::update(float dt)
 	std::map<int, TransformComponent*> oldTransform = mapTransform_;
 	std::map<int, StateComponent*> oldState = mapState_;
 
-	#ifndef _DEBUG
 	music.Update();
-	#endif
 	inputSystem_.update( mapState_[player_],	mapSpeed_[player_] );
 	gravitySystem_.update( dt, mapSpeed_, mapPhysics_, mapState_ );
 	// particleEmitterSystem_.update( dt, level_->getCollisionMap(), mapTransform_[particleEmitter_], mapEmitter_[particleEmitter_], mapTimer_[particleEmitter_] );
 	moveSystem_.update( dt, mapTransform_, mapSpeed_ );
-	collisionSystem_.update( level_->getCollisionMap(), oldTransform, mapTransform_, mapCollider_, mapSpeed_, mapState_, mapZipline_ );
-	renderSystem_.update( dt, oldState, mapState_, mapRender_ );
-	playerRenderSystem_.update( dt, (PlayerStateComponent*)oldState[player_], (PlayerStateComponent*)mapState_[player_], &playerRenderComponent_ ); // ai q feio
+	collisionSystem_.update( player_, level_->getCollisionMap(), oldTransform, mapTransform_, mapCollider_, mapSpeed_, oldState, mapState_, mapZipline_ );
+	renderSystem_.update( dt, mapTransform_, oldState, mapState_, mapRender_ );
+	playerRenderSystem_.update( dt, mapTransform_[player_], (PlayerStateComponent*)oldState[player_], (PlayerStateComponent*)mapState_[player_], &playerRenderComponent_ ); // ai q feio
+	soundSystem_.update(oldState, mapState_, mapSound_);
 
 	Camera::update(dt);
 
@@ -101,9 +102,7 @@ void GameState::render()
 
 	// particleEmitterSystem_.render();
 
-	#ifdef _DEBUG
 	// collisionSystem_.render();
-	#endif
 
 	level_->render(0);
 	renderSystem_.render(0, mapTransform_, mapState_, mapRender_[0]);
@@ -127,20 +126,34 @@ void GameState::createPlayer()
 	player_ = nextId_;
 	nextId_++;
 
-	mapTransform_.emplace(player_, new TransformComponent(Rect(352, 100, 52, 90)));
+
+	mapTransform_.emplace(player_, new TransformComponent(Rect(352, 100, 52, 90), Vec2(0.2, 0.2), 0));
 	mapCollider_.emplace(player_, new ColliderComponent(Rect(0, 0, 52, 90)));
 	mapState_.emplace(player_, new PlayerStateComponent());
 	mapPhysics_.emplace(player_, new PhysicsComponent());
 	mapSpeed_.emplace(player_, new SpeedComponent());
+	mapSound_.emplace(player_, new SoundComponent());
+
+/*	playerRenderComponent_.addSprite(State::IDLE, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
+		Sprite("../img/characters/player/idle.png", 24, 0.01));
+	playerRenderComponent_.addSprite(State::WALKING, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
+		Sprite("../img/characters/player/run_front_closed.png", 24, 0.01));
+	playerRenderComponent_.addSprite(State::JUMPING, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
+		Sprite("../img/characters/player/jump_front_closed.png", 23, 0.01));
+	playerRenderComponent_.addSprite(State::FALLING, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
+		Sprite("../img/characters/player/falling_front_closed.png", 11, 0.01));*/
 
 	playerRenderComponent_.addSprite(State::IDLE, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
-		Sprite("../img/characters/player/idle.png"));
+		Sprite("../img/characters/idle.png"));
 	playerRenderComponent_.addSprite(State::WALKING, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
-		Sprite("../img/characters/player/idle.png"));
+		Sprite("../img/characters/idle.png"));
 	playerRenderComponent_.addSprite(State::JUMPING, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
-		Sprite("../img/characters/player/idle.png"));
+		Sprite("../img/characters/idle.png"));
 	playerRenderComponent_.addSprite(State::FALLING, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
-		Sprite("../img/characters/player/idle.png"));
+		Sprite("../img/characters/idle.png"));
+
+	mapSound_[player_]->addSound(State::JUMPING, Sound("../audio/character_jump.wav"));
+	mapSound_[player_]->addSound(State::FALLING, Sound("../audio/character_fall.wav"));	//Mudar para ("estado: colidindo com o chão")
 
 	Camera::follow(mapTransform_[player_]);
 }

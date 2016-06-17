@@ -9,6 +9,7 @@ PlayerRenderSystem::PlayerRenderSystem()
 
 void PlayerRenderSystem::update(
 	float dt,
+	TransformComponent* transfComp,
 	PlayerStateComponent* oldState,
 	PlayerStateComponent* stateComp,
 	PlayerRenderComponent* renderComp)
@@ -22,6 +23,8 @@ void PlayerRenderSystem::update(
 		stateComp->umbrellaState_ != oldState->umbrellaState_ || 
 		stateComp->umbrellaDirection_ != oldState->umbrellaDirection_)
 	{
+		renderComp->getSprite(spriteKey).setScaleX(transfComp->scale_.x());
+		renderComp->getSprite(spriteKey).setScaleY(transfComp->scale_.y());
 		renderComp->getSprite(spriteKey).setFrame(0);
 	}
 	renderComp->getSprite(spriteKey).update(dt);
@@ -41,7 +44,7 @@ void PlayerRenderSystem::render(
 	renderComp->getSprite(spriteKey).render(
 		transform.x(),
 		transform.y(),
-		0,
-		stateComp->facingRight_ // flip se nao ta virado pra direita
+		transfComp->rotation_,
+		!stateComp->facingRight_ // flip se nao ta virado pra direita
 	);
 }

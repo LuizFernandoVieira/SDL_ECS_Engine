@@ -28,7 +28,7 @@ void CollisionRainTerrainSystem::update(
 	// Colisao com o terreno
 	for (auto& col : colComp)
 	{
-    Rect collider = col.second->rect_;
+    Rect collider = col.second->hurtbox_;
 
 		for (int y = collider.y() / Resources::TILE_HEIGHT/* - 1*/;
 			y <= (collider.y() + collider.h()) / Resources::TILE_HEIGHT/* + 1*/;
@@ -118,8 +118,8 @@ void CollisionRainTerrainSystem::render(std::map<int, ColliderComponent*> collid
   for(auto col : collidersForRendering)
   {
     Sprite sp = Sprite();
-    sp.setClip(col.second->rect_.x(), col.second->rect_.y(), col.second->rect_.w(), col.second->rect_.h());
-    sp.renderSelection(col.second->rect_.x() - Camera::pos_.x(), col.second->rect_.y() - Camera::pos_.y());
+    sp.setClip(col.second->hurtbox_.x(), col.second->hurtbox_.y(), col.second->hurtbox_.w(), col.second->hurtbox_.h());
+    sp.renderSelection(col.second->hurtbox_.x() - Camera::pos_.x(), col.second->hurtbox_.y() - Camera::pos_.y());
   }
 
 	// for (int i = 0; i < (int)coisaFeia.size(); i++)

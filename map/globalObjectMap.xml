@@ -36,7 +36,9 @@
 		<sprite state="0" filename="../img/maps/test/canil_prpl_96x128.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
-	<collider x="0" y="0" w="96" h="128" />
+	<collider>
+		<hurtbox x="0" y="0" w="96" h="128" />
+	</collider>
 	<physics gravity_scale="1.0" />
 	<speed />
 </object>
@@ -47,7 +49,9 @@
 		<sprite state="0" filename="../img/maps/test/pedra_80x64.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
-	<collider x="0" y="0" w="80" h="64" />
+	<collider>
+		<hurtbox x="0" y="0" w="80" h="64" />
+	</collider>
 	<physics gravity_scale="1.0" />
 	<speed />
 </object>
@@ -58,7 +62,9 @@
 		<sprite state="0" filename="../img/maps/test/cerquinha_252x52.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
-	<collider x="0" y="0" w="252" h="52" />
+	<collider>
+		<hurtbox x="0" y="0" w="252" h="52" />
+	</collider>
 	<physics gravity_scale="1.0" />
 	<speed />
 </object>

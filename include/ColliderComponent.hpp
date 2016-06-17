@@ -7,11 +7,13 @@
 class ColliderComponent : public Component
 {
 public:
-	ColliderComponent() : rect_() {}
-	ColliderComponent(Rect rect) { rect_ = rect; }
+	ColliderComponent() : hurtbox_(), hitbox_() {}
+	ColliderComponent(Rect hurtbox) : hitbox_() { hurtbox_ = hurtbox; }
+	ColliderComponent(Rect hurtbox, Rect hitbox) { hurtbox_ = hurtbox; hitbox_ = hitbox; }
 	~ColliderComponent() {}
 
-	Rect rect_;
+	Rect hurtbox_;
+	Rect hitbox_;
 };
 
 #endif

@@ -30,19 +30,6 @@ struct SpriteKey
 namespace std
 {
 	template <>
-	struct hash<State>
-	{
-		std::size_t operator()(const State& k) const
-		{
-			using std::size_t;
-			using std::hash;
-
-			return ((hash<int>()((int)k)
-					 ^ (hash<int>()((int)k) << 1)));
-		}
-	};
-
-	template <>
 	struct hash<SpriteKey>
 	{
 		std::size_t operator()(const SpriteKey& k) const

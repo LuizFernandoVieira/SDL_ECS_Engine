@@ -14,6 +14,7 @@ public:
 	RenderSystem();
 	void update(
 		float dt,
+		std::map<int, TransformComponent*> transfComp,
 		std::map<int, StateComponent*> oldState,
 		std::map<int, StateComponent*> stateComp,
 		std::map<int, std::map<int, RenderComponent*>> renderComp
