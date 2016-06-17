@@ -2,11 +2,11 @@
 
 <config>
 	<globals>
-		<data type="int" value="1024" name="WINDOW_WIDTH">1024</data>
-		<data type="int" value="600" name="WINDOW_HEIGHT">600</data>
-		<data type="int" value="32" name="TILE_WIDTH">32</data>
-		<data type="int" value="32" name="TILE_HEIGHT">32</data>
-		<data type="int" value="200" name="GRAVITY">250</data>
+		<data type="int" value="1024" name="WINDOW_WIDTH"/>
+		<data type="int" value="600" name="WINDOW_HEIGHT"/>
+		<data type="int" value="48" name="TILE_WIDTH"/>
+		<data type="int" value="48" name="TILE_HEIGHT"/>
+		<data type="int" value="200" name="GRAVITY"/>
 
 		<data type="float" value="200" name="PLAYER_WALK_SPEED">200</data>
 		<data type="float" value="500" name="PLAYER_JUMP_SPEED">500</data>

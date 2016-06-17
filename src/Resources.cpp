@@ -20,9 +20,9 @@ int Resources::MAP_WIDTH            = 0;
 int Resources::MAP_HEIGHT           = 0;
 
 std::string Resources::TILE_SET_IMG           = "../img/maps/tilesetcidade1.png";
-std::string Resources::TILE_MAP_TXT           = "../map/FaseCidade_tilemap.txt";
-std::string Resources::COLLISION_MAP_TXT      = "../map/FaseCidade_colmap.txt";
-std::string Resources::OBJECT_MAP_XML         = "../map/objectMap.xml";
+std::string Resources::TILE_MAP_TXT           = "../map/FaseUm_tilemap.txt";
+std::string Resources::COLLISION_MAP_TXT      = "../map/FaseUm_colmap.txt";
+std::string Resources::OBJECT_MAP_XML         = "../map/FaseUm_objectsMap.xml";
 std::string Resources::GLOBAL_OBJECT_MAP_XML  = "../map/globalObjectMap.xml";
 
 
