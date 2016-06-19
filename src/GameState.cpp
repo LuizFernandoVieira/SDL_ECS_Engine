@@ -72,6 +72,19 @@ void GameState::update(float dt)
 {
 	InputHandler::getInstance().update();
 
+	// if (mapState_[player_]->state_ == State::IDLE)
+	// 	std::cout << "IDLE" << std::endl;
+	// else if (mapState_[player_]->state_ == State::WALKING)
+	// 	std::cout << "WALKING" << std::endl;
+	// else if (mapState_[player_]->state_ == State::JUMPING)
+	// 	std::cout << "JUMPING" << std::endl;
+	// else if (mapState_[player_]->state_ == State::FALLING)
+	// 	std::cout << "FALLING" << std::endl;
+	// else if (mapState_[player_]->state_ == State::GRAPPLE)
+	// 	std::cout << "GRAPPLE" << std::endl;
+	// else if (mapState_[player_]->state_ == State::ZIPLINE)
+	// 	std::cout << "ZIPLINE" << std::endl;
+
 	std::map<int, TransformComponent*> oldTransform = mapTransform_;
 	std::map<int, StateComponent*> oldState = mapState_;
 
@@ -86,8 +99,6 @@ void GameState::update(float dt)
 	soundSystem_.update(oldState, mapState_, mapSound_);
 
 	Camera::update(dt);
-
-	std::cout << mapTransform_[player_]->scale_.x() << std::endl;
 
 
 	if (InputHandler::getInstance().keyPress(ESCAPE_KEY)) {
@@ -114,7 +125,7 @@ void GameState::render()
 
 	// particleEmitterSystem_.render();
 
-	// collisionSystem_.render();
+	collisionSystem_.render();
 
 	level_->render(0);
 	renderSystem_.render(0, mapTransform_, mapState_, mapRender_[0]);
@@ -140,7 +151,7 @@ void GameState::createPlayer()
 
 
 	mapTransform_.emplace(player_, new TransformComponent(Rect(352, 100, 52, 90), Vec2(0.3, 0.3), 0));
-	mapCollider_.emplace(player_, new ColliderComponent(Rect(0, 0, 52, 90)));
+	mapCollider_.emplace(player_, new ColliderComponent( Rect(0, 0, 52, 90), Rect(10, -10, 20, 20) ));
 	mapState_.emplace(player_, new PlayerStateComponent());
 	mapPhysics_.emplace(player_, new PhysicsComponent());
 	mapSpeed_.emplace(player_, new SpeedComponent());
@@ -149,11 +160,15 @@ void GameState::createPlayer()
 	playerRenderComponent_.addSprite(State::IDLE, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
 		Sprite("../img/characters/player/idle.png", 24, 0.01));
 	playerRenderComponent_.addSprite(State::WALKING, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
-		Sprite("../img/characters/player/running_front_closed.png", 24, 0.01));
+		Sprite("../img/characters/player/running_front_closed.png", 24, 0.02));
 	playerRenderComponent_.addSprite(State::JUMPING, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
 		Sprite("../img/characters/player/jumping_front_closed.png", 23, 0.01));
 	playerRenderComponent_.addSprite(State::FALLING, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
 		Sprite("../img/characters/player/falling_front_closed.png", 11, 0.01));
+	playerRenderComponent_.addSprite(State::GRAPPLE, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
+		Sprite("../img/characters/player/zipline_grapple.png", 11, 0.02));
+	playerRenderComponent_.addSprite(State::ZIPLINE, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
+		Sprite("../img/characters/player/zipline.png", 19, 0.01));
 
 /*	playerRenderComponent_.addSprite(State::IDLE, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
 		Sprite("../img/characters/idle.png"));
@@ -191,12 +206,15 @@ void GameState::createMapObjects()
 
 		// TRANSFORM
 		aux = obj.child("transform");
-		mapTransform_.emplace(nextId_, new TransformComponent(Rect(
-			aux.attribute("x").as_float(),
-			aux.attribute("y").as_float(),
-			aux.attribute("w").as_float(),
-			aux.attribute("h").as_float()
-		)));
+		mapTransform_.emplace(nextId_, new TransformComponent(
+			Rect( aux.child("rect").attribute("x").as_float(),
+			      aux.child("rect").attribute("y").as_float(),
+			      aux.child("rect").attribute("w").as_float(),
+			      aux.child("rect").attribute("h").as_float() ),
+			Vec2( aux.child("scale").attribute("x").as_float(),
+			      aux.child("scale").attribute("y").as_float() ),
+			aux.child("rotation").attribute("value").as_float()
+		));
 
 		// RENDER
 		if ((aux = obj.child("render")))
@@ -220,12 +238,16 @@ void GameState::createMapObjects()
 		// COLLIDER
 		if ((aux = obj.child("collider")))
 		{
-			mapCollider_.emplace(nextId_, new ColliderComponent(Rect(
-				aux.attribute("x").as_float(),
-				aux.attribute("y").as_float(),
-				aux.attribute("w").as_float(),
-				aux.attribute("h").as_float()
-			)));
+			mapCollider_.emplace(nextId_, new ColliderComponent(
+				Rect( aux.child("hurtbox").attribute("x").as_float(),
+				      aux.child("hurtbox").attribute("y").as_float(),
+				      aux.child("hurtbox").attribute("w").as_float(),
+				      aux.child("hurtbox").attribute("h").as_float() ),
+				Rect( aux.child("hitbox").attribute("x").as_float(),
+				      aux.child("hitbox").attribute("y").as_float(),
+				      aux.child("hitbox").attribute("w").as_float(),
+				      aux.child("hitbox").attribute("h").as_float() )
+			));
 		}
 
 		// SPEED
@@ -256,6 +278,15 @@ void GameState::createMapObjects()
 		if ((aux = obj.child("timer")))
 		{
 			mapTimer_.emplace(nextId_, new TimerComponent());
+		}
+
+		// ZIPLINE
+		if ((aux = obj.child("zipline")))
+		{
+			mapZipline_.emplace(nextId_, new ZiplineComponent(
+				Vec2(aux.child("start").attribute("x").as_float(), aux.child("start").attribute("y").as_float()),
+				Vec2(aux.child("end").attribute("x").as_float(), aux.child("end").attribute("y").as_float())
+			));
 		}
 
 		nextId_++;

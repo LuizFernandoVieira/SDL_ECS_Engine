@@ -8,16 +8,17 @@
 #define PRINTITALL 	true
 
 
-int Resources::WINDOW_WIDTH 		= 0;
-int Resources::WINDOW_HEIGHT 		= 0;
-int Resources::TILE_WIDTH 			= 0;
-int Resources::TILE_HEIGHT 			= 0;
-int Resources::GRAVITY 				= 0; // pixels per second
-float Resources::PLAYER_WALK_SPEED 	= 0; // pixels per second
-float Resources::PLAYER_JUMP_SPEED 	= 0; // pixels per second
+int Resources::WINDOW_WIDTH            = 0;
+int Resources::WINDOW_HEIGHT           = 0;
+int Resources::TILE_WIDTH              = 0;
+int Resources::TILE_HEIGHT             = 0;
+int Resources::GRAVITY                 = 0; // pixels per second
+float Resources::PLAYER_WALK_SPEED     = 0; // pixels per second
+float Resources::PLAYER_JUMP_SPEED     = 0; // pixels per second
+float Resources::PLAYER_ZIPLINE_SPEED  = 300; 
 
-int Resources::MAP_WIDTH            = 0;
-int Resources::MAP_HEIGHT           = 0;
+int Resources::MAP_WIDTH               = 0;
+int Resources::MAP_HEIGHT              = 0;
 
 std::string Resources::TILE_SET_IMG           = "../img/maps/tilesetcidade1.png";
 std::string Resources::TILE_MAP_TXT           = "../map/FaseUm_tilemap.txt";

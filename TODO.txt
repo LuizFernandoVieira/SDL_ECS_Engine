@@ -1,15 +1,6 @@
 Fazendo:
 
-GameState
-  ParticleEmitterSystem
-    ParticleEmitter
-      TransformComponent
-      EmitterComponent
-			Timer
-        int Particle
-        map TransformComponent
-        map RenderComponent
-        map TimerComponent
+- Botar o player no xml;
 
 
 Probleminhas a resolver:

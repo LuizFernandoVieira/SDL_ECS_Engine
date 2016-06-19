@@ -31,9 +31,7 @@ public:
 		std::map<int, ZiplineComponent*> zipline
 	);
 	
-	#ifdef _DEBUG
 	void render();
-	#endif
 
 private:
 	bool isColliding(const Rect& a, const Rect& b, float angleOfA, float angleOfB);

@@ -21,13 +21,13 @@ void CollisionSystem::update(
 	std::map<int, StateComponent*> state,
 	std::map<int, ZiplineComponent*> zipline)
 {
-	#ifdef _DEBUG
 	collidersToRender.clear();
-	#endif
 
 	updateTerrain(collisionMap, oldTransform, transform, collider, speed, state);
 	updateCollider(collisionMap, oldTransform, transform, collider, speed, state);
 	updateZipline(player, collisionMap, transform, collider, speed, oldState, state, zipline);
+
+	collidersToRender.emplace_back(collider[player]->hitbox_ + Vec2(transform[player]->rect_.x(), transform[player]->rect_.y()));
 }
 
 
@@ -82,9 +82,7 @@ void CollisionSystem::updateTerrain(
 					// Atualizar colisor que foi movido
 					finalCollider = col.second->hurtbox_ + Vec2(transform[col.first]->rect_.x(), transform[col.first]->rect_.y() );
 
-					#ifdef _DEBUG
-					collidersToRender.emplace_back(terrain);
-					#endif
+					// collidersToRender.emplace_back(terrain);
 				}
 			}
 		}
@@ -134,14 +132,16 @@ void CollisionSystem::updateZipline(
 {
 	for (auto& zip : zipline)
 	{
-		if (isColliding( collider[player]->hitbox_ + Vec2(transform[player]->rect_.x(), transform[player]->rect_.y() ),
-		                 transform[zip.first]->rect_,
+		if ( (state[player]->state_ == State::GRAPPLE || state[player]->state_ == State::ZIPLINE)  && 
+		    isColliding( collider[player]->hitbox_ + Vec2(transform[player]->rect_.x(), transform[player]->rect_.y() ),
+		                 transform[zip.first]->rect_ * Rect(1, 1, transform[zip.first]->scale_.x(), transform[zip.first]->scale_.y()),
 		                 transform[player]->rotation_,
 		                 transform[zip.first]->rotation_ ))
 		{
 			state[player]->state_ = State::ZIPLINE;
-			speed[player]->speed_ = Vec2( ProjectX(transform[zip.first]->rect_.x(), transform[zip.first]->rotation_),
-			                              ProjectY(transform[zip.first]->rect_.x(), transform[zip.first]->rotation_) );
+			speed[player]->speed_ = Vec2( ProjectX(Resources::PLAYER_ZIPLINE_SPEED, transform[zip.first]->rotation_),
+			                              ProjectY(Resources::PLAYER_ZIPLINE_SPEED, transform[zip.first]->rotation_) );
+			std::cout << "ZIPLINE" << std::endl;
 		}
 		else if (oldState[player]->state_ == State::ZIPLINE)
 		{
@@ -209,14 +209,14 @@ void CollisionSystem::correctPosSolid(Rect& entityPos, Rect oldPos, Rect terrain
 		// std::cout << "COLIDIU A DIREITA" << std::endl;
 		entityPos.x( terrain.x() - entityPos.w() );
 	}
-	else if (angle >= 55 && angle <= 125) // entity estava acima do colisor
+	else if (angle >= 55 && angle <= 130) // entity estava acima do colisor
 	{
 		// std::cout << "COLIDIU EMBAIXO" << std::endl;
 		entityPos.y( terrain.y() - entityPos.h() );
 		speed.y(0.0);
 		state->state_ = speed.x() == 0 ? State::IDLE : State::WALKING;
 	}
-	else if (angle > 125 && angle < 235) // entity colidiu à esquerda
+	else if (angle > 130 && angle < 235) // entity colidiu à esquerda
 	{
 		// std::cout << "COLIDIU A ESQUERDA" << std::endl;
 		entityPos.x( terrain.x() + terrain.w() );
@@ -350,7 +350,6 @@ void CollisionSystem::correctPosCorner(Rect& entityPos, Rect oldPos, Rect terrai
 
 
 
-#ifdef _DEBUG
 void CollisionSystem::render()
 {
 	for (int i = 0; i < (int)collidersToRender.size(); i++)
@@ -360,4 +359,3 @@ void CollisionSystem::render()
 		sp.renderSelection(collidersToRender[i].x() - Camera::pos_.x(), collidersToRender[i].y() - Camera::pos_.y());
 	}
 }
-#endif

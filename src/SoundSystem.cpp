@@ -29,12 +29,12 @@ void SoundSystem::update(
 		//std::cout << "Current State: " << stateComp[sfx.first]->state_ << std::endl;
 		//std::cout << "Old State: " << oldState[sfx.first]->state_ << std::endl;
 		if (oldState[sfx.first]->state_ ==  stateComp[sfx.first]->state_)
-			std::cout << "[EQUAL STATES] - Current State: " << oldState[sfx.first]->state_ << "// New State: " << stateComp[sfx.first]->state_ << std::endl;
-		else std::cout << "[CHANGE DETECTED] - Current State: " << oldState[sfx.first]->state_ << "// New State: " << stateComp[sfx.first]->state_ << std::endl;
+			// std::cout << "[EQUAL STATES] - Current State: " << oldState[sfx.first]->state_ << "// New State: " << stateComp[sfx.first]->state_ << std::endl;
+		// else std::cout << "[CHANGE DETECTED] - Current State: " << oldState[sfx.first]->state_ << "// New State: " << stateComp[sfx.first]->state_ << std::endl;
 
 		if (stateComp[sfx.first]->state_ != oldState[sfx.first]->state_){
 
-			std::cout << "[Render Message] State Changed to: " << stateComp[sfx.first]->state_ << std::endl;
+			// std::cout << "[Render Message] State Changed to: " << stateComp[sfx.first]->state_ << std::endl;
 			sfx.second->getSound(stateComp[sfx.first]->state_).Play();
 		}
 	}
