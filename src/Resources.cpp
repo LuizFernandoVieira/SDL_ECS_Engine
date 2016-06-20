@@ -5,7 +5,10 @@
 #include "../include/Resources.hpp"
 #include "../include/Game.hpp"
 
-#define PRINTITALL 	true
+//Test: Loading Volumes
+#include "../include/Music.hpp"
+
+#define PRINTITALL 	false
 
 
 int Resources::WINDOW_WIDTH 		= 0;
@@ -165,8 +168,16 @@ void Resources::Read(std::string _filename){
 
 	_node node = doc.first_child();
 
-	//std::cout << "First node name: [" << node.name() << "], node value: [" << node.first_child().name() << "]\n";
-	//std::cout << "Second node name: [" << node.next_sibling().name() << "], node value: [" << node.next_sibling().first_child().name() << "]\n";
+	// --------------------------------------------------------------------------------------------------
+		//This should be in a "ReadState()" Method, for reading each different game stage etc.
+
+	//Setting Music Volumes
+	std::cout << "Reading State: " << node.child("state").attribute("name").as_string() << std::endl;
+	Music::ReadVolumes(node.child("state").child("music"));
+
+	// --------------------------------------------------------------------------------------------------
+
+
 
 	//Fetching Globals
 	for(_node data = node.child("globals").first_child(); data; data = data.next_sibling()){
@@ -199,7 +210,6 @@ void Resources::Read(std::string _filename){
 	PLAYER_WALK_SPEED 	= floatTable["PLAYER_WALK_SPEED"];
 
 
-
 	//Test Printing
 	if (PRINTITALL){
 
@@ -228,3 +238,29 @@ void Resources::Read(std::string _filename){
 	std::cout << std::endl << "Resources Loaded Successfully" << std::endl;
 
 }
+
+
+//-----------------------------------------------------------------------------------------
+/*
+void Resources::Read(std::string _filename, Music&){
+
+	int 			tempInt	= 0;
+	float 			tempFloat;
+	std::string		varName;
+	std::string		varType;
+	_document 	doc;
+	_parse		config;
+
+	config = doc.load_file(_filename.c_str());
+	if (config.status){
+		std::cout << "Error Reading CONFIG_FILE: " << config.description() << std::endl;
+		std::cout << "\tStatus code: " << config.status << std::endl;
+	}
+	else std::cout << "Load result: " << config.description() << std::endl;
+	std::cout << std::endl;
+
+
+	_node node = doc.first_child();
+
+}
+*/

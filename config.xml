@@ -15,36 +15,36 @@
 	<state name="prototype">
 		<music>
 			<assets>
-				<layer channel="1">"audio/umbra_test_bass.wav"</layer>
-				<layer channel="2">"audio/umbra_test_flute.wav"</layer>
-				<layer channel="3">"audio/umbra_test_piano.wav"</layer>
-				<layer channel="4">"audio/umbra_test_synth.wav"</layer>
-				<layer channel="5">"audio/umbra_test_violin.wav"</layer>
-				<layer channel="6">null</layer>
-				<layer channel="7">null</layer>
-				<layer channel="8">null</layer>
+				<layer channel="1" file="audio/umbra_test_bass.wav"/>
+				<layer channel="2" file="audio/umbra_test_flute.wav"/>
+				<layer channel="3" file="audio/umbra_test_piano.wav"/>
+				<layer channel="4" file="audio/umbra_test_synth.wav"/>
+				<layer channel="5" file="audio/umbra_test_violin.wav"/>
+				<layer channel="6" file="null"/>
+				<layer channel="7" file="null"/>
+				<layer channel="8" file="null"/>
 			</assets>
 
 			<volume state="default">
-				<layer channel="1">128</layer>
-				<layer channel="2">128</layer>
-				<layer channel="3">128</layer>
-				<layer channel="4">128</layer>
-				<layer channel="5">128</layer>
-				<layer channel="6">128</layer>
-				<layer channel="7">128</layer>
-				<layer channel="8">128</layer>
+				<layer channel="1" value="128"/>
+				<layer channel="2" value="128"/>
+				<layer channel="3" value="128"/>
+				<layer channel="4" value="128"/>
+				<layer channel="5" value="128"/>
+				<layer channel="6" value="128"/>
+				<layer channel="7" value="128"/>
+				<layer channel="8" value="128"/>
 			</volume>
 
 			<volume state="walking">
-				<layer channel="1">0</layer>
-				<layer channel="2">0</layer>
-				<layer channel="3">0</layer>
-				<layer channel="4">0</layer>
-				<layer channel="5">0</layer>
-				<layer channel="6">0</layer>
-				<layer channel="7">0</layer>
-				<layer channel="8">0</layer>
+				<layer channel="1" value="0"/>
+				<layer channel="2" value="0"/>
+				<layer channel="3" value="0"/>
+				<layer channel="4" value="0"/>
+				<layer channel="5" value="0"/>
+				<layer channel="6" value="0"/>
+				<layer channel="7" value="0"/>
+				<layer channel="8" value="0"/>
 			</volume>
 		</music>
 	</state>

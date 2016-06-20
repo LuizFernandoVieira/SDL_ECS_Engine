@@ -17,6 +17,7 @@
 #include <string>
 #include <memory>
 #include "pugixml.hpp"
+#include "music.hpp"
 
 #define _attribute	pugi::xml_attribute
 #define _node		pugi::xml_node
@@ -48,6 +49,7 @@ public:
 	static std::string GLOBAL_OBJECT_MAP_XML;
 
 	static void Read(std::string filename_);
+	//static void ReadVolumes(std::string filename_);
 
 	// Global Values
 	static std::unordered_map<std::string, int>			intTable;

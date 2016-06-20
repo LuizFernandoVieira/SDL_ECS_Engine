@@ -134,23 +134,23 @@ void GameState::createPlayer()
 	mapSpeed_.emplace(player_, new SpeedComponent());
 	mapSound_.emplace(player_, new SoundComponent());
 
-/*	playerRenderComponent_.addSprite(State::IDLE, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
+	playerRenderComponent_.addSprite(State::IDLE, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
 		Sprite("../img/characters/player/idle.png", 24, 0.01));
 	playerRenderComponent_.addSprite(State::WALKING, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
-		Sprite("../img/characters/player/run_front_closed.png", 24, 0.01));
+		Sprite("../img/characters/player/running_front_closed.png", 24, 0.01));
 	playerRenderComponent_.addSprite(State::JUMPING, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
-		Sprite("../img/characters/player/jump_front_closed.png", 23, 0.01));
+		Sprite("../img/characters/player/jumping_front_closed.png", 23, 0.01));
 	playerRenderComponent_.addSprite(State::FALLING, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
-		Sprite("../img/characters/player/falling_front_closed.png", 11, 0.01));*/
+		Sprite("../img/characters/player/falling_front_closed.png", 11, 0.01));
 
-	playerRenderComponent_.addSprite(State::IDLE, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
+/*	playerRenderComponent_.addSprite(State::IDLE, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
 		Sprite("../img/characters/idle.png"));
 	playerRenderComponent_.addSprite(State::WALKING, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
 		Sprite("../img/characters/idle.png"));
 	playerRenderComponent_.addSprite(State::JUMPING, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
 		Sprite("../img/characters/idle.png"));
 	playerRenderComponent_.addSprite(State::FALLING, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
-		Sprite("../img/characters/idle.png"));
+		Sprite("../img/characters/idle.png"));*/
 
 	mapSound_[player_]->addSound(State::JUMPING, Sound("../audio/character_jump.wav"));
 	mapSound_[player_]->addSound(State::FALLING, Sound("../audio/character_fall.wav"));	//Mudar para ("estado: colidindo com o chão")
