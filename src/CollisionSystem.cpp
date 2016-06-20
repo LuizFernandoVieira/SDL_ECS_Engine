@@ -141,7 +141,6 @@ void CollisionSystem::updateZipline(
 			state[player]->state_ = State::ZIPLINE;
 			speed[player]->speed_ = Vec2( ProjectX(Resources::PLAYER_ZIPLINE_SPEED, transform[zip.first]->rotation_),
 			                              ProjectY(Resources::PLAYER_ZIPLINE_SPEED, transform[zip.first]->rotation_) );
-			std::cout << "ZIPLINE" << std::endl;
 		}
 		else if (oldState[player]->state_ == State::ZIPLINE)
 		{

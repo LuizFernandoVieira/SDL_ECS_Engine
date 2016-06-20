@@ -9,7 +9,8 @@ InputSystem::InputSystem()
 
 void InputSystem::update(
 	StateComponent* stateComp,
-	SpeedComponent* speedComp)
+	SpeedComponent* speedComp,
+	ColliderComponent* colComp)
 {
 	InputHandler& input = InputHandler::getInstance();
 
@@ -59,20 +60,22 @@ void InputSystem::update(
 			}
 			else
 			{
+				// GRAPPLE
 				stateComp->state_ = State::GRAPPLE;
+				colComp->hitbox_ = Rect( stateComp->facingRight_ ? 15 : 15, -10, 20, 20);
 			}
 		}
 
 		if (input.keyPress(SPACE_BAR))
 		{
-			if (stateComp->state_ == State::JUMPING ||
-				stateComp->state_ == State::FALLING)
-			{
-				// ZIPLINE
-			}
-			else
+			if (stateComp->state_ != State::JUMPING &&
+				stateComp->state_ != State::FALLING &&
+				stateComp->state_ != State::GRAPPLE &&
+				stateComp->state_ != State::ZIPLINE)
 			{
 				// ATAQUE
+				stateComp->state_ = State::ATTACKING;
+				colComp->hitbox_ = Rect( stateComp->facingRight_ ? 52 : 52, 20, 48, 48);
 			}
 		}
 

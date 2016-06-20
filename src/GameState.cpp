@@ -55,6 +55,7 @@ GameState::~GameState()
 	mapTimer_.clear();
 	mapZipline_.clear();
 	mapSound_.clear();
+	mapHealth_.clear();
 
 	mapRender_[0].clear();
 	mapRender_[1].clear();
@@ -89,7 +90,7 @@ void GameState::update(float dt)
 	std::map<int, StateComponent*> oldState = mapState_;
 
 	music.Update();
-	inputSystem_.update( mapState_[player_],	mapSpeed_[player_] );
+	inputSystem_.update( mapState_[player_], mapSpeed_[player_], mapCollider_[player_] );
 	gravitySystem_.update( dt, mapSpeed_, mapPhysics_, mapState_ );
 	// particleEmitterSystem_.update( dt, level_->getCollisionMap(), mapTransform_[particleEmitter_], mapEmitter_[particleEmitter_], mapTimer_[particleEmitter_] );
 	moveSystem_.update( dt, mapTransform_, mapSpeed_ );
@@ -100,6 +101,7 @@ void GameState::update(float dt)
 
 	Camera::update(dt);
 
+	deleteDeadEntities();
 
 	if (InputHandler::getInstance().keyPress(ESCAPE_KEY)) {
 		pop_ = true;
@@ -156,6 +158,7 @@ void GameState::createPlayer()
 	mapPhysics_.emplace(player_, new PhysicsComponent());
 	mapSpeed_.emplace(player_, new SpeedComponent());
 	mapSound_.emplace(player_, new SoundComponent());
+	mapHealth_.emplace(player_, new HealthComponent(1));
 
 	playerRenderComponent_.addSprite(State::IDLE, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
 		Sprite("../img/characters/player/idle.png", 24, 0.01));
@@ -289,6 +292,40 @@ void GameState::createMapObjects()
 			));
 		}
 
+		// HEALTH
+		if ((aux = obj.child("health")))
+		{
+			mapHealth_.emplace(nextId_, new HealthComponent(aux.attribute("value").as_float()));
+		}
+
 		nextId_++;
+	}
+}
+
+
+void GameState::deleteDeadEntities()
+{
+	for (auto& health : mapHealth_ )
+	{
+		if (health.second->health_ <= 0)
+		{
+			int id = health.first;
+			
+			mapTransform_.erase(id);
+			mapState_.erase(id);
+			mapPhysics_.erase(id);
+			mapCollider_.erase(id);
+			mapSpeed_.erase(id);
+			mapEmitter_.erase(id);
+			mapTimer_.erase(id);
+			mapZipline_.erase(id);
+			mapSound_.erase(id);
+			mapHealth_.erase(id);
+
+			mapRender_[0].erase(id);
+			mapRender_[1].erase(id);
+			mapRender_[2].erase(id);
+			mapRender_[3].erase(id);
+		}
 	}
 }
