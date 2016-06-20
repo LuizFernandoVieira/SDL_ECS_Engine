@@ -11,6 +11,7 @@
 #include "TimerComponent.hpp"
 #include "ZiplineComponent.hpp"
 #include "SoundComponent.hpp"
+#include "HealthComponent.hpp"
 #include "InputSystem.hpp"
 #include "PlayerRenderSystem.hpp"
 #include "RenderSystem.hpp"
@@ -37,6 +38,7 @@ private:
 	void createPlayer();
 	void createParticleEmitter();
 	void createMapObjects();
+	void deleteDeadEntities();
 
 	Level* level_;
 
@@ -58,6 +60,7 @@ private:
 	std::map<int, TimerComponent*> mapTimer_;
 	std::map<int, ZiplineComponent*> mapZipline_;
 	std::map<int, SoundComponent*> mapSound_;
+	std::map<int, HealthComponent*> mapHealth_;
 	std::map<int, std::map<int, RenderComponent*>> mapRender_;
 	PlayerRenderComponent playerRenderComponent_;
 

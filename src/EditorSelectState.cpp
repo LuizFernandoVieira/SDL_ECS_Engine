@@ -9,8 +9,8 @@
 #include <sstream>
 
 
-EditorSelectState::EditorSelectState() : 
-	bg_("../img/bg.png"), 
+EditorSelectState::EditorSelectState() :
+	bg_("../img/bg.png"),
 	mode(INIT),
 	btnNewMap("../img/interface/editor/btn_1.png"),
 	btnNewMapPos(300, 250, 200, 100),
@@ -97,22 +97,22 @@ void EditorSelectState::update(float dt)
 
 				textLabels.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Imagem tile set:", Colors::black));
 				textLabels[0]->setPos(200, 150, false, false);
-				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "../img/maps/test/tile_set.png", Colors::blue));
+				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "../img/maps/tilesetcidade1.png", Colors::blue));
 				textAreas[0]->setPos(400, 150, false, false);
 
 				textLabels.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Tile map:", Colors::black));
 				textLabels[1]->setPos(200, 250, false, false);
-				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "../map/tileMap.txt", Colors::black));
+				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "../map/FaseUm_tilemap.txt", Colors::black));
 				textAreas[1]->setPos(400, 250, false, false);
 
 				textLabels.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Collision map:", Colors::black));
 				textLabels[2]->setPos(200, 350, false, false);
-				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "../map/collisionMap.txt", Colors::black));
+				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "../map/FaseUm_colmap.txt", Colors::black));
 				textAreas[2]->setPos(400, 350, false, false);
 
 				textLabels.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Object map:", Colors::black));
 				textLabels[3]->setPos(200, 450, false, false);
-				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "../map/objectMap.xml", Colors::black));
+				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "../map/FaseUm_objectsMap.xml", Colors::black));
 				textAreas[3]->setPos(400, 450, false, false);
 
 			}

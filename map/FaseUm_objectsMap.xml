@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<object name="zipline">
+	<transform>
+		<rect x="600" y="520" w="217" h="9" />
+		<scale x="4" y="1" />
+		<rotation value="15" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/zipline.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+	<zipline>
+		<start x="0" y="0" />
+		<end x="0" y="0" />
+	</zipline>
+</object>

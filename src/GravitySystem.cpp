@@ -23,8 +23,12 @@ void GravitySystem::update(
 		else
 		{
 			// TA CAINDO (A MENOS QUE ESTEJA COLIDINDO)
-			speed[phys.first]->speed_.y(Resources::GRAVITY * phys.second->gravityScale_);
-			state[phys.first]->state_ = State::FALLING;
+			if (state[phys.first]->state_ != State::ZIPLINE)
+			{
+				speed[phys.first]->speed_.y(Resources::GRAVITY * phys.second->gravityScale_);
+				if (state[phys.first]->state_ != State::GRAPPLE)
+					state[phys.first]->state_ = State::FALLING;
+			}
 		}
 	}
 }

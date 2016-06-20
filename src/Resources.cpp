@@ -11,21 +11,22 @@
 #define PRINTITALL 	false
 
 
-int Resources::WINDOW_WIDTH 		= 0;
-int Resources::WINDOW_HEIGHT 		= 0;
-int Resources::TILE_WIDTH 			= 0;
-int Resources::TILE_HEIGHT 			= 0;
-int Resources::GRAVITY 				= 0; // pixels per second
-float Resources::PLAYER_WALK_SPEED 	= 0; // pixels per second
-float Resources::PLAYER_JUMP_SPEED 	= 0; // pixels per second
+int Resources::WINDOW_WIDTH            = 0;
+int Resources::WINDOW_HEIGHT           = 0;
+int Resources::TILE_WIDTH              = 0;
+int Resources::TILE_HEIGHT             = 0;
+int Resources::GRAVITY                 = 0; // pixels per second
+float Resources::PLAYER_WALK_SPEED     = 0; // pixels per second
+float Resources::PLAYER_JUMP_SPEED     = 0; // pixels per second
+float Resources::PLAYER_ZIPLINE_SPEED  = 300; 
 
-int Resources::MAP_WIDTH            = 0;
-int Resources::MAP_HEIGHT           = 0;
+int Resources::MAP_WIDTH               = 0;
+int Resources::MAP_HEIGHT              = 0;
 
 std::string Resources::TILE_SET_IMG           = "../img/maps/tilesetcidade1.png";
-std::string Resources::TILE_MAP_TXT           = "../map/FaseCidade_tilemap.txt";
-std::string Resources::COLLISION_MAP_TXT      = "../map/FaseCidade_colmap.txt";
-std::string Resources::OBJECT_MAP_XML         = "../map/objectMap.xml";
+std::string Resources::TILE_MAP_TXT           = "../map/FaseUm_tilemap.txt";
+std::string Resources::COLLISION_MAP_TXT      = "../map/FaseUm_colmap.txt";
+std::string Resources::OBJECT_MAP_XML         = "../map/FaseUm_objectsMap.xml";
 std::string Resources::GLOBAL_OBJECT_MAP_XML  = "../map/globalObjectMap.xml";
 
 
@@ -238,29 +239,3 @@ void Resources::Read(std::string _filename){
 	std::cout << std::endl << "Resources Loaded Successfully" << std::endl;
 
 }
-
-
-//-----------------------------------------------------------------------------------------
-/*
-void Resources::Read(std::string _filename, Music&){
-
-	int 			tempInt	= 0;
-	float 			tempFloat;
-	std::string		varName;
-	std::string		varType;
-	_document 	doc;
-	_parse		config;
-
-	config = doc.load_file(_filename.c_str());
-	if (config.status){
-		std::cout << "Error Reading CONFIG_FILE: " << config.description() << std::endl;
-		std::cout << "\tStatus code: " << config.status << std::endl;
-	}
-	else std::cout << "Load result: " << config.description() << std::endl;
-	std::cout << std::endl;
-
-
-	_node node = doc.first_child();
-
-}
-*/

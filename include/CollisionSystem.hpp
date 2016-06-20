@@ -31,9 +31,7 @@ public:
 		std::map<int, ZiplineComponent*> zipline
 	);
 	
-	#ifdef _DEBUG
 	void render();
-	#endif
 
 private:
 	bool isColliding(const Rect& a, const Rect& b, float angleOfA, float angleOfB);
@@ -59,6 +57,7 @@ private:
 		CollisionMap& collisionMap,
 		std::map<int, TransformComponent*> transform,
 		std::map<int, ColliderComponent*> collider,
+		std::map<int, SpeedComponent*> speed,
 		std::map<int, StateComponent*> oldState,
 		std::map<int, StateComponent*> state,
 		std::map<int, ZiplineComponent*> zipline

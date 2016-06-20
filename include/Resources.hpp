@@ -38,6 +38,7 @@ public:
 
 	static float PLAYER_WALK_SPEED;
 	static float PLAYER_JUMP_SPEED;
+	static float PLAYER_ZIPLINE_SPEED;
 
 	static int MAP_WIDTH;
 	static int MAP_HEIGHT;

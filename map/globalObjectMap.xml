@@ -3,7 +3,11 @@
 ========= MODELO:
 
 <object name="nome">
-	<transform x="0" y="0" w="10" h="10" />
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
 	<render>
 		<sprite state="0" filename="../img/img.png" frame_count="1" frame_time="1.0" />
 	</render>
@@ -31,7 +35,11 @@
 
 
 <object name="canil">
-	<transform x="0" y="0" w="96" h="128" />
+	<transform>
+		<rect x="0" y="0" w="96" h="128" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
 	<render>
 		<sprite state="0" filename="../img/maps/test/canil_prpl_96x128.png" frame_count="1" frame_time="1.0" />
 	</render>
@@ -44,7 +52,11 @@
 </object>
 
 <object name="pedra">
-	<transform x="0" y="0" w="80" h="64" />
+	<transform>
+		<rect x="0" y="0" w="80" h="64" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
 	<render>
 		<sprite state="0" filename="../img/maps/test/pedra_80x64.png" frame_count="1" frame_time="1.0" />
 	</render>
@@ -57,7 +69,11 @@
 </object>
 
 <object name="cerca">
-	<transform x="0" y="0" w="252" h="52" />
+	<transform>
+		<rect x="0" y="0" w="252" h="52" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
 	<render>
 		<sprite state="0" filename="../img/maps/test/cerquinha_252x52.png" frame_count="1" frame_time="1.0" />
 	</render>
@@ -70,7 +86,11 @@
 </object>
 
 <object name="fonte">
-	<transform x="0" y="0" w="320" h="384" />
+	<transform>
+		<rect x="0" y="0" w="320" h="384" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
 	<render>
 		<sprite state="0" filename="../img/maps/test/fountain_320x384.png" frame_count="10" frame_time="0.2" />
 	</render>

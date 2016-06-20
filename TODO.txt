@@ -1,23 +1,18 @@
 Fazendo:
 
-GameState
-  ParticleEmitterSystem
-    ParticleEmitter
-      TransformComponent
-      EmitterComponent
-			Timer
-        int Particle
-        map TransformComponent
-        map RenderComponent
-        map TimerComponent
+- Botar o player no xml;
 
 
 Probleminhas a resolver:
 
-- Acrescentar largura, altura, escala e rotação na transform component;
 - DELETAR PONTEIROS!!!!!!!!!!!!!!!!!!!
 - Bug do editor, mousePress e isMouseDown;
 
+============== PROXIMA AULA ==================
+
+Player atacando
+Player planar
+Vento (mecanica)
 
 ============== ESSA SEMANA ==================
 
@@ -38,7 +33,7 @@ Segunda entrega / 17
 
 		Inimigos
 			IA
-				Coisa -> Zip Zag -> Distancia
+				Coisa -> Zig Zag -> Distancia
 				Coisa -> Segue e para depois de uma distancia
 				Cerberus -> Bloca a passagem
 				Macaco -> Inimigo
@@ -65,18 +60,10 @@ Segunda entrega / 17
 		Checkpoints
 		Switchs
 
-	Victor & Thales
-			Player
-				Zip line
-
 	Victor & Thales feat Luiz
-			Menu
-				Muitas telas
-			Gamepad
-			Player
-				Ataque
-				Dano de Queda
-				Planar
+		Menu
+			Muitas telas
+		Gamepad
 
 
 ===

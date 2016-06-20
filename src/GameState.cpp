@@ -1,6 +1,12 @@
+#ifdef __APPLE__
+	#include <SDL2/SDL.h>
+#else
+	#include "SDL.h"
+#endif
 #include <vector>
 #include <unordered_map>
 
+#include "../include/Game.hpp"
 #include "../include/GameState.hpp"
 #include "../include/Camera.hpp"
 #include "../include/InputHandler.hpp"
@@ -9,13 +15,17 @@
 #include "../include/StateComponent.hpp"
 #include "../include/RenderComponent.hpp"
 #include "../include/SoundComponent.hpp"
-
+#include "../include/StaticSprite.hpp"
 
 unsigned int GameState::nextId_ = 0;
 
 GameState::GameState()
 : music()
 {
+	StaticSprite loadScreen("../img/bg.png");
+	loadScreen.render(0,0);
+	SDL_RenderPresent(Game::getInstance().getRenderer());
+	
 	mapRender_[0] = std::map<int, RenderComponent*>();
 	mapRender_[1] = std::map<int, RenderComponent*>();
 	mapRender_[2] = std::map<int, RenderComponent*>();
@@ -45,6 +55,7 @@ GameState::~GameState()
 	mapTimer_.clear();
 	mapZipline_.clear();
 	mapSound_.clear();
+	mapHealth_.clear();
 
 	mapRender_[0].clear();
 	mapRender_[1].clear();
@@ -62,21 +73,35 @@ void GameState::update(float dt)
 {
 	InputHandler::getInstance().update();
 
+	// if (mapState_[player_]->state_ == State::IDLE)
+	// 	std::cout << "IDLE" << std::endl;
+	// else if (mapState_[player_]->state_ == State::WALKING)
+	// 	std::cout << "WALKING" << std::endl;
+	// else if (mapState_[player_]->state_ == State::JUMPING)
+	// 	std::cout << "JUMPING" << std::endl;
+	// else if (mapState_[player_]->state_ == State::FALLING)
+	// 	std::cout << "FALLING" << std::endl;
+	// else if (mapState_[player_]->state_ == State::GRAPPLE)
+	// 	std::cout << "GRAPPLE" << std::endl;
+	// else if (mapState_[player_]->state_ == State::ZIPLINE)
+	// 	std::cout << "ZIPLINE" << std::endl;
+
 	std::map<int, TransformComponent*> oldTransform = mapTransform_;
 	std::map<int, StateComponent*> oldState = mapState_;
 
 	music.Update();
-	inputSystem_.update( mapState_[player_],	mapSpeed_[player_] );
+	inputSystem_.update( mapState_[player_], mapSpeed_[player_], mapCollider_[player_] );
 	gravitySystem_.update( dt, mapSpeed_, mapPhysics_, mapState_ );
 	// particleEmitterSystem_.update( dt, level_->getCollisionMap(), mapTransform_[particleEmitter_], mapEmitter_[particleEmitter_], mapTimer_[particleEmitter_] );
 	moveSystem_.update( dt, mapTransform_, mapSpeed_ );
 	collisionSystem_.update( player_, level_->getCollisionMap(), oldTransform, mapTransform_, mapCollider_, mapSpeed_, oldState, mapState_, mapZipline_ );
-	renderSystem_.update( dt, mapTransform_, oldState, mapState_, mapRender_ );
-	playerRenderSystem_.update( dt, mapTransform_[player_], (PlayerStateComponent*)oldState[player_], (PlayerStateComponent*)mapState_[player_], &playerRenderComponent_ ); // ai q feio
+	renderSystem_.update( dt, oldState, mapState_, mapRender_ );
+	playerRenderSystem_.update( dt, (PlayerStateComponent*)oldState[player_], (PlayerStateComponent*)mapState_[player_], &playerRenderComponent_ ); // ai q feio
 	soundSystem_.update(oldState, mapState_, mapSound_);
 
 	Camera::update(dt);
 
+	deleteDeadEntities();
 
 	if (InputHandler::getInstance().keyPress(ESCAPE_KEY)) {
 		pop_ = true;
@@ -102,7 +127,7 @@ void GameState::render()
 
 	// particleEmitterSystem_.render();
 
-	// collisionSystem_.render();
+	collisionSystem_.render();
 
 	level_->render(0);
 	renderSystem_.render(0, mapTransform_, mapState_, mapRender_[0]);
@@ -127,21 +152,27 @@ void GameState::createPlayer()
 	nextId_++;
 
 
-	mapTransform_.emplace(player_, new TransformComponent(Rect(352, 100, 52, 90), Vec2(0.2, 0.2), 0));
-	mapCollider_.emplace(player_, new ColliderComponent(Rect(0, 0, 52, 90)));
+	mapTransform_.emplace(player_, new TransformComponent(Rect(352, 100, 52, 90), Vec2(0.3, 0.3), 0));
+	mapCollider_.emplace(player_, new ColliderComponent( Rect(0, 0, 52, 90), Rect(10, -10, 20, 20) ));
 	mapState_.emplace(player_, new PlayerStateComponent());
 	mapPhysics_.emplace(player_, new PhysicsComponent());
 	mapSpeed_.emplace(player_, new SpeedComponent());
 	mapSound_.emplace(player_, new SoundComponent());
+	mapHealth_.emplace(player_, new HealthComponent(1));
 
 	playerRenderComponent_.addSprite(State::IDLE, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
 		Sprite("../img/characters/player/idle.png", 24, 0.01));
 	playerRenderComponent_.addSprite(State::WALKING, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
-		Sprite("../img/characters/player/running_front_closed.png", 24, 0.01));
+		Sprite("../img/characters/player/running_front_closed.png", 24, 0.02));
+
 	playerRenderComponent_.addSprite(State::JUMPING, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
 		Sprite("../img/characters/player/jumping_front_closed.png", 23, 0.01));
 	playerRenderComponent_.addSprite(State::FALLING, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
 		Sprite("../img/characters/player/falling_front_closed.png", 11, 0.01));
+	playerRenderComponent_.addSprite(State::GRAPPLE, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
+		Sprite("../img/characters/player/zipline_grapple.png", 11, 0.02));
+	playerRenderComponent_.addSprite(State::ZIPLINE, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
+		Sprite("../img/characters/player/zipline.png", 19, 0.01));
 
 /*	playerRenderComponent_.addSprite(State::IDLE, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
 		Sprite("../img/characters/idle.png"));
@@ -179,12 +210,15 @@ void GameState::createMapObjects()
 
 		// TRANSFORM
 		aux = obj.child("transform");
-		mapTransform_.emplace(nextId_, new TransformComponent(Rect(
-			aux.attribute("x").as_float(),
-			aux.attribute("y").as_float(),
-			aux.attribute("w").as_float(),
-			aux.attribute("h").as_float()
-		)));
+		mapTransform_.emplace(nextId_, new TransformComponent(
+			Rect( aux.child("rect").attribute("x").as_float(),
+			      aux.child("rect").attribute("y").as_float(),
+			      aux.child("rect").attribute("w").as_float(),
+			      aux.child("rect").attribute("h").as_float() ),
+			Vec2( aux.child("scale").attribute("x").as_float(),
+			      aux.child("scale").attribute("y").as_float() ),
+			aux.child("rotation").attribute("value").as_float()
+		));
 
 		// RENDER
 		if ((aux = obj.child("render")))
@@ -208,12 +242,16 @@ void GameState::createMapObjects()
 		// COLLIDER
 		if ((aux = obj.child("collider")))
 		{
-			mapCollider_.emplace(nextId_, new ColliderComponent(Rect(
-				aux.attribute("x").as_float(),
-				aux.attribute("y").as_float(),
-				aux.attribute("w").as_float(),
-				aux.attribute("h").as_float()
-			)));
+			mapCollider_.emplace(nextId_, new ColliderComponent(
+				Rect( aux.child("hurtbox").attribute("x").as_float(),
+				      aux.child("hurtbox").attribute("y").as_float(),
+				      aux.child("hurtbox").attribute("w").as_float(),
+				      aux.child("hurtbox").attribute("h").as_float() ),
+				Rect( aux.child("hitbox").attribute("x").as_float(),
+				      aux.child("hitbox").attribute("y").as_float(),
+				      aux.child("hitbox").attribute("w").as_float(),
+				      aux.child("hitbox").attribute("h").as_float() )
+			));
 		}
 
 		// SPEED
@@ -246,6 +284,49 @@ void GameState::createMapObjects()
 			mapTimer_.emplace(nextId_, new TimerComponent());
 		}
 
+		// ZIPLINE
+		if ((aux = obj.child("zipline")))
+		{
+			mapZipline_.emplace(nextId_, new ZiplineComponent(
+				Vec2(aux.child("start").attribute("x").as_float(), aux.child("start").attribute("y").as_float()),
+				Vec2(aux.child("end").attribute("x").as_float(), aux.child("end").attribute("y").as_float())
+			));
+		}
+
+		// HEALTH
+		if ((aux = obj.child("health")))
+		{
+			mapHealth_.emplace(nextId_, new HealthComponent(aux.attribute("value").as_float()));
+		}
+
 		nextId_++;
+	}
+}
+
+
+void GameState::deleteDeadEntities()
+{
+	for (auto& health : mapHealth_ )
+	{
+		if (health.second->health_ <= 0)
+		{
+			int id = health.first;
+			
+			mapTransform_.erase(id);
+			mapState_.erase(id);
+			mapPhysics_.erase(id);
+			mapCollider_.erase(id);
+			mapSpeed_.erase(id);
+			mapEmitter_.erase(id);
+			mapTimer_.erase(id);
+			mapZipline_.erase(id);
+			mapSound_.erase(id);
+			mapHealth_.erase(id);
+
+			mapRender_[0].erase(id);
+			mapRender_[1].erase(id);
+			mapRender_[2].erase(id);
+			mapRender_[3].erase(id);
+		}
 	}
 }

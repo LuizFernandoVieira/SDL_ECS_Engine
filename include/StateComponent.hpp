@@ -10,6 +10,7 @@ enum State
 	JUMPING,
 	FALLING,
 	ATTACKING,
+	GRAPPLE,
 	ZIPLINE,
 	SHOOT
 };
