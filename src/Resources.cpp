@@ -6,7 +6,7 @@
 #include "../include/Game.hpp"
 
 //Test: Loading Volumes
-#include "../include/Music.hpp"
+//#include "../include/Music.hpp"
 
 #define PRINTITALL 	false
 
@@ -92,8 +92,8 @@ Mix_Chunk* Resources::GetSound(std::string file){
 	}
 
 	if (asset->second == nullptr){
-		std::cout << "Error while loading \"" << file << "\": file could not be retrieved!" << std::endl;
-		std::cout << "\t SDL_mixer error: " << Mix_GetError() << std::endl;
+		std::cout << "Error while loading \"" << file << "." << std::endl;
+		std::cout << "\t SDL_mixer error: " << Mix_GetError() << std::endl << std::endl;
 	}
 	return asset->second;
 }
@@ -168,17 +168,6 @@ void Resources::Read(std::string _filename){
 
 
 	_node node = doc.first_child();
-
-	// --------------------------------------------------------------------------------------------------
-		//This should be in a "ReadState()" Method, for reading each different game stage etc.
-
-	//Setting Music Volumes
-	std::cout << "Reading State: " << node.child("state").attribute("name").as_string() << std::endl;
-	Music::ReadVolumes(node.child("state").child("music"));
-
-	// --------------------------------------------------------------------------------------------------
-
-
 
 	//Fetching Globals
 	for(_node data = node.child("globals").first_child(); data; data = data.next_sibling()){

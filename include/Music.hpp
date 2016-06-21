@@ -33,22 +33,17 @@ public:
 
 	void Update();
 
+	void ReadVolumes(_node source);
+	void SetVolumes(std::string state);
+
 private:
-	static Mix_Chunk* 	layer[AUDIO_MAXLAYERS];
+	Mix_Chunk* 	layer[AUDIO_MAXLAYERS];
 
 	int			channel[AUDIO_MAXLAYERS];
 
 	float 		volume[AUDIO_MAXLAYERS];
 	float 		volumeCurrent[AUDIO_MAXLAYERS];
 
-	//----------------------------------------------
-	//std::vector<int[AUDIO_MAXLAYERS]>	volume_vector;
-	static std::unordered_map<std::string, int*>	volume_vector;
-
-	//source = "music" node in config.xml
-	public:
-		static void ReadVolumes(_node source);
-		void SetVolumes(std::string state);
-
+	std::unordered_map<std::string, int*>	volume_vector;
 };
 #endif

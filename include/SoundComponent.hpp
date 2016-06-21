@@ -22,16 +22,19 @@ class SoundComponent : public Component
 public:
 	SoundComponent()
 		{
+			lastState = 0;
 			/*
 			for (auto& assets : component_sfx){
 
 			}
 			*/
 		}
-	~SoundComponent() { /*delete rect_;*/ }
+	~SoundComponent() {assets.clear();}
 
 
 	Sound& getSound(State state) {
+		//if (assets[state] == nullptr)
+			//std::cout << "getSound returned nullptr" << std::endl;
 		return assets[state];
 		/*
 		if (assets.find(state) != assets.end())
@@ -40,17 +43,17 @@ public:
 		*/
 	}
 
+	void Play(State state)
+		{assets[state].Play();}
 
 
-	//std::stack<Sound>	audioQueue;
-
-	//TESTE :: 'int' está na verdade recebendo um enum e castando. Caso não funcione:
-		//OPÇÃO 1: Passar bagunça Hash de render component para state component, e usar a mesma hash
-		//OPÇÃO 2: Copiar bagunça Hash de render component para cá e rezar
-
-	std::unordered_map<State, Sound>	assets;
+	
 	void addSound(State state, Sound sound)
-		{ assets.emplace(state, sound); }
+		{ assets.emplace(state, sound); std::cout << "\tMapped new sound to state: " << state << std::endl;}
+
+	int lastState;
+//private:
+	std::unordered_map<State, Sound>	assets;
 
 };
 

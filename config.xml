@@ -20,9 +20,6 @@
 				<layer channel="3" file="audio/umbra_test_piano.wav"/>
 				<layer channel="4" file="audio/umbra_test_synth.wav"/>
 				<layer channel="5" file="audio/umbra_test_violin.wav"/>
-				<layer channel="6" file="null"/>
-				<layer channel="7" file="null"/>
-				<layer channel="8" file="null"/>
 			</assets>
 
 			<volume state="default">

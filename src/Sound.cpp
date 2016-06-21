@@ -17,15 +17,19 @@ Sound::Sound(){
 }
 
 Sound::Sound(std::string file){
-	Open(file);
+	chunk = nullptr;
 	channel = 0;
+
+	Open(file);
 }
 
 
 void Sound::Play(int times){
 	if (chunk != nullptr)
-		if (times >= -1)
+		if (times >= -1){
 			channel = Mix_PlayChannel(-1, chunk, times);
+			Mix_Volume(channel, MIX_MAX_VOLUME);
+		}
 }
 
 void Sound::Stop(){

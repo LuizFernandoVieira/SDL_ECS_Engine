@@ -12,86 +12,48 @@
 #include "../include/inputhandler.hpp"
 #include "../include/resources.hpp"
 
-#define MUSIC_FADE_TIME 100
+#define MUSIC_FADE_TIME 	100
 #define VOLUME_THRESHOLD	10
 #define VOLUME_SLIDE		5
-
-
-#define musiclayer1		"../audio/umbra_test_piano.wav"
-#define musiclayer2		"../audio/umbra_test_synth.wav"
-#define musiclayer3		"../audio/umbra_test_flute.wav"
-#define musiclayer4		"../audio/umbra_test_bass.wav"
-#define musiclayer5		"../audio/umbra_test_violin.wav"
+#define PRINTITALL			false
 
 #define TestVolume	MIX_MAX_VOLUME - 20
 
-std::unordered_map<std::string, int*>	Music::volume_vector;
-Mix_Chunk* 	Music::layer[AUDIO_MAXLAYERS];
+#define ROOT_DIRECTORY	"../"
+#define CONFIG_XML	"../config.xml"
+
+
 
 Music::Music(){
 	int i;
 	std::string layername 		= "";
 	std::string volume_string 	= "";
-
-	for (i = 0; i < AUDIO_MAXLAYERS; ++i)
-		layer[i] = nullptr;
-
-	//Test Sounds Loading
-	//layer[0] = Resources::GetSound(musiclayer1);
-	//layer[1] = Resources::GetSound(musiclayer2);
-	//layer[2] = Resources::GetSound(musiclayer3);
-	//layer[3] = Resources::GetSound(musiclayer4);
-	//layer[4] = Resources::GetSound(musiclayer5);
-
-	/*
-		Protótipo da função GetMusic
-
-		Music::Open(std::string state){
-			chama Resources::GetMusic(state)
-		}
-
-		bool Resources::GetMusic(std::string state, SDL_Chunk* layer)
-
-			-	Recebe nome do estado atual (recebido), e vetor de camadas
-			-	Retorna se funfou
-	*/
-
-	/*
-		Protótipo da função GetVolume
-
-		Durante Update, Music checa se
-			player::state != currentState
-
-		Caso seja verdade, Chama Resources::GetVolume
-
-		Resources::GetVolume(std::string playerState, int*)
-
-			-	Recebe nome do estado atual do player e
-	*/
-
+	
 	for (i = 0; i < AUDIO_MAXLAYERS; i++){
-		/*
-		//Carregar Layers
-		layername = testaudiolayer;
-		layer[i] = Resources::GetSound(layername);
-
-		*/
-		//Carregar Volumes
-		volumeCurrent[i] = 0;
-
-		volume[i] = 0;
+		volumeCurrent[i] 	= 0;
+		volume[i] 			= 0;
+		layer[i] = nullptr;
 	}
+
+	Open(CONFIG_XML);
 	Play();
 }
 
 Music::Music(std::string file){
+	for (int i = 0; i < AUDIO_MAXLAYERS; i++){
+		volumeCurrent[i] 	= 0;
+		volume[i] 			= 0;
+		layer[i]	= nullptr;
+	}
+
+	Open(file);
+	Play();
 }
 
 
 void Music::Play(){
 	int i;
 	for (i = 0; i < AUDIO_MAXLAYERS; i++){
-		//std::cout << "playing" << std::endl;
 		channel[i] = Mix_PlayChannel(-1, layer[i], -1);
 		Mix_Volume(channel[i], volumeCurrent[i]);
 	}
@@ -101,10 +63,12 @@ void Music::Stop(){
 	Mix_HaltChannel(-1);
 }
 
+/*
 void Music::Open(std::string file){
 	if (!IsOpen())
 		std::cout << "ERROR RETRIEVING FILE" << std::endl;
 }
+*/
 
 bool Music::IsOpen(){
 	for (int i = 0; i < AUDIO_MAXLAYERS; ++i)
@@ -120,64 +84,8 @@ void Music::Update(){
 	short int i;
 	short int volume_diff;
 
-	//GetPlayerState
-	//GetVolume
-/*
-	//Volume Setting
-	if (In.keyPress(NUMKEY_1)) {
-		if (volume[0] == 0)
-			volume[0] = TestVolume;
-		else volume[0] = 0;
-	}
-
-	if (In.keyPress(NUMKEY_2)) {
-		if (volume[1] == 0)
-			volume[1] = TestVolume;
-		else volume[1] = 0;
-	}
-
-	if (In.keyPress(NUMKEY_3)) {
-		if (volume[2] == 0)
-			volume[2] = TestVolume;
-		else volume[2] = 0;
-	}
-
-	if (In.keyPress(NUMKEY_4)) {
-		if (volume[3] == 0)
-			volume[3] = TestVolume;
-		else volume[3] = 0;
-	}
-
-	if (In.keyPress(NUMKEY_5)) {
-		if (volume[4] == 0)
-			volume[4] = TestVolume;
-		else volume[4] = 0;
-	}
-
-	if (In.keyPress(NUMKEY_6)) {
-		if (volume[5] == 0)
-			volume[5] = TestVolume;
-		else volume[5] = 0;
-	}
-
-	if (In.keyPress(NUMKEY_7)) {
-		if (volume[6] == 0)
-			volume[6] = TestVolume;
-		else volume[6] = 0;
-	}
-
-	if (In.keyPress(NUMKEY_8)) {
-		if (volume[7] == 0)
-			volume[7] = TestVolume;
-		else volume[7] = 0;
-	}
-*/
-
-	if (In.keyPress(NUMKEY_1)) {
-		if (volume[0] == 0)
-			SetVolumes("default");
-		else SetVolumes("walking");
-	}
+	if (In.keyPress(NUMKEY_1))	SetVolumes("default");
+	if (In.keyPress(NUMKEY_2))	SetVolumes("walking");
 
 	//Fading Loop
 	for (i = 0; i < AUDIO_MAXLAYERS; i++){
@@ -207,6 +115,7 @@ void Music::ReadVolumes(_node source){
 
 	int 	counter;
 	int*	volumeArray;
+	std::string	fileName;
 
 	_node assetsNode;
 	_node layerAsset;
@@ -216,6 +125,7 @@ void Music::ReadVolumes(_node source){
 
 	volume_vector.clear();
 
+	
 	//Setando Arquivos de áudio a serem tocados
 	assetsNode = source.child("assets");
 	if (assetsNode != nullptr){
@@ -223,27 +133,18 @@ void Music::ReadVolumes(_node source){
 			layer[counter] = nullptr;
 		}
 
-		for (_node layerAsset = source.child("assets"); layerAsset; layerAsset = layerAsset.next_sibling()){
-			if (layerAsset.attribute("file").as_string() == "null")
-				layer[layerAsset.attribute("channel").as_int()] = nullptr;
-			else layer[layerAsset.attribute("channel").as_int()] = Resources::GetSound(layerAsset.attribute("file").as_string());
-		}
-	}
-
-
-	/*
-	for (_node assetsNode = source.child("assets"); assetsNode; assetsNode = assetsNode.next_sibling("assets")){
-		
-		//Inserção de novo padrão de volume
-		volumeArray = volume_vector[assetsNode.attribute("state").as_string()];
 		counter = 0;
+		for (_node layerAsset = assetsNode.child("layer"); layerAsset; layerAsset = layerAsset.next_sibling()){
+			//std::cout << "Filename: " << layerAsset.attribute("file").as_string() << std::endl;
 
-		//Preenchimento do vetor de volumes
-		for(_node layerVolume = assetsNode.child("layer"); layerVolume; layerVolume = layerVolume.next_sibling()){
-			volumeArray[counter] = layerVolume.attribute("value").as_int();
+			fileName = ROOT_DIRECTORY;
+			fileName += layerAsset.attribute("file").as_string();
+			layer[layerAsset.attribute("channel").as_int()] = Resources::GetSound(fileName);
+
 			counter++;
 		}
-	}*/
+	}
+	
 
 	//Iterando através de padrões de volume
 	for (_node volumeNode = source.child("volume"); volumeNode; volumeNode = volumeNode.next_sibling("volume")){
@@ -260,7 +161,7 @@ void Music::ReadVolumes(_node source){
 		}
 	}
 
-	if (true){
+	if (PRINTITALL){
 		for (auto it = volume_vector.begin(); it != volume_vector.end(); it++){
 			std::cout << "Acquired State: " << it->first << std::endl;
 
@@ -279,4 +180,23 @@ void Music::SetVolumes(std::string state){
 	if ((targetVolume = volume_vector[state]) != nullptr)
 		for (counter = 0; counter < AUDIO_MAXLAYERS; counter++)
 			volume[counter] = targetVolume[counter];
+}
+
+void Music::Open(std::string file){
+	_document 	doc;
+	_parse		config;
+
+	config = doc.load_file(file.c_str());
+	if (config.status){
+		std::cout << "[MUSIC] Error Reading CONFIG_FILE: " << config.description() << std::endl;
+		std::cout << "\tStatus code: " << config.status << std::endl;
+	}
+
+
+	_node node = doc.first_child();
+
+	std::cout << "Reading State: " << node.child("state").attribute("name").as_string() << std::endl;
+
+	//Setting Music Assets + Volume Patterns
+	ReadVolumes(node.child("state").child("music"));
 }
