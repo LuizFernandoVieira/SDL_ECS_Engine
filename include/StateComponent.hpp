@@ -17,15 +17,15 @@ enum State
 
 enum UmbrellaState
 {
-	OPEN, 
-	CLOSED
+	CLOSED,
+	OPEN
 };
 
 enum UmbrellaDirection
 {
 	UP,
-	DOWN,
 	FRONT,
+	DOWN,
 	BACK
 };
 

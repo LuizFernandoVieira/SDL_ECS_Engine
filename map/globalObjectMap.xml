@@ -1,22 +1,44 @@
 <!-- 
 
-========= MODELO:
+=============== MODELO ====================
 
-<object name="nome">
+<object name="nome" layer="1">
 	<transform>
 		<rect x="0" y="0" w="10" h="10" />
 		<scale x="1" y="1" />
 		<rotation value="0" />
 	</transform>
+
 	<render>
 		<sprite state="0" filename="../img/img.png" frame_count="1" frame_time="1.0" />
 	</render>
-	<collider x="0" y="0" w="10" h="10" />
+
+	<player_render>
+		<sprite state="0" umbrella_state="0" umbrella_direction="0" filename="../img/img.png" frame_count="1" frame_time="1.0" />
+	</player_render>
+
+	<sound>
+		<sound state="0" filename="../audio/file.wav" />
+	</sound>
+
+	<collider>
+		<hurtbox x="0" y="0" w="10" h="10" />
+		<hitbox x="0" y="0" w="10" h="10" />
+	</collider>
+
 	<speed />
+	
+	<player_state />
 	<state />
+
+	<health value="1" />
+
 	<physics gravity_scale="1.0" />
+
 	<emitter emission_rate="0.01" />
+
 	<timer />
+
 	<zipline>
 		<start x="0" y="0" />
 		<end x="0" y="0" />
@@ -24,15 +46,66 @@
 </object>
 
 
-======= DEPENDENCIAS
+============ DEPENDENCIAS ===================
 
 * TODO OBJETO PRECISA DE UMA TRANSFORM
 * RENDER PRECISA DE STATE, MAS NÃO PRECISA DE UM SPRITE PARA CADA ESTADO, BASTA UM PARA O IDLE
 * PHYSICS PRECISA DE SPEED
+* PLAYER PRECISA DE PLAYER_RENDER
+* ZIPLINE NÃO PODE TER COLLIDER
+
+=============== ESTADOS ====================
+
+	IDLE		= 0
+	WALKING		= 1
+	JUMPING		= 2
+	FALLING		= 3
+	ATTACKING	= 4
+	GRAPPLE		= 5
+	ZIPLINE		= 6
+	SHOOT		= 7
+
+UMBRELLA STATE
+	CLOSED		= 0
+	OPEN		= 1
+
+UMBRELLA DIRECTION
+	UP			= 0
+	FRONT		= 1
+	DOWN		= 2
+	BACK		= 3
 
  -->
 <?xml version="1.0" encoding="UTF-8"?>
 
+
+<object name="player">
+	<transform>
+		<rect x="352" y="100" w="52" h="90" />
+		<scale x="0.3" y="0.3" />
+		<rotation value="0" />
+	</transform>
+	<player_render>
+		<sprite state="0" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/idle.png" frame_count="24" frame_time="0.01" />
+		<sprite state="1" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/running_front_closed.png" frame_count="24" frame_time="0.02" />
+		<sprite state="2" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/jumping_front_closed.png" frame_count="23" frame_time="0.01" />
+		<sprite state="3" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/falling_front_closed.png" frame_count="11" frame_time="0.01" />
+		<sprite state="5" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/zipline_grapple.png" frame_count="11" frame_time="0.02" />
+		<sprite state="6" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/zipline.png" frame_count="19" frame_time="0.01" />
+	</player_render>
+	<sound>
+		<sound state="2" filename="../audio/character_jump.wav" />
+		<sound state="3" filename="../audio/character_fall.wav" />
+	</sound>
+	<collider>
+		<hurtbox x="0" y="0" w="52" h="90" />
+		<hitbox x="10" y="-10" w="20" h="20" />
+	</collider>
+	<speed />
+	<player_state />
+	<health value="1" />
+	<physics gravity_scale="1.0" />
+</object>
 
 <object name="canil">
 	<transform>
@@ -95,4 +168,20 @@
 		<sprite state="0" filename="../img/maps/test/fountain_320x384.png" frame_count="10" frame_time="0.2" />
 	</render>
 	<state />
+</object>
+
+<object name="zipline">
+	<transform>
+		<rect x="600" y="520" w="217" h="9" />
+		<scale x="4" y="1" />
+		<rotation value="15" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/zipline.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+	<zipline>
+		<start x="0" y="0" />
+		<end x="0" y="0" />
+	</zipline>
 </object>

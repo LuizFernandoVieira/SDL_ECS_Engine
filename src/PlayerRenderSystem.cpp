@@ -23,6 +23,8 @@ void PlayerRenderSystem::update(
 		stateComp->umbrellaDirection_ != oldState->umbrellaDirection_)
 	{
 		renderComp->getSprite(spriteKey).setFrame(0);
+		std::cout << "TROCOU ESTADO ";
+		std::cout.flush();
 	}
 	renderComp->getSprite(spriteKey).update(dt);
 }

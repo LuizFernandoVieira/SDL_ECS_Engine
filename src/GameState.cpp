@@ -36,9 +36,11 @@ GameState::GameState()
 
 	level_ = new FirstLevel();
 
-	createPlayer();
+	// createPlayer();
 	createMapObjects();
 	// createParticleEmitter();
+
+	Camera::follow(mapTransform_[player_]);
 }
 
 GameState::~GameState()
@@ -174,19 +176,8 @@ void GameState::createPlayer()
 	playerRenderComponent_.addSprite(State::ZIPLINE, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
 		Sprite("../img/characters/player/zipline.png", 19, 0.01));
 
-/*	playerRenderComponent_.addSprite(State::IDLE, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
-		Sprite("../img/characters/idle.png"));
-	playerRenderComponent_.addSprite(State::WALKING, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
-		Sprite("../img/characters/idle.png"));
-	playerRenderComponent_.addSprite(State::JUMPING, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
-		Sprite("../img/characters/idle.png"));
-	playerRenderComponent_.addSprite(State::FALLING, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
-		Sprite("../img/characters/idle.png"));*/
-
 	mapSound_[player_]->addSound(State::JUMPING, Sound("../audio/character_jump.wav"));
 	mapSound_[player_]->addSound(State::FALLING, Sound("../audio/character_fall.wav"));	//Mudar para ("estado: colidindo com o chão")
-
-	Camera::follow(mapTransform_[player_]);
 }
 
 void GameState::createParticleEmitter()
@@ -239,6 +230,34 @@ void GameState::createMapObjects()
 				mapRender_[1].emplace(nextId_, renderComp);
 		}
 
+		// PLAYER RENDER
+		if ((aux = obj.child("player_render")))
+		{
+			for (auto sprite : aux.children())
+			{
+				State state = (State)sprite.attribute("state").as_int();
+				UmbrellaState umb = (UmbrellaState)sprite.attribute("umbrella_state").as_int();
+				UmbrellaDirection umbDir = (UmbrellaDirection)sprite.attribute("umbrella_direction").as_int();
+				playerRenderComponent_.addSprite(state, umb, umbDir, Sprite(sprite.attribute("filename").value(), 
+				                                                            sprite.attribute("frame_count").as_int(),
+				                                                            sprite.attribute("frame_time").as_float()));
+			}
+
+			player_ = nextId_;
+		}
+
+		// SOUND
+		if ((aux = obj.child("sound")))
+		{
+			mapSound_.emplace(nextId_, new SoundComponent());
+
+			for (auto sound : aux.children())
+			{
+				State state = (State)sound.attribute("state").as_int();
+				mapSound_[nextId_]->addSound( state, Sound(sound.attribute("filename").value()) );
+			}
+		}
+
 		// COLLIDER
 		if ((aux = obj.child("collider")))
 		{
@@ -264,6 +283,12 @@ void GameState::createMapObjects()
 		if ((aux = obj.child("state")))
 		{
 			mapState_.emplace(nextId_, new StateComponent());
+		}
+
+		// PLAYER_STATE
+		if ((aux = obj.child("player_state")))
+		{
+			mapState_.emplace(nextId_, new PlayerStateComponent());
 		}
 
 		// PHYSICS

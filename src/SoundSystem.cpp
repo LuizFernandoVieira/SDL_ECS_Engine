@@ -33,7 +33,7 @@ void SoundSystem::update(
 
 		/*ALERTA DE GAMBIARRA*/
 		if ((int) stateComp[sfx.first]->state_ != sfx.second->lastState){
-			std::cout << "[Sound Message] State Changed to: " << stateComp[sfx.first]->state_ << std::endl;
+			// std::cout << "[Sound Message] State Changed to: " << stateComp[sfx.first]->state_ << std::endl;
 			sfx.second->Play(stateComp[sfx.first]->state_);
 			sfx.second->lastState = stateComp[sfx.first]->state_;
 			/*
