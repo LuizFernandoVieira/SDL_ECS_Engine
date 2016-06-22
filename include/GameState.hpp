@@ -19,6 +19,7 @@
 #include "GravitySystem.hpp"
 #include "CollisionSystem.hpp"
 #include "SoundSystem.hpp"
+#include "AttackSystem.hpp"
 #include "ParticleEmitterSystem.hpp"
 #include "Music.hpp"
 
@@ -71,6 +72,7 @@ private:
 	GravitySystem gravitySystem_;
 	CollisionSystem collisionSystem_;
 	SoundSystem	soundSystem_;
+	AttackSystem attackSystem_;
 	ParticleEmitterSystem particleEmitterSystem_;
 };
 

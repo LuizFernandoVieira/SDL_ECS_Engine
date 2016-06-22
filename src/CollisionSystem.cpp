@@ -3,7 +3,6 @@
 
 #include "../include/Camera.hpp"
 #include "../include/Sprite.hpp"
-#include <iostream>
 
 CollisionSystem::CollisionSystem()
 {
@@ -213,7 +212,8 @@ void CollisionSystem::correctPosSolid(Rect& entityPos, Rect oldPos, Rect terrain
 		// std::cout << "COLIDIU EMBAIXO" << std::endl;
 		entityPos.y( terrain.y() - entityPos.h() );
 		speed.y(0.0);
-		state->state_ = speed.x() == 0 ? State::IDLE : State::WALKING;
+		if (state->state_ != State::ATTACKING)
+			state->state_ = speed.x() == 0 ? State::IDLE : State::WALKING;
 	}
 	else if (angle > 130 && angle < 235) // entity colidiu à esquerda
 	{
@@ -257,7 +257,8 @@ void CollisionSystem::correctPosDiagonalUp(Rect& entityPos, Rect oldPos, Rect te
 			// std::cout << "COLIDIU EMBAIXO" << std::endl;
 			entityPos.y( terrain.y() + terrain.h() - entityPos.h() - (entityPos.getCenter().x() - terrain.x()) );
 			speed.y(0.0);
-			state->state_ = speed.x() == 0 ? State::IDLE : State::WALKING;
+			if (state->state_ != State::ATTACKING)
+				state->state_ = speed.x() == 0 ? State::IDLE : State::WALKING;
 		}
 	}
 	else if (angle > 125 && angle < 235) // entity colidiu à esquerda
@@ -305,7 +306,8 @@ void CollisionSystem::correctPosDiagonalDown(Rect& entityPos, Rect oldPos, Rect 
 			// std::cout << "COLIDIU EMBAIXO" << std::endl;
 			entityPos.y( terrain.y() /*+ terrain.h()*/ - entityPos.h() + (entityPos.getCenter().x() - terrain.x()) );
 			speed.y(0.0);
-			state->state_ = speed.x() == 0 ? State::IDLE : State::WALKING;
+			if (state->state_ != State::ATTACKING)
+				state->state_ = speed.x() == 0 ? State::IDLE : State::WALKING;
 		}
 	}
 /*	else // entity estava abaixo do colisor
@@ -331,7 +333,8 @@ void CollisionSystem::correctPosCorner(Rect& entityPos, Rect oldPos, Rect terrai
 		// std::cout << "COLIDIU EMBAIXO" << std::endl;
 		entityPos.y( terrain.y() - entityPos.h() );
 		speed.y(0.0);
-		state->state_ = speed.x() == 0 ? State::IDLE : State::WALKING;
+		if (state->state_ != State::ATTACKING)
+			state->state_ = speed.x() == 0 ? State::IDLE : State::WALKING;
 	}
 	else if (angle > 125 && angle < 235) // entity colidiu à esquerda
 	{

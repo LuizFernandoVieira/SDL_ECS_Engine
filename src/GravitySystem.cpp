@@ -1,6 +1,8 @@
 #include "../include/GravitySystem.hpp"
 #include "../include/Resources.hpp"
 
+#include <iostream>
+
 GravitySystem::GravitySystem()
 {
 
@@ -26,8 +28,10 @@ void GravitySystem::update(
 			if (state[phys.first]->state_ != State::ZIPLINE)
 			{
 				speed[phys.first]->speed_.y(Resources::GRAVITY * phys.second->gravityScale_);
-				if (state[phys.first]->state_ != State::GRAPPLE)
+				if (state[phys.first]->state_ != State::GRAPPLE && state[phys.first]->state_ != State::ATTACKING)
+				{
 					state[phys.first]->state_ = State::FALLING;
+				}
 			}
 		}
 	}
