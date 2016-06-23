@@ -75,27 +75,15 @@ void GameState::update(float dt)
 {
 	InputHandler::getInstance().update();
 
-	// if (mapState_[player_]->state_ == State::IDLE)
-	// 	std::cout << "IDLE" << std::endl;
-	// else if (mapState_[player_]->state_ == State::WALKING)
-	// 	std::cout << "WALKING" << std::endl;
-	// else if (mapState_[player_]->state_ == State::JUMPING)
-	// 	std::cout << "JUMPING" << std::endl;
-	// else if (mapState_[player_]->state_ == State::FALLING)
-	// 	std::cout << "FALLING" << std::endl;
-	// else if (mapState_[player_]->state_ == State::GRAPPLE)
-	// 	std::cout << "GRAPPLE" << std::endl;
-	// else if (mapState_[player_]->state_ == State::ZIPLINE)
-	// 	std::cout << "ZIPLINE" << std::endl;
-
 	std::map<int, TransformComponent*> oldTransform = mapTransform_;
 	std::map<int, StateComponent*> oldState = mapState_;
 
 	music.Update();
-	inputSystem_.update( mapState_[player_], mapSpeed_[player_], mapCollider_[player_] );
+	inputSystem_.update( (PlayerStateComponent*)mapState_[player_], mapSpeed_[player_], mapPhysics_[player_], mapCollider_[player_] );
 	gravitySystem_.update( dt, mapSpeed_, mapPhysics_, mapState_ );
 	// particleEmitterSystem_.update( dt, level_->getCollisionMap(), mapTransform_[particleEmitter_], mapEmitter_[particleEmitter_], mapTimer_[particleEmitter_] );
 	moveSystem_.update( dt, mapTransform_, mapSpeed_ );
+	attackSystem_.update( dt, oldState[player_], mapState_[player_] );
 	collisionSystem_.update( player_, level_->getCollisionMap(), oldTransform, mapTransform_, mapCollider_, mapSpeed_, oldState, mapState_, mapZipline_ );
 	renderSystem_.update( dt, oldState, mapState_, mapRender_ );
 	playerRenderSystem_.update( dt, (PlayerStateComponent*)oldState[player_], (PlayerStateComponent*)mapState_[player_], &playerRenderComponent_ ); // ai q feio
@@ -104,6 +92,21 @@ void GameState::update(float dt)
 	Camera::update(dt);
 
 	deleteDeadEntities();
+
+/*	if (mapState_[player_]->state_ == State::IDLE)
+		std::cout << "IDLE" << std::endl;
+	else if (mapState_[player_]->state_ == State::WALKING)
+		std::cout << "WALKING" << std::endl;
+	else if (mapState_[player_]->state_ == State::JUMPING)
+		std::cout << "JUMPING" << std::endl;
+	else if (mapState_[player_]->state_ == State::FALLING)
+		std::cout << "FALLING" << std::endl;
+	else if (mapState_[player_]->state_ == State::GRAPPLE)
+		std::cout << "GRAPPLE" << std::endl;
+	else if (mapState_[player_]->state_ == State::ZIPLINE)
+		std::cout << "ZIPLINE" << std::endl;
+	else if (mapState_[player_]->state_ == State::ATTACKING)
+		std::cout << "ATTACKING" << std::endl;*/
 
 	if (InputHandler::getInstance().keyPress(ESCAPE_KEY)) {
 		pop_ = true;

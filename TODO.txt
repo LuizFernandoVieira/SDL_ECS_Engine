@@ -1,7 +1,5 @@
 Fazendo:
 
-- Botar o player no xml;
-
 
 Probleminhas a resolver:
 
@@ -10,7 +8,6 @@ Probleminhas a resolver:
 
 ============== PROXIMA AULA ==================
 
-Player atacando
 Player planar
 Vento (mecanica)
 
@@ -53,9 +50,6 @@ Segunda entrega / 17
 				(de baixo para cima)
 
 	Thales
-		Sons
-			Efeitos
-			Musicas
 		Objetos quebraveis
 		Checkpoints
 		Switchs
@@ -63,7 +57,7 @@ Segunda entrega / 17
 	Victor & Thales feat Luiz
 		Menu
 			Muitas telas
-		Gamepad
+		Gameapd
 
 
 ===

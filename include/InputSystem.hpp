@@ -7,6 +7,7 @@
 #include "System.hpp"
 #include "SpeedComponent.hpp"
 #include "StateComponent.hpp"
+#include "PhysicsComponent.hpp"
 #include "ColliderComponent.hpp"
 
 class InputSystem : public System
@@ -14,8 +15,9 @@ class InputSystem : public System
 public:
 	InputSystem();
 	void update(
-		StateComponent* stateComp,
+		PlayerStateComponent* stateComp,
 		SpeedComponent* speedComp,
+		PhysicsComponent* physicsComp,
 		ColliderComponent* colComp
 	);
 };

@@ -8,13 +8,14 @@ InputSystem::InputSystem()
 }
 
 void InputSystem::update(
-	StateComponent* stateComp,
+	PlayerStateComponent* stateComp,
 	SpeedComponent* speedComp,
+	PhysicsComponent* physicsComp,
 	ColliderComponent* colComp)
 {
 	InputHandler& input = InputHandler::getInstance();
 
-	if (stateComp->state_ != State::ZIPLINE)
+	if (stateComp->state_ != State::ZIPLINE && stateComp->state_ != State::ATTACKING)
 	{
 		if (
 			(input.isKeyDown('a') &&
@@ -66,7 +67,30 @@ void InputSystem::update(
 			}
 		}
 
+		// GUARDA CHUVA
+		if (input.keyPress(UP_ARROW_KEY))
+		{
+			stateComp->umbrellaDirection_ = UmbrellaDirection::UP;
+		}
+		else if (input.keyPress(DOWN_ARROW_KEY))
+		{
+			stateComp->umbrellaDirection_ = UmbrellaDirection::DOWN;
+		}
+		else if (input.keyPress(LEFT_ARROW_KEY))
+		{
+			stateComp->umbrellaDirection_ = stateComp->facingRight_ ? UmbrellaDirection::BACK : UmbrellaDirection::FRONT;
+		}
+		else if (input.keyPress(RIGHT_ARROW_KEY))
+		{
+			stateComp->umbrellaDirection_ = stateComp->facingRight_ ? UmbrellaDirection::FRONT : UmbrellaDirection::BACK;
+		}
+
 		if (input.keyPress(SPACE_BAR))
+		{
+			stateComp->umbrellaState_ = stateComp->umbrellaState_ == UmbrellaState::OPEN ? UmbrellaState::CLOSED : UmbrellaState::OPEN;
+		}
+
+		if (input.keyPress('e'))
 		{
 			if (stateComp->state_ != State::JUMPING &&
 				stateComp->state_ != State::FALLING &&
@@ -75,11 +99,15 @@ void InputSystem::update(
 			{
 				// ATAQUE
 				stateComp->state_ = State::ATTACKING;
-				colComp->hitbox_ = Rect( stateComp->facingRight_ ? 52 : 52, 20, 48, 48);
+				colComp->hitbox_ = Rect( stateComp->facingRight_ ? 58 : -40, 30, 52, 48);
 			}
 		}
 
-		// GUARDA CHUVA
-		// sei nem como
+		if (stateComp->state_ == State::FALLING && 
+			stateComp->umbrellaState_ == UmbrellaState::OPEN &&
+			stateComp->umbrellaDirection_ == UmbrellaDirection::UP)
+			physicsComp->gravityScale_ = 0.3;
+		else
+			physicsComp->gravityScale_ = 1.0;
 	}
 }
