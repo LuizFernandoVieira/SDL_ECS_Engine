@@ -72,9 +72,10 @@ void Resources::ClearImages()
 {
 	for ( auto it = imageTable.begin() ; it != imageTable.end(); ++it ) {
 		if (it->second.unique()) {
-			imageTable.erase(it);
+			it = imageTable.erase(it);
 		}
 	}
+	
 }
 
 
@@ -141,7 +142,7 @@ void Resources::ClearFonts()
 	for ( auto it = fontTable.begin() ; it != fontTable.end(); ++it )
 	{
 		if (it->second.unique())
-			fontTable.erase(it);
+			it = fontTable.erase(it);
 	}
 }
 
