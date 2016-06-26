@@ -13,7 +13,7 @@ public:
 	MoveSystem();
 	void update(
 		float dt,
-		std::map<int, TransformComponent>& transform,
+		std::map<int, TransformComponent*> transform,
 		std::map<int, SpeedComponent*> speed
 	);
 };

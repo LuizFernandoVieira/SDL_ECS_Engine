@@ -103,6 +103,8 @@ void Game::run()
 			stateStack_.emplace(storedState_);
 			storedState_ = NULL;
 		}
+		
+		float frameEnd = (float)SDL_GetTicks();
 
 		if((frameEnd-frameStart_) < (float)(1000.f / 60.0))
 			while(frameEnd - frameStart_ <= (1000.f / 60.0))

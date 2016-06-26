@@ -23,8 +23,8 @@ public:
 	void update(
 		int player,
 		CollisionMap& collisionMap,
-		std::map<int, TransformComponent>& oldTransform,
-		std::map<int, TransformComponent>& transform,
+		std::map<int, TransformComponent*> oldTransform,
+		std::map<int, TransformComponent*> transform,
 		std::map<int, ColliderComponent*> collider,
 		std::map<int, SpeedComponent*> speed,
 		std::map<int, StateComponent*> oldState,
@@ -32,7 +32,7 @@ public:
 		std::map<int, ZiplineComponent*> zipline,
 		std::map<int, WindComponent*> wind
 	);
-
+	
 	void render();
 
 private:
@@ -40,23 +40,23 @@ private:
 
 	void updateTerrain(
 		CollisionMap& collisionMap,
-		std::map<int, TransformComponent>& oldTransform,
-		std::map<int, TransformComponent>& transform,
+		std::map<int, TransformComponent*> oldTransform,
+		std::map<int, TransformComponent*> transform,
 		std::map<int, ColliderComponent*> collider,
 		std::map<int, SpeedComponent*> speed,
 		std::map<int, StateComponent*> state
 	);
 	void updateCollider(
 		CollisionMap& collisionMap,
-		std::map<int, TransformComponent>& oldTransform,
-		std::map<int, TransformComponent>& transform,
+		std::map<int, TransformComponent*> oldTransform,
+		std::map<int, TransformComponent*> transform,
 		std::map<int, ColliderComponent*> collider,
 		std::map<int, SpeedComponent*> speed,
 		std::map<int, StateComponent*> state
 	);
 	void updateZipline(
 		int player,
-		std::map<int, TransformComponent>& transform,
+		std::map<int, TransformComponent*> transform,
 		std::map<int, ColliderComponent*> collider,
 		std::map<int, SpeedComponent*> speed,
 		std::map<int, StateComponent*> oldState,
@@ -65,7 +65,7 @@ private:
 	);
 	void updateWind(
 		int player,
-		std::map<int, TransformComponent>& transform,
+		std::map<int, TransformComponent*> transform,
 		std::map<int, ColliderComponent*> collider,
 		// std::map<int, SpeedComponent*> speed,
 		// std::map<int, StateComponent*> oldState,

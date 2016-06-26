@@ -23,11 +23,13 @@ std::map<int, std::map<int, RenderComponent*>> GameState::mapRender_;
 
 GameState::GameState()
 : music()
+	//testando componente de música, não há necessidade de se carregar um arquivo
+	//A própria music está carregando um arquivo teste
 {
 	StaticSprite loadScreen("../img/bg.png");
 	loadScreen.render(0,0);
 	SDL_RenderPresent(Game::getInstance().getRenderer());
-
+	
 	try{
 		mapRender_[0] = std::map<int, RenderComponent*>();
 		mapRender_[1] = std::map<int, RenderComponent*>();
@@ -42,7 +44,7 @@ GameState::GameState()
 		createMapObjects();
 		// createParticleEmitter();
 
-		Camera::follow(&mapTransform_[player_]);
+		Camera::follow(mapTransform_[player_]);
 	}
 	catch (std::exception& e)
 	{
@@ -52,6 +54,7 @@ GameState::GameState()
 	{
 		std::cout << "DEU MUITA MERDA" << std::endl;
 	}
+
 }
 
 GameState::~GameState()
@@ -88,7 +91,7 @@ void GameState::update(float dt)
 {
 	InputHandler::getInstance().update();
 
-	std::map<int, TransformComponent> oldTransform = mapTransform_;
+	std::map<int, TransformComponent*> oldTransform = mapTransform_;
 	std::map<int, StateComponent*> oldState = mapState_;
 
 	music.Update();
@@ -143,6 +146,7 @@ void GameState::render()
 	level_->render(2);
 	renderSystem_.render(2, mapTransform_, mapState_, mapRender_[2]);
 
+	// renderSystem_.render(mapTransform_, mapState_, mapRender_);
 	playerRenderSystem_.render(mapTransform_[player_], (PlayerStateComponent*)mapState_[player_], &playerRenderComponent_); // ai q feio
 
 	// particleEmitterSystem_.render();
@@ -168,12 +172,44 @@ void GameState::resume()
 
 }
 
+
+void GameState::createPlayer()
+{
+	player_ = nextId_;
+	nextId_++;
+
+	mapTransform_.emplace(player_, new TransformComponent(Rect(352, 100, 52, 90), Vec2(0.3, 0.3), 0));
+	mapCollider_.emplace(player_, new ColliderComponent( Rect(0, 0, 52, 90), Rect(10, -10, 20, 20) ));
+	mapState_.emplace(player_, new PlayerStateComponent());
+	mapPhysics_.emplace(player_, new PhysicsComponent());
+	mapSpeed_.emplace(player_, new SpeedComponent());
+	mapSound_.emplace(player_, new SoundComponent());
+	mapHealth_.emplace(player_, new HealthComponent(1));
+
+	playerRenderComponent_.addSprite(State::IDLE, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
+		Sprite("../img/characters/player/idle.png", 24, 0.01));
+	playerRenderComponent_.addSprite(State::WALKING, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
+		Sprite("../img/characters/player/running_front_closed.png", 24, 0.02));
+
+	playerRenderComponent_.addSprite(State::JUMPING, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
+		Sprite("../img/characters/player/jumping_front_closed.png", 23, 0.01));
+	playerRenderComponent_.addSprite(State::FALLING, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
+		Sprite("../img/characters/player/falling_front_closed.png", 11, 0.01));
+	playerRenderComponent_.addSprite(State::GRAPPLE, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
+		Sprite("../img/characters/player/zipline_grapple.png", 11, 0.02));
+	playerRenderComponent_.addSprite(State::ZIPLINE, UmbrellaState::CLOSED, UmbrellaDirection::DOWN, 
+		Sprite("../img/characters/player/zipline.png", 19, 0.01));
+
+	mapSound_[player_]->addSound(State::JUMPING, Sound("../audio/character_jump.wav"));
+	mapSound_[player_]->addSound(State::FALLING, Sound("../audio/character_fall.wav"));	//Mudar para ("estado: colidindo com o chão")
+}
+
 void GameState::createParticleEmitter()
 {
 	particleEmitter_ = nextId_;
 	nextId_++;
 
-	mapTransform_.emplace(particleEmitter_, TransformComponent(Rect(300, 250, 32, 32)));
+	mapTransform_.emplace(particleEmitter_, new TransformComponent(Rect(300, 250, 32, 32)));
 	mapEmitter_.emplace(particleEmitter_, new EmitterComponent(0.01));
 	mapTimer_.emplace(particleEmitter_, new TimerComponent());
 }
@@ -189,7 +225,7 @@ void GameState::createMapObjects()
 
 		// TRANSFORM
 		aux = obj.child("transform");
-		mapTransform_.emplace(nextId_, TransformComponent(
+		mapTransform_.emplace(nextId_, new TransformComponent(
 			Rect( aux.child("rect").attribute("x").as_float(),
 			      aux.child("rect").attribute("y").as_float(),
 			      aux.child("rect").attribute("w").as_float(),
@@ -207,7 +243,7 @@ void GameState::createMapObjects()
 			for (auto sprite : aux.children())
 			{
 				State state = (State)sprite.attribute("state").as_int();
-				renderComp->addSprite(state, Sprite(sprite.attribute("filename").value(),
+				renderComp->addSprite(state, Sprite(sprite.attribute("filename").value(), 
 				                                    sprite.attribute("frame_count").as_int(),
 				                                    sprite.attribute("frame_time").as_float()));
 			}
@@ -226,7 +262,7 @@ void GameState::createMapObjects()
 				State state = (State)sprite.attribute("state").as_int();
 				UmbrellaState umb = (UmbrellaState)sprite.attribute("umbrella_state").as_int();
 				UmbrellaDirection umbDir = (UmbrellaDirection)sprite.attribute("umbrella_direction").as_int();
-				playerRenderComponent_.addSprite(state, umb, umbDir, Sprite(sprite.attribute("filename").value(),
+				playerRenderComponent_.addSprite(state, umb, umbDir, Sprite(sprite.attribute("filename").value(), 
 				                                                            sprite.attribute("frame_count").as_int(),
 				                                                            sprite.attribute("frame_time").as_float()));
 			}
@@ -331,7 +367,7 @@ void GameState::deleteDeadEntities()
 		if (health.second->health_ <= 0)
 		{
 			int id = health.first;
-
+			
 			mapTransform_.erase(id);
 			mapState_.erase(id);
 			mapPhysics_.erase(id);
