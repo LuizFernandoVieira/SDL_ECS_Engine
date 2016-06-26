@@ -51,8 +51,8 @@ void InputSystem::update(
 		}
 	}
 
-	if ( (input.keyPress('w') || input.gamePadPress(GAMEPAD_A)) && 
-		 stateComp->state_ != State::ATTACKING && 
+	if ( (input.keyPress('w') || input.gamePadPress(GAMEPAD_A)) &&
+		 stateComp->state_ != State::ATTACKING &&
 		 stateComp->state_ != State::GRAPPLE )
 	{
 		if (stateComp->state_ != State::JUMPING &&
@@ -106,7 +106,7 @@ void InputSystem::update(
 		}
 	}
 
-	if (stateComp->state_ == State::FALLING && 
+	if (stateComp->state_ == State::FALLING &&
 		stateComp->umbrellaState_ == UmbrellaState::OPEN &&
 		stateComp->umbrellaDirection_ == UmbrellaDirection::UP)
 		physicsComp->gravityScale_ = 0.3;

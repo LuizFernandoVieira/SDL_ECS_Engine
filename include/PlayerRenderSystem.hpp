@@ -19,7 +19,7 @@ public:
 		PlayerRenderComponent* renderComp
 	);
 	void render(
-		TransformComponent* transfComp,
+		TransformComponent transfComp,
 		PlayerStateComponent* stateComp,
 		PlayerRenderComponent* renderComp
 	);

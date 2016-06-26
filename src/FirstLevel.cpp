@@ -2,7 +2,7 @@
 #include "../include/Resources.hpp"
 
 
-FirstLevel::FirstLevel() : 
+FirstLevel::FirstLevel() :
 	bg("../img/bg.png"),
 	tileSet_(Resources::TILE_WIDTH, Resources::TILE_HEIGHT, Resources::TILE_SET_IMG.c_str()),
 	tileMap_(Resources::TILE_MAP_TXT.c_str(), &tileSet_),
@@ -54,7 +54,7 @@ pugi::xml_document& FirstLevel::getObjectMap()
 			if (collisionMap_.at(x, y) == 0)
 			{
 				terrainEntities.emplace_back( std::pair<int, TransformComponent*> (
-					nextId++, 
+					nextId++,
 					new TransformComponent(Rect(
 						x * Resources::TILE_WIDTH,
 						y * Resources::TILE_HEIGHT,

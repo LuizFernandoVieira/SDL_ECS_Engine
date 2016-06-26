@@ -20,7 +20,7 @@ public:
 	);
 	void render(
 		int layer,
-		std::map<int, TransformComponent*> transfComp,
+		std::map<int, TransformComponent> transfComp,
 		std::map<int, StateComponent*> stateComp,
 		std::map<int, RenderComponent*> renderComp
 	);

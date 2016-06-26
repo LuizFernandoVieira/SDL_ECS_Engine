@@ -53,7 +53,7 @@ private:
 	Music music;
 	// #endif
 
-	std::map<int, TransformComponent*> mapTransform_;
+	std::map<int, TransformComponent> mapTransform_;
 	std::map<int, StateComponent*> 	mapState_;
 	std::map<int, PhysicsComponent*> mapPhysics_;
 	std::map<int, ColliderComponent*> mapCollider_;
@@ -64,7 +64,7 @@ private:
 	std::map<int, SoundComponent*> mapSound_;
 	std::map<int, HealthComponent*> mapHealth_;
 	std::map<int, WindComponent*> mapWind_;
-	
+
 	static std::map<int, std::map<int, RenderComponent*>> mapRender_;
 	PlayerRenderComponent playerRenderComponent_;
 

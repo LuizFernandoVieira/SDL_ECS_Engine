@@ -29,7 +29,7 @@ void RenderSystem::update(
 
 void RenderSystem::render(
 	int layer,
-	std::map<int, TransformComponent*> transfComp,
+	std::map<int, TransformComponent> transfComp,
 	std::map<int, StateComponent*> stateComp,
 	std::map<int, RenderComponent*> renderComp)
 {
@@ -48,16 +48,16 @@ void RenderSystem::render(
 		default:
 			break;
 	}
-	
+
 	for(auto& render : renderComp)
 	{
-		Rect transform = transfComp[render.first]->rect_;
-		render.second->getSprite(stateComp[render.first]->state_).setScaleX(transfComp[render.first]->scale_.x());
-		render.second->getSprite(stateComp[render.first]->state_).setScaleY(transfComp[render.first]->scale_.y());
+		Rect transform = transfComp[render.first].rect_;
+		render.second->getSprite(stateComp[render.first]->state_).setScaleX(transfComp[render.first].scale_.x());
+		render.second->getSprite(stateComp[render.first]->state_).setScaleY(transfComp[render.first].scale_.y());
 		render.second->getSprite(stateComp[render.first]->state_).render(
 			transform.x() + layerSpeed.x(),
 			transform.y() + layerSpeed.y(),
-			transfComp[render.first]->rotation_,
+			transfComp[render.first].rotation_,
 			!stateComp[render.first]->facingRight_ // flip se nao ta virado pra direita
 		);
 	}
