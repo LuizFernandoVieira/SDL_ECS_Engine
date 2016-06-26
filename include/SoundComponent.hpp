@@ -49,7 +49,7 @@ public:
 
 	
 	void addSound(State state, Sound sound)
-		{ assets.emplace(state, sound); std::cout << "\tMapped new sound to state: " << state << std::endl;}
+		{ assets.emplace(state, sound);}
 
 	int lastState;
 //private:

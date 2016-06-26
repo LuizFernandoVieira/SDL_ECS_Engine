@@ -1,9 +1,10 @@
 Fazendo:
 
-- Ta pulando quando no estado grapple;
-- Poder pular quando tá no zipline;
-- Colisão por baixo de plataformas;
+- Colisão por baixo de plataformas (colisões diferentes para chão / parede / teto?);
 - Bloquear vento com guarda chuva;
+- Camadas adicionais sem parallax;
+- Colocar novos sprites com guarda chuva;
+- Animação do tipo começo + loop (grapple);
 
 
 Probleminhas a resolver:

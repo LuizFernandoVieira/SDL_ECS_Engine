@@ -301,12 +301,12 @@ void CollisionSystem::correctPosDiagonalUp(Rect& entityPos, Rect oldPos, Rect te
 				state->state_ = speed.x() == 0 ? State::IDLE : State::WALKING;
 		}
 	}
-	else if (angle > 125 && angle < 235) // entity colidiu à esquerda
+/*	else if (angle > 125 && angle < 235) // entity colidiu à esquerda
 	{
 		// std::cout << "COLIDIU A ESQUERDA" << std::endl;
 		entityPos.x( terrain.x() + terrain.w() );
 	}
-/*	else // entity estava abaixo do colisor
+	else // entity estava abaixo do colisor
 	{
 		std::cout << "COLIDIU EM CIMA" << std::endl;
 		entityPos.y( terrain.y() + terrain.h() );
@@ -319,11 +319,11 @@ void CollisionSystem::correctPosDiagonalUp(Rect& entityPos, Rect oldPos, Rect te
 void CollisionSystem::correctPosDiagonalDown(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed, StateComponent* state)
 {
 	float angle = LineInclination(oldPos.getCenter(), terrain.getCenter());
-	if (angle >= -55 && angle < 55) // entity colidiu à direita
+/*	if (angle >= -55 && angle < 55) // entity colidiu à direita
 	{
 		entityPos.x( terrain.x() - entityPos.w() );
 	}
-	else if (angle >= 55 && angle <= 125 && state->state_ != JUMPING) // entity estava acima do colisor
+	else*/ if (angle >= 55 && angle <= 125 && state->state_ != JUMPING) // entity estava acima do colisor
 	{
 		if (entityPos.getCenter().x() >= terrain.x() && 
 			entityPos.getCenter().x() <= terrain.x() + terrain.w() && 

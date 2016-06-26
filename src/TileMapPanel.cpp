@@ -68,19 +68,16 @@ void TileMapPanel::update()
 
 	if (rect_.isInside(InputHandler::getInstance().getMouse()))
 	{
-		Vec2 speedChangePerLayer;
+		Vec2 speedChangePerLayer(0,0);
 		switch(*selectedLayer_)
 		{
 			case 0:
 				speedChangePerLayer = Camera::pos_ * (-0.5);
 				break;
-			case 1:
-				speedChangePerLayer = Vec2(0,0);
-				break;
-			case 2:
+			case 4:
 				speedChangePerLayer = Camera::pos_ * 0.5;
 				break;
-			case 3:
+			case 5:
 				speedChangePerLayer = Camera::pos_ * 0.75;
 				break;
 			default:
@@ -201,23 +198,36 @@ void TileMapPanel::render()
 {
 	Panel::render();
 
+	// LAYER 5
+	tileMap_->renderLayer(5, rect_.x(), rect_.y());
+	for (auto object : objects_)
+		if (object.layer == 5)
+			object.sprite.render(object.pos.x() + rect_.x() + Camera::pos_.x() * 0.75, 
+				                 object.pos.y() + rect_.y() + Camera::pos_.y() * 0.75);
+
+	// LAYER 4
+	tileMap_->renderLayer(4, rect_.x(), rect_.y());
+	for (auto object : objects_)
+		if (object.layer == 4)
+			object.sprite.render(object.pos.x() + rect_.x() + Camera::pos_.x() * 0.5, 
+				                 object.pos.y() + rect_.y() + Camera::pos_.y() * 0.5);
+
 	// LAYER 3
 	tileMap_->renderLayer(3, rect_.x(), rect_.y());
 	for (auto object : objects_)
 		if (object.layer == 3)
-			object.sprite.render(object.pos.x() + rect_.x() + Camera::pos_.x() * 0.75, 
-				                 object.pos.y() + rect_.y() + Camera::pos_.y() * 0.75);
+			object.sprite.render(object.pos.x() + rect_.x(), 
+				                 object.pos.y() + rect_.y());
 
 	// LAYER 2
 	tileMap_->renderLayer(2, rect_.x(), rect_.y());
 	for (auto object : objects_)
 		if (object.layer == 2)
-			object.sprite.render(object.pos.x() + rect_.x() + Camera::pos_.x() * 0.5, 
-				                 object.pos.y() + rect_.y() + Camera::pos_.y() * 0.5);
+			object.sprite.render(object.pos.x() + rect_.x(), 
+				                 object.pos.y() + rect_.y());
 
 	// LAYER 1
 	tileMap_->renderLayer(1, rect_.x(), rect_.y());
-	collisionMap_->render(rect_.x(), rect_.y());
 	for (auto object : objects_)
 		if (object.layer == 1)
 			object.sprite.render(object.pos.x() + rect_.x(), 
@@ -229,6 +239,8 @@ void TileMapPanel::render()
 		if (object.layer == 0)
 			object.sprite.render(object.pos.x() + rect_.x() - Camera::pos_.x() * 0.5, 
 				                 object.pos.y() + rect_.y() - Camera::pos_.y() * 0.5);
+
+	collisionMap_->render(rect_.x(), rect_.y());
 
 	// CURSORES
 	// Cursor quando tá só hover
@@ -265,19 +277,16 @@ void TileMapPanel::render()
 		}
 
 
-		Vec2 speedChangePerLayer;
+		Vec2 speedChangePerLayer(0,0);
 		switch(*selectedLayer_)
 		{
 			case 0:
 				speedChangePerLayer = Camera::pos_ * (-0.5);
 				break;
-			case 1:
-				speedChangePerLayer = Vec2(0,0);
-				break;
-			case 2:
+			case 4:
 				speedChangePerLayer = Camera::pos_ * 0.5;
 				break;
-			case 3:
+			case 5:
 				speedChangePerLayer = Camera::pos_ * 0.75;
 				break;
 			default:

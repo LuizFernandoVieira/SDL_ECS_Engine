@@ -2,7 +2,7 @@
 
 =============== MODELO ====================
 
-<object name="nome" layer="1">
+<object name="nome" layer="2">
 	<transform>
 		<rect x="0" y="0" w="10" h="10" />
 		<scale x="1" y="1" />

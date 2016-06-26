@@ -13,7 +13,7 @@ mainPanel_(Rect(0, 0, Resources::WINDOW_WIDTH, Resources::WINDOW_HEIGHT), "../im
 	objectMap_ = new ObjectMap(Resources::GLOBAL_OBJECT_MAP_XML.c_str(), Resources::OBJECT_MAP_XML.c_str());
 	selectedTile_ = 0;
 	selectedTool_ = ADD;
-	selectedLayer_ = 1;
+	selectedLayer_ = 2;
 	selectedCollision_ = 0;
 	selectedTab_ = NULL;
 	selectedObject_ = 0;
@@ -46,10 +46,12 @@ void LevelEditorState::initGUI()
 	Rect deleteTilesRectProportion        = Rect(0.50, 0.025, 0.15, 0.05);
 	Rect layersRectProportion             = Rect(0.20, 0.000, 0.80, 0.05);
 
-	Rect layerButton1RectProportion = Rect(0.1, 0.100, 0.10, 0.80);
-	Rect layerButton2RectProportion = Rect(0.3, 0.100, 0.10, 0.80);
-	Rect layerButton3RectProportion = Rect(0.5, 0.100, 0.10, 0.80);
-	Rect layerButton4RectProportion = Rect(0.7, 0.100, 0.10, 0.80);
+	Rect layerButton1RectProportion = Rect(0.05, 0.100, 0.10, 0.80);
+	Rect layerButton2RectProportion = Rect(0.2, 0.100, 0.10, 0.80);
+	Rect layerButton3RectProportion = Rect(0.35, 0.100, 0.10, 0.80);
+	Rect layerButton4RectProportion = Rect(0.5, 0.100, 0.10, 0.80);
+	Rect layerButton5RectProportion = Rect(0.65, 0.100, 0.10, 0.80);
+	Rect layerButton6RectProportion = Rect(0.8, 0.100, 0.10, 0.80);
 
 	// Rect
 	Rect leftRect               = getPanelRect(mainPanel_.getRect(), leftRectProportion);
@@ -64,6 +66,8 @@ void LevelEditorState::initGUI()
 	Rect layerButton2Rect = getPanelRect(layersRect, layerButton2RectProportion);
 	Rect layerButton3Rect = getPanelRect(layersRect, layerButton3RectProportion);
 	Rect layerButton4Rect = getPanelRect(layersRect, layerButton4RectProportion);
+	Rect layerButton5Rect = getPanelRect(layersRect, layerButton5RectProportion);
+	Rect layerButton6Rect = getPanelRect(layersRect, layerButton6RectProportion);
 
 	// Panel
 	Panel* leftPanel        = new Panel(leftRect, "../img/interface/editor/left_panel.png");
@@ -83,15 +87,19 @@ void LevelEditorState::initGUI()
 	selectTilesBtn_->setResizable(true);
 	deleteTilesBtn_->setResizable(true);
 
-	layerButtons_.push_back(new Button(layerButton1Rect, "../img/interface/editor/btn_4.png"/*, tileBtnExecute*/));
-	layerButtons_.push_back(new Button(layerButton2Rect, "../img/interface/editor/btn_5.png"/*, tileBtnExecute*/));
-	layerButtons_.push_back(new Button(layerButton3Rect, "../img/interface/editor/btn_6.png"/*, tileBtnExecute*/));
-	layerButtons_.push_back(new Button(layerButton4Rect, "../img/interface/editor/btn_7.png"/*, tileBtnExecute*/));
+	layerButtons_.push_back(new Button(layerButton1Rect, "../img/interface/editor/btn_5.png"));
+	layerButtons_.push_back(new Button(layerButton2Rect, "../img/interface/editor/btn_5.png"));
+	layerButtons_.push_back(new Button(layerButton3Rect, "../img/interface/editor/btn_6.png"));
+	layerButtons_.push_back(new Button(layerButton4Rect, "../img/interface/editor/btn_7.png"));
+	layerButtons_.push_back(new Button(layerButton5Rect, "../img/interface/editor/btn_7.png"));
+	layerButtons_.push_back(new Button(layerButton6Rect, "../img/interface/editor/btn_7.png"));
 
 	layerButtons_[0]->setResizable(true);
 	layerButtons_[1]->setResizable(true);
 	layerButtons_[2]->setResizable(true);
 	layerButtons_[3]->setResizable(true);
+	layerButtons_[4]->setResizable(true);
+	layerButtons_[5]->setResizable(true);
 
 	//                    pq caralhos esse rect vvvvv nao eh alterado??
 	collisionButtons_.emplace_back(new Button(Rect(0,0,32,32), "../img/interface/editor/btn_6.png"));
@@ -113,6 +121,8 @@ void LevelEditorState::initGUI()
 	layersPanel->add(*layerButtons_[1], layerButton2RectProportion);
 	layersPanel->add(*layerButtons_[2], layerButton3RectProportion);
 	layersPanel->add(*layerButtons_[3], layerButton4RectProportion);
+	layersPanel->add(*layerButtons_[4], layerButton4RectProportion);
+	layersPanel->add(*layerButtons_[5], layerButton4RectProportion);
 
 	// Tile Buttons
 	int nTilesRow = tileSetAndObjectsRect.w() / (Resources::TILE_WIDTH + 2);

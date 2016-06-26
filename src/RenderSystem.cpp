@@ -33,21 +33,19 @@ void RenderSystem::render(
 	std::map<int, StateComponent*> stateComp,
 	std::map<int, RenderComponent*> renderComp)
 {
-	Vec2 layerSpeed;
+	Vec2 layerSpeed(0,0);
 	switch (layer)
 	{
 		case 0:
 			layerSpeed = Camera::pos_ * -0.5;
 			break;
-		default:
-		case 1:
-			layerSpeed = Vec2(0,0);
-			break;
-		case 2:
+		case 4:
 			layerSpeed = Camera::pos_ * 0.5;
 			break;
-		case 3:
+		case 5:
 			layerSpeed = Camera::pos_ * 0.75;
+			break;
+		default:
 			break;
 	}
 	

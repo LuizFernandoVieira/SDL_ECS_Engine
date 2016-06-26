@@ -135,7 +135,7 @@ std::vector<LocalObjectInfo> ObjectMap::getLocalObjects()
 		pugi::xml_node transf = object.child("transform");
 		info.x = transf.attribute("x").as_int();
 		info.y = transf.attribute("y").as_int();
-		info.layer = object.attribute("layer") ? object.attribute("layer").as_int() : 1;
+		info.layer = object.attribute("layer") ? object.attribute("layer").as_int() : 2;
 
 		infos.emplace_back(info);
 	}

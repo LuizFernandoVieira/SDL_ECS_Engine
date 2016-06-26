@@ -21,9 +21,9 @@ void TileMap::newTileMap(int width, int height)
 
 	mapWidth_ = width;
 	mapHeight_ = height;
-	mapDepth_ = 4;
+	mapDepth_ = 6;
 
-	for (int z = 0; z < 4; z++)
+	for (int z = 0; z < 6; z++)
 	{
 		for (int y = 0; y < height; y++)
 		{
@@ -136,42 +136,28 @@ void TileMap::render(int x, int y)
 
 void TileMap::renderLayer(int layer, int x, int y)
 {
-	Vec2 layerSpeed;
+	Vec2 layerSpeed(0,0);
 	int tileX = 0, tileY = 0, tileW = mapWidth_, tileH = mapHeight_;
 
 	switch (layer)
 	{
 		case 0:
 			layerSpeed = Camera::pos_ * -0.5;
-			tileX = (Camera::pos_.x() - layerSpeed.x() / tileSet_->getTileWidth()) - 5;
-			tileY = (Camera::pos_.y() - layerSpeed.y() / tileSet_->getTileHeight()) - 5;
-			tileW = ((Camera::pos_.x() + layerSpeed.x() + Resources::WINDOW_WIDTH) / tileSet_->getTileWidth()) + 5;
-			tileH = ((Camera::pos_.y() + layerSpeed.y() + Resources::WINDOW_HEIGHT) / tileSet_->getTileHeight()) + 5;
+			break;
+		case 4:
+			layerSpeed = Camera::pos_ * 0.5;
+			break;
+		case 5:
+			layerSpeed = Camera::pos_ * 0.75;
 			break;
 		default:
-		case 1:
-			layerSpeed = Vec2(0,0);
-			tileX = (Camera::pos_.x() /*- layerSpeed.x()*/ / tileSet_->getTileWidth()) - 2;
-			tileY = (Camera::pos_.y() /*- layerSpeed.y()*/ / tileSet_->getTileHeight()) - 2;
-			tileW = ((Camera::pos_.x() /*+ layerSpeed.x()*/ + Resources::WINDOW_WIDTH) / tileSet_->getTileWidth()) + 2;
-			tileH = ((Camera::pos_.y() /*+ layerSpeed.y()*/ + Resources::WINDOW_HEIGHT) / tileSet_->getTileHeight()) + 2;
-			break;
-		case 2:
-			layerSpeed = Camera::pos_ * 0.5;
-			tileX = (Camera::pos_.x() - layerSpeed.x() / tileSet_->getTileWidth()) - 5;
-			tileY = (Camera::pos_.y() - layerSpeed.y() / tileSet_->getTileHeight()) - 5;
-			tileW = ((Camera::pos_.x() + layerSpeed.x() + Resources::WINDOW_WIDTH) / tileSet_->getTileWidth()) + 5;
-			tileH = ((Camera::pos_.y() + layerSpeed.y() + Resources::WINDOW_HEIGHT) / tileSet_->getTileHeight()) + 5;
-			break;
-		case 3:
-			layerSpeed = Camera::pos_ * 0.75;
-			tileX = (Camera::pos_.x() - layerSpeed.x() / tileSet_->getTileWidth()) - 5;
-			tileY = (Camera::pos_.y() - layerSpeed.y() / tileSet_->getTileHeight()) - 5;
-			tileW = ((Camera::pos_.x() + layerSpeed.x() + Resources::WINDOW_WIDTH) / tileSet_->getTileWidth()) + 5;
-			tileH = ((Camera::pos_.y() + layerSpeed.y() + Resources::WINDOW_HEIGHT) / tileSet_->getTileHeight()) + 5;
 			break;
 	}
 
+	tileX = (Camera::pos_.x() /*- layerSpeed.x()*/ / tileSet_->getTileWidth()) - 8;
+	tileY = (Camera::pos_.y() /*- layerSpeed.y()*/ / tileSet_->getTileHeight()) - 8;
+	tileW = ((Camera::pos_.x() /*+ layerSpeed.x()*/ + Resources::WINDOW_WIDTH) / tileSet_->getTileWidth()) + 8;
+	tileH = ((Camera::pos_.y() /*+ layerSpeed.y()*/ + Resources::WINDOW_HEIGHT) / tileSet_->getTileHeight()) + 8;
 
 
 	for (int i = tileY >= 0 ? tileY : 0; 

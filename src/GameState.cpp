@@ -35,17 +35,14 @@ GameState::GameState()
 		mapRender_[1] = std::map<int, RenderComponent*>();
 		mapRender_[2] = std::map<int, RenderComponent*>();
 		mapRender_[3] = std::map<int, RenderComponent*>();
-
-		std::cout << "1" << std::endl;
+		mapRender_[4] = std::map<int, RenderComponent*>();
+		mapRender_[5] = std::map<int, RenderComponent*>();
 
 		level_ = new FirstLevel();
-		std::cout << "2" << std::endl;
 
 		// createPlayer();
 		createMapObjects();
 		// createParticleEmitter();
-
-		std::cout << "3" << std::endl;
 
 		Camera::follow(mapTransform_[player_]);
 	}
@@ -81,7 +78,8 @@ GameState::~GameState()
 	mapRender_[1].clear();
 	mapRender_[2].clear();
 	mapRender_[3].clear();
-	mapRender_.clear();
+	mapRender_[4].clear();
+	mapRender_[5].clear();
 
 	Camera::unfollow();
 	Camera::pos_ = Vec2(0,0);
@@ -136,21 +134,27 @@ void GameState::update(float dt)
 
 void GameState::render()
 {
+	level_->render(5);
+	renderSystem_.render(5, mapTransform_, mapState_, mapRender_[5]);
+
+	level_->render(4);
+	renderSystem_.render(4, mapTransform_, mapState_, mapRender_[4]);
+
 	level_->render(3);
 	renderSystem_.render(3, mapTransform_, mapState_, mapRender_[3]);
 
 	level_->render(2);
 	renderSystem_.render(2, mapTransform_, mapState_, mapRender_[2]);
 
-	level_->render(1);
-	renderSystem_.render(1, mapTransform_, mapState_, mapRender_[1]);
-
 	// renderSystem_.render(mapTransform_, mapState_, mapRender_);
 	playerRenderSystem_.render(mapTransform_[player_], (PlayerStateComponent*)mapState_[player_], &playerRenderComponent_); // ai q feio
 
 	// particleEmitterSystem_.render();
 
-	collisionSystem_.render();
+	// collisionSystem_.render();
+
+	level_->render(1);
+	renderSystem_.render(1, mapTransform_, mapState_, mapRender_[1]);
 
 	level_->render(0);
 	renderSystem_.render(0, mapTransform_, mapState_, mapRender_[0]);
@@ -247,7 +251,7 @@ void GameState::createMapObjects()
 			if (obj.attribute("layer"))
 				mapRender_[obj.attribute("layer").as_int()].emplace(nextId_, renderComp);
 			else
-				mapRender_[1].emplace(nextId_, renderComp);
+				mapRender_[2].emplace(nextId_, renderComp);
 		}
 
 		// PLAYER RENDER
@@ -379,6 +383,7 @@ void GameState::deleteDeadEntities()
 			mapRender_[1].erase(id);
 			mapRender_[2].erase(id);
 			mapRender_[3].erase(id);
+			mapRender_[4].erase(id);
 		}
 	}
 }
