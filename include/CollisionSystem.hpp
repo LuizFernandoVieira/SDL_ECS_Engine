@@ -13,6 +13,7 @@
 #include "SpeedComponent.hpp"
 #include "StateComponent.hpp"
 #include "ZiplineComponent.hpp"
+#include "WindComponent.hpp"
 #include "CollisionMap.hpp"
 
 class CollisionSystem : public System
@@ -28,7 +29,8 @@ public:
 		std::map<int, SpeedComponent*> speed,
 		std::map<int, StateComponent*> oldState,
 		std::map<int, StateComponent*> state,
-		std::map<int, ZiplineComponent*> zipline
+		std::map<int, ZiplineComponent*> zipline,
+		std::map<int, WindComponent*> wind
 	);
 	
 	void render();
@@ -54,7 +56,6 @@ private:
 	);
 	void updateZipline(
 		int player,
-		CollisionMap& collisionMap,
 		std::map<int, TransformComponent*> transform,
 		std::map<int, ColliderComponent*> collider,
 		std::map<int, SpeedComponent*> speed,
@@ -62,7 +63,15 @@ private:
 		std::map<int, StateComponent*> state,
 		std::map<int, ZiplineComponent*> zipline
 	);
-	void updateWind();
+	void updateWind(
+		int player,
+		std::map<int, TransformComponent*> transform,
+		std::map<int, ColliderComponent*> collider,
+		// std::map<int, SpeedComponent*> speed,
+		// std::map<int, StateComponent*> oldState,
+		// std::map<int, StateComponent*> state,
+		std::map<int, WindComponent*> wind
+	);
 
 	void correctPosSolid(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed, StateComponent* state);
 	void correctPosDiagonalUp(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed, StateComponent* state);

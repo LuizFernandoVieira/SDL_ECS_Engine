@@ -70,12 +70,13 @@ std::shared_ptr<SDL_Texture> Resources::GetImage(std::string file)
 
 void Resources::ClearImages()
 {
-	for ( auto it = imageTable.begin() ; it != imageTable.end(); ++it ) {
-		if (it->second.unique()) {
-			it = imageTable.erase(it);
-		}
+	for ( auto it = imageTable.cbegin(); it != imageTable.cend(); )
+	{
+		if (it->second.unique())
+			imageTable.erase(it++);
+		else
+			++it;
 	}
-	
 }
 
 
@@ -139,10 +140,12 @@ std::shared_ptr<TTF_Font> Resources::GetFont(std::string file, int fontSize)
 
 void Resources::ClearFonts()
 {
-	for ( auto it = fontTable.begin() ; it != fontTable.end(); ++it )
+	for ( auto it = fontTable.cbegin() ; it != fontTable.cend(); )
 	{
 		if (it->second.unique())
-			it = fontTable.erase(it);
+			fontTable.erase(it++);
+		else
+			++it;
 	}
 }
 

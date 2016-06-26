@@ -3,6 +3,7 @@
 
 #include "../include/Camera.hpp"
 #include "../include/Sprite.hpp"
+#include "../include/Game.hpp"
 
 CollisionSystem::CollisionSystem()
 {
@@ -18,13 +19,15 @@ void CollisionSystem::update(
 	std::map<int, SpeedComponent*> speed,
 	std::map<int, StateComponent*> oldState,
 	std::map<int, StateComponent*> state,
-	std::map<int, ZiplineComponent*> zipline)
+	std::map<int, ZiplineComponent*> zipline,
+	std::map<int, WindComponent*> wind)
 {
 	collidersToRender.clear();
 
 	updateTerrain(collisionMap, oldTransform, transform, collider, speed, state);
 	updateCollider(collisionMap, oldTransform, transform, collider, speed, state);
-	updateZipline(player, collisionMap, transform, collider, speed, oldState, state, zipline);
+	updateZipline(player, transform, collider, speed, oldState, state, zipline);
+	updateWind(player, transform, collider, /*speed, oldState, state,*/ wind);
 
 	collidersToRender.emplace_back(collider[player]->hitbox_ + Vec2(transform[player]->rect_.x(), transform[player]->rect_.y()));
 }
@@ -121,7 +124,6 @@ void CollisionSystem::updateCollider(
 
 void CollisionSystem::updateZipline(
 	int player,
-	CollisionMap& collisionMap,
 	std::map<int, TransformComponent*> transform,
 	std::map<int, ColliderComponent*> collider,
 	std::map<int, SpeedComponent*> speed,
@@ -144,6 +146,44 @@ void CollisionSystem::updateZipline(
 		else if (oldState[player]->state_ == State::ZIPLINE)
 		{
 			state[player]->state_ = State::FALLING;
+		}
+	}
+}
+
+
+void CollisionSystem::updateWind(
+	int player,
+	std::map<int, TransformComponent*> transform,
+	std::map<int, ColliderComponent*> collider,
+	// std::map<int, SpeedComponent*> speed,
+	// std::map<int, StateComponent*> oldState,
+	// std::map<int, StateComponent*> state,
+	std::map<int, WindComponent*> wind)
+{
+	for (auto& w : wind)
+	{
+		if (isColliding( collider[player]->hitbox_ + Vec2(transform[player]->rect_.x(), transform[player]->rect_.y() ),
+		                 transform[w.first]->rect_ * Rect(1, 1, transform[w.first]->scale_.x(), transform[w.first]->scale_.y()),
+		                 transform[player]->rotation_,
+		                 transform[w.first]->rotation_ ))
+		{
+			Vec2 speed;
+			switch(w.second->direction_)
+			{
+				case Direction::W_UP :
+					speed = Vec2(0, -w.second->speed_);
+					break;
+				case Direction::W_DOWN :
+					speed = Vec2(0, w.second->speed_);
+					break;
+				case Direction::W_LEFT :
+					speed = Vec2(-w.second->speed_, 0);
+					break;
+				case Direction::W_RIGHT :
+					speed = Vec2(w.second->speed_, 0);
+					break;
+			}
+			transform[player]->rect_ += speed * Game::getInstance().getDeltaTime();
 		}
 	}
 }

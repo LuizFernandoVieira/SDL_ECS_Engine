@@ -12,6 +12,7 @@
 #include "ZiplineComponent.hpp"
 #include "SoundComponent.hpp"
 #include "HealthComponent.hpp"
+#include "WindComponent.hpp"
 #include "InputSystem.hpp"
 #include "PlayerRenderSystem.hpp"
 #include "RenderSystem.hpp"
@@ -62,7 +63,9 @@ private:
 	std::map<int, ZiplineComponent*> mapZipline_;
 	std::map<int, SoundComponent*> mapSound_;
 	std::map<int, HealthComponent*> mapHealth_;
-	std::map<int, std::map<int, RenderComponent*>> mapRender_;
+	std::map<int, WindComponent*> mapWind_;
+	
+	static std::map<int, std::map<int, RenderComponent*>> mapRender_;
 	PlayerRenderComponent playerRenderComponent_;
 
 	InputSystem inputSystem_;

@@ -5,6 +5,7 @@
 #endif
 #include <vector>
 #include <unordered_map>
+#include <exception>
 
 #include "../include/Game.hpp"
 #include "../include/GameState.hpp"
@@ -18,29 +19,45 @@
 #include "../include/StaticSprite.hpp"
 
 unsigned int GameState::nextId_ = 0;
+std::map<int, std::map<int, RenderComponent*>> GameState::mapRender_;
 
 GameState::GameState()
 : music()
+	//testando componente de música, não há necessidade de se carregar um arquivo
+	//A própria music está carregando um arquivo teste
 {
 	StaticSprite loadScreen("../img/bg.png");
 	loadScreen.render(0,0);
 	SDL_RenderPresent(Game::getInstance().getRenderer());
 	
-	mapRender_[0] = std::map<int, RenderComponent*>();
-	mapRender_[1] = std::map<int, RenderComponent*>();
-	mapRender_[2] = std::map<int, RenderComponent*>();
-	mapRender_[3] = std::map<int, RenderComponent*>();
-	
-	//testando componente de música, não há necessidade de se carregar um arquivo
-	//A própria music está carregando um arquivo teste
+	try{
+		mapRender_[0] = std::map<int, RenderComponent*>();
+		mapRender_[1] = std::map<int, RenderComponent*>();
+		mapRender_[2] = std::map<int, RenderComponent*>();
+		mapRender_[3] = std::map<int, RenderComponent*>();
 
-	level_ = new FirstLevel();
+		std::cout << "1" << std::endl;
 
-	// createPlayer();
-	createMapObjects();
-	// createParticleEmitter();
+		level_ = new FirstLevel();
+		std::cout << "2" << std::endl;
 
-	Camera::follow(mapTransform_[player_]);
+		// createPlayer();
+		createMapObjects();
+		// createParticleEmitter();
+
+		std::cout << "3" << std::endl;
+
+		Camera::follow(mapTransform_[player_]);
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "DEU MERDA: " << e.what() << std::endl;
+	}
+	catch (...)
+	{
+		std::cout << "DEU MUITA MERDA" << std::endl;
+	}
+
 }
 
 GameState::~GameState()
@@ -58,6 +75,7 @@ GameState::~GameState()
 	mapZipline_.clear();
 	mapSound_.clear();
 	mapHealth_.clear();
+	mapWind_.clear();
 
 	mapRender_[0].clear();
 	mapRender_[1].clear();
@@ -84,7 +102,7 @@ void GameState::update(float dt)
 	// particleEmitterSystem_.update( dt, level_->getCollisionMap(), mapTransform_[particleEmitter_], mapEmitter_[particleEmitter_], mapTimer_[particleEmitter_] );
 	moveSystem_.update( dt, mapTransform_, mapSpeed_ );
 	attackSystem_.update( dt, oldState[player_], mapState_[player_] );
-	collisionSystem_.update( player_, level_->getCollisionMap(), oldTransform, mapTransform_, mapCollider_, mapSpeed_, oldState, mapState_, mapZipline_ );
+	collisionSystem_.update( player_, level_->getCollisionMap(), oldTransform, mapTransform_, mapCollider_, mapSpeed_, oldState, mapState_, mapZipline_, mapWind_ );
 	renderSystem_.update( dt, oldState, mapState_, mapRender_ );
 	playerRenderSystem_.update( dt, (PlayerStateComponent*)oldState[player_], (PlayerStateComponent*)mapState_[player_], &playerRenderComponent_ ); // ai q feio
 	soundSystem_.update(oldState, mapState_, mapSound_);
@@ -155,7 +173,6 @@ void GameState::createPlayer()
 {
 	player_ = nextId_;
 	nextId_++;
-
 
 	mapTransform_.emplace(player_, new TransformComponent(Rect(352, 100, 52, 90), Vec2(0.3, 0.3), 0));
 	mapCollider_.emplace(player_, new ColliderComponent( Rect(0, 0, 52, 90), Rect(10, -10, 20, 20) ));
@@ -325,6 +342,13 @@ void GameState::createMapObjects()
 		if ((aux = obj.child("health")))
 		{
 			mapHealth_.emplace(nextId_, new HealthComponent(aux.attribute("value").as_float()));
+		}
+
+		// WIND
+		if ((aux = obj.child("wind")))
+		{
+			mapWind_.emplace(nextId_, new WindComponent( (Direction)aux.attribute("direction").as_float(),
+			                                             aux.attribute("speed").as_float() ));
 		}
 
 		nextId_++;

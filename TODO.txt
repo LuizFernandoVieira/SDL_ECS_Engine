@@ -1,5 +1,10 @@
 Fazendo:
 
+- Ta pulando quando no estado grapple;
+- Poder pular quando tá no zipline;
+- Colisão por baixo de plataformas;
+- Bloquear vento com guarda chuva;
+
 
 Probleminhas a resolver:
 
@@ -59,11 +64,6 @@ Segunda entrega / 17
 			Muitas telas
 		Gameapd
 
-
-===
-
-Terceira entrega / 6
-	Selecionar tile set / tile map;
 
 
 ===========================================================

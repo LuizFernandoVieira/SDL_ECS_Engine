@@ -43,6 +43,9 @@
 		<start x="0" y="0" />
 		<end x="0" y="0" />
 	</zipline>
+
+	<wind direction="0" speed="100" />
+
 </object>
 
 
@@ -52,7 +55,7 @@
 * RENDER PRECISA DE STATE, MAS NÃO PRECISA DE UM SPRITE PARA CADA ESTADO, BASTA UM PARA O IDLE
 * PHYSICS PRECISA DE SPEED
 * PLAYER PRECISA DE PLAYER_RENDER
-* ZIPLINE NÃO PODE TER COLLIDER
+* ZIPLINE E WIND NÃO PODEM TER COLLIDER
 
 =============== ESTADOS ====================
 
@@ -74,6 +77,12 @@ UMBRELLA DIRECTION
 	FRONT		= 1
 	DOWN		= 2
 	BACK		= 3
+
+WIND DIRECTIOM
+	UP			= 0
+	DOWN		= 1
+	LEFT		= 2
+	RIGHT		= 3
 
  -->
 <?xml version="1.0" encoding="UTF-8"?>
