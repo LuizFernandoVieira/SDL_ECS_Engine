@@ -104,10 +104,9 @@ void Game::run()
 			storedState_ = NULL;
 		}
 
-		if ( (float)(SDL_GetTicks() - frameStart_) < 1000.0 / 60.0 )
-		{
-			SDL_Delay( (1000.0/60.0) - (frameStart_ - SDL_GetTicks()) );
-		}
+		if((frameEnd-frameStart_) < (float)(1000.f / 60.0))
+			while(frameEnd - frameStart_ <= (1000.f / 60.0))
+				frameEnd = (float)SDL_GetTicks();
 	}
 
 	while (!stateStack_.empty())
