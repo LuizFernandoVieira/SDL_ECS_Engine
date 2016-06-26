@@ -126,12 +126,54 @@ void CollisionMap::render(int x, int y)
 void CollisionMap::renderSelection(Rect rect)
 {
 	SDL_Renderer* renderer = Game::getInstance().getRenderer();
+	SDL_SetRenderDrawColor(renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
 	SDL_RenderDrawLine(renderer, rect.x(), rect.y(), rect.w() + rect.x(), rect.y());
 	SDL_RenderDrawLine(renderer, rect.x(), rect.y(), rect.x(), rect.h() + rect.y());
 	SDL_RenderDrawLine(renderer, rect.x(), rect.y(), rect.w() + rect.x(), rect.h() + rect.y());
 	SDL_RenderDrawLine(renderer, rect.w() + rect.x(), rect.y(), rect.w() + rect.x(), rect.h() + rect.y());
 	SDL_RenderDrawLine(renderer, rect.x(), rect.h() + rect.y(), rect.w() + rect.x(), rect.h() + rect.y());
 	SDL_RenderDrawLine(renderer, rect.w() + rect.x(), rect.y(), rect.x(), rect.h() + rect.y());
+/*	Uint32 rmask, gmask, bmask, amask;
+
+#if SDL_BYTEORDER == SDL_BIG_ENDIAN
+    rmask = 0xff000000;
+    gmask = 0x00ff0000;
+    bmask = 0x0000ff00;
+    amask = 0x000000ff;
+#else
+    rmask = 0x000000ff;
+    gmask = 0x0000ff00;
+    bmask = 0x00ff0000;
+    amask = 0xff000000;
+#endif
+
+	SDL_Surface* surface = SDL_CreateRGBSurface(0,
+                                  rect.w(),
+                                  rect.h(),
+                                  32,
+                                  rmask,
+                                  gmask,
+                                  bmask,
+                                  amask);
+	SDL_SetSurfaceAlphaMod(surface, 100);
+
+	SDL_Texture* texture =  SDL_CreateTextureFromSurface(renderer,
+                                                         surface);
+
+	SDL_Rect srcrect, dstrect;
+
+	srcrect.x = 0;
+	srcrect.y = 0;
+	srcrect.w = rect.w();
+	srcrect.h = rect.h();
+	dstrect.x = rect.x();
+	dstrect.y = rect.y();
+	dstrect.w = rect.w() + rect.x();
+	dstrect.h = rect.h() + rect.y();
+
+	SDL_RenderCopy(renderer, texture,
+                   &srcrect,
+                   &dstrect);*/
 }
 
 int CollisionMap::getWidth() const

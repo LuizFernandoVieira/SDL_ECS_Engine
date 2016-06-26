@@ -64,12 +64,66 @@ void Sprite::render(int x, int y, float angle, bool flip)
 void Sprite::renderSelection(int x, int y)
 {
 	SDL_Renderer* renderer = Game::getInstance().getRenderer();
+
+	SDL_SetRenderDrawColor(renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
+
 	SDL_RenderDrawLine(renderer, x, y, clipRect_.w + x, y);
 	SDL_RenderDrawLine(renderer, x, y, x, clipRect_.h + y);
 	SDL_RenderDrawLine(renderer, x, y, clipRect_.w + x, clipRect_.h + y);
 	SDL_RenderDrawLine(renderer, clipRect_.w + x, y, clipRect_.w + x, clipRect_.h + y);
 	SDL_RenderDrawLine(renderer, x, clipRect_.h + y, clipRect_.w + x, clipRect_.h + y);
 	SDL_RenderDrawLine(renderer, clipRect_.w + x, y, x, clipRect_.h + y);
+
+/*	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+	SDL_Rect rectangle;
+
+	rectangle.x = x;
+	rectangle.y = y;
+	rectangle.w = clipRect_.w + x;
+	rectangle.h = clipRect_.h + y;
+	SDL_RenderFillRect(renderer, &rectangle);*/
+
+/*	Uint32 rmask, gmask, bmask, amask;
+
+#if SDL_BYTEORDER == SDL_BIG_ENDIAN
+    rmask = 0xff000000;
+    gmask = 0x00ff0000;
+    bmask = 0x0000ff00;
+    amask = 0x000000ff;
+#else
+    rmask = 0x000000ff;
+    gmask = 0x0000ff00;
+    bmask = 0x00ff0000;
+    amask = 0xff000000;
+#endif
+
+	SDL_Surface* surface = SDL_CreateRGBSurface(0,
+                                  clipRect_.w,
+                                  clipRect_.h,
+                                  32,
+                                  rmask,
+                                  gmask,
+                                  bmask,
+                                  amask);
+	SDL_SetSurfaceAlphaMod(surface, 100);
+
+	SDL_Texture* texture =  SDL_CreateTextureFromSurface(renderer,
+                                                         surface);
+
+	SDL_Rect srcrect, dstrect;
+
+	srcrect.x = 0;
+	srcrect.y = 0;
+	srcrect.w = clipRect_.w;
+	srcrect.h = clipRect_.h;
+	dstrect.x = x;
+	dstrect.y = y;
+	dstrect.w = clipRect_.w + x;
+	dstrect.h = clipRect_.h + y;
+
+	SDL_RenderCopy(renderer, texture,
+                   &srcrect,
+                   &dstrect);*/
 }
 
 int Sprite::getWidth()
