@@ -25,6 +25,7 @@ class Music
 public:
 	Music();
 	Music(std::string file);
+	~Music();
 
 	void Play();
 	void Stop();

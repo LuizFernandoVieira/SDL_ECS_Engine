@@ -50,6 +50,18 @@ Music::Music(std::string file){
 	Play();
 }
 
+Music::~Music(){
+	Stop();
+
+	for (int i = 0; i < AUDIO_MAXLAYERS; i++){
+		volumeCurrent[i]	= 0;
+		volume[i]			= 0;
+		channel[i] 			= 0;
+		layer[i]			= nullptr;
+	}
+
+	volume_vector.clear();
+}
 
 void Music::Play(){
 	int i;
@@ -62,6 +74,7 @@ void Music::Play(){
 void Music::Stop(){
 	Mix_HaltChannel(-1);
 }
+
 
 /*
 void Music::Open(std::string file){
