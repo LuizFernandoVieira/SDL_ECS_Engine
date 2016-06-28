@@ -64,21 +64,30 @@ void CollisionSystem::updateTerrain(
 				int collisionType;
 				if ((collisionType = collisionMap.at(x,y)) >= 0 && isColliding(finalCollider, terrain, 0, 0))
 				{
-					if (collisionType == 0)
+					switch(collisionType)
 					{
-						correctPosSolid(transform[col.first]->rect_, oldTransform[col.first]->rect_, terrain, speed[col.first]->speed_, state[col.first]);
+						case 0:
+							correctFloor(transform[col.first]->rect_, oldTransform[col.first]->rect_, terrain, speed[col.first]->speed_);
+							break;
+						case 1:
+							correctCeiling(transform[col.first]->rect_, oldTransform[col.first]->rect_, terrain, speed[col.first]->speed_);
+							break;
+						case 2:
+							correctWall(transform[col.first]->rect_, oldTransform[col.first]->rect_, terrain, speed[col.first]->speed_);
+							break;
+						case 3:
+							if (state[col.first]->state_ != State::JUMPING)
+								correctDiagonalUp(transform[col.first]->rect_, oldTransform[col.first]->rect_, terrain, speed[col.first]->speed_);
+							break;
+						case 4:
+							if (state[col.first]->state_ != State::JUMPING)
+								correctDiagonalDown(transform[col.first]->rect_, oldTransform[col.first]->rect_, terrain, speed[col.first]->speed_);
+							break;
 					}
-					else if (collisionType == 1)
+
+					if (speed[col.first]->speed_.y() == 0 && state[col.first]->state_ != State::ATTACKING)
 					{
-						correctPosDiagonalUp(transform[col.first]->rect_, oldTransform[col.first]->rect_, terrain, speed[col.first]->speed_, state[col.first]);
-					}
-					else if (collisionType == 2)
-					{
-						correctPosDiagonalDown(transform[col.first]->rect_, oldTransform[col.first]->rect_, terrain, speed[col.first]->speed_, state[col.first]);
-					}
-					else if (collisionType == 3)
-					{
-						correctPosCorner(transform[col.first]->rect_, oldTransform[col.first]->rect_, terrain, speed[col.first]->speed_, state[col.first]);
+						state[col.first]->state_ = speed[col.first]->speed_.x() == 0 ? State::IDLE : State::WALKING;
 					}
 
 					// Atualizar colisor que foi movido
@@ -239,7 +248,7 @@ bool CollisionSystem::isColliding(const Rect& a, const Rect& b, float angleOfA, 
 }
 
 
-void CollisionSystem::correctPosSolid(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed, StateComponent* state)
+/*void CollisionSystem::correctPosSolid(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed, StateComponent* state)
 {
 	float angle = LineInclination(oldPos.getCenter(), terrain.getCenter());
 	if (angle >= -55 && angle < 55) // entity colidiu à direita
@@ -270,95 +279,70 @@ void CollisionSystem::correctPosSolid(Rect& entityPos, Rect oldPos, Rect terrain
 			state->state_ = State::FALLING;
 		}
 	}
-}
+}*/
 
-
-void CollisionSystem::correctPosDiagonalUp(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed, StateComponent* state)
+void CollisionSystem::correctFloor(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed)
 {
 	float angle = LineInclination(oldPos.getCenter(), terrain.getCenter());
-	if (angle >= -55 && angle < 55) // entity colidiu à direita
+	if (angle >= 40 && angle <= 140 && entityPos.y() + entityPos.h() <= terrain.y() + terrain.h() / 2 )
 	{
-		if (entityPos.getCenter().x() >= terrain.x() && 
-			entityPos.getCenter().x() <= terrain.x() + terrain.w() && 
-			state->state_ != JUMPING)
-		{
-			// std::cout << "COLIDIU A DIREITA" << std::endl;
-			entityPos.y( terrain.y() + terrain.h() - entityPos.h() - (entityPos.getCenter().x() - terrain.x()) );
-			speed.y(0.0);
-			state->state_ = speed.x() == 0 ? State::IDLE : State::WALKING;
-		}
-	}
-	else if (angle >= 55 && angle <= 125 && state->state_ != JUMPING) // entity estava acima do colisor
-	{
-		if (entityPos.getCenter().x() >= terrain.x() && 
-			entityPos.getCenter().x() <= terrain.x() + terrain.w() && 
-			state->state_ != JUMPING)
-		{
-			// std::cout << "COLIDIU EMBAIXO" << std::endl;
-			entityPos.y( terrain.y() + terrain.h() - entityPos.h() - (entityPos.getCenter().x() - terrain.x()) );
-			speed.y(0.0);
-			if (state->state_ != State::ATTACKING)
-				state->state_ = speed.x() == 0 ? State::IDLE : State::WALKING;
-		}
-	}
-/*	else if (angle > 125 && angle < 235) // entity colidiu à esquerda
-	{
-		// std::cout << "COLIDIU A ESQUERDA" << std::endl;
-		entityPos.x( terrain.x() + terrain.w() );
-	}
-	else // entity estava abaixo do colisor
-	{
-		std::cout << "COLIDIU EM CIMA" << std::endl;
-		entityPos.y( terrain.y() + terrain.h() );
+		entityPos.y( terrain.y() - entityPos.h() );
 		speed.y(0.0);
-		state->state_ = State::FALLING;
-	}*/
+	}
 }
 
-
-void CollisionSystem::correctPosDiagonalDown(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed, StateComponent* state)
+void CollisionSystem::correctWall(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed)
 {
 	float angle = LineInclination(oldPos.getCenter(), terrain.getCenter());
-/*	if (angle >= -55 && angle < 55) // entity colidiu à direita
+	if (angle >= -50 && angle < 50)
 	{
 		entityPos.x( terrain.x() - entityPos.w() );
 	}
-	else*/ if (angle >= 55 && angle <= 125 && state->state_ != JUMPING) // entity estava acima do colisor
+	else if (angle > 130 && angle < 230)
 	{
-		if (entityPos.getCenter().x() >= terrain.x() && 
-			entityPos.getCenter().x() <= terrain.x() + terrain.w() && 
-			state->state_ != JUMPING)
-		{
-			// std::cout << "COLIDIU EMBAIXO" << std::endl;
-			entityPos.y( terrain.y() /*+ terrain.h()*/ - entityPos.h() + (entityPos.getCenter().x() - terrain.x()) );
-			speed.y(0.0);
-			state->state_ = speed.x() == 0 ? State::IDLE : State::WALKING;
-		}
+		entityPos.x( terrain.x() + terrain.w() );
 	}
-	else if (angle > 125 && angle < 235) // entity colidiu à esquerda
-	{
-		// std::cout << "COLIDIU A ESQUERDA" << std::endl;
-		// entityPos.x( terrain.x() + terrain.w() );
-		if (entityPos.getCenter().x() >= terrain.x() && 
-			entityPos.getCenter().x() <= terrain.x() + terrain.w() && 
-			state->state_ != JUMPING)
-		{
-			// std::cout << "COLIDIU EMBAIXO" << std::endl;
-			entityPos.y( terrain.y() /*+ terrain.h()*/ - entityPos.h() + (entityPos.getCenter().x() - terrain.x()) );
-			speed.y(0.0);
-			if (state->state_ != State::ATTACKING)
-				state->state_ = speed.x() == 0 ? State::IDLE : State::WALKING;
-		}
-	}
-/*	else // entity estava abaixo do colisor
-	{
-		std::cout << "COLIDIU EM CIMA" << std::endl;
-		entityPos.y( terrain.y() + terrain.h() );
-		speed.y(0.0);
-		state->state_ = State::FALLING;
-	}*/
 }
 
+void CollisionSystem::correctCeiling(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed)
+{
+	float angle = LineInclination(oldPos.getCenter(), terrain.getCenter());
+	if ( ( (angle >= 220 && angle <= 320) || (angle >= -140 && angle <= -40) ) && entityPos.y() >= terrain.y() + terrain.h() / 2 )
+	{
+		entityPos.y( terrain.y() - entityPos.h() );
+		speed.y(0.0);
+	}
+}
+
+void CollisionSystem::correctDiagonalUp(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed)
+{
+	float angle = LineInclination(oldPos.getCenter(), terrain.getCenter());
+	if (angle >= -55 && angle <= 125)
+	{
+		if (entityPos.getCenter().x() >= terrain.x() && 
+			entityPos.getCenter().x() <= terrain.x() + terrain.w())
+		{
+			entityPos.y( terrain.y() + terrain.h() - entityPos.h() - (entityPos.getCenter().x() - terrain.x()) );
+			speed.y(0.0);
+		}
+	}
+}
+
+
+void CollisionSystem::correctDiagonalDown(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed)
+{
+	float angle = LineInclination(oldPos.getCenter(), terrain.getCenter());
+	if (angle >= 55 && angle < 235)
+	{
+		if (entityPos.getCenter().x() >= terrain.x() && 
+			entityPos.getCenter().x() <= terrain.x() + terrain.w())
+		{
+			entityPos.y( terrain.y() - entityPos.h() + (entityPos.getCenter().x() - terrain.x()) );
+			speed.y(0.0);
+		}
+	}
+}
+/*
 
 void CollisionSystem::correctPosCorner(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed, StateComponent* state)
 {
@@ -388,7 +372,7 @@ void CollisionSystem::correctPosCorner(Rect& entityPos, Rect oldPos, Rect terrai
 		speed.y(0.0);
 		state->state_ = State::FALLING;
 	}
-}
+}*/
 
 
 

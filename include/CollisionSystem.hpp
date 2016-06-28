@@ -73,10 +73,16 @@ private:
 		std::map<int, WindComponent*> wind
 	);
 
-	void correctPosSolid(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed, StateComponent* state);
+/*	void correctPosSolid(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed, StateComponent* state);
 	void correctPosDiagonalUp(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed, StateComponent* state);
 	void correctPosDiagonalDown(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed, StateComponent* state);
-	void correctPosCorner(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed, StateComponent* state);
+	void correctPosCorner(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed, StateComponent* state);*/
+
+	void correctFloor(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed);
+	void correctWall(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed);
+	void correctCeiling(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed);
+	void correctDiagonalUp(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed);
+	void correctDiagonalDown(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed);
 
 	//#ifdef _DEBUG
 	std::vector<Rect> collidersToRender; // para renderizar colisores q estao colidindo
