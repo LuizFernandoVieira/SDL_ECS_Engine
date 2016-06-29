@@ -90,6 +90,14 @@ void InputSystem::update(
 
 	if (input.keyPress(SPACE_BAR))
 	{
+		/*
+		if (stateComp->state_ == State::Dead){
+			//stateComp->state_ = State::Respawn;
+
+			
+		}
+		else
+		*/
 		stateComp->umbrellaState_ = stateComp->umbrellaState_ == UmbrellaState::OPEN ? UmbrellaState::CLOSED : UmbrellaState::OPEN;
 	}
 
@@ -104,6 +112,15 @@ void InputSystem::update(
 			stateComp->state_ = State::ATTACKING;
 			colComp->hitbox_ = Rect( stateComp->facingRight_ ? 58 : -40, 30, 52, 48);
 		}
+	}
+
+	if (input.keyPress('0'))
+	{
+		stateComp->state_ = State::DEAD;
+		stateComp->umbrellaState_ == UmbrellaState::OPEN;
+		stateComp->umbrellaDirection_ == UmbrellaDirection::UP;
+
+		std::cout << "State: Dead // Code:" << stateComp->state_ << std::endl;
 	}
 
 	if (stateComp->state_ == State::FALLING &&
