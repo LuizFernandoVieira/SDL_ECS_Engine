@@ -3,7 +3,7 @@
 
 
 FirstLevel::FirstLevel() :
-	bg("../img/bg.png"),
+	bg("../img/floresta_bg.png"),
 	tileSet_(Resources::TILE_WIDTH, Resources::TILE_HEIGHT, Resources::TILE_SET_IMG.c_str()),
 	tileMap_(Resources::TILE_MAP_TXT.c_str(), &tileSet_),
 	objectMap_(Resources::OBJECT_MAP_XML.c_str()),

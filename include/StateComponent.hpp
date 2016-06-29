@@ -12,7 +12,8 @@ enum State
 	ATTACKING,
 	GRAPPLE,
 	ZIPLINE,
-	SHOOT
+	SHOOT,
+	DEAD
 };
 
 enum UmbrellaState

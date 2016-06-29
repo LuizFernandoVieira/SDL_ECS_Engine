@@ -68,6 +68,7 @@ private:
 	static std::map<int, std::map<int, RenderComponent*>> mapRender_;
 	PlayerRenderComponent playerRenderComponent_;
 
+
 	InputSystem inputSystem_;
 	RenderSystem renderSystem_;
 	PlayerRenderSystem playerRenderSystem_;
@@ -77,6 +78,8 @@ private:
 	SoundSystem	soundSystem_;
 	AttackSystem attackSystem_;
 	ParticleEmitterSystem particleEmitterSystem_;
+
+	std::vector<TransformComponent> spawners;
 };
 
 #endif
