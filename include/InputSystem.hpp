@@ -5,21 +5,13 @@
 
 #include "Rect.hpp"
 #include "System.hpp"
-#include "SpeedComponent.hpp"
-#include "StateComponent.hpp"
-#include "PhysicsComponent.hpp"
-#include "ColliderComponent.hpp"
+#include "GameState.hpp"
 
 class InputSystem : public System
 {
 public:
 	InputSystem();
-	void update(
-		PlayerStateComponent* stateComp,
-		SpeedComponent* speedComp,
-		PhysicsComponent* physicsComp,
-		ColliderComponent* colComp
-	);
+	void update(float dt, GameState& gameState);
 };
 
 #endif

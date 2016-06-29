@@ -8,17 +8,16 @@ unsigned int ParticleEmitterSystem::nextId_ = 0;
 
 ParticleEmitterSystem::ParticleEmitterSystem()
 {
-	 srand (time(NULL));
+	srand (time(NULL));
 }
 
-void ParticleEmitterSystem::update(
-	float dt,
-	CollisionMap levelCollisionMap,
-	TransformComponent* tc,
-	EmitterComponent* ec,
-	TimerComponent* timerComponent
-)
+void ParticleEmitterSystem::update(float dt, GameState& gameState)
 {
+	CollisionMap& levelCollisionMap = gameState.getCollisionMap();
+	TransformComponent* tc = gameState.mapTransform_[gameState.particleEmitter_];
+	EmitterComponent* ec = gameState.mapEmitter_[gameState.particleEmitter_];
+	TimerComponent* timerComponent = gameState.mapTimer_[gameState.particleEmitter_];
+
 	emissionRateSystem_.update(dt, timerComponent);
 
 	std::map<int, TransformComponent*> oldTransform = mapTransform_;

@@ -1,6 +1,3 @@
-#include "../include/GravitySystem.hpp"
-#include "../include/Resources.hpp"
-
 #ifdef __APPLE__
 	#include <SDL2/SDL.h>
 	#include <SDL2_mixer/SDL_mixer.h>
@@ -10,15 +7,21 @@
 #endif
 
 #include "../include/SoundSystem.hpp"
+#include "../include/GravitySystem.hpp"
+#include "../include/Resources.hpp"
+#include "../include/Sound.hpp"
+#include "../include/SoundComponent.hpp"
+#include "../include/StateComponent.hpp"
+
 
 SoundSystem::SoundSystem(){
 }
 
-void SoundSystem::update(
-	std::map<int, StateComponent*> oldState,
-	std::map<int, StateComponent*> stateComp,
-	std::map<int, SoundComponent*> sound)
+void SoundSystem::update(float dt, GameState& gameState)
 {
+	// std::map<int, StateComponent*> oldState = gameState.oldState_;
+	std::map<int, StateComponent*> stateComp = gameState.mapState_;
+	std::map<int, SoundComponent*> sound = gameState.mapSound_;
 
 	//Percorrimento externo - Todas as entidades
 	for (auto& sfx : sound){

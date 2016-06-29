@@ -7,7 +7,7 @@
 #include <algorithm>
 
 #include "Rect.hpp"
-#include "System.hpp"
+// #include "System.hpp"
 #include "TransformComponent.hpp"
 #include "ColliderComponent.hpp"
 #include "SpeedComponent.hpp"
@@ -15,7 +15,7 @@
 
 class ParticleEmitterSystem;
 
-class CollisionRainTerrainSystem : public System
+class CollisionRainTerrainSystem// : public System
 {
 public:
 	CollisionRainTerrainSystem();

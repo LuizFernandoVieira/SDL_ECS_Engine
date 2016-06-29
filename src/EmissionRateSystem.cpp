@@ -6,9 +6,9 @@ EmissionRateSystem::EmissionRateSystem()
 }
 
 void EmissionRateSystem::update(
-  float dt,
-  TimerComponent* tc
+	float dt,
+	TimerComponent* tc
 )
 {
-  tc->time_ += dt;
+	tc->time_ += dt;
 }

@@ -8,31 +8,14 @@
 
 #include "Rect.hpp"
 #include "System.hpp"
-#include "TransformComponent.hpp"
-#include "ColliderComponent.hpp"
-#include "SpeedComponent.hpp"
-#include "StateComponent.hpp"
-#include "ZiplineComponent.hpp"
-#include "WindComponent.hpp"
+#include "GameState.hpp"
 #include "CollisionMap.hpp"
 
 class CollisionSystem : public System
 {
 public:
 	CollisionSystem();
-	void update(
-		int player,
-		CollisionMap& collisionMap,
-		std::map<int, TransformComponent*> oldTransform,
-		std::map<int, TransformComponent*> transform,
-		std::map<int, ColliderComponent*> collider,
-		std::map<int, SpeedComponent*> speed,
-		std::map<int, StateComponent*> oldState,
-		std::map<int, StateComponent*> state,
-		std::map<int, ZiplineComponent*> zipline,
-		std::map<int, WindComponent*> wind
-	);
-	
+	void update(float dt, GameState& gameState);
 	void render();
 
 private:
@@ -64,6 +47,7 @@ private:
 		std::map<int, ZiplineComponent*> zipline
 	);
 	void updateWind(
+		float dt,
 		int player,
 		std::map<int, TransformComponent*> transform,
 		std::map<int, ColliderComponent*> collider,
