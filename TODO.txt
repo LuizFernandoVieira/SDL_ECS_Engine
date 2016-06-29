@@ -1,6 +1,5 @@
 Fazendo:
 
-- Colisão por baixo de plataformas (colisões diferentes para chão / parede / teto?);
 - Bloquear vento com guarda chuva;
 - Colocar novos sprites com guarda chuva;
 - Animação do tipo começo + loop (grapple);
@@ -11,17 +10,12 @@ Probleminhas a resolver:
 - DELETAR PONTEIROS!!!!!!!!!!!!!!!!!!!
 - Bug do editor, mousePress e isMouseDown;
 
+
 ============== PROXIMA AULA ==================
 
-Player planar
-Vento (mecanica)
 
 ============== ESSA SEMANA ==================
 
-Player
-Inimigos
-Particle System
-Menu
 
 =============== ENTREGAS ====================
 
