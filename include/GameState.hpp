@@ -5,6 +5,11 @@
 
 #include "IState.hpp"
 #include "Level.hpp"
+#include "System.hpp"
+#include "TransformComponent.hpp"
+#include "StateComponent.hpp"
+#include "RenderComponent.hpp"
+#include "PhysicsComponent.hpp"
 #include "ColliderComponent.hpp"
 #include "SpeedComponent.hpp"
 #include "EmitterComponent.hpp"
@@ -13,16 +18,8 @@
 #include "SoundComponent.hpp"
 #include "HealthComponent.hpp"
 #include "WindComponent.hpp"
-#include "InputSystem.hpp"
-#include "PlayerRenderSystem.hpp"
-#include "RenderSystem.hpp"
-#include "MoveSystem.hpp"
-#include "GravitySystem.hpp"
-#include "CollisionSystem.hpp"
-#include "SoundSystem.hpp"
-#include "AttackSystem.hpp"
-#include "ParticleEmitterSystem.hpp"
 #include "Music.hpp"
+#include "CollisionMap.hpp"
 
 class GameState: public IState
 {
@@ -37,7 +34,6 @@ public:
 	void resume();
 
 private:
-	void createPlayer();
 	void createParticleEmitter();
 	void createMapObjects();
 	void deleteDeadEntities();
@@ -46,12 +42,13 @@ private:
 
 	static unsigned int nextId_;
 
-	unsigned int player_;
-	unsigned int particleEmitter_;
-
 	// #ifndef _DEBUG
 	Music music;
 	// #endif
+
+public:
+	unsigned int player_;
+	unsigned int particleEmitter_;
 
 	std::map<int, TransformComponent*> mapTransform_;
 	std::map<int, StateComponent*> 	mapState_;
@@ -65,11 +62,16 @@ private:
 	std::map<int, HealthComponent*> mapHealth_;
 	std::map<int, WindComponent*> mapWind_;
 
+	std::map<int, TransformComponent*> oldTransform_;
+	std::map<int, StateComponent*> oldState_;
+
 	static std::map<int, std::map<int, RenderComponent*>> mapRender_;
 	PlayerRenderComponent playerRenderComponent_;
 
+	CollisionMap& getCollisionMap();
 
-	InputSystem inputSystem_;
+private:
+/*	InputSystem inputSystem_;
 	RenderSystem renderSystem_;
 	PlayerRenderSystem playerRenderSystem_;
 	MoveSystem moveSystem_;
@@ -77,7 +79,8 @@ private:
 	CollisionSystem collisionSystem_;
 	SoundSystem	soundSystem_;
 	AttackSystem attackSystem_;
-	ParticleEmitterSystem particleEmitterSystem_;
+	ParticleEmitterSystem particleEmitterSystem_;*/
+	std::vector<System*> systems_;
 
 	std::vector<TransformComponent> spawners;
 };

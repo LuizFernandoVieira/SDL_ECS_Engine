@@ -4,25 +4,14 @@
 #include <map>
 
 #include "System.hpp"
-#include "TransformComponent.hpp"
-#include "StateComponent.hpp"
-#include "RenderComponent.hpp"
+#include "GameState.hpp"
 
 class PlayerRenderSystem : public System
 {
 public:
 	PlayerRenderSystem();
-	void update(
-		float dt,
-		PlayerStateComponent* oldState,
-		PlayerStateComponent* stateComp,
-		PlayerRenderComponent* renderComp
-	);
-	void render(
-		TransformComponent* transfComp,
-		PlayerStateComponent* stateComp,
-		PlayerRenderComponent* renderComp
-	);
+	void update(float dt, GameState& gameState);
+	void render(GameState& gameState);
 };
 
 #endif

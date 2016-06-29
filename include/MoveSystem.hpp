@@ -4,18 +4,13 @@
 #include <map>
 
 #include "System.hpp"
-#include "TransformComponent.hpp"
-#include "SpeedComponent.hpp"
+#include "GameState.hpp"
 
 class MoveSystem : public System
 {
 public:
 	MoveSystem();
-	void update(
-		float dt,
-		std::map<int, TransformComponent*> transform,
-		std::map<int, SpeedComponent*> speed
-	);
+	void update(float dt, GameState& gameState);
 };
 
 #endif

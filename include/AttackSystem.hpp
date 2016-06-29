@@ -4,18 +4,14 @@
 #include <map>
 
 #include "System.hpp"
-#include "StateComponent.hpp"
 #include "Timer.hpp"
+#include "GameState.hpp"
 
 class AttackSystem : public System
 {
 public:
 	AttackSystem();
-	void update(
-		float dt,
-		StateComponent* oldState,
-		StateComponent* state
-	);
+	void update(float dt, GameState& gameState);
 private:
 	Timer timer;
 };

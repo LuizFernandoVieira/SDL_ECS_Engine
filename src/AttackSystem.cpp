@@ -1,16 +1,15 @@
 #include "../include/AttackSystem.hpp"
-#include <iostream>
+#include "../include/StateComponent.hpp"
 
 AttackSystem::AttackSystem() : timer()
 {
 
 }
 
-void AttackSystem::update(
-	float dt,
-	StateComponent* oldState,
-	StateComponent* state)
+void AttackSystem::update(float dt, GameState& gameState)
 {
+	StateComponent* state = gameState.mapState_[gameState.player_];
+	
 	if (state->state_ == State::ATTACKING)
 	{
 		timer.update(dt);

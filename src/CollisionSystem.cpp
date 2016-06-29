@@ -1,33 +1,38 @@
 #include "../include/CollisionSystem.hpp"
 #include "../include/Resources.hpp"
-
 #include "../include/Camera.hpp"
 #include "../include/Sprite.hpp"
-#include "../include/Game.hpp"
+#include "../include/TransformComponent.hpp"
+#include "../include/ColliderComponent.hpp"
+#include "../include/SpeedComponent.hpp"
+#include "../include/StateComponent.hpp"
+#include "../include/ZiplineComponent.hpp"
+#include "../include/WindComponent.hpp"
 
 CollisionSystem::CollisionSystem()
 {
 
 }
 
-void CollisionSystem::update(
-	int player,
-	CollisionMap& collisionMap,
-	std::map<int, TransformComponent*> oldTransform,
-	std::map<int, TransformComponent*> transform,
-	std::map<int, ColliderComponent*> collider,
-	std::map<int, SpeedComponent*> speed,
-	std::map<int, StateComponent*> oldState,
-	std::map<int, StateComponent*> state,
-	std::map<int, ZiplineComponent*> zipline,
-	std::map<int, WindComponent*> wind)
+void CollisionSystem::update(float dt, GameState& gameState)
 {
+	int player = gameState.player_;
+	CollisionMap& collisionMap = gameState.getCollisionMap();
+	std::map<int, TransformComponent*> oldTransform = gameState.oldTransform_;
+	std::map<int, TransformComponent*> transform = gameState.mapTransform_;
+	std::map<int, ColliderComponent*> collider = gameState.mapCollider_;
+	std::map<int, SpeedComponent*> speed = gameState.mapSpeed_;
+	std::map<int, StateComponent*> oldState = gameState.oldState_;
+	std::map<int, StateComponent*> state = gameState.mapState_;
+	std::map<int, ZiplineComponent*> zipline = gameState.mapZipline_;
+	std::map<int, WindComponent*> wind = gameState.mapWind_;
+
 	collidersToRender.clear();
 
 	updateTerrain(collisionMap, oldTransform, transform, collider, speed, state);
 	updateCollider(collisionMap, oldTransform, transform, collider, speed, state);
 	updateZipline(player, transform, collider, speed, oldState, state, zipline);
-	updateWind(player, transform, collider, /*speed, oldState, state,*/ wind);
+	updateWind(dt, player, transform, collider, /*speed, oldState, state,*/ wind);
 
 	collidersToRender.emplace_back(collider[player]->hitbox_ + Vec2(transform[player]->rect_.x(), transform[player]->rect_.y()));
 }
@@ -161,6 +166,7 @@ void CollisionSystem::updateZipline(
 
 
 void CollisionSystem::updateWind(
+	float dt,
 	int player,
 	std::map<int, TransformComponent*> transform,
 	std::map<int, ColliderComponent*> collider,
@@ -192,7 +198,7 @@ void CollisionSystem::updateWind(
 					speed = Vec2(w.second->speed_, 0);
 					break;
 			}
-			transform[player]->rect_ += speed * Game::getInstance().getDeltaTime();
+			transform[player]->rect_ += speed * dt;
 		}
 	}
 }

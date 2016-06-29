@@ -1,19 +1,24 @@
 #include "../include/InputSystem.hpp"
 #include "../include/InputHandler.hpp"
 #include "../include/Resources.hpp"
+#include "../include/SpeedComponent.hpp"
+#include "../include/StateComponent.hpp"
+#include "../include/PhysicsComponent.hpp"
+#include "../include/ColliderComponent.hpp"
 
 InputSystem::InputSystem()
 {
 
 }
 
-void InputSystem::update(
-	PlayerStateComponent* stateComp,
-	SpeedComponent* speedComp,
-	PhysicsComponent* physicsComp,
-	ColliderComponent* colComp)
+void InputSystem::update(float dt, GameState& gameState)
 {
 	InputHandler& input = InputHandler::getInstance();
+
+	PlayerStateComponent* stateComp = (PlayerStateComponent*)gameState.mapState_[gameState.player_];
+	SpeedComponent* speedComp = gameState.mapSpeed_[gameState.player_];
+	PhysicsComponent* physicsComp = gameState.mapPhysics_[gameState.player_];
+	ColliderComponent* colComp = gameState.mapCollider_[gameState.player_];
 
 	if (stateComp->state_ != State::ZIPLINE && stateComp->state_ != State::ATTACKING)
 	{
@@ -117,8 +122,8 @@ void InputSystem::update(
 	if (input.keyPress('0'))
 	{
 		stateComp->state_ = State::DEAD;
-		stateComp->umbrellaState_ == UmbrellaState::OPEN;
-		stateComp->umbrellaDirection_ == UmbrellaDirection::UP;
+		stateComp->umbrellaState_ = UmbrellaState::OPEN;
+		stateComp->umbrellaDirection_ = UmbrellaDirection::UP;
 
 		std::cout << "State: Dead // Code:" << stateComp->state_ << std::endl;
 	}

@@ -1,19 +1,20 @@
 #include "../include/GravitySystem.hpp"
 #include "../include/Resources.hpp"
-
-#include <iostream>
+#include "../include/SpeedComponent.hpp"
+#include "../include/StateComponent.hpp"
+#include "../include/PhysicsComponent.hpp"
 
 GravitySystem::GravitySystem()
 {
 
 }
 
-void GravitySystem::update( 
-	float dt,
-	std::map<int, SpeedComponent*> speed,
-	std::map<int, PhysicsComponent*> physics,
-	std::map<int, StateComponent*> state)
+void GravitySystem::update(float dt, GameState& gameState)
 {
+	std::map<int, SpeedComponent*> speed = gameState.mapSpeed_;
+	std::map<int, PhysicsComponent*> physics = gameState.mapPhysics_;
+	std::map<int, StateComponent*> state = gameState.mapState_;
+
 	for (auto& phys : physics)
 	{
 		if (speed[phys.first]->speed_.y() < 0)

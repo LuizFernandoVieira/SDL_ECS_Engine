@@ -1,19 +1,21 @@
 #include "../include/RenderSystem.hpp"
 #include "../include/Vec2.hpp"
 #include "../include/Camera.hpp"
-#include <iostream>
+#include "../include/TransformComponent.hpp"
+#include "../include/StateComponent.hpp"
+#include "../include/RenderComponent.hpp"
 
 RenderSystem::RenderSystem()
 {
 }
 
 
-void RenderSystem::update(
-	float dt,
-	std::map<int, StateComponent*> oldState,
-	std::map<int, StateComponent*> stateComp,
-	std::map<int, std::map<int, RenderComponent*>> renderComp)
+void RenderSystem::update(float dt, GameState& gameState)
 {
+	std::map<int, StateComponent*> oldState = gameState.oldState_;
+	std::map<int, StateComponent*> stateComp = gameState.mapState_;
+	std::map<int, std::map<int, RenderComponent*>> renderComp = gameState.mapRender_;
+
 	for (int i = 0; i < 4; i++)
 	{
 		for(auto& render : renderComp[i])
@@ -27,12 +29,12 @@ void RenderSystem::update(
 	}
 }
 
-void RenderSystem::render(
-	int layer,
-	std::map<int, TransformComponent*> transfComp,
-	std::map<int, StateComponent*> stateComp,
-	std::map<int, RenderComponent*> renderComp)
+void RenderSystem::render(int layer, GameState& gameState)
 {
+	std::map<int, TransformComponent*> transfComp = gameState.mapTransform_;
+	std::map<int, StateComponent*> stateComp = gameState.mapState_;
+	std::map<int, RenderComponent*> renderComp = gameState.mapRender_[layer];
+
 	Vec2 layerSpeed(0,0);
 	switch (layer)
 	{
