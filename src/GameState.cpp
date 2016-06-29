@@ -11,12 +11,15 @@
 #include "../include/GameState.hpp"
 #include "../include/Camera.hpp"
 #include "../include/InputHandler.hpp"
-#include "../include/FirstLevel.hpp"
+//#include "../include/FirstLevel.hpp"
 #include "../include/TransformComponent.hpp"
 #include "../include/StateComponent.hpp"
 #include "../include/RenderComponent.hpp"
 #include "../include/SoundComponent.hpp"
 #include "../include/StaticSprite.hpp"
+
+#define LEVEL_1_FILE "../map/FaseUm.xml"
+	//Ideia: Fazer um vetor estático de strings em Resources, lendo dinamicamente de config.xml as fases
 
 unsigned int GameState::nextId_ = 0;
 std::map<int, std::map<int, RenderComponent*>> GameState::mapRender_;
@@ -29,7 +32,8 @@ GameState::GameState()
 	StaticSprite loadScreen("../img/bg.png");
 	loadScreen.render(0,0);
 	SDL_RenderPresent(Game::getInstance().getRenderer());
-	
+	level_ = nullptr;
+
 	try{
 		mapRender_[0] = std::map<int, RenderComponent*>();
 		mapRender_[1] = std::map<int, RenderComponent*>();
@@ -38,10 +42,8 @@ GameState::GameState()
 		mapRender_[4] = std::map<int, RenderComponent*>();
 		mapRender_[5] = std::map<int, RenderComponent*>();
 
-		level_ = new FirstLevel();
-
 		// createPlayer();
-		createMapObjects();
+		loadLevel(LEVEL_1_FILE);
 		// createParticleEmitter();
 
 		Camera::follow(mapTransform_[player_]);
@@ -134,6 +136,18 @@ void GameState::update(float dt)
 
 void GameState::render()
 {
+	/*
+	//int level_->player_layer (variável obtida por xml->membro da classe)
+
+	for (int i = level_->max_layers; i >= 0; i--){
+		if (i == level_->player_layer){
+			playerRenderSystem_.render(mapTransform_[player_], (PlayerStateComponent*)mapState_[player_], &playerRenderComponent_); // ai q feio
+
+		level_->render(i);
+		renderSystem_.render(i, mapTransform_, mapState_, mapRender_[i]);
+	}
+	*/
+
 	level_->render(5);
 	renderSystem_.render(5, mapTransform_, mapState_, mapRender_[5]);
 
@@ -214,11 +228,28 @@ void GameState::createParticleEmitter()
 	mapTimer_.emplace(particleEmitter_, new TimerComponent());
 }
 
+void GameState::loadLevel(std::string target){
+	pugi::xml_document 	stage_file;
+	pugi::xml_parse_result	p_res;
 
-void GameState::createMapObjects()
+	p_res = stage_file.load_file(target.c_str());
+	if (p_res.status){
+		std::cout << "Error Reading Level File: " << p_res.description() << std::endl;
+		std::cout << "\tLoad result: " << p_res.description() << std::endl;
+		std::cout << "\tStatus code: " << p_res.status << std::endl;
+	}
+	else
+	{
+		setObjects(stage_file.child("world_objects"));
+
+		if (level_ != nullptr)
+			delete level_;
+		level_ = new Level(stage_file.child("world_info"));
+	}
+}
+
+void GameState::setObjects(pugi::xml_node objects)
 {
-	pugi::xml_document& objects = level_->getObjectMap();
-
 	for (auto obj : objects.children())
 	{
 		pugi::xml_node aux;

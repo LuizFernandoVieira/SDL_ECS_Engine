@@ -39,8 +39,11 @@ public:
 private:
 	void createPlayer();
 	void createParticleEmitter();
-	void createMapObjects();
+	void setObjects(pugi::xml_node objects);
 	void deleteDeadEntities();
+	//--------------------------
+	void loadLevel(std::string target);
+	//--------------------------
 
 	Level* level_;
 

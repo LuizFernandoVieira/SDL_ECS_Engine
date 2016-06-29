@@ -5,16 +5,28 @@
 
 #include "TransformComponent.hpp"
 #include "CollisionMap.hpp"
-#include "ObjectMap.hpp"
+#include "TileSet.hpp"
+#include "TileMap.hpp"
+#include "CollisionMap.hpp"
+#include "TransformComponent.hpp"
+#include "StaticSprite.hpp"
+#include "pugixml.hpp"
 
 class Level
 {
 public:
-	virtual ~Level() {}
-	virtual void render(int layer) = 0;
-	// virtual std::vector<std::pair<int, TransformComponent*>> createTerrain(unsigned int&) = 0;
-	virtual CollisionMap& getCollisionMap() = 0;
-	virtual pugi::xml_document& getObjectMap() = 0;
+	Level();
+	Level(pugi::xml_node source);
+	~Level();
+	void render(int layer);
+	// std::vector<std::pair<int, TransformComponent*>> createTerrain(unsigned int&);
+	CollisionMap& getCollisionMap();
+
+private:
+	StaticSprite bg;
+	TileSet tileSet_;
+	TileMap tileMap_;
+	CollisionMap collisionMap_;
 };
 
 #endif

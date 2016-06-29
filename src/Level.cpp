@@ -1,12 +1,11 @@
-#include "../include/FirstLevel.hpp"
+#include "../include/Level.hpp"
 #include "../include/Resources.hpp"
+#include "../include/pugixml.hpp"
 
-
-FirstLevel::FirstLevel() :
+Level::Level() :
 	bg("../img/floresta_bg.png"),
 	tileSet_(Resources::TILE_WIDTH, Resources::TILE_HEIGHT, Resources::TILE_SET_IMG.c_str()),
 	tileMap_(Resources::TILE_MAP_TXT.c_str(), &tileSet_),
-	objectMap_(Resources::OBJECT_MAP_XML.c_str()),
 	collisionMap_(Resources::COLLISION_MAP_TXT.c_str())
 
 	//TODO: Inserir elementos acima em config.txt, carregar dinamicamente
@@ -14,17 +13,30 @@ FirstLevel::FirstLevel() :
 
 }
 
-FirstLevel::~FirstLevel()
+Level::Level(pugi::xml_node source) :
+	bg("../img/floresta_bg.png"),
+	tileSet_(Resources::TILE_WIDTH, Resources::TILE_HEIGHT, Resources::TILE_SET_IMG.c_str()),
+	tileMap_(source.child("tilemap").attribute("file").value(), &tileSet_),
+	collisionMap_(source.child("collision_map").attribute("file").value())
+{
+	/*
+	
+
+	tileSet_.Open();
+	*/
+}
+
+Level::~Level()
 {
 
 }
 
-// void FirstLevel::update(float dt)
+// void Level::update(float dt)
 // {
 
 // }
 
-void FirstLevel::render(int layer)
+void Level::render(int layer)
 {
 	if (layer == 3)
 		bg.render(0,0);
@@ -33,16 +45,10 @@ void FirstLevel::render(int layer)
 }
 
 
-CollisionMap& FirstLevel::getCollisionMap()
+CollisionMap& Level::getCollisionMap()
 {
 	return collisionMap_;
 }
-
-pugi::xml_document& FirstLevel::getObjectMap()
-{
-	return objectMap_.getLocalXML();
-}
-
 
 /*std::vector<std::pair<int, TransformComponent*>> FirstLevel::createTerrain(unsigned int& nextId)
 {
