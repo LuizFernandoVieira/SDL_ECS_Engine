@@ -157,45 +157,29 @@ void GameState::update(float dt)
 }
 
 void GameState::render()
-{
-	/*
-	//int level_->player_layer (variável obtida por xml->membro da classe)
-
-	for (int i = level_->max_layers; i >= 0; i--){
-		if (i == level_->player_layer){
-			playerRenderSystem_.render(mapTransform_[player_], (PlayerStateComponent*)mapState_[player_], &playerRenderComponent_); // ai q feio
-
-		level_->render(i);
-		renderSystem_.render(i, mapTransform_, mapState_, mapRender_[i]);
-	}
-	*/
-
+{	
+	//Setting Rendering Systems
 	RenderSystem& renderSystem = *(RenderSystem*)systems_[5];
 	PlayerRenderSystem& playerRenderSystem = *(PlayerRenderSystem*)systems_[6];
 	// ParticleEmitterSystem& particleEmitterSystem = *(ParticleEmitterSystem*)systems_[8];
 
-	level_->render(5);
-	renderSystem.render(5, *this);
 
-	level_->render(4);
-	renderSystem.render(4, *this);
 
-	level_->render(3);
-	renderSystem.render(3, *this);
+	//Valores supostamente contidos em level_ (aqduiridos do xml)
+	int main_layer 	= 2;
+	int max_layers	= 5;
 
-	level_->render(2);
-	renderSystem.render(2, *this);
-	playerRenderSystem.render(*this); // ai q feio
+	//Rendering Loop
+	for (int i = max_layers; i >= 0; i--){
 
-	// particleEmitterSystem.render();
-
-	// collisionSystem_.render();
-
-	level_->render(1);
-	renderSystem.render(1, *this);
-
-	level_->render(0);
-	renderSystem.render(0, *this);
+		level_->render(i);
+		renderSystem.render(i, *this);
+		if (i == main_layer){
+			playerRenderSystem.render(*this);
+			// particleEmitterSystem.render();
+			// collisionSystem_.render();
+		}
+	}
 }
 
 
@@ -230,6 +214,8 @@ void GameState::loadLevel(std::string target){
 		std::cout << "Error Reading Level File: " << p_res.description() << std::endl;
 		std::cout << "\tLoad result: " << p_res.description() << std::endl;
 		std::cout << "\tStatus code: " << p_res.status << std::endl;
+
+		pop_ = true;
 	}
 	else
 	{
@@ -238,11 +224,16 @@ void GameState::loadLevel(std::string target){
 		if (level_ != nullptr)
 			delete level_;
 		level_ = new Level(stage_file.child("world_info"));
+		music.Load(stage_file.child("world_info").child("music"));
+		music.Play();
 	}
 }
 
 void GameState::setObjects(pugi::xml_node objects)
 {
+
+	short int main_layer = 2;
+
 	for (auto obj : objects.children())
 	{
 		pugi::xml_node aux;
@@ -275,7 +266,7 @@ void GameState::setObjects(pugi::xml_node objects)
 			if (obj.attribute("layer"))
 				mapRender_[obj.attribute("layer").as_int()].emplace(nextId_, renderComp);
 			else
-				mapRender_[2].emplace(nextId_, renderComp);
+				mapRender_[main_layer].emplace(nextId_, renderComp);
 		}
 
 		// PLAYER RENDER
@@ -383,7 +374,7 @@ void GameState::setObjects(pugi::xml_node objects)
 		if ((aux = obj.child("checkpoints")))
 			{
 				//Loop insere todos os spawners no vetor
-				printf("obtaining checkpoints\n");
+				//printf("obtaining checkpoints\n");
 				for(pugi::xml_node spawner = aux.first_child(); spawner; spawner = spawner.next_sibling())
 				{
 					spawners.emplace_back(TransformComponent(
@@ -402,19 +393,21 @@ void GameState::setObjects(pugi::xml_node objects)
 	if (spawners.empty())	//FAILSAFE: Emplacing Default Spawner
 		spawners.emplace_back(TransformComponent(Rect(352, 100, 48, 96)));
 
-	//APAGAR ABAIXO
+	/* APAGAR ABAIXO
 	int counter = 0;
 	std::cout << "Printing Checkpoints" << std::endl;
 	for (auto& it : spawners){
 		std::cout << "\t Checkpoint number " << counter << ": (" << it.rect_.x() << ", " << it.rect_.y() << ", " << it.rect_.h() << ", " << it.rect_.h() << ")" << std::endl;
 		counter++;
 	}
-	//APAGAR ACIMA
+	//APAGAR ACIMA */
 }
 
 
 void GameState::deleteDeadEntities()
 {
+	int max_layers = 5;
+
 	for (auto& health : mapHealth_ )
 	{
 		if (health.second->health_ <= 0)
@@ -432,11 +425,8 @@ void GameState::deleteDeadEntities()
 			mapSound_.erase(id);
 			mapHealth_.erase(id);
 
-			mapRender_[0].erase(id);
-			mapRender_[1].erase(id);
-			mapRender_[2].erase(id);
-			mapRender_[3].erase(id);
-			mapRender_[4].erase(id);
+			for (int i = 0; i <= max_layers; i++)	//era para ser i < max_layers, segundo o que estava escrito
+				mapRender_[i].erase(id);
 		}
 	}
 }

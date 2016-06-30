@@ -32,21 +32,8 @@ public:
 
 	void pause();
 	void resume();
+	CollisionMap& getCollisionMap();
 
-private:
-	void createParticleEmitter();
-	void setObjects(pugi::xml_node objects);
-	void deleteDeadEntities();
-	//--------------------------
-	void loadLevel(std::string target);
-	//--------------------------
-
-	Level* level_;
-	Music music;
-
-	static unsigned int nextId_;
-
-public:
 	unsigned int player_;
 	unsigned int particleEmitter_;
 
@@ -68,11 +55,19 @@ public:
 	static std::map<int, std::map<int, RenderComponent*>> mapRender_;
 	PlayerRenderComponent playerRenderComponent_;
 
-	CollisionMap& getCollisionMap();
-
 private:
+	void createParticleEmitter();
+	void setObjects(pugi::xml_node objects);
+	void deleteDeadEntities();
+	void loadLevel(std::string target);
+
+	Level* level_;
+	Music music;
 	std::vector<System*> systems_;
 	std::vector<TransformComponent> spawners;
+
+	static unsigned int nextId_;
+
 };
 
 #endif

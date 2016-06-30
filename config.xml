@@ -12,7 +12,7 @@
 		<data type="float" value="500" name="PLAYER_JUMP_SPEED">500</data>
 	</globals>
 
-	<state name="prototype">
+	<!--state name="prototype">
 		<music>
 			<assets>
 				<layer channel="1" file="audio/umbra_test_bass.wav"/>
@@ -44,5 +44,5 @@
 				<layer channel="8" value="0"/>
 			</volume>
 		</music>
-	</state>
+	</state-->
 </config>

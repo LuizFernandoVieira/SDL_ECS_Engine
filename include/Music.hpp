@@ -34,7 +34,7 @@ public:
 
 	void Update();
 
-	void ReadVolumes(_node source);
+	void Load(_node source);
 	void SetVolumes(std::string state);
 
 private:
