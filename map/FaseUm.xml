@@ -49,8 +49,8 @@
 				}
 			}
 		-->
-		<layer main="false" parallax="0" static="true" file="../img/floresta_bg.png"/>
-		<layer main="false" parallax="0" type="sprite" file="../img/bg.png"/>
+		<screen main="false" parallax="0" static="true" file="../img/floresta_bg.png"/>
+		<screen main="false" parallax="0" type="sprite" file="../img/bg.png"/>
 
 		<!--
 			<layer main="false" parallax="1" type="tile" file=""/>
@@ -96,7 +96,8 @@
 <world_objects>
 	<object name="player">
 		<transform>
-			<rect x="288" y="500" w="52" h="90" />
+			<!--<rect x="288" y="500" w="52" h="90" />-->
+			<rect x="500" y="500" w="52" h="90" />
 			<scale x="0.3" y="0.3" />
 			<rotation value="0" />
 		</transform>
@@ -146,17 +147,30 @@
 		</transform>
 		<wind direction="0" speed="100" />
 	</object>
-	<object name="ai">
+
+	<object name="ai_test">
 		<transform>
-			<rect x="288" y="100" w="52" h="90" />
+			<rect x="288" y="500" w="52" h="90" />
 			<scale x="0.3" y="0.3" />
 			<rotation value="0" />
 		</transform>
-
-		<state/>
-
 		<render>
 			<sprite state="0" filename="../img/characters/player/idle.png" frame_count="24" frame_time="0.01" />
 		</render>
+		<physics gravity_scale="1.0" />	
+		<collider>
+			<hurtbox x="0" y="0" w="52" h="90" />
+			<hitbox x="10" y="-10" w="20" h="20" />
+		</collider>
+		<speed />
+		<state/>
+		<AI type="0" debug="true">
+			<state_index state="0" cooldown="2.0">
+				<trigger verification="0" target_index="1"/>
+			</state_index>
+			<state_index state="1" cooldown="2.0">
+				<trigger verification="0" target_index="0"/>
+			</state_index>
+		</AI>
 	</object>
 </world_objects>

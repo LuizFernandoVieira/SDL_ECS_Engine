@@ -18,6 +18,9 @@
 #include "SoundComponent.hpp"
 #include "HealthComponent.hpp"
 #include "WindComponent.hpp"
+#include "AIComponent.hpp"
+
+
 #include "Music.hpp"
 #include "CollisionMap.hpp"
 
@@ -48,6 +51,7 @@ public:
 	std::map<int, SoundComponent*> mapSound_;
 	std::map<int, HealthComponent*> mapHealth_;
 	std::map<int, WindComponent*> mapWind_;
+	std::map<int, AIComponent*> mapAI_;
 
 	std::map<int, TransformComponent*> oldTransform_;
 	std::map<int, StateComponent*> oldState_;
@@ -64,7 +68,7 @@ private:
 	Level* level_;
 	Music music;
 	std::vector<System*> systems_;
-	std::vector<TransformComponent> spawners;
+	std::vector<TransformComponent> spawners;	//passar para level
 
 	static unsigned int nextId_;
 

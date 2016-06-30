@@ -22,6 +22,7 @@
 #include "../include/CollisionSystem.hpp"
 #include "../include/SoundSystem.hpp"
 #include "../include/AttackSystem.hpp"
+#include "../include/AISystem.hpp"
 #include "../include/ParticleEmitterSystem.hpp"
 
 #define LEVEL_1_FILE "../map/FaseUm.xml"
@@ -59,6 +60,7 @@ GameState::GameState()
 		systems_.emplace_back(new RenderSystem());
 		systems_.emplace_back(new PlayerRenderSystem());
 		systems_.emplace_back(new SoundSystem());
+		systems_.emplace_back(new AISystem());
 		// systems_.emplace_back(new ParticleEmitterSystem());
 
 		// createParticleEmitter();
@@ -370,7 +372,42 @@ void GameState::setObjects(pugi::xml_node objects)
 			                                             aux.attribute("speed").as_float() ));
 		}
 
-		// CHECKPOINTS
+		// AI
+		if ((aux = obj.child("AI"))){
+			short int counter = 0;
+
+			switch (aux.attribute("type").as_int()){
+
+				//Externally-Defined AI
+				case 0:
+					std::cout << "AI Detected. Type: " << aux.attribute("type").as_int() << std::endl;
+					mapAI_.emplace(nextId_, new AIComponent(aux.attribute("type").as_int()));
+
+					//State Emplacement
+					for (pugi::xml_node state = aux.first_child(); state; state = state.next_sibling()){
+						printf("Loading State %d (%.3f)\n", counter, state.attribute("cooldown").as_float());
+						//Exclusão de valores inválidos (e de IDLE state)
+						if (state.attribute("state").as_int() > 0){
+							if (state.attribute("cooldown").as_float() >= 0)
+									mapAI_[nextId_]->AddState(state.attribute("state").as_int(), state.attribute("cooldown").as_float());
+							else	mapAI_[nextId_]->AddState(state.attribute("state").as_int(), 0.0f);
+						}
+
+						for (pugi::xml_node trigger_ = state.first_child(); trigger_; trigger_ = trigger_.next_sibling()){
+							printf("\tNow Loading Trigger: %d -> (%d) -> %d\n", counter, trigger_.attribute("verification").as_int(), trigger_.attribute("target_index").as_int());
+							mapAI_[nextId_]->AddTrigger(counter, trigger_.attribute("verification").as_int(), trigger_.attribute("target_index").as_int());
+						}
+						counter++;
+					}
+					break;
+
+				//Motionless AI
+				default:
+					break;
+			}
+		}
+
+		// CHECKPOINTS :: Passar para level
 		if ((aux = obj.child("checkpoints")))
 			{
 				//Loop insere todos os spawners no vetor
@@ -385,22 +422,13 @@ void GameState::setObjects(pugi::xml_node objects)
 						);
 				}
 			}
-
 			nextId_++;
 		}
 
 
 	if (spawners.empty())	//FAILSAFE: Emplacing Default Spawner
 		spawners.emplace_back(TransformComponent(Rect(352, 100, 48, 96)));
-
-	/* APAGAR ABAIXO
-	int counter = 0;
-	std::cout << "Printing Checkpoints" << std::endl;
-	for (auto& it : spawners){
-		std::cout << "\t Checkpoint number " << counter << ": (" << it.rect_.x() << ", " << it.rect_.y() << ", " << it.rect_.h() << ", " << it.rect_.h() << ")" << std::endl;
-		counter++;
-	}
-	//APAGAR ACIMA */
+		//CHECKPOINTS :: Passar para Level
 }
 
 
