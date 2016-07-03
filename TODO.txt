@@ -5,6 +5,7 @@ Fazendo:
 - Trigger (abrir portoes);
 - Checkpoints;
 - Fullscreen;
+- Morrer quando ta caindo de certa altura; 
 
 
 Probleminhas a resolver:
