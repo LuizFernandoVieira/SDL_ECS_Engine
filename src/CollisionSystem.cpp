@@ -29,10 +29,10 @@ void CollisionSystem::update(float dt, GameState& gameState)
 
 	collidersToRender.clear();
 
+	updateZipline(player, transform, collider, speed, oldState, state, zipline);
+	updateWind(dt, player, transform, collider, /*speed, oldState,*/ state, wind);
 	updateTerrain(collisionMap, oldTransform, transform, collider, speed, state);
 	updateCollider(collisionMap, oldTransform, transform, collider, speed, state);
-	updateZipline(player, transform, collider, speed, oldState, state, zipline);
-	updateWind(dt, player, transform, collider, /*speed, oldState, state,*/ wind);
 
 	collidersToRender.emplace_back(collider[player]->hitbox_ + Vec2(transform[player]->rect_.x(), transform[player]->rect_.y()));
 }
@@ -72,7 +72,8 @@ void CollisionSystem::updateTerrain(
 					switch(collisionType)
 					{
 						case 0:
-							correctFloor(transform[col.first]->rect_, oldTransform[col.first]->rect_, terrain, speed[col.first]->speed_);
+							if (state[col.first]->state_ != State::JUMPING)
+								correctFloor(transform[col.first]->rect_, oldTransform[col.first]->rect_, terrain, speed[col.first]->speed_);
 							break;
 						case 1:
 							correctCeiling(transform[col.first]->rect_, oldTransform[col.first]->rect_, terrain, speed[col.first]->speed_);
@@ -81,10 +82,16 @@ void CollisionSystem::updateTerrain(
 							correctWall(transform[col.first]->rect_, oldTransform[col.first]->rect_, terrain, speed[col.first]->speed_);
 							break;
 						case 3:
+							correctFloorCeiling(transform[col.first]->rect_, oldTransform[col.first]->rect_, terrain, speed[col.first]->speed_);
+							break;
+						case 4:
+							correctAllSides(transform[col.first]->rect_, oldTransform[col.first]->rect_, terrain, speed[col.first]->speed_);
+							break;
+						case 5:
 							if (state[col.first]->state_ != State::JUMPING)
 								correctDiagonalUp(transform[col.first]->rect_, oldTransform[col.first]->rect_, terrain, speed[col.first]->speed_);
 							break;
-						case 4:
+						case 6:
 							if (state[col.first]->state_ != State::JUMPING)
 								correctDiagonalDown(transform[col.first]->rect_, oldTransform[col.first]->rect_, terrain, speed[col.first]->speed_);
 							break;
@@ -172,7 +179,7 @@ void CollisionSystem::updateWind(
 	std::map<int, ColliderComponent*> collider,
 	// std::map<int, SpeedComponent*> speed,
 	// std::map<int, StateComponent*> oldState,
-	// std::map<int, StateComponent*> state,
+	std::map<int, StateComponent*> state,
 	std::map<int, WindComponent*> wind)
 {
 	for (auto& w : wind)
@@ -183,19 +190,53 @@ void CollisionSystem::updateWind(
 		                 transform[w.first]->rotation_ ))
 		{
 			Vec2 speed;
+			PlayerStateComponent& playerState = *(PlayerStateComponent*)state[player];
 			switch(w.second->direction_)
 			{
 				case Direction::W_UP :
-					speed = Vec2(0, -w.second->speed_);
+					if (playerState.umbrellaState_ == UmbrellaState::OPEN && playerState.umbrellaDirection_ == UmbrellaDirection::UP)
+						speed = Vec2(0, -w.second->speed_);
 					break;
 				case Direction::W_DOWN :
 					speed = Vec2(0, w.second->speed_);
 					break;
 				case Direction::W_LEFT :
-					speed = Vec2(-w.second->speed_, 0);
+					if (playerState.umbrellaState_ == UmbrellaState::OPEN)
+					{
+						if (playerState.umbrellaDirection_ != UmbrellaDirection::FRONT &&
+							playerState.umbrellaDirection_ != UmbrellaDirection::BACK)
+						{
+							speed = Vec2(-w.second->speed_, 0);
+						}
+						else if ((playerState.facingRight_ && playerState.umbrellaDirection_ != UmbrellaDirection::FRONT) || 
+						         (!playerState.facingRight_ && playerState.umbrellaDirection_ != UmbrellaDirection::BACK))
+						{
+							speed = Vec2(2 * w.second->speed_, 0);
+						}
+					}
+					else
+					{
+						speed = Vec2(-w.second->speed_, 0);
+					}
 					break;
 				case Direction::W_RIGHT :
-					speed = Vec2(w.second->speed_, 0);
+					if (playerState.umbrellaState_ == UmbrellaState::OPEN)
+					{
+						if (playerState.umbrellaDirection_ != UmbrellaDirection::FRONT &&
+							playerState.umbrellaDirection_ != UmbrellaDirection::BACK)
+						{
+							speed = Vec2(w.second->speed_, 0);
+						}
+						else if ((playerState.facingRight_ && playerState.umbrellaDirection_ != UmbrellaDirection::BACK) || 
+						         (!playerState.facingRight_ && playerState.umbrellaDirection_ != UmbrellaDirection::FRONT))
+						{
+							speed = Vec2(2 * -w.second->speed_, 0);
+						}
+					}
+					else
+					{
+						speed = Vec2(w.second->speed_, 0);
+					}
 					break;
 			}
 			transform[player]->rect_ += speed * dt;
@@ -253,40 +294,6 @@ bool CollisionSystem::isColliding(const Rect& a, const Rect& b, float angleOfA, 
 	return true;
 }
 
-
-/*void CollisionSystem::correctPosSolid(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed, StateComponent* state)
-{
-	float angle = LineInclination(oldPos.getCenter(), terrain.getCenter());
-	if (angle >= -55 && angle < 55) // entity colidiu à direita
-	{
-		// std::cout << "COLIDIU A DIREITA" << std::endl;
-		entityPos.x( terrain.x() - entityPos.w() );
-	}
-	else if (angle >= 55 && angle <= 130) // entity estava acima do colisor
-	{
-		// std::cout << "COLIDIU EMBAIXO" << std::endl;
-		entityPos.y( terrain.y() - entityPos.h() );
-		speed.y(0.0);
-		if (state->state_ != State::ATTACKING)
-			state->state_ = speed.x() == 0 ? State::IDLE : State::WALKING;
-	}
-	else if (angle > 130 && angle < 235) // entity colidiu à esquerda
-	{
-		// std::cout << "COLIDIU A ESQUERDA" << std::endl;
-		entityPos.x( terrain.x() + terrain.w() );
-	}
-	else // entity estava abaixo do colisor
-	{
-		// std::cout << "COLIDIU EM CIMA" << std::endl;
-		if (state->state_ != JUMPING)
-		{
-			entityPos.y( terrain.y() + terrain.h() );
-			speed.y(0.0);
-			state->state_ = State::FALLING;
-		}
-	}
-}*/
-
 void CollisionSystem::correctFloor(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed)
 {
 	float angle = LineInclination(oldPos.getCenter(), terrain.getCenter());
@@ -315,7 +322,53 @@ void CollisionSystem::correctCeiling(Rect& entityPos, Rect oldPos, Rect terrain,
 	float angle = LineInclination(oldPos.getCenter(), terrain.getCenter());
 	if ( ( (angle >= 220 && angle <= 320) || (angle >= -140 && angle <= -40) ) && entityPos.y() >= terrain.y() + terrain.h() / 2 )
 	{
+		entityPos.y( terrain.y() + terrain.h() );
+		speed.y(0.0);
+	}
+}
+
+void CollisionSystem::correctFloorCeiling(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed)
+{
+	float angle = LineInclination(oldPos.getCenter(), terrain.getCenter());
+	if (angle >= 40 && angle <= 140 && entityPos.y() + entityPos.h() <= terrain.y() + terrain.h() / 2 )
+	{
 		entityPos.y( terrain.y() - entityPos.h() );
+		speed.y(0.0);
+	}
+	else if ( ( (angle >= 220 && angle <= 320) || (angle >= -140 && angle <= -40) ) && entityPos.y() >= terrain.y() + terrain.h() / 2 )
+	{
+		entityPos.y( terrain.y() + terrain.h() );
+		speed.y(0.0);
+	}
+}
+
+void CollisionSystem::correctAllSides(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed)
+{
+	float angle = LineInclination(oldPos.getCenter(), terrain.getCenter());
+	if (angle >= -56 && angle <= 55)
+	{
+/*		std::cout << "DIREITA" << std::endl;
+		std::cout << angle << std::endl;*/
+		entityPos.x( terrain.x() - entityPos.w() );
+	}
+	else if (angle > 55 && angle <= 130)
+	{
+/*		std::cout << "EMBAIXO" << std::endl;
+		std::cout << angle << std::endl;*/
+		entityPos.y( terrain.y() - entityPos.h() );
+		speed.y(0.0);
+	}
+	else if (angle > 130 && angle <= 230)
+	{
+/*		std::cout << "ESQUERDA" << std::endl;
+		std::cout << angle << std::endl;*/
+		entityPos.x( terrain.x() + terrain.w() );
+	}
+	else
+	{
+/*		std::cout << "EM CIMA" << std::endl;
+		std::cout << angle << std::endl;*/
+		entityPos.y( terrain.y() + terrain.h() );
 		speed.y(0.0);
 	}
 }
@@ -348,37 +401,6 @@ void CollisionSystem::correctDiagonalDown(Rect& entityPos, Rect oldPos, Rect ter
 		}
 	}
 }
-/*
-
-void CollisionSystem::correctPosCorner(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed, StateComponent* state)
-{
-	float angle = LineInclination(oldPos.getCenter(), terrain.getCenter());
-	if (angle >= -55 && angle < 55) // entity colidiu à direita
-	{
-		// std::cout << "COLIDIU A DIREITA" << std::endl;
-		// entityPos.x( terrain.x() - entityPos.w() );
-	}
-	else if (angle >= 55 && angle <= 125) // entity estava acima do colisor
-	{
-		// std::cout << "COLIDIU EMBAIXO" << std::endl;
-		entityPos.y( terrain.y() - entityPos.h() );
-		speed.y(0.0);
-		if (state->state_ != State::ATTACKING)
-			state->state_ = speed.x() == 0 ? State::IDLE : State::WALKING;
-	}
-	else if (angle > 125 && angle < 235) // entity colidiu à esquerda
-	{
-		// std::cout << "COLIDIU A ESQUERDA" << std::endl;
-		// entityPos.x( terrain.x() + terrain.w() );
-	}
-	else // entity estava abaixo do colisor
-	{
-		// std::cout << "COLIDIU EM CIMA" << std::endl;
-		entityPos.y( terrain.y() + terrain.h() );
-		speed.y(0.0);
-		state->state_ = State::FALLING;
-	}
-}*/
 
 
 

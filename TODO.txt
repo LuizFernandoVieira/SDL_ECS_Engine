@@ -1,13 +1,15 @@
 Fazendo:
 
-- Bloquear vento com guarda chuva;
-- Colocar novos sprites com guarda chuva;
 - Animação do tipo começo + loop (grapple);
+- Começar os inimigos;
+- Trigger (abrir portoes);
+- Posicionamento dos sprites da menina;
+- Checkpoints;
+- Fullscreen;
 
 
 Probleminhas a resolver:
 
-- DELETAR PONTEIROS!!!!!!!!!!!!!!!!!!!
 - Bug do editor, mousePress e isMouseDown;
 
 
@@ -45,8 +47,6 @@ Segunda entrega / 17
 		Colisao
 			Colisao entre objetos / entities
 			Triggers
-			Atravessar plataformas
-				(de baixo para cima)
 
 	Thales
 		Objetos quebraveis
