@@ -3,32 +3,31 @@
 #include "../include/pugixml.hpp"
 
 Level::Level() :
-	bg("../img/floresta_bg.png"),
 	tileSet_(Resources::TILE_WIDTH, Resources::TILE_HEIGHT, Resources::TILE_SET_IMG.c_str()),
 	tileMap_(Resources::TILE_MAP_TXT.c_str(), &tileSet_),
 	collisionMap_(Resources::COLLISION_MAP_TXT.c_str())
-
-	//TODO: Inserir elementos acima em config.txt, carregar dinamicamente
 {
-
+	screen.emplace_back("../img/bg.png");	//failsafe
 }
 
 Level::Level(pugi::xml_node source) :
-	bg("../img/floresta_bg.png"),
 	tileSet_(Resources::TILE_WIDTH, Resources::TILE_HEIGHT, Resources::TILE_SET_IMG.c_str()),
 	tileMap_(source.child("tilemap").attribute("file").value(), &tileSet_),
 	collisionMap_(source.child("collision_map").attribute("file").value())
 {
-	/*
+	//printf("Attempting to open: %s \n", source.child("layers").first_child().attribute("file").value());
 	
+	//Checagem de tipo antes de emplacement de nova camada (será útil mais tarde)
+	if (source.child("layers").first_child().attribute("static").as_bool() == true)
+		screen.emplace_back(source.child("layers").first_child().attribute("file").value());
 
-	tileSet_.Open();
-	*/
 }
 
 Level::~Level()
 {
-
+	for (auto& it : screen){
+		//liberar camadas  
+	}
 }
 
 // void Level::update(float dt)
@@ -39,7 +38,7 @@ Level::~Level()
 void Level::render(int layer)
 {
 	if (layer == 3)
-		bg.render(0,0);
+		screen[0].render(0,0);
 	tileMap_.renderLayer(layer, 0, 0);
 	// collisionMap_.render(0,0);
 }

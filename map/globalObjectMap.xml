@@ -194,11 +194,3 @@ WIND DIRECTIOM
 		<end x="0" y="0" />
 	</zipline>
 </object>
-
-<layers player="2">
-	<layer />
-	<layer />
-	<layer />
-	<layer player_layer="true"/>
-	<layer />
-</layers>

@@ -1,11 +1,8 @@
-#ifndef ATTACKSYSTEM_HPP
-#define ATTACKSYSTEM_HPP
-
-#include <map>
+#ifndef AttackSYSTEM_HPP
+#define AttackSYSTEM_HPP
 
 #include "System.hpp"
 #include "Timer.hpp"
-#include "GameState.hpp"
 
 class AttackSystem : public System
 {

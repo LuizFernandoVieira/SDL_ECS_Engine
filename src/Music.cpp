@@ -25,18 +25,12 @@
 
 
 Music::Music(){
-	int i;
-	std::string layername 		= "";
-	std::string volume_string 	= "";
-	
+	int i;	
 	for (i = 0; i < AUDIO_MAXLAYERS; i++){
 		volumeCurrent[i] 	= 0;
 		volume[i] 			= 0;
 		layer[i] = nullptr;
 	}
-
-	Open(CONFIG_XML);
-	Play();
 }
 
 Music::Music(std::string file){
@@ -74,14 +68,6 @@ void Music::Play(){
 void Music::Stop(){
 	Mix_HaltChannel(-1);
 }
-
-
-/*
-void Music::Open(std::string file){
-	if (!IsOpen())
-		std::cout << "ERROR RETRIEVING FILE" << std::endl;
-}
-*/
 
 bool Music::IsOpen(){
 	for (int i = 0; i < AUDIO_MAXLAYERS; ++i)
@@ -123,7 +109,7 @@ void Music::Update(){
 
 //---------------------------------------------------------------------------------------
 
-void Music::ReadVolumes(_node source){
+void Music::Load(_node source){
 	if (source == nullptr)	return;
 
 	int 	counter;
@@ -135,6 +121,15 @@ void Music::ReadVolumes(_node source){
 
 	_node volumeNode;
 	_node layerVolume;
+
+	Stop();
+
+	for (int i = 0; i < AUDIO_MAXLAYERS; i++){
+		volumeCurrent[i]	= 0;
+		volume[i]			= 0;
+		channel[i] 			= 0;
+		layer[i]			= nullptr;
+	}
 
 	volume_vector.clear();
 
@@ -208,8 +203,8 @@ void Music::Open(std::string file){
 
 	_node node = doc.first_child();
 
-	std::cout << "Reading State: " << node.child("state").attribute("name").as_string() << std::endl;
+	//std::cout << "Reading State: " << node.child("state").attribute("name").as_string() << std::endl;
 
 	//Setting Music Assets + Volume Patterns
-	ReadVolumes(node.child("state").child("music"));
+	Load(node.child("state").child("music"));
 }
