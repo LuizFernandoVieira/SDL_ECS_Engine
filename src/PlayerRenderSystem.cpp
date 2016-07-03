@@ -41,11 +41,12 @@ void PlayerRenderSystem::render(GameState& gameState)
 	spriteKey.umbrellaDirection = stateComp->umbrellaDirection_;
 
 	Rect transform = transfComp->rect_;
-	renderComp.getSprite(spriteKey).setScaleX(transfComp->scale_.x());
-	renderComp.getSprite(spriteKey).setScaleY(transfComp->scale_.y());
-	renderComp.getSprite(spriteKey).render(
-		transform.x(),
-		transform.y(),
+	Sprite& sprite = renderComp.getSprite(spriteKey);
+	sprite.setScaleX(transfComp->scale_.x());
+	sprite.setScaleY(transfComp->scale_.y());
+	sprite.render(
+		transform.getBase().x() - sprite.getWidth() / 2,
+		transform.getBase().y() - sprite.getHeight(),
 		transfComp->rotation_,
 		!stateComp->facingRight_ // flip se nao ta virado pra direita
 	);

@@ -3,7 +3,6 @@ Fazendo:
 - Animação do tipo começo + loop (grapple);
 - Começar os inimigos;
 - Trigger (abrir portoes);
-- Posicionamento dos sprites da menina;
 - Checkpoints;
 - Fullscreen;
 
@@ -11,6 +10,8 @@ Fazendo:
 Probleminhas a resolver:
 
 - Bug do editor, mousePress e isMouseDown;
+- Arrumar editor com adições do level;
+- Posicionamento dos sprites da menina;
 
 
 ============== PROXIMA AULA ==================

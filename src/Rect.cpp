@@ -26,7 +26,15 @@ Rect::Rect(float x, float y, float w, float h)
 
 Vec2 Rect::getCenter() const
 {
-	return Vec2( x_+(w_ /2), y_+(h_ /2) );
+	return Vec2( x_+(w_/2), y_+(h_/2) );
+}
+Vec2 Rect::getPivot() const
+{
+	return Vec2( x_, y_ );
+}
+Vec2 Rect::getBase() const
+{
+	return Vec2( x_+(w_/2), y_ + h_ );
 }
 
 

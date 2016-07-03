@@ -409,21 +409,21 @@ void GameState::setObjects(pugi::xml_node objects)
 
 		// CHECKPOINTS :: Passar para level
 		if ((aux = obj.child("checkpoints")))
+		{
+			//Loop insere todos os spawners no vetor
+			//printf("obtaining checkpoints\n");
+			for(pugi::xml_node spawner = aux.first_child(); spawner; spawner = spawner.next_sibling())
 			{
-				//Loop insere todos os spawners no vetor
-				//printf("obtaining checkpoints\n");
-				for(pugi::xml_node spawner = aux.first_child(); spawner; spawner = spawner.next_sibling())
-				{
-					spawners.emplace_back(TransformComponent(
-						Rect(	spawner.attribute("x").as_float(),
-								spawner.attribute("y").as_float(),
-								spawner.attribute("w").as_float(),
-								spawner.attribute("h").as_float() ))
-						);
-				}
+				spawners.emplace_back(TransformComponent(
+					Rect(	spawner.attribute("x").as_float(),
+							spawner.attribute("y").as_float(),
+							spawner.attribute("w").as_float(),
+							spawner.attribute("h").as_float() ))
+					);
 			}
-			nextId_++;
 		}
+		nextId_++;
+	}
 
 
 	if (spawners.empty())	//FAILSAFE: Emplacing Default Spawner

@@ -39,8 +39,8 @@ private:
 			
 
 			AIState();
-			addTrigger(	short unsigned int condition_index,
-						short unsigned int target_index){
+			void addTrigger(short unsigned int condition_index,
+			                short unsigned int target_index){
 
 				triggers[condition_index] = target_index;
 			};
