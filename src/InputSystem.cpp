@@ -131,7 +131,7 @@ void InputSystem::update(float dt, GameState& gameState)
 	if (stateComp->state_ == State::FALLING &&
 		stateComp->umbrellaState_ == UmbrellaState::OPEN &&
 		stateComp->umbrellaDirection_ == UmbrellaDirection::UP)
-		physicsComp->gravityScale_ = 0.3;
+		physicsComp->gravityScale_ = 0.5;
 	else
 		physicsComp->gravityScale_ = 1.0;
 }

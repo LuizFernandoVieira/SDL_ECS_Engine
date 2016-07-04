@@ -1,7 +1,11 @@
 #include "../include/AISystem.hpp"
 #include "../include/AIComponent.hpp"
+#include "../include/Resources.hpp"
 
 #define AI_DEBUG true
+
+#define FOLLOW_DISTANCE 100.0f
+#define FOLLOW_TARGET gameState.player_
 
 AISystem::AISystem()
 {
@@ -11,16 +15,30 @@ AISystem::AISystem()
 void AISystem::update(float dt, GameState& gameState)
 {
 	
-	std::map<int, AIComponent*> ai_comp 		= gameState.mapAI_;
-	
+	std::map<int, AIComponent*> aiComp	= gameState.mapAI_;
 
-	//std::cout << "updating AI" << std::endl;
+	StateComponent* stateComp;
+	SpeedComponent* speedComp;
+	PhysicsComponent* physicsComp;
+	ColliderComponent* colComp;
+	TransformComponent* transComp;
+
+
 	bool move = false;
 	//Processamento de IAs
-	for (auto& ai : ai_comp){
+	for (auto& ai : aiComp){
 
-		//Update de cooldown :: Mudara para update em um vetor/hash table, contendo cooldowns individuais
-		ai.second->current_action_timer.update(dt);
+		stateComp 	= gameState.mapState_[ai.first];
+		speedComp	= gameState.mapSpeed_[ai.first];
+		physicsComp	= gameState.mapPhysics_[ai.first];
+		colComp		= gameState.mapCollider_[ai.first];
+		transComp	= gameState.mapTransform_[ai.first];
+
+		//Update de Cooldown por estado
+		for (auto& state : ai.second->states){
+			state.action_timer.update(dt);
+		}
+
 		auto& current_state = ai.second->states[ai.second->state_index];
 
 		//Loop de verificação de condições
@@ -35,24 +53,115 @@ void AISystem::update(float dt, GameState& gameState)
 
 				//Caso: Idle
 				case 1:
-					//move = true;
-					move = ((int) current_state.state == 0);
+						move = ((int) current_state.state == 0);
 					break;
 
+
+				//Caso: Longe Demais do Alvo
+				case 2:
+					//move = Distance(ai.first, gameState.player_, FOLLOW_DISTANCE);
+					move = (FOLLOW_DISTANCE < Distance( transComp->rect_,
+								gameState.mapTransform_[FOLLOW_TARGET]->rect_));
+
+					/*
+					move = (gameState.mapTransform_[gameState.player_]->rect_.getCenter().x() - 
+							gameState.mapTransform_[ai.first]->			rect_.getCenter().x())
+					*/
+					break;
+
+				//Caso: Perto Demais do Alvo
+				case 3:
+					//move = Distance(ai.first, gameState.player_, FOLLOW_DISTANCE);
+					move = (FOLLOW_DISTANCE > Distance( transComp->rect_,
+								gameState.mapTransform_[FOLLOW_TARGET]->rect_));
+					break;
+
+				//Caso: Abaixo do Alvo	
+				case 4:
+					move = (gameState.mapTransform_[gameState.player_]->rect_.getCenter().y()
+						> 	gameState.mapTransform_[ai.first]->			rect_.getCenter().y() + Resources::TILE_HEIGHT);
+					break;					
+
+				//Ué
 				default:
-					ai.second->state_index = trigger.second;
+					move = false;
 					break;
 			}
 
 
-			//AI improvement: mover timer para estados individuais
-			if (move && ai.second->current_action_timer.get() >= current_state.hold){
+				//Se movimento for válido
+			if (move && current_state.action_timer.get() >= current_state.cooldown){				
 				ai.second->state_index = trigger.second;
-				ai.second->current_action_timer.restart();	
+				current_state.action_timer.restart();	
 			}
+
+			//Não houve mudança de estado no frame
+			else move = false; 
 		}
 
-	if (AI_DEBUG){ ai.second->PrintCurrentState();}
+	if (AI_DEBUG){
+		ai.second->PrintCurrentState();
+		printf("\t Distance: %.0f\n", Distance( transComp->rect_,	gameState.mapTransform_[FOLLOW_TARGET]->rect_));
+	}
+
+
+
+
+	//Consolidação da Ação
+	switch ((int) ai.second->states[ai.second->state_index].state){
+	/*
+		enum EntityState
+		{
+			IDLE,		//0
+			WALKING,	//1
+			JUMPING,	//2
+			FALLING,	//3
+			ATTACKING,	//4
+			GRAPPLE,	//5
+			ZIPLINE,	//6
+			SHOOT,		//7
+			DEAD,		//8
+			FOLLOW		//9
+		};
+	*/
+			//IDLE
+			case 0:				
+				speedComp->speed_.y(0);
+				speedComp->speed_.x(0);
+				stateComp->state_ = State::IDLE;
+				break;
+
+			//WALK
+			case 1:
+
+				break;
+
+			//JUMP
+			case 2:
+				if (move){
+					speedComp->speed_.y(-Resources::PLAYER_JUMP_SPEED);
+					stateComp->state_ = State::JUMPING;
+				}
+				break;
+
+			//FOLLOW
+			case 9:
+				//if(transComp	= gameState.mapTransform_[ai.second->action_target])
+				if(			gameState.mapTransform_[gameState.player_]->rect_.getCenter().x()
+						> 	gameState.mapTransform_[ai.first]->			rect_.getCenter().x()){
+					speedComp->speed_.x(Resources::PLAYER_WALK_SPEED / 1.25);
+				}
+				else{
+					(speedComp->speed_.x(-Resources::PLAYER_WALK_SPEED / 1.25));
+				}
+
+
+				stateComp->state_ = State::WALKING;
+				break;
+
+			default:
+				break;
+		}
 	}
 
 
@@ -79,5 +188,5 @@ void AISystem::update(float dt, GameState& gameState)
 			}
 		}
 	}
-	*/
+*/
 }

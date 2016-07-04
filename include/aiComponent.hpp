@@ -31,9 +31,9 @@ private:
 				hold	= action_hold;
 			};
 			*/
-			AIState(EntityState state_new, float action_hold = 0){
-				state 	= state_new;
-				hold	= action_hold;
+			AIState(EntityState state_new, float action_hold = 0) : action_timer() {
+				state 		= state_new;
+				cooldown	= action_hold;
 			};
 
 			
@@ -49,7 +49,8 @@ private:
 			EntityState state;
 			std::unordered_map<short unsigned int, short unsigned int>	triggers;
 
-			float hold;
+			Timer action_timer;
+			float cooldown;
 	};
 
 
@@ -59,22 +60,22 @@ public:
 	std::vector<bool>		conditions;
 	std::vector<AIState>	states;
 	short unsigned int 		state_index;
+	short unsigned int		action_target;
 
-	Timer					current_action_timer;
 	CollisionMap* 			terrain;
 
 	//User-Defined AI
-	AIComponent() : current_action_timer() {
+	AIComponent(){
 		terrain = nullptr;
 		AddState((int) IDLE);
 		state_index = 0;
 	}
 
 
-	//Template AI
-	AIComponent(int type) : current_action_timer() {
+	//Template AI: Jumper
+	AIComponent(int type){
 		terrain = nullptr;
-		AddState((int) IDLE, 2.0f);
+		AddState((int) IDLE);
 		state_index = 0;
 
 		if(type == 1){
@@ -82,7 +83,6 @@ public:
 			AddState((int) JUMPING, 2.0f);
 			states[0].addTrigger(0, 1);
 			states[1].addTrigger(0, 1);
-			std::cout << "error here" << std::endl;
 		}
 	};
 
@@ -105,12 +105,12 @@ public:
 			std::cout << "State: " << st.state << std::endl;
 			for (auto trigger_it : st.triggers)
 				std::cout << "\t	Trigger - Condition:  " << trigger_it.first << " Target: " << trigger_it.second << std::endl;
-			std::cout << "\t 	Action Timer: " << current_action_timer.get() << std::endl << std::endl;
+			//std::cout << "\t 	Action Timer: " << current_action_timer.get() << std::endl << std::endl;
 		}
 	}
 	void PrintCurrentState(){
 		std::cout << "Current State: " << states[state_index].state << std::endl;
-		std::cout << std::endl;
+		std::cout << std::endl; 
 	}
 
 	void AddState(int entityState, float action_hold = 0.0f){
