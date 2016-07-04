@@ -152,6 +152,7 @@ void CollisionSystem::updateZipline(
 	std::map<int, StateComponent*> state,
 	std::map<int, ZiplineComponent*> zipline)
 {
+	bool isCollidingZip = false;
 	for (auto& zip : zipline)
 	{
 		if ( (state[player]->state_ == State::GRAPPLE || state[player]->state_ == State::ZIPLINE)  && 
@@ -160,14 +161,19 @@ void CollisionSystem::updateZipline(
 		                 transform[player]->rotation_,
 		                 transform[zip.first]->rotation_ ))
 		{
-			state[player]->state_ = State::ZIPLINE;
-			speed[player]->speed_ = Vec2( ProjectX(Resources::PLAYER_ZIPLINE_SPEED, transform[zip.first]->rotation_),
-			                              ProjectY(Resources::PLAYER_ZIPLINE_SPEED, transform[zip.first]->rotation_) );
+			if (state[player]->state_ != State::ZIPLINE)
+			{
+				state[player]->state_ = State::ZIPLINE;
+				speed[player]->speed_ = Vec2( ProjectX(Resources::PLAYER_ZIPLINE_SPEED, transform[zip.first]->rotation_),
+				                              ProjectY(Resources::PLAYER_ZIPLINE_SPEED, transform[zip.first]->rotation_) );
+			}
+			isCollidingZip = true;
+			break;
 		}
-		else if (oldState[player]->state_ == State::ZIPLINE)
-		{
-			state[player]->state_ = State::FALLING;
-		}
+	}
+	if (oldState[player]->state_ == State::ZIPLINE && !isCollidingZip)
+	{
+		state[player]->state_ = State::FALLING;
 	}
 }
 

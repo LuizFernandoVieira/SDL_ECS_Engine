@@ -111,6 +111,8 @@ void TileMapPanel::update()
 					float angle = LineInclination(ziplineBegin_, ziplineEnd_);
 					float distance = Distance(ziplineBegin_, ziplineEnd_);
 					float scaleX = distance / 48;
+					if (angle > 90)
+						ziplineBegin_.x( ziplineBegin_.x() + ProjectX(distance, angle) );
 					objectMap_->addZipline(nextId++, ziplineBegin_.x(), ziplineBegin_.y() + ProjectY(distance, angle) / 2, angle, scaleX);
 					/*int old = *selectedObject_;
 					*selectedObject_ = objectMap_->globalSize() - 1;
