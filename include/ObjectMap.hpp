@@ -21,6 +21,8 @@ struct ObjectInfo
 	std::string filename;
 	int frameCount;
 	float frameTime;
+	float scaleX, scaleY;
+	float rotation;
 };
 
 struct LocalObjectInfo
@@ -30,6 +32,7 @@ struct LocalObjectInfo
 	int frameCount;
 	float frameTime;
 	int x, y;
+	float scaleX, scaleY, rotation;
 	int layer;
 };
 

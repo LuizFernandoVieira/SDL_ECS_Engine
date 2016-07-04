@@ -54,10 +54,6 @@ private:
 	Rect previousObjectProportions;
 	Button* nextObject;
 	Rect nextObjectProportions;
-
-	// pugi::xml_document globalObjects_;
-	// int selectedObject_;
-	// pugi::xml_node getSelectedObjectXML(int index);
 };
 
 

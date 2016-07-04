@@ -30,12 +30,20 @@ TileMapPanel::TileMapPanel(TileSet& tileSet, TileMap& tileMap, CollisionMap& col
 
 	ObjectInfo info = objectMap_->getGlobalObject(*selectedObject_);
 	if (!info.filename.empty())
+	{
 		objectSp_ = new Sprite(info.filename.c_str(), info.frameCount, info.frameTime);
+		objectSp_->setScaleX(info.scaleX);
+		objectSp_->setScaleY(info.scaleY);
+		objectSpRotation_ = info.rotation;
+	}
 	else
+	{
 		objectSp_ = new Sprite("../img/interface/editor/btn_4.png");
+	}
 
 	nextId = objectMap_->getLastObjectId() + 1;
 	loadObjects();
+
 }
 
 
@@ -61,9 +69,17 @@ void TileMapPanel::update()
 	{
 		ObjectInfo info = objectMap_->getGlobalObject(*selectedObject_);
 		if (!info.filename.empty())
+		{
 			objectSp_ = new Sprite(info.filename.c_str(), info.frameCount, info.frameTime);
+			objectSp_->setScaleX(info.scaleX);
+			objectSp_->setScaleY(info.scaleY);
+			objectSpRotation_ = info.rotation;
+		}
 		else
+		{
 			objectSp_ = new Sprite("../img/interface/editor/btn_4.png");
+			objectSpRotation_ = 0;
+		}
 	}
 
 	if (rect_.isInside(InputHandler::getInstance().getMouse()))
@@ -203,42 +219,51 @@ void TileMapPanel::render()
 	for (auto object : objects_)
 		if (object.layer == 5)
 			object.sprite.render(object.pos.x() + rect_.x() + Camera::pos_.x() * 0.75, 
-				                 object.pos.y() + rect_.y() + Camera::pos_.y() * 0.75);
+				                 object.pos.y() + rect_.y() + Camera::pos_.y() * 0.75,
+				                 object.rotation);
 
 	// LAYER 4
 	tileMap_->renderLayer(4, rect_.x(), rect_.y());
 	for (auto object : objects_)
 		if (object.layer == 4)
 			object.sprite.render(object.pos.x() + rect_.x() + Camera::pos_.x() * 0.5, 
-				                 object.pos.y() + rect_.y() + Camera::pos_.y() * 0.5);
+				                 object.pos.y() + rect_.y() + Camera::pos_.y() * 0.5,
+				                 object.rotation);
 
 	// LAYER 3
 	tileMap_->renderLayer(3, rect_.x(), rect_.y());
 	for (auto object : objects_)
 		if (object.layer == 3)
 			object.sprite.render(object.pos.x() + rect_.x(), 
-				                 object.pos.y() + rect_.y());
+				                 object.pos.y() + rect_.y(),
+				                 object.rotation);
 
 	// LAYER 2
 	tileMap_->renderLayer(2, rect_.x(), rect_.y());
 	for (auto object : objects_)
+	{
+		// std::cout << object.pos.x() << ", " << object.pos.y() << std::endl;
 		if (object.layer == 2)
 			object.sprite.render(object.pos.x() + rect_.x(), 
-				                 object.pos.y() + rect_.y());
+				                 object.pos.y() + rect_.y(),
+				                 object.rotation);
+	}
 
 	// LAYER 1
 	tileMap_->renderLayer(1, rect_.x(), rect_.y());
 	for (auto object : objects_)
 		if (object.layer == 1)
 			object.sprite.render(object.pos.x() + rect_.x(), 
-				                 object.pos.y() + rect_.y());
+				                 object.pos.y() + rect_.y(),
+				                 object.rotation);
 
 	// LAYER 0
 	tileMap_->renderLayer(0, rect_.x(), rect_.y());
 	for (auto object : objects_)
 		if (object.layer == 0)
 			object.sprite.render(object.pos.x() + rect_.x() - Camera::pos_.x() * 0.5, 
-				                 object.pos.y() + rect_.y() - Camera::pos_.y() * 0.5);
+				                 object.pos.y() + rect_.y() - Camera::pos_.y() * 0.5,
+				                 object.rotation);
 
 	collisionMap_->render(rect_.x(), rect_.y());
 
@@ -251,7 +276,8 @@ void TileMapPanel::render()
 		else if (*selectedTab_ == 2 && *selectedTool_ == LevelEditorState::Tools::ADD)
 			objectSp_->render(
 				InputHandler::getInstance().getMouseX() - objectSp_->getWidth() / 2 + Camera::pos_.x(), 
-				InputHandler::getInstance().getMouseY() - objectSp_->getHeight() / 2 + Camera::pos_.y()
+				InputHandler::getInstance().getMouseY() - objectSp_->getHeight() / 2 + Camera::pos_.y(),
+				objectSpRotation_
 			);
 		else if (*selectedTab_ != 2)
 			cursorBg_.render(cursorPos_.x(), cursorPos_.y());
@@ -353,6 +379,7 @@ void TileMapPanel::placeObject(int x, int y, int layer)
 	object.layer = layer;
 	object.sprite = *objectSp_;
 	object.pos = Rect(x, y, object.sprite.getWidth(), object.sprite.getHeight());
+	object.rotation = objectSpRotation_;
 
 	objects_.emplace_back(object);
 
@@ -387,14 +414,15 @@ void TileMapPanel::loadObjects()
 		if (objInfo.filename.empty())
 		{
 			object.sprite = Sprite("../img/interface/editor/btn_4.png");
-			object.sprite.setScaleX( objInfo.x / object.sprite.getWidth() );
-			object.sprite.setScaleY( objInfo.y / object.sprite.getHeight() );
 		}
 		else
 		{
 			object.sprite = Sprite(objInfo.filename.c_str(), objInfo.frameCount, objInfo.frameTime);
+			object.sprite.setScaleX(objInfo.scaleX);
+			object.sprite.setScaleY(objInfo.scaleY);
 		}
 		object.pos = Rect(objInfo.x, objInfo.y, object.sprite.getWidth(), object.sprite.getHeight());
+		object.rotation = objInfo.rotation;
 
 		objects_.emplace_back(object);
 	}

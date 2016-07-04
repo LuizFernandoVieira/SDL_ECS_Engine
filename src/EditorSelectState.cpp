@@ -112,7 +112,7 @@ void EditorSelectState::update(float dt)
 
 				textLabels.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Object map:", Colors::black));
 				textLabels[3]->setPos(200, 450, false, false);
-				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "../map/FaseUm_objectsMap.xml", Colors::black));
+				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "../map/FaseUm.xml", Colors::black));
 				textAreas[3]->setPos(400, 450, false, false);
 
 			}

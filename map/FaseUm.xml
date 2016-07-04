@@ -1,108 +1,54 @@
 <?xml version="1.0"?>
 <world_info>
-	<tileset file="../img/maps/tilesetcidade1.png"/>
-	<tilemap file="../map/FaseUm_tilemap.txt"/>
-	<collision_map file="../map/FaseUm_colmap.txt"/>
-
+	<tileset file="../img/maps/tilesetcidade1.png" />
+	<tilemap file="../map/FaseUm_tilemap.txt" />
+	<collision_map file="../map/FaseUm_colmap.txt" />
 	<checkpoints name="checkpoints">
-		<spawner name="default" x="288" y="500" w="48" h="96"/>
-		<spawner name="test" x="864" y="500" w="48" h="96"/>
+		<spawner name="default" x="288" y="500" w="48" h="96" />
+		<spawner name="test" x="864" y="500" w="48" h="96" />
 	</checkpoints>
-
 	<layers>
-		<!--	Ainda não implementado, aqui por referência
-			Class ScreenLayer{
-					bool main;
-					float parallax;
-					float scale;
-					bool tile;
-
-					union {
-						Sprite	layer_image
-						TileMap	layer_tile
-					}
-			};
-
-			class Level{
-				private: 
-					std::vector<layer> screen;
-			}
-
-			Level::ReadLayers(pugi::xml_node source){
-				for (auto pugi::xml_node layer_node : source.child("layer")){
-					if (layer_node.attribute("type").value() == "tile")
-						tile = true;
-					else tile = false;
-
-					screen.emplace(ScreenLayer()) ;
-
-					/*
-					switch (tile){
-						case true:
-
-						case false:
-
-						default:
-						return;
-					}
-					*/
-				}
-			}
-		-->
-		<screen main="false" parallax="0" static="true" file="../img/floresta_bg.png"/>
-		<screen main="false" parallax="0" type="sprite" file="../img/bg.png"/>
-
-		<!--
-			<layer main="false" parallax="1" type="tile" file=""/>
-			<layer main="false" parallax="1" type="tile" file=""/>
-			<layer main="false" parallax="1" type="tile" file=""/>
-			<layer main="true" parallax="1" type="tile" file=""/>
-		-->
+		<screen main="false" parallax="0" static="true" file="../img/floresta_bg.png" />
+		<screen main="false" parallax="0" type="sprite" file="../img/bg.png" />
 	</layers>
-
 	<music>
 		<assets>
-			<layer channel="1" file="audio/umbra_test_bass.wav"/>
-			<layer channel="2" file="audio/umbra_test_flute.wav"/>
-			<layer channel="3" file="audio/umbra_test_piano.wav"/>
-			<layer channel="4" file="audio/umbra_test_synth.wav"/>
-			<layer channel="5" file="audio/umbra_test_violin.wav"/>
+			<layer channel="1" file="audio/umbra_test_bass.wav" />
+			<layer channel="2" file="audio/umbra_test_flute.wav" />
+			<layer channel="3" file="audio/umbra_test_piano.wav" />
+			<layer channel="4" file="audio/umbra_test_synth.wav" />
+			<layer channel="5" file="audio/umbra_test_violin.wav" />
 		</assets>
-
 		<volume state="default">
-			<layer channel="1" value="128"/>
-			<layer channel="2" value="128"/>
-			<layer channel="3" value="128"/>
-			<layer channel="4" value="128"/>
-			<layer channel="5" value="128"/>
-			<layer channel="6" value="128"/>
-			<layer channel="7" value="128"/>
-			<layer channel="8" value="128"/>
+			<layer channel="1" value="128" />
+			<layer channel="2" value="128" />
+			<layer channel="3" value="128" />
+			<layer channel="4" value="128" />
+			<layer channel="5" value="128" />
+			<layer channel="6" value="128" />
+			<layer channel="7" value="128" />
+			<layer channel="8" value="128" />
 		</volume>
-
 		<volume state="walking">
-			<layer channel="1" value="0"/>
-			<layer channel="2" value="0"/>
-			<layer channel="3" value="0"/>
-			<layer channel="4" value="0"/>
-			<layer channel="5" value="0"/>
-			<layer channel="6" value="0"/>
-			<layer channel="7" value="0"/>
-			<layer channel="8" value="0"/>
+			<layer channel="1" value="0" />
+			<layer channel="2" value="0" />
+			<layer channel="3" value="0" />
+			<layer channel="4" value="0" />
+			<layer channel="5" value="0" />
+			<layer channel="6" value="0" />
+			<layer channel="7" value="0" />
+			<layer channel="8" value="0" />
 		</volume>
 	</music>
 </world_info>
-
 <world_objects>
 	<object name="player">
 		<transform>
-			<!--<rect x="288" y="500" w="52" h="90" />-->
 			<rect x="500" y="500" w="52" h="90" />
 			<scale x="0.3" y="0.3" />
 			<rotation value="0" />
 		</transform>
 		<player_render>
-			<!-- IDLE -->
 			<sprite state="0" umbrella_state="0" umbrella_direction="0" filename="../img/characters/player/idle.png" frame_count="24" frame_time="0.01" />
 			<sprite state="0" umbrella_state="0" umbrella_direction="1" filename="../img/characters/player/idle.png" frame_count="24" frame_time="0.01" />
 			<sprite state="0" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/idle.png" frame_count="24" frame_time="0.01" />
@@ -111,8 +57,6 @@
 			<sprite state="0" umbrella_state="1" umbrella_direction="1" filename="../img/characters/player/idle apontado pra frente.png" frame_count="24" frame_time="0.01" />
 			<sprite state="0" umbrella_state="1" umbrella_direction="2" filename="../img/characters/player/idle.png" frame_count="24" frame_time="0.01" />
 			<sprite state="0" umbrella_state="1" umbrella_direction="3" filename="../img/characters/player/Parada apontado pra tras.png" frame_count="24" frame_time="0.01" />
-
-			<!-- WALKING -->
 			<sprite state="1" umbrella_state="0" umbrella_direction="0" filename="../img/characters/player/running_front_closed.png" frame_count="24" frame_time="0.02" />
 			<sprite state="1" umbrella_state="0" umbrella_direction="1" filename="../img/characters/player/running_front_closed.png" frame_count="24" frame_time="0.02" />
 			<sprite state="1" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/running_front_closed.png" frame_count="24" frame_time="0.02" />
@@ -121,8 +65,6 @@
 			<sprite state="1" umbrella_state="1" umbrella_direction="1" filename="../img/characters/player/andando apontado pra frente.png" frame_count="24" frame_time="0.02" />
 			<sprite state="1" umbrella_state="1" umbrella_direction="2" filename="../img/characters/player/andando apontado pra frente.png" frame_count="24" frame_time="0.02" />
 			<sprite state="1" umbrella_state="1" umbrella_direction="3" filename="../img/characters/player/andando apontado pra tras.png" frame_count="24" frame_time="0.02" />
-
-			<!-- JUMPING -->
 			<sprite state="2" umbrella_state="0" umbrella_direction="0" filename="../img/characters/player/jumping_front_closed.png" frame_count="23" frame_time="0.01" />
 			<sprite state="2" umbrella_state="0" umbrella_direction="1" filename="../img/characters/player/jumping_front_closed.png" frame_count="23" frame_time="0.01" />
 			<sprite state="2" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/jumping_front_closed.png" frame_count="23" frame_time="0.01" />
@@ -131,8 +73,6 @@
 			<sprite state="2" umbrella_state="1" umbrella_direction="1" filename="../img/characters/player/jumping_front_closed.png" frame_count="23" frame_time="0.01" />
 			<sprite state="2" umbrella_state="1" umbrella_direction="2" filename="../img/characters/player/jumping_front_closed.png" frame_count="23" frame_time="0.01" />
 			<sprite state="2" umbrella_state="1" umbrella_direction="3" filename="../img/characters/player/jumping_front_closed.png" frame_count="23" frame_time="0.01" />
-
-			<!-- FALLING -->
 			<sprite state="3" umbrella_state="0" umbrella_direction="0" filename="../img/characters/player/falling_front_closed.png" frame_count="11" frame_time="0.01" />
 			<sprite state="3" umbrella_state="0" umbrella_direction="1" filename="../img/characters/player/falling_front_closed.png" frame_count="11" frame_time="0.01" />
 			<sprite state="3" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/falling_front_closed.png" frame_count="11" frame_time="0.01" />
@@ -141,8 +81,6 @@
 			<sprite state="3" umbrella_state="1" umbrella_direction="1" filename="../img/characters/player/falling_front_closed.png" frame_count="11" frame_time="0.01" />
 			<sprite state="3" umbrella_state="1" umbrella_direction="2" filename="../img/characters/player/falling_front_closed.png" frame_count="11" frame_time="0.01" />
 			<sprite state="3" umbrella_state="1" umbrella_direction="3" filename="../img/characters/player/falling_front_closed.png" frame_count="11" frame_time="0.01" />
-
-			<!-- ATTACKING -->
 			<sprite state="4" umbrella_state="0" umbrella_direction="0" filename="../img/characters/player/attacking_front_closed.png" frame_count="12" frame_time="0.02" />
 			<sprite state="4" umbrella_state="0" umbrella_direction="1" filename="../img/characters/player/attacking_front_closed.png" frame_count="12" frame_time="0.02" />
 			<sprite state="4" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/attacking_front_closed.png" frame_count="12" frame_time="0.02" />
@@ -151,8 +89,6 @@
 			<sprite state="4" umbrella_state="1" umbrella_direction="1" filename="../img/characters/player/attacking_front_closed.png" frame_count="12" frame_time="0.02" />
 			<sprite state="4" umbrella_state="1" umbrella_direction="2" filename="../img/characters/player/attacking_front_closed.png" frame_count="12" frame_time="0.02" />
 			<sprite state="4" umbrella_state="1" umbrella_direction="3" filename="../img/characters/player/attacking_front_closed.png" frame_count="12" frame_time="0.02" />
-
-			<!-- GRAPPLE -->
 			<sprite state="5" umbrella_state="0" umbrella_direction="0" filename="../img/characters/player/zipline_grapple.png" frame_count="11" frame_time="0.02" />
 			<sprite state="5" umbrella_state="0" umbrella_direction="1" filename="../img/characters/player/zipline_grapple.png" frame_count="11" frame_time="0.02" />
 			<sprite state="5" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/zipline_grapple.png" frame_count="11" frame_time="0.02" />
@@ -161,8 +97,6 @@
 			<sprite state="5" umbrella_state="1" umbrella_direction="1" filename="../img/characters/player/zipline_grapple.png" frame_count="11" frame_time="0.02" />
 			<sprite state="5" umbrella_state="1" umbrella_direction="2" filename="../img/characters/player/zipline_grapple.png" frame_count="11" frame_time="0.02" />
 			<sprite state="5" umbrella_state="1" umbrella_direction="3" filename="../img/characters/player/zipline_grapple.png" frame_count="11" frame_time="0.02" />
-
-			<!-- ZIPLINE -->
 			<sprite state="6" umbrella_state="0" umbrella_direction="0" filename="../img/characters/player/zipline.png" frame_count="19" frame_time="0.01" />
 			<sprite state="6" umbrella_state="0" umbrella_direction="1" filename="../img/characters/player/zipline.png" frame_count="19" frame_time="0.01" />
 			<sprite state="6" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/zipline.png" frame_count="19" frame_time="0.01" />
@@ -171,7 +105,6 @@
 			<sprite state="6" umbrella_state="1" umbrella_direction="1" filename="../img/characters/player/zipline.png" frame_count="19" frame_time="0.01" />
 			<sprite state="6" umbrella_state="1" umbrella_direction="2" filename="../img/characters/player/zipline.png" frame_count="19" frame_time="0.01" />
 			<sprite state="6" umbrella_state="1" umbrella_direction="3" filename="../img/characters/player/zipline.png" frame_count="19" frame_time="0.01" />
-
 		</player_render>
 		<sound>
 			<sound state="2" filename="../audio/character_jump.wav" />
@@ -210,7 +143,6 @@
 		</transform>
 		<wind direction="0" speed="100" />
 	</object>
-
 	<object name="ai_test">
 		<transform>
 			<rect x="288" y="500" w="52" h="90" />
@@ -220,7 +152,7 @@
 		<render>
 			<sprite state="0" filename="../img/characters/player/idle.png" frame_count="24" frame_time="0.01" />
 		</render>
-		<physics gravity_scale="1.0" />	
+		<physics gravity_scale="1.0" />
 		<collider>
 			<hurtbox x="0" y="0" w="52" h="90" />
 			<hitbox x="10" y="-10" w="20" h="20" />

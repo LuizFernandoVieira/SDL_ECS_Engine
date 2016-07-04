@@ -20,6 +20,7 @@ struct Object
 	int id;
 	int layer;
 	Rect pos;
+	float rotation;
 	Sprite sprite;
 };
 
@@ -50,6 +51,7 @@ private:
 	Sprite cursorBg_;
 
 	Sprite* objectSp_;
+	float objectSpRotation_;
 
 	Vec2 firstDragClick_;
 	Vec2 curDragClick_;
