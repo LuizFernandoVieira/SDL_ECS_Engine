@@ -15,7 +15,9 @@ TileMapPanel::TileMapPanel(TileSet& tileSet, TileMap& tileMap, CollisionMap& col
 	firstDragClick_(-1,-1),
 	curDragClick_(-1,-1),
 	previousSelectedObject_(selectedObject),
-	ziplineMode_(false)
+	ziplineMode_(false),
+	ziplineBegin_(-1,-1),
+	ziplineEnd_(-1,-1)
 {
 	tileSet_ = &tileSet;
 	tileMap_ = &tileMap;
@@ -40,6 +42,7 @@ TileMapPanel::TileMapPanel(TileSet& tileSet, TileMap& tileMap, CollisionMap& col
 	else
 	{
 		objectSp_ = new Sprite("../img/interface/editor/btn_4.png");
+		objectSpRotation_ = 0;
 	}
 
 	nextId = objectMap_->getLastObjectId() + 1;
@@ -66,11 +69,12 @@ void TileMapPanel::update()
 {
 	Panel::update();
 
-	if (*selectedTab_ == 2 && *selectedObject_ != previousSelectedObject_)
+	if (*selectedObject_ != previousSelectedObject_)
 	{
 		ObjectInfo info = objectMap_->getGlobalObject(*selectedObject_);
 		if (!info.filename.empty())
 		{
+			delete objectSp_;
 			objectSp_ = new Sprite(info.filename.c_str(), info.frameCount, info.frameTime);
 			objectSp_->setScaleX(info.scaleX);
 			objectSp_->setScaleY(info.scaleY);
@@ -86,8 +90,8 @@ void TileMapPanel::update()
 	if (InputHandler::getInstance().keyPress('z'))
 	{
 		ziplineMode_ = ziplineMode_ ? false : true;
-		firstDragClick_ = Vec2(-1,-1);
-		curDragClick_ = Vec2(-1,-1);
+		ziplineBegin_ = Vec2(-1,-1);
+		ziplineEnd_ = Vec2(-1,-1);
 	}
 
 
@@ -97,20 +101,25 @@ void TileMapPanel::update()
 		{
 			if (InputHandler::getInstance().mousePress(LEFT_MOUSE_BUTTON))
 			{
-				if (firstDragClick_ == Vec2(-1,-1))
+				if (ziplineBegin_ == Vec2(-1,-1))
 				{
-					firstDragClick_ = InputHandler::getInstance().getMouse() + Camera::pos_ + Vec2(rect_.x(), 0);
+					ziplineBegin_ = InputHandler::getInstance().getMouse() + Camera::pos_ - Vec2(rect_.x(), rect_.y());
 				}
 				else
 				{
-					curDragClick_ = InputHandler::getInstance().getMouse() + Camera::pos_ + Vec2(rect_.x(), 0);
-					float angle = LineInclination(firstDragClick_, curDragClick_);
-					float scaleX = Distance(firstDragClick_, curDragClick_) / 48;
-					objectMap_->addZipline(nextId++, firstDragClick_.x(), firstDragClick_.y(), angle, scaleX);
-					placeObject(firstDragClick_.x(), firstDragClick_.y(), 2);
-					ziplineMode_ = false;
-					firstDragClick_ = Vec2(-1,-1);
-					curDragClick_ = Vec2(-1,-1);
+					ziplineEnd_ = InputHandler::getInstance().getMouse() + Camera::pos_ - Vec2(rect_.x(), rect_.y());
+					float angle = LineInclination(ziplineBegin_, ziplineEnd_);
+					float distance = Distance(ziplineBegin_, ziplineEnd_);
+					float scaleX = distance / 48;
+					objectMap_->addZipline(nextId++, ziplineBegin_.x(), ziplineBegin_.y() + ProjectY(distance, angle) / 2, angle, scaleX);
+					/*int old = *selectedObject_;
+					*selectedObject_ = objectMap_->globalSize() - 1;
+					placeObject(ziplineBegin_.x(), ziplineBegin_.y(), 2);
+					*selectedObject_ = old;*/
+
+					/*ziplineMode_ = false;
+					ziplineBegin_ = Vec2(-1,-1);
+					ziplineEnd_ = Vec2(-1,-1);*/
 				}
 			}
 		}
@@ -301,19 +310,21 @@ void TileMapPanel::render()
 	collisionMap_->render(rect_.x(), rect_.y());
 
 	// CURSORES
-	// Cursor quando tá só hover
 	if (!ziplineMode_)
 	{
+		// Cursor quando tá só hover
 		if (rect_.isInside(InputHandler::getInstance().getMouse()))
 		{
 			if (*selectedTab_ == 0 && *selectedTool_ == LevelEditorState::Tools::ADD)
 				tileSet_->render(*selectedTile_, cursorPos_.x(), cursorPos_.y());
 			else if (*selectedTab_ == 2 && *selectedTool_ == LevelEditorState::Tools::ADD)
+			{
 				objectSp_->render(
 					InputHandler::getInstance().getMouseX() - objectSp_->getWidth() / 2 + Camera::pos_.x(), 
 					InputHandler::getInstance().getMouseY() - objectSp_->getHeight() / 2 + Camera::pos_.y(),
 					objectSpRotation_
 				);
+			}
 			else if (*selectedTab_ != 2)
 				cursorBg_.render(cursorPos_.x(), cursorPos_.y());
 		}

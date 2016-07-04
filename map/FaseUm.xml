@@ -173,19 +173,4 @@
 			</state_index>
 		</AI>
 	</object>
-	<object name="Zipline NAO USE">
-		<transform>
-			<rect x="731" y="408" w="48" h="2" />
-			<scale x="10" y="1" />
-			<rotation value="18" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-		<zipline>
-			<start x="0" y="0" />
-			<end x="0" y="0" />
-		</zipline>
-	</object>
 </world_objects>

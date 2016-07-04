@@ -58,11 +58,11 @@ void Sprite::render(int x, int y, float angle, bool flip)
 	dstRect.w = clipRect_.w * scaleX_;
 	dstRect.h = clipRect_.h * scaleY_;
 
-	SDL_Point rotPoint;
-	rotPoint.x = dstRect.x;
-	rotPoint.y = dstRect.y;
+/*	SDL_Point rotPoint;
+	rotPoint.x = x;
+	rotPoint.y = y;*/
 
-	SDL_RenderCopyEx ( Game::getInstance().getRenderer(), texture_.get(), &clipRect_, &dstRect, (double)angle, &rotPoint, flip ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE );
+	SDL_RenderCopyEx ( Game::getInstance().getRenderer(), texture_.get(), &clipRect_, &dstRect, (double)angle, /*&rotPoint*/NULL, flip ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE );
 }
 
 void Sprite::renderSelection(int x, int y)

@@ -52,6 +52,8 @@ ObjectInfo ObjectMap::getGlobalObject(int index)
 	}
 
 	pugi::xml_node sprite = object.child("render").find_child_by_attribute("sprite", "state", "0");
+	if (!sprite)
+		sprite = object.child("player_render").find_child_by_attribute("sprite", "state", "0");
 
 	ObjectInfo info;
 	info.name = object.attribute("name").value();

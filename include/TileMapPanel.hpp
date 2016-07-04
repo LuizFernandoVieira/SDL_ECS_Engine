@@ -70,6 +70,8 @@ private:
 	static int nextId;
 
 	bool ziplineMode_;
+	Vec2 ziplineBegin_;
+	Vec2 ziplineEnd_;
 };
 
 #endif
