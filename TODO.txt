@@ -1,17 +1,16 @@
 Fazendo:
 
+- Inserir zipline pelo editor (ponto inicial e final);
 - Animação do tipo começo + loop (grapple);
-- Começar os inimigos;
 - Trigger (abrir portoes);
 - Checkpoints;
 - Fullscreen;
-- Morrer quando ta caindo de certa altura; 
+- Morrer quando ta caindo de certa altura;
 
 
 Probleminhas a resolver:
 
 - Bug do editor, mousePress e isMouseDown;
-- Arrumar editor com adições do level;
 - Posicionamento dos sprites da menina;
 
 

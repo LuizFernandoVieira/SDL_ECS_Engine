@@ -4,12 +4,14 @@
 #include "../include/Game.hpp"
 
 TileSetAndObjectsPanel::TileSetAndObjectsPanel(Rect rect, std::string imgPath, ObjectMap* objectMap, int& selectedObject) :
-	Panel(rect, imgPath), scroll_(0), selectedObject_(selectedObject)
+	Panel(rect, imgPath), scroll_(0), selectedObject_(selectedObject), 
+	objectName_("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "", Colors::black)
 {
 	selectedTab_ = TILES;
 	objectMap_ = objectMap;
 
 	createButtons();
+	objectName_.setPos(rect_.x() + rect_.w() / 2, rect_.y() + 35);
 	createObjectSprite();
 }
 
@@ -84,7 +86,8 @@ void TileSetAndObjectsPanel::createButtons()
 	previousObject->setResizable(true);
 	nextObject->setResizable(true);
 
-	objectSp_ = new StaticSprite("../img/addTilesBtn.png");
+	// objectSp_ = new StaticSprite("../img/addTilesBtn.png");
+	createObjectSprite();
 }
 
 
@@ -94,15 +97,15 @@ void TileSetAndObjectsPanel::createObjectSprite()
 		delete objectSp_;
 
 	ObjectInfo objectInfo = objectMap_->getGlobalObject(selectedObject_);
-	objectName_ = objectInfo.name;
+	objectName_.setText(objectInfo.name);
 	if (!objectInfo.filename.empty())
 		objectSp_ = new StaticSprite(objectInfo.filename.c_str(), objectInfo.frameCount, objectInfo.frameTime);
 	else
 		objectSp_ = new StaticSprite("../img/interface/editor/btn_4.png");
 	
 	// escala do sprite, sem mudar proporcao largura/altura
-	objectSp_->setScaleX(1.0);
-	objectSp_->setScaleY(1.0);
+	// objectSp_->setScaleX(1.0);
+	// objectSp_->setScaleY(1.0);
 	float proportion = (float)objectSp_->getWidth() / (float)objectSp_->getHeight();
 	float scaleX = 0.9 * rect_.w() / (float)objectSp_->getWidth();
 	objectSp_->setScaleX(scaleX);
@@ -170,6 +173,7 @@ void TileSetAndObjectsPanel::render()
 	}
 	else if (selectedTab_ == OBJECTS)
 	{
+		objectName_.render();
 		objectSp_->render(rect_.x() + 10, rect_.y() + 50);
 
 		previousObject->render();

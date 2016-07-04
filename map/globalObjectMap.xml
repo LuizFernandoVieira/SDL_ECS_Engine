@@ -2,7 +2,7 @@
 
 =============== MODELO ====================
 
-<object name="nome" layer="2">
+<object name="nome">
 	<transform>
 		<rect x="0" y="0" w="10" h="10" />
 		<scale x="1" y="1" />
@@ -116,7 +116,7 @@ WIND DIRECTIOM
 	<physics gravity_scale="1.0" />
 </object>
 
-<object name="canil">
+<!-- <object name="canil">
 	<transform>
 		<rect x="0" y="0" w="96" h="128" />
 		<scale x="1" y="1" />
@@ -186,11 +186,562 @@ WIND DIRECTIOM
 		<rotation value="15" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/zipline.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 	<zipline>
 		<start x="0" y="0" />
 		<end x="0" y="0" />
 	</zipline>
+</object> -->
+
+<object name="Comoda">
+	<transform>
+		<rect x="0" y="0" w="54" h="96" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/armoire.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+	<collider>
+		<hurtbox x="0" y="0" w="54" h="96" />
+	</collider>
+</object>
+
+<object name="Barril macaco">
+	<transform>
+		<rect x="0" y="0" w="96" h="144" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/barril - puzzle do macaco.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+	<collider>
+		<hurtbox x="0" y="0" w="96" h="144" />
+	</collider>
+</object>
+
+<!-- ================== DECORATIVOS ======================== -->
+<object name="Cama">
+	<transform>
+		<rect x="0" y="0" w="145" h="96" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/bedbred.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Logo Umbra">
+	<transform>
+		<rect x="0" y="0" w="262" h="153" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/logo.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Portão trás">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/portão-trás.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Portão frente">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/portão-frente.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Porta aberta">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/portaberta.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Estátua chafariz">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações chão/estátua do chafariz.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Lampada 1">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações chão/lâmpada1.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Lampada 2">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações chão/lâmpada2.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Lampada 3">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações chão/lâmpada3.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Lampada 4">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações chão/lâmpada4.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Crack 1">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações de parede/crack1.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Crack 2">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações de parede/crack2.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Crack 3">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações de parede/crack3.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Janela I 1">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações de parede/JI1.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Janela I 2">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações de parede/JI2.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Janela I 3">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações de parede/JI3.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Janela I 4">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações de parede/JI4.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Janela I 5">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações de parede/JI5.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Janela I 6">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações de parede/JI6.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Janela I 7">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações de parede/JI7.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Janela I 8">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações de parede/JI8.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Janela I 9">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações de parede/JI9.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Janela O 1">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações de parede/JO1.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Janela O 2">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações de parede/JO2.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Janela O 3">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações de parede/JO3.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Janela O 4">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações de parede/JO4.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Janela O 5">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações de parede/JO5.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Janela O 6">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações de parede/JO6.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Janela O 7">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações de parede/JO7.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Janela O 8">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações de parede/JO8.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Janela O 9">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações de parede/JO9.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Porta 1">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações de parede/P1.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Porta 2">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações de parede/P2.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Porta 3">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações de parede/P3.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Porta 4">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações de parede/P4.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Porta 5">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações de parede/P5.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Porta 6">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações de parede/P6.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Porta 7">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações de parede/P7.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Porta 8">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações de parede/P8.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Porta 9">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações de parede/P9.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Quadro">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações de parede/quadro.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Web 1">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações de parede/web1.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Web 2">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações de parede/web2.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Chadelier">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/decorações de teto/chandelier.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+
+<!-- ================= Toldos puzzle artista de rua ================== -->
+<object name="Toldo 1">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/toldos - puzzle da artista de rua/toldo.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Toldo 2">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/toldos - puzzle da artista de rua/toldo2.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+</object>
+<object name="Toldo 3">
+	<transform>
+		<rect x="0" y="0" w="10" h="10" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/objetos/toldos - puzzle da artista de rua/toldo3.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
 </object>

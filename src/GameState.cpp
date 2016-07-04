@@ -37,7 +37,7 @@ GameState::GameState()
 	//testando componente de música, não há necessidade de se carregar um arquivo
 	//A própria music está carregando um arquivo teste
 {
-	StaticSprite loadScreen("../img/bg.png");
+	StaticSprite loadScreen("../img/LOADING.png");
 	loadScreen.render(0,0);
 	SDL_RenderPresent(Game::getInstance().getRenderer());
 	level_ = nullptr;

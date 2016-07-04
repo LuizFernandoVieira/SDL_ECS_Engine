@@ -9,6 +9,7 @@
 #include "StaticSprite.hpp"
 #include "Sprite.hpp"
 #include "ObjectMap.hpp"
+#include "Text.hpp"
 
 #define SCROLL_SPEED 400
 
@@ -47,7 +48,7 @@ private:
 
 	int& selectedObject_;
 	ObjectMap* objectMap_;
-	std::string objectName_;
+	Text objectName_;
 	StaticSprite* objectSp_;
 
 	Button* previousObject;

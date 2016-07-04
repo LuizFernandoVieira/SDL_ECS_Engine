@@ -54,7 +54,7 @@ ObjectInfo ObjectMap::getGlobalObject(int index)
 	pugi::xml_node sprite = object.child("render").find_child_by_attribute("sprite", "state", "0");
 
 	ObjectInfo info;
-	info.name = object.name();
+	info.name = object.attribute("name").value();
 	info.filename = sprite ? sprite.attribute("filename").value() : "";
 	info.frameCount = sprite ? sprite.attribute("frame_count").as_int() : 1;
 	info.frameTime = sprite ? sprite.attribute("frame_time").as_float() : 0;
