@@ -6,8 +6,8 @@
 #include "../include/EditorSelectState.hpp"
 
 MainMenuState::MainMenuState() : 
-	info_("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "PRESS SPACE BAR TO START GAME, E TO START THE LEVEL EDITOR", Colors::black),
-	bg_("../img/bg.png")
+	info_("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "PRESS SPACE BAR TO START GAME, E TO START THE LEVEL EDITOR", Colors::white),
+	bg_("../img/loading.png")
 {
 	info_.setPos(Resources::WINDOW_WIDTH / 2, Resources::WINDOW_HEIGHT / 2);
 }

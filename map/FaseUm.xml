@@ -225,14 +225,24 @@
 			<hurtbox x="0" y="0" w="52" h="90" />
 			<hitbox x="10" y="-10" w="20" h="20" />
 		</collider>
-		<speed />
+		<speed jump="10" walk="10"/> <!-- implementar -->
 		<state/>
 		<AI type="0" debug="true">
-			<state_index state="0" cooldown="2.0">
-				<trigger verification="0" target_index="1"/>
+			<!-- IDLE -->
+			<state_index state="0" cooldown="0.3">
+				<trigger verification="2" target_index="1"/>
+				<trigger verification="4" target_index="1"/>
 			</state_index>
-			<state_index state="1" cooldown="2.0">
-				<trigger verification="0" target_index="0"/>
+
+			<!-- FOLLOWING -->
+			<state_index state="9" cooldown="0.3">
+				<trigger verification="3" target_index="0"/>
+				<trigger verification="4" target_index="2"/>
+			</state_index>
+
+			<!-- JUMPING -->
+			<state_index state="2" cooldown="2.0">
+				<trigger verification="2" target_index="1"/>
 			</state_index>
 		</AI>
 	</object>

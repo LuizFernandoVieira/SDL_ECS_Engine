@@ -28,6 +28,17 @@ private:
 	const bool AlwaysTrue(){
 		return true;
 	}
+
+	//const bool Distance(short int current_index, short int target_index, float distance){
+	//	return ;
+	//}
+
+
+	//--------------------------------------------------------------------------------------
+	//------------------------IMPLEMENTAÇÃO ESPECÍFICA--------------------------------------
+	//--------------------------------------------------------------------------------------
+
+	
 };
 
 #endif
