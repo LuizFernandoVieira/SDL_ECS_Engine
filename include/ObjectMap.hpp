@@ -52,6 +52,7 @@ public:
 	int globalSize();
 
 	void addObject(int index, int id, int x, int y, int layer);
+	void addZipline(int id, int x, int y, int angle, int scaleX);
 	std::vector<LocalObjectInfo> getLocalObjects();
 
 	pugi::xml_document& getLocalXML();

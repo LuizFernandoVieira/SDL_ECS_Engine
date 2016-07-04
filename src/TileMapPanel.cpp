@@ -14,7 +14,8 @@ TileMapPanel::TileMapPanel(TileSet& tileSet, TileMap& tileMap, CollisionMap& col
 	cursorBg_("../img/interface/editor/btn_1.png"),
 	firstDragClick_(-1,-1),
 	curDragClick_(-1,-1),
-	previousSelectedObject_(selectedObject)
+	previousSelectedObject_(selectedObject),
+	ziplineMode_(false)
 {
 	tileSet_ = &tileSet;
 	tileMap_ = &tileMap;
@@ -82,120 +83,152 @@ void TileMapPanel::update()
 		}
 	}
 
+	if (InputHandler::getInstance().keyPress('z'))
+	{
+		ziplineMode_ = ziplineMode_ ? false : true;
+		firstDragClick_ = Vec2(-1,-1);
+		curDragClick_ = Vec2(-1,-1);
+	}
+
+
 	if (rect_.isInside(InputHandler::getInstance().getMouse()))
 	{
-		Vec2 speedChangePerLayer(0,0);
-		switch(*selectedLayer_)
+		if(ziplineMode_)
 		{
-			case 0:
-				speedChangePerLayer = Camera::pos_ * (-0.5);
-				break;
-			case 4:
-				speedChangePerLayer = Camera::pos_ * 0.5;
-				break;
-			case 5:
-				speedChangePerLayer = Camera::pos_ * 0.75;
-				break;
-			default:
-				break;
-		}
-		if (*selectedTab_ == 1) // collision
-			speedChangePerLayer = Vec2(0,0);
-
-		// Tile da tela q o ponteiro do mouse está em cima
-		int tileX = (int)((InputHandler::getInstance().getMouseX() - rect_.x() + Camera::pos_.x() - speedChangePerLayer.x() ) / Resources::TILE_WIDTH);
-		int tileY = (int)((InputHandler::getInstance().getMouseY() - rect_.y() + Camera::pos_.y() - speedChangePerLayer.y() ) / Resources::TILE_HEIGHT);
-
-		// Mover o cursor para este tile
-		cursorPos_.x( tileX * Resources::TILE_WIDTH + rect_.x() + speedChangePerLayer.x() );
-		cursorPos_.y( tileY * Resources::TILE_HEIGHT + rect_.y() + speedChangePerLayer.y() );
-
-		if (InputHandler::getInstance().mousePress(LEFT_MOUSE_BUTTON))
-		{
-			if(*selectedTool_ == LevelEditorState::Tools::ADD) {
-				if (*selectedTab_ == 0)
-					placeTile(tileX, tileY);
-				else if (*selectedTab_ == 1)
-					placeCollisionTile(tileX, tileY);
+			if (InputHandler::getInstance().mousePress(LEFT_MOUSE_BUTTON))
+			{
+				if (firstDragClick_ == Vec2(-1,-1))
+				{
+					firstDragClick_ = InputHandler::getInstance().getMouse() + Camera::pos_ + Vec2(rect_.x(), 0);
+				}
 				else
-					placeObject(
-						InputHandler::getInstance().getMouseX() - objectSp_->getWidth() / 2 + Camera::pos_.x() - speedChangePerLayer.x() - rect_.x(), 
-						InputHandler::getInstance().getMouseY() - objectSp_->getHeight() / 2 + Camera::pos_.y() - speedChangePerLayer.y() - rect_.y(),
-						*selectedLayer_
-					);
-			} else if (*selectedTool_ == LevelEditorState::Tools::DELETE) {
-				if (*selectedTab_ == 0)
-					deleteTile(tileX, tileY);
-				else if (*selectedTab_ == 1)
-					deleteCollisionTile(tileX, tileY);
-				else
-					deleteObject(
-						InputHandler::getInstance().getMouseX() + Camera::pos_.x(), 
-						InputHandler::getInstance().getMouseY() + Camera::pos_.y(),
-						*selectedLayer_);
-			}
-		}
-		else if (*selectedTab_ != 2 && InputHandler::getInstance().isMouseDown(LEFT_MOUSE_BUTTON))
-		{
-			Vec2 v = Vec2(
-				tileX * Resources::TILE_WIDTH + rect_.x(),
-				tileY * Resources::TILE_HEIGHT + rect_.y()
-			);
-			if (firstDragClick_ == Vec2(-1,-1)) {
-				firstDragClick_ = v;
-			} else {
-				curDragClick_ = v;
-			}
-		}
-		else if (*selectedTab_ != 2 && firstDragClick_ != Vec2(-1,-1) && InputHandler::getInstance().mouseRelease(LEFT_MOUSE_BUTTON))
-		{
-			int bigX, smallX;
-			int bigY, smallY;
-			if(firstDragClick_.x() <= curDragClick_.x()) {
-				smallX = firstDragClick_.x();
-				bigX = curDragClick_.x();
-			} else {
-				smallX = curDragClick_.x();
-				bigX = firstDragClick_.x();
-			}
-			if(firstDragClick_.y() <= curDragClick_.y()) {
-				smallY = firstDragClick_.y();
-				bigY = curDragClick_.y();
-			} else {
-				smallY = curDragClick_.y();
-				bigY = firstDragClick_.y();
-			}
-
-			for(int x = smallX; x<=bigX; x+=Resources::TILE_WIDTH) {
-				for(int y = smallY; y<=bigY; y+=Resources::TILE_HEIGHT) {
-					if(*selectedTool_ == LevelEditorState::Tools::ADD) {
-						if (*selectedTab_ == 0)
-							placeTile(
-								((x - rect_.x()) / Resources::TILE_WIDTH) + 1, // nao me pergunte por que + 1
-								(y - rect_.y()) / Resources::TILE_HEIGHT
-							);
-						else if (*selectedTab_ == 1)
-							placeCollisionTile(
-								((x - rect_.x()) / Resources::TILE_WIDTH) + 1, // nao me pergunte por que + 1
-								(y - rect_.y()) / Resources::TILE_HEIGHT
-							);
-					} else if (*selectedTool_ == LevelEditorState::Tools::DELETE) {
-						if (*selectedTab_ == 0)
-							deleteTile(
-								((x - rect_.x()) / Resources::TILE_WIDTH) + 1,
-								(y - rect_.y()) / Resources::TILE_HEIGHT
-							);
-						else if (*selectedTab_ == 1)
-							deleteCollisionTile(
-								((x - rect_.x()) / Resources::TILE_WIDTH) + 1, // nao me pergunte por que + 1
-								(y - rect_.y()) / Resources::TILE_HEIGHT
-							);
-					}
+				{
+					curDragClick_ = InputHandler::getInstance().getMouse() + Camera::pos_ + Vec2(rect_.x(), 0);
+					float angle = LineInclination(firstDragClick_, curDragClick_);
+					float scaleX = Distance(firstDragClick_, curDragClick_) / 48;
+					objectMap_->addZipline(nextId++, firstDragClick_.x(), firstDragClick_.y(), angle, scaleX);
+					placeObject(firstDragClick_.x(), firstDragClick_.y(), 2);
+					ziplineMode_ = false;
+					firstDragClick_ = Vec2(-1,-1);
+					curDragClick_ = Vec2(-1,-1);
 				}
 			}
+		}
+		else
+		{
+			Vec2 speedChangePerLayer(0,0);
+			switch(*selectedLayer_)
+			{
+				case 0:
+					speedChangePerLayer = Camera::pos_ * (-0.5);
+					break;
+				case 4:
+					speedChangePerLayer = Camera::pos_ * 0.5;
+					break;
+				case 5:
+					speedChangePerLayer = Camera::pos_ * 0.75;
+					break;
+				default:
+					break;
+			}
+			if (*selectedTab_ == 1) // collision
+				speedChangePerLayer = Vec2(0,0);
 
-			firstDragClick_ = Vec2(-1,-1);
-			curDragClick_ = Vec2(-1,-1);
+			// Tile da tela q o ponteiro do mouse está em cima
+			int tileX = (int)((InputHandler::getInstance().getMouseX() - rect_.x() + Camera::pos_.x() - speedChangePerLayer.x() ) / Resources::TILE_WIDTH);
+			int tileY = (int)((InputHandler::getInstance().getMouseY() - rect_.y() + Camera::pos_.y() - speedChangePerLayer.y() ) / Resources::TILE_HEIGHT);
+
+			// Mover o cursor para este tile
+			cursorPos_.x( tileX * Resources::TILE_WIDTH + rect_.x() + speedChangePerLayer.x() );
+			cursorPos_.y( tileY * Resources::TILE_HEIGHT + rect_.y() + speedChangePerLayer.y() );
+
+			if (InputHandler::getInstance().mousePress(LEFT_MOUSE_BUTTON))
+			{
+				if(*selectedTool_ == LevelEditorState::Tools::ADD) {
+					if (*selectedTab_ == 0)
+						placeTile(tileX, tileY);
+					else if (*selectedTab_ == 1)
+						placeCollisionTile(tileX, tileY);
+					else
+						placeObject(
+							InputHandler::getInstance().getMouseX() - objectSp_->getWidth() / 2 + Camera::pos_.x() - speedChangePerLayer.x() - rect_.x(), 
+							InputHandler::getInstance().getMouseY() - objectSp_->getHeight() / 2 + Camera::pos_.y() - speedChangePerLayer.y() - rect_.y(),
+							*selectedLayer_
+						);
+				} else if (*selectedTool_ == LevelEditorState::Tools::DELETE) {
+					if (*selectedTab_ == 0)
+						deleteTile(tileX, tileY);
+					else if (*selectedTab_ == 1)
+						deleteCollisionTile(tileX, tileY);
+					else
+						deleteObject(
+							InputHandler::getInstance().getMouseX() + Camera::pos_.x(), 
+							InputHandler::getInstance().getMouseY() + Camera::pos_.y(),
+							*selectedLayer_);
+				}
+			}
+			else if (*selectedTab_ != 2 && InputHandler::getInstance().isMouseDown(LEFT_MOUSE_BUTTON))
+			{
+				Vec2 v = Vec2(
+					tileX * Resources::TILE_WIDTH + rect_.x(),
+					tileY * Resources::TILE_HEIGHT + rect_.y()
+				);
+				if (firstDragClick_ == Vec2(-1,-1)) {
+					firstDragClick_ = v;
+				} else {
+					curDragClick_ = v;
+				}
+			}
+			else if (*selectedTab_ != 2 && firstDragClick_ != Vec2(-1,-1) && InputHandler::getInstance().mouseRelease(LEFT_MOUSE_BUTTON))
+			{
+				int bigX, smallX;
+				int bigY, smallY;
+				if(firstDragClick_.x() <= curDragClick_.x()) {
+					smallX = firstDragClick_.x();
+					bigX = curDragClick_.x();
+				} else {
+					smallX = curDragClick_.x();
+					bigX = firstDragClick_.x();
+				}
+				if(firstDragClick_.y() <= curDragClick_.y()) {
+					smallY = firstDragClick_.y();
+					bigY = curDragClick_.y();
+				} else {
+					smallY = curDragClick_.y();
+					bigY = firstDragClick_.y();
+				}
+
+				for(int x = smallX; x<=bigX; x+=Resources::TILE_WIDTH) {
+					for(int y = smallY; y<=bigY; y+=Resources::TILE_HEIGHT) {
+						if(*selectedTool_ == LevelEditorState::Tools::ADD) {
+							if (*selectedTab_ == 0)
+								placeTile(
+									((x - rect_.x()) / Resources::TILE_WIDTH) + 1, // nao me pergunte por que + 1
+									(y - rect_.y()) / Resources::TILE_HEIGHT
+								);
+							else if (*selectedTab_ == 1)
+								placeCollisionTile(
+									((x - rect_.x()) / Resources::TILE_WIDTH) + 1, // nao me pergunte por que + 1
+									(y - rect_.y()) / Resources::TILE_HEIGHT
+								);
+						} else if (*selectedTool_ == LevelEditorState::Tools::DELETE) {
+							if (*selectedTab_ == 0)
+								deleteTile(
+									((x - rect_.x()) / Resources::TILE_WIDTH) + 1,
+									(y - rect_.y()) / Resources::TILE_HEIGHT
+								);
+							else if (*selectedTab_ == 1)
+								deleteCollisionTile(
+									((x - rect_.x()) / Resources::TILE_WIDTH) + 1, // nao me pergunte por que + 1
+									(y - rect_.y()) / Resources::TILE_HEIGHT
+								);
+						}
+					}
+				}
+
+				firstDragClick_ = Vec2(-1,-1);
+				curDragClick_ = Vec2(-1,-1);
+			}
 		}
 	}
 
@@ -269,67 +302,70 @@ void TileMapPanel::render()
 
 	// CURSORES
 	// Cursor quando tá só hover
-	if (rect_.isInside(InputHandler::getInstance().getMouse()))
+	if (!ziplineMode_)
 	{
-		if (*selectedTab_ == 0 && *selectedTool_ == LevelEditorState::Tools::ADD)
-			tileSet_->render(*selectedTile_, cursorPos_.x(), cursorPos_.y());
-		else if (*selectedTab_ == 2 && *selectedTool_ == LevelEditorState::Tools::ADD)
-			objectSp_->render(
-				InputHandler::getInstance().getMouseX() - objectSp_->getWidth() / 2 + Camera::pos_.x(), 
-				InputHandler::getInstance().getMouseY() - objectSp_->getHeight() / 2 + Camera::pos_.y(),
-				objectSpRotation_
-			);
-		else if (*selectedTab_ != 2)
-			cursorBg_.render(cursorPos_.x(), cursorPos_.y());
-	}
-
-	// Cursor com drag
-	if (firstDragClick_ != Vec2(-1,-1) && *selectedTab_ != 2) {
-		int bigX, smallX;
-		int bigY, smallY;
-		if(firstDragClick_.x() <= curDragClick_.x()) {
-			smallX = firstDragClick_.x();
-			bigX = curDragClick_.x();
-		} else {
-			smallX = curDragClick_.x();
-			bigX = firstDragClick_.x();
-		}
-		if(firstDragClick_.y() <= curDragClick_.y()) {
-			smallY = firstDragClick_.y();
-			bigY = curDragClick_.y();
-		} else {
-			smallY = curDragClick_.y();
-			bigY = firstDragClick_.y();
-		}
-
-
-		Vec2 speedChangePerLayer(0,0);
-		switch(*selectedLayer_)
+		if (rect_.isInside(InputHandler::getInstance().getMouse()))
 		{
-			case 0:
-				speedChangePerLayer = Camera::pos_ * (-0.5);
-				break;
-			case 4:
-				speedChangePerLayer = Camera::pos_ * 0.5;
-				break;
-			case 5:
-				speedChangePerLayer = Camera::pos_ * 0.75;
-				break;
-			default:
-				break;
+			if (*selectedTab_ == 0 && *selectedTool_ == LevelEditorState::Tools::ADD)
+				tileSet_->render(*selectedTile_, cursorPos_.x(), cursorPos_.y());
+			else if (*selectedTab_ == 2 && *selectedTool_ == LevelEditorState::Tools::ADD)
+				objectSp_->render(
+					InputHandler::getInstance().getMouseX() - objectSp_->getWidth() / 2 + Camera::pos_.x(), 
+					InputHandler::getInstance().getMouseY() - objectSp_->getHeight() / 2 + Camera::pos_.y(),
+					objectSpRotation_
+				);
+			else if (*selectedTab_ != 2)
+				cursorBg_.render(cursorPos_.x(), cursorPos_.y());
 		}
-		if (*selectedTab_ == 1) // collision
-			speedChangePerLayer = Vec2(0,0);
 
-		for(int x = smallX; x<=bigX; x+=Resources::TILE_WIDTH) {
-			for(int y = smallY; y<=bigY; y+=Resources::TILE_HEIGHT) {
-				if (*selectedTab_ != 1 && *selectedTool_ == LevelEditorState::Tools::ADD)
-					tileSet_->render(*selectedTile_, 
-					                 x + speedChangePerLayer.x(), 
-					                 y + speedChangePerLayer.y());
-				else
-					cursorBg_.render(x + speedChangePerLayer.x(), 
-						             y + speedChangePerLayer.y());
+		// Cursor com drag
+		if (firstDragClick_ != Vec2(-1,-1) && *selectedTab_ != 2) {
+			int bigX, smallX;
+			int bigY, smallY;
+			if(firstDragClick_.x() <= curDragClick_.x()) {
+				smallX = firstDragClick_.x();
+				bigX = curDragClick_.x();
+			} else {
+				smallX = curDragClick_.x();
+				bigX = firstDragClick_.x();
+			}
+			if(firstDragClick_.y() <= curDragClick_.y()) {
+				smallY = firstDragClick_.y();
+				bigY = curDragClick_.y();
+			} else {
+				smallY = curDragClick_.y();
+				bigY = firstDragClick_.y();
+			}
+
+
+			Vec2 speedChangePerLayer(0,0);
+			switch(*selectedLayer_)
+			{
+				case 0:
+					speedChangePerLayer = Camera::pos_ * (-0.5);
+					break;
+				case 4:
+					speedChangePerLayer = Camera::pos_ * 0.5;
+					break;
+				case 5:
+					speedChangePerLayer = Camera::pos_ * 0.75;
+					break;
+				default:
+					break;
+			}
+			if (*selectedTab_ == 1) // collision
+				speedChangePerLayer = Vec2(0,0);
+
+			for(int x = smallX; x<=bigX; x+=Resources::TILE_WIDTH) {
+				for(int y = smallY; y<=bigY; y+=Resources::TILE_HEIGHT) {
+					if (*selectedTab_ != 1 && *selectedTool_ == LevelEditorState::Tools::ADD)
+						tileSet_->render(*selectedTile_, 
+						                 x + speedChangePerLayer.x(), 
+						                 y + speedChangePerLayer.y());
+					else
+						cursorBg_.render(x + speedChangePerLayer.x(), 
+							             y + speedChangePerLayer.y());
+				}
 			}
 		}
 	}

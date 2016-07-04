@@ -248,7 +248,7 @@ WIND DIRECTIOM
 	</render>
 	<state />
 </object>
-<object name="Portão trás">
+<object name="Portao tras">
 	<transform>
 		<rect x="0" y="0" w="10" h="10" />
 		<scale x="1" y="1" />
@@ -259,7 +259,7 @@ WIND DIRECTIOM
 	</render>
 	<state />
 </object>
-<object name="Portão frente">
+<object name="Portao frente">
 	<transform>
 		<rect x="0" y="0" w="10" h="10" />
 		<scale x="1" y="1" />
@@ -281,7 +281,7 @@ WIND DIRECTIOM
 	</render>
 	<state />
 </object>
-<object name="Estátua chafariz">
+<object name="Estatua chafariz">
 	<transform>
 		<rect x="0" y="0" w="10" h="10" />
 		<scale x="1" y="1" />
@@ -744,4 +744,21 @@ WIND DIRECTIOM
 		<sprite state="0" filename="../img/objetos/toldos - puzzle da artista de rua/toldo3.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
+</object>
+
+<!-- ============== ZIPLINE ================ -->
+<object name="Zipline NAO USE">
+	<transform>
+		<rect x="0" y="0" w="48" h="2" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
+	</render>
+	<state />
+	<zipline>
+		<start x="0" y="0" />
+		<end x="0" y="0" />
+	</zipline>
 </object>

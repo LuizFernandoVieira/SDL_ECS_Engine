@@ -68,6 +68,8 @@ private:
 	std::vector<Object> objects_;
 
 	static int nextId;
+
+	bool ziplineMode_;
 };
 
 #endif

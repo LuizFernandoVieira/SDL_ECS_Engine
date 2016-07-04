@@ -6,6 +6,7 @@ Fazendo:
 - Checkpoints;
 - Fullscreen;
 - Morrer quando ta caindo de certa altura;
+- Colisao entre objetos / entities;
 
 
 Probleminhas a resolver:
@@ -42,11 +43,8 @@ Segunda entrega / 17
 			Moça da Musica -> Chuva + Movimento de NPC + GC
 			Cachorro -> Dorme
 
-		Text
-
 	Victor
 		Colisao
-			Colisao entre objetos / entities
 			Triggers
 
 	Thales
