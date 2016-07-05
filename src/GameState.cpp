@@ -62,7 +62,7 @@ GameState::GameState()
 		systems_.emplace_back(new RenderSystem());
 		systems_.emplace_back(new PlayerRenderSystem());
 		systems_.emplace_back(new SoundSystem());
-		// systems_.emplace_back(new AISystem());
+		systems_.emplace_back(new AISystem());
 		// systems_.emplace_back(new ParticleEmitterSystem());
 
 		// createParticleEmitter();
@@ -501,9 +501,8 @@ void GameState::deleteDeadEntities()
 			{
 				// FAZ ALGUMA COISA
 				// VOLTA PRO CHECKPOINT
-				std::cout << "MORREU COITADA" << std::endl;
 				state.second->state_ = State::IDLE;
-				mapTransform_[player_]->rect_.x(200);
+				mapTransform_[player_]->rect_.x(400);
 				mapTransform_[player_]->rect_.y(400);
 				mapHealth_[player_]->health_ = 1;
 			}

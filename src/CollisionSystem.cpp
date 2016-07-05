@@ -180,7 +180,7 @@ void CollisionSystem::updateCollider(
 	// HURTBOX COM HURTBOX (POSICAO)
 	for (auto col = collider.begin(); col != collider.end(); ++col)
 	{
-		for (auto col2 = collider.end(); col2 != col; --col2)
+		for (auto col2 = --collider.end(); col2 != col; --col2)
 		{
 			if (isColliding( col->second->hurtbox_ + transform[col->first]->rect_.getPivot(),
 			                 col2->second->hurtbox_ + transform[col2->first]->rect_.getPivot(),
