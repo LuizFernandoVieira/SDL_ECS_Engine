@@ -32,7 +32,7 @@ void CollisionSystem::update(float dt, GameState& gameState)
 	updateZipline(player, transform, collider, speed, oldState, state, zipline);
 	updateWind(dt, player, transform, collider, /*speed, oldState,*/ state, wind);
 	updateTerrain(collisionMap, oldTransform, transform, collider, speed, state);
-	updateCollider(collisionMap, oldTransform, transform, collider, speed, state);
+	updateCollider(transform, collider, speed, state);
 
 	collidersToRender.emplace_back(collider[player]->hitbox_ + Vec2(transform[player]->rect_.x(), transform[player]->rect_.y()));
 }
@@ -49,22 +49,20 @@ void CollisionSystem::updateTerrain(
 	// Colisao com o terreno
 	for (auto& col : collider)
 	{
-		Rect finalCollider = col.second->hurtbox_ + Vec2(transform[col.first]->rect_.x(), transform[col.first]->rect_.y() );
+		Rect finalCollider = col.second->hurtbox_ + transform[col.first]->rect_.getPivot();
 
-		for (int y = finalCollider.y() / Resources::TILE_HEIGHT/* - 1*/;
-			y <= (finalCollider.y() + finalCollider.h()) / Resources::TILE_HEIGHT && y < collisionMap.getHeight()/* + 1*/;
-			y++)
+		for ( int y = finalCollider.y() / Resources::TILE_HEIGHT;
+		      y <= (finalCollider.y() + finalCollider.h()) / Resources::TILE_HEIGHT && y < collisionMap.getHeight();
+		      y++ )
 		{
-			for (int x = finalCollider.x() / Resources::TILE_WIDTH/* - 1*/;
-				x <= (finalCollider.x() + finalCollider.w()) / Resources::TILE_WIDTH && x < collisionMap.getWidth()/* + 1*/;
-				x++)
+			for ( int x = finalCollider.x() / Resources::TILE_WIDTH;
+			      x <= (finalCollider.x() + finalCollider.w()) / Resources::TILE_WIDTH && x < collisionMap.getWidth();
+			      x++ )
 			{
-				Rect terrain = Rect(
-					x * Resources::TILE_WIDTH,
-					y * Resources::TILE_HEIGHT,
-					Resources::TILE_WIDTH,
-					Resources::TILE_HEIGHT
-				);
+				Rect terrain = Rect( x * Resources::TILE_WIDTH,
+				                     y * Resources::TILE_HEIGHT,
+				                     Resources::TILE_WIDTH,
+				                     Resources::TILE_HEIGHT );
 
 				int collisionType;
 				if ((collisionType = collisionMap.at(x,y)) >= 0 && isColliding(finalCollider, terrain, 0, 0))
@@ -103,7 +101,7 @@ void CollisionSystem::updateTerrain(
 					}
 
 					// Atualizar colisor que foi movido
-					finalCollider = col.second->hurtbox_ + Vec2(transform[col.first]->rect_.x(), transform[col.first]->rect_.y() );
+					finalCollider = col.second->hurtbox_ + transform[col.first]->rect_.getPivot();
 
 					// collidersToRender.emplace_back(terrain);
 				}
@@ -113,33 +111,39 @@ void CollisionSystem::updateTerrain(
 }
 
 void CollisionSystem::updateCollider(
-	CollisionMap& collisionMap,
-	std::map<int, TransformComponent*> oldTransform,
 	std::map<int, TransformComponent*> transform,
 	std::map<int, ColliderComponent*> collider,
 	std::map<int, SpeedComponent*> speed,
 	std::map<int, StateComponent*> state)
 {
-/*	for (auto col = collider.begin(); col != collider.end(); ++col)
+	for (auto col = collider.begin(); col != collider.end(); ++col)
 	{
-		for (auto col2 = col + 1; col2 != collider.end(); ++col2)
+		for (auto col2 = collider.end(); col2 != col; --col2)
 		{
-			if (isColliding( col.second->hurtbox_ + Vec2(transform[col.first]->rect_.x(), transform[col.first]->rect_.y()),
-			                 col2.second->hurtbox_ + Vec2(transform[col2.first]->rect_.x(), transform[col2.first]->rect_.y()),
-			                 transform[col.first]->rotation_,
-			                 transform[col2.first]->rotation_))
+			if (isColliding( col->second->hurtbox_ + transform[col->first]->rect_.getPivot(),
+			                 col2->second->hurtbox_ + transform[col2->first]->rect_.getPivot(),
+			                 transform[col->first]->rotation_,
+			                 transform[col2->first]->rotation_))
 			{
-				if (speed.find(col.first) != speed.end())
+				if (speed.find(col->first) != speed.end())
 				{
-					correctPosSolid(transform[col.first], oldTransform[col.first], transform[col2.first], speed[col.first]->speed_, state[col.first]);
+					correctAllSides(transform[col->first]->rect_, col->second->hurtbox_, col2->second->hurtbox_ + transform[col2->first]->rect_.getPivot(), speed[col->first]->speed_);
+					if (speed[col->first]->speed_.y() == 0 && state[col->first]->state_ != State::ATTACKING)
+					{
+						state[col->first]->state_ = speed[col->first]->speed_.x() == 0 ? State::IDLE : State::WALKING;
+					}
 				}
-				else if (speed.find(col2.first) != speed.end())
+				else if (speed.find(col2->first) != speed.end())
 				{
-					correctPosSolid(transform[col2.first], oldTransform[col2.first], transform[col.first], speed[col2.first]->speed_, state[col2.first]);
-				}
+					correctAllSides(transform[col2->first]->rect_, col2->second->hurtbox_, col->second->hurtbox_ + transform[col->first]->rect_.getPivot(), speed[col2->first]->speed_);
+					if (speed[col2->first]->speed_.y() == 0 && state[col2->first]->state_ != State::ATTACKING)
+					{
+						state[col2->first]->state_ = speed[col2->first]->speed_.x() == 0 ? State::IDLE : State::WALKING;
+					}
+				}	
 			}
 		}
-	}*/
+	}
 }
 
 
@@ -387,7 +391,7 @@ void CollisionSystem::correctDiagonalUp(Rect& entityPos, Rect collider, Rect ter
 		if (entityPos.getCenter().x() >= terrain.x() && 
 			entityPos.getCenter().x() <= terrain.x() + terrain.w())
 		{
-			entityPos.y( terrain.y() + terrain.h() - entityPos.h() - (entityPos.getCenter().x() - terrain.x()) );
+			entityPos.y( terrain.y() + terrain.h() - collider.h() - collider.y() - (collider.getCenter().x() - terrain.x()) );
 			speed.y(0.0);
 		}
 	}
@@ -402,7 +406,7 @@ void CollisionSystem::correctDiagonalDown(Rect& entityPos, Rect collider, Rect t
 		if (entityPos.getCenter().x() >= terrain.x() && 
 			entityPos.getCenter().x() <= terrain.x() + terrain.w())
 		{
-			entityPos.y( terrain.y() - entityPos.h() + (entityPos.getCenter().x() - terrain.x()) );
+			entityPos.y( terrain.y() - collider.h() - collider.y() + (collider.getCenter().x() - terrain.x()) );
 			speed.y(0.0);
 		}
 	}

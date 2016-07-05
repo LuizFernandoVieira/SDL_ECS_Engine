@@ -30,8 +30,6 @@ private:
 		std::map<int, StateComponent*> state
 	);
 	void updateCollider(
-		CollisionMap& collisionMap,
-		std::map<int, TransformComponent*> oldTransform,
 		std::map<int, TransformComponent*> transform,
 		std::map<int, ColliderComponent*> collider,
 		std::map<int, SpeedComponent*> speed,
