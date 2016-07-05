@@ -54,9 +54,10 @@ void RenderSystem::render(int layer, GameState& gameState)
 	for(auto& render : renderComp)
 	{
 		Rect transform = transfComp[render.first]->rect_;
-		render.second->getSprite(stateComp[render.first]->state_).setScaleX(transfComp[render.first]->scale_.x());
-		render.second->getSprite(stateComp[render.first]->state_).setScaleY(transfComp[render.first]->scale_.y());
-		render.second->getSprite(stateComp[render.first]->state_).render(
+		Sprite& sprite = render.second->getSprite(stateComp[render.first]->state_);
+		sprite.setScaleX(transfComp[render.first]->scale_.x());
+		sprite.setScaleY(transfComp[render.first]->scale_.y());
+		sprite.render(
 			transform.x() + layerSpeed.x(),
 			transform.y() + layerSpeed.y(),
 			transfComp[render.first]->rotation_,

@@ -65,9 +65,13 @@ private:
 
 	LevelEditorState::Tools* selectedTool_;
 
-	std::vector<Object> objects_;
+	static std::vector<Object> objects_;
 
 	static int nextId;
+
+	bool ziplineMode_;
+	Vec2 ziplineBegin_;
+	Vec2 ziplineEnd_;
 };
 
 #endif

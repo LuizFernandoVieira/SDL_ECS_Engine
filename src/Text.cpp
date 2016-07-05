@@ -39,8 +39,8 @@ void Text::render()
 	srcRect.w = box.w();
 	srcRect.h = box.h();
 
-	dstRect.x = box.x() - Camera::pos_.x();
-	dstRect.y = box.y() - Camera::pos_.y();
+	dstRect.x = box.x()/* - Camera::pos_.x()*/;
+	dstRect.y = box.y()/* - Camera::pos_.y()*/;
 	dstRect.w = box.w();
 	dstRect.h = box.h();
 

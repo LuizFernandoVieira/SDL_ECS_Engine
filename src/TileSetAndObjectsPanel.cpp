@@ -86,7 +86,7 @@ void TileSetAndObjectsPanel::createButtons()
 	previousObject->setResizable(true);
 	nextObject->setResizable(true);
 
-	// objectSp_ = new StaticSprite("../img/addTilesBtn.png");
+	objectSp_ = NULL;
 	createObjectSprite();
 }
 
@@ -173,6 +173,7 @@ void TileSetAndObjectsPanel::render()
 	}
 	else if (selectedTab_ == OBJECTS)
 	{
+		objectName_.setPos(rect_.x() + rect_.w() / 2, rect_.y() + 35);
 		objectName_.render();
 		objectSp_->render(rect_.x() + 10, rect_.y() + 50);
 

@@ -52,6 +52,8 @@ ObjectInfo ObjectMap::getGlobalObject(int index)
 	}
 
 	pugi::xml_node sprite = object.child("render").find_child_by_attribute("sprite", "state", "0");
+	if (!sprite)
+		sprite = object.child("player_render").find_child_by_attribute("sprite", "state", "0");
 
 	ObjectInfo info;
 	info.name = object.attribute("name").value();
@@ -121,6 +123,22 @@ void ObjectMap::addObject(int index, int id, int x, int y, int layer)
 	}
 	transf.child("rect").attribute("x").set_value(x);
 	transf.child("rect").attribute("y").set_value(y);
+}
+
+
+void ObjectMap::addZipline(int id, int x, int y, int angle, int scaleX)
+{
+	pugi::xml_node zipline = globalObjects_.find_child_by_attribute("object", "name", "Zipline NAO USE");
+
+	pugi::xml_node newZip = localObjects_.child("world_objects").append_copy(zipline);
+	newZip.append_attribute("id").set_value(id);
+	newZip.append_attribute("layer").set_value(2);
+
+	pugi::xml_node transf = newZip.child("transform");
+	transf.child("rect").attribute("x").set_value(x);
+	transf.child("rect").attribute("y").set_value(y);
+	transf.child("scale").attribute("x").set_value(scaleX);
+	transf.child("rotation").attribute("value").set_value(angle);
 }
 
 

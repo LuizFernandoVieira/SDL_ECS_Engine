@@ -12,6 +12,7 @@ Sprite::Sprite()
 	frameTime_ = 1;
 	timeElapsed_ = 0.0;
 	currentFrame_ = 0;
+	loopBackFrame_ = 0;
 	width_ = 0;
 	height_ = 0;
 	setClip(0, 0, 0, 0);
@@ -24,6 +25,21 @@ Sprite::Sprite(const char* file, int frameCount, float frameTime)
 	scaleY_ = 1;
 	frameCount_ = frameCount;
 	frameTime_ = frameTime;
+	loopBackFrame_ = 0;
+	timeElapsed_ = 0.0;
+	currentFrame_ = 0;
+	open(file);
+	setClip(0, 0, width_ / frameCount_, height_);
+}
+
+Sprite::Sprite(const char* file, int frameCount, float frameTime, int loopBackFrame)
+{
+	texture_ = NULL;
+	scaleX_ = 1;
+	scaleY_ = 1;
+	frameCount_ = frameCount;
+	frameTime_ = frameTime;
+	loopBackFrame_ = loopBackFrame;
 	timeElapsed_ = 0.0;
 	currentFrame_ = 0;
 	open(file);
@@ -58,7 +74,11 @@ void Sprite::render(int x, int y, float angle, bool flip)
 	dstRect.w = clipRect_.w * scaleX_;
 	dstRect.h = clipRect_.h * scaleY_;
 
-	SDL_RenderCopyEx ( Game::getInstance().getRenderer(), texture_.get(), &clipRect_, &dstRect, (double)angle, NULL, flip ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE );
+/*	SDL_Point rotPoint;
+	rotPoint.x = x;
+	rotPoint.y = y;*/
+
+	SDL_RenderCopyEx ( Game::getInstance().getRenderer(), texture_.get(), &clipRect_, &dstRect, (double)angle, /*&rotPoint*/NULL, flip ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE );
 }
 
 void Sprite::renderSelection(int x, int y)
@@ -164,7 +184,7 @@ void Sprite::update(float dt)
 void Sprite::setFrame(int frame)
 {
 	if(frame >= frameCount_) {
-		currentFrame_ = frame % frameCount_;
+		currentFrame_ = loopBackFrame_;
 	} else {
 		currentFrame_ = frame;
 	}
