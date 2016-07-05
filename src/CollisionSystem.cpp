@@ -2,12 +2,12 @@
 #include "../include/Resources.hpp"
 #include "../include/Camera.hpp"
 #include "../include/Sprite.hpp"
-#include "../include/TransformComponent.hpp"
+/*#include "../include/TransformComponent.hpp"
 #include "../include/ColliderComponent.hpp"
 #include "../include/SpeedComponent.hpp"
 #include "../include/StateComponent.hpp"
 #include "../include/ZiplineComponent.hpp"
-#include "../include/WindComponent.hpp"
+#include "../include/WindComponent.hpp"*/
 
 CollisionSystem::CollisionSystem()
 {
@@ -26,13 +26,14 @@ void CollisionSystem::update(float dt, GameState& gameState)
 	std::map<int, StateComponent*> state = gameState.mapState_;
 	std::map<int, ZiplineComponent*> zipline = gameState.mapZipline_;
 	std::map<int, WindComponent*> wind = gameState.mapWind_;
+	std::map<int, HealthComponent*> health = gameState.mapHealth_;
 
 	collidersToRender.clear();
 
 	updateZipline(player, transform, collider, speed, oldState, state, zipline);
 	updateWind(dt, player, transform, collider, /*speed, oldState,*/ state, wind);
 	updateTerrain(collisionMap, oldTransform, transform, collider, speed, state);
-	updateCollider(transform, collider, speed, state);
+	updateCollider(transform, collider, speed, state, health);
 
 	updateTriggers(gameState);
 
@@ -156,8 +157,27 @@ void CollisionSystem::updateCollider(
 	std::map<int, TransformComponent*> transform,
 	std::map<int, ColliderComponent*> collider,
 	std::map<int, SpeedComponent*> speed,
-	std::map<int, StateComponent*> state)
+	std::map<int, StateComponent*> state,
+	std::map<int, HealthComponent*> health)
 {
+	// HITBOX COM HURTBOX (ATAQUE E DANO)
+	for (auto col = collider.begin(); col != collider.end(); ++col)
+	{
+		for (auto col2 = collider.begin(); col2 != collider.end(); ++col2)
+		{
+			if (col != col2 &&
+				health.find(col2->first) != health.end() &&
+				isColliding( col->second->hurtbox_ + transform[col->first]->rect_.getPivot(),
+			                 col2->second->hurtbox_ + transform[col2->first]->rect_.getPivot(),
+			                 transform[col->first]->rotation_,
+			                 transform[col2->first]->rotation_))
+			{
+				// health[col2->first]->health_--;
+			}
+		}
+	}
+
+	// HURTBOX COM HURTBOX (POSICAO)
 	for (auto col = collider.begin(); col != collider.end(); ++col)
 	{
 		for (auto col2 = collider.end(); col2 != col; --col2)
