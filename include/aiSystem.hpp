@@ -4,8 +4,11 @@
 #include "System.hpp"
 #include "Timer.hpp"
 
+#define MAX_CONDITIONS	10
+
 //Apenas ignorem essa linha por enquanto
-typedef const bool (*verification)();
+//typedef const bool (*verification)();
+
 
 class AISystem : public System
 {
@@ -17,27 +20,18 @@ public:
 
 private:
 
+	bool conditions[MAX_CONDITIONS];
+	//void checkCondition[&](short int target);
+
+
 	//E essa também
-	std::vector<verification> trigger_table;
+	//std::vector<verification> trigger_table;
 
-	//Segunda Opção:
-	//std::vector<bool>	
-		//problema: sempre verifica todas as condições antes de começar a consulta
-
-	//Available Triggers
+	/*Available Triggers
 	const bool AlwaysTrue(){
 		return true;
 	}
-
-	//const bool Distance(short int current_index, short int target_index, float distance){
-	//	return ;
-	//}
-
-
-	//--------------------------------------------------------------------------------------
-	//------------------------IMPLEMENTAÇÃO ESPECÍFICA--------------------------------------
-	//--------------------------------------------------------------------------------------
-
+	*/
 	
 };
 

@@ -57,6 +57,8 @@ private:
 		std::map<int, WindComponent*> wind
 	);
 
+	void updateTriggers(GameState& gameState);
+
 	void correctFloor(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed);
 	void correctWall(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed);
 	void correctCeiling(Rect& entityPos, Rect oldPos, Rect terrain, Vec2& speed);

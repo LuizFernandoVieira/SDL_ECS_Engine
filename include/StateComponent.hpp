@@ -60,8 +60,9 @@ public:
 class PlayerStateComponent : public StateComponent
 {
 public:
-	PlayerStateComponent() : StateComponent(), umbrellaState_(CLOSED), umbrellaDirection_(DOWN) {}
+	PlayerStateComponent() : StateComponent(), umbrellaState_(CLOSED), umbrellaDirection_(DOWN) { current_checkpoint = 0;}
 
+	short unsigned int current_checkpoint;
 	UmbrellaState umbrellaState_;
 	UmbrellaDirection umbrellaDirection_;
 };

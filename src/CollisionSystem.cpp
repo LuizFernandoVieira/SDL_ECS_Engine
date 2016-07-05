@@ -34,9 +34,50 @@ void CollisionSystem::update(float dt, GameState& gameState)
 	updateTerrain(collisionMap, oldTransform, transform, collider, speed, state);
 	updateCollider(collisionMap, oldTransform, transform, collider, speed, state);
 
+	updateTriggers(gameState);
+
 	collidersToRender.emplace_back(collider[player]->hitbox_ + Vec2(transform[player]->rect_.x(), transform[player]->rect_.y()));
 }
 
+void CollisionSystem::updateTriggers(GameState& gameState)
+{
+
+	TransformComponent& playerTransform = *gameState.mapTransform_[gameState.player_];
+	short unsigned int& player_checkpoint = ((PlayerStateComponent*) gameState.mapState_[gameState.player_])->current_checkpoint;
+	
+	//Rect player_collider = gameState.mapCollider_[player_]->hitbox_ + Vec2(transform[col.first]->rect_.x(), transform[col.first]->rect_.y() );
+
+	//std::vector<TransformComponent> 	checkpoints;
+	//std::vector<std::pair<TransformComponent, short int>> musicTriggers;
+	int counter = 0;
+	for(auto& triggerbox : gameState.checkpoints){
+		if (isColliding(playerTransform.rect_, triggerbox.rect_, 0, 0))
+			if (counter > player_checkpoint){
+				player_checkpoint = counter;
+				std::cout << "Player obtained checkpoint: " << counter << std::endl;
+			}
+			/* do stuff*/
+		counter++;
+	}
+
+	for(auto& triggerbox : gameState.musicTriggers)
+		if (isColliding(playerTransform.rect_, triggerbox.first.rect_, 0, 0)){
+			gameState.SetVolumes(triggerbox.second);
+			//std::cout << "GRITEI CARAIO" << std::endl;
+		}
+
+	//TransformComponent	playerTransform = gameState.mapTransform_[player_];
+	/*
+	void updateCollider(
+	CollisionMap& collisionMap,
+	std::map<int, TransformComponent*> oldTransform,
+	std::map<int, TransformComponent*> transform,
+	std::map<int, ColliderComponent*> collider,
+	std::map<int, SpeedComponent*> speed,
+	std::map<int, StateComponent*> state
+	*/
+
+}
 
 void CollisionSystem::updateTerrain(
 	CollisionMap& collisionMap,
@@ -95,6 +136,7 @@ void CollisionSystem::updateTerrain(
 							if (state[col.first]->state_ != State::JUMPING)
 								correctDiagonalDown(transform[col.first]->rect_, oldTransform[col.first]->rect_, terrain, speed[col.first]->speed_);
 							break;
+						
 					}
 
 					if (speed[col.first]->speed_.y() == 0 && state[col.first]->state_ != State::ATTACKING)

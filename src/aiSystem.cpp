@@ -2,10 +2,11 @@
 #include "../include/AIComponent.hpp"
 #include "../include/Resources.hpp"
 
-#define AI_DEBUG true
+#define AI_DEBUG false
 
-#define FOLLOW_DISTANCE 100.0f
-#define FOLLOW_TARGET gameState.player_
+#define AI_PROCESSING_DISTANCE	Resources::WINDOW_WIDTH
+#define FOLLOW_DISTANCE 		100.0f
+#define FOLLOW_TARGET 			gameState.player_
 
 AISystem::AISystem()
 {
@@ -26,7 +27,10 @@ void AISystem::update(float dt, GameState& gameState)
 
 	bool move = false;
 	//Processamento de IAs
-	for (auto& ai : aiComp){
+	for (auto& ai : aiComp)
+		if( Distance(gameState.mapTransform_[ai.first]->rect_.getCenter(),
+			gameState.mapTransform_[gameState.player_]->rect_.getCenter())
+				< AI_PROCESSING_DISTANCE){
 
 		stateComp 	= gameState.mapState_[ai.first];
 		speedComp	= gameState.mapSpeed_[ai.first];
@@ -78,9 +82,21 @@ void AISystem::update(float dt, GameState& gameState)
 
 				//Caso: Abaixo do Alvo	
 				case 4:
-					move = (gameState.mapTransform_[gameState.player_]->rect_.getCenter().y()
-						> 	gameState.mapTransform_[ai.first]->			rect_.getCenter().y() + Resources::TILE_HEIGHT);
+					move = (gameState.mapTransform_[FOLLOW_TARGET]->rect_.getCenter().y()
+						> 	transComp->rect_.getCenter().y() + Resources::TILE_HEIGHT);
 					break;					
+
+				//Caso: Proximidade de ataque
+				case 5:
+					//move = Distance(ai.first, gameState.player_, FOLLOW_DISTANCE);
+					move = (colComp->hitbox_.w() > Distance( transComp->rect_, 
+								gameState.mapTransform_[FOLLOW_TARGET]->rect_));
+					break;
+
+				//Caso: Falso
+				case 6:
+					move = false;
+					break;
 
 				//Ué
 				default:
@@ -89,7 +105,7 @@ void AISystem::update(float dt, GameState& gameState)
 			}
 
 
-				//Se movimento for válido
+			//Se movimento for válido
 			if (move && current_state.action_timer.get() >= current_state.cooldown){				
 				ai.second->state_index = trigger.second;
 				current_state.action_timer.restart();	
@@ -139,20 +155,33 @@ void AISystem::update(float dt, GameState& gameState)
 			//JUMP
 			case 2:
 				if (move){
+					std::cout << "Bam" << std::endl;
 					speedComp->speed_.y(-Resources::PLAYER_JUMP_SPEED);
 					stateComp->state_ = State::JUMPING;
+				}
+				break;
+
+
+			//ATTACKING
+			case 4:
+				if (move){
+					std::cout << "Bam" << std::endl;
+					stateComp->state_ = State::ATTACKING;
+					colComp->hitbox_ = Rect( stateComp->facingRight_ ? 58 : -40, 30, 52, 48);
 				}
 				break;
 
 			//FOLLOW
 			case 9:
 				//if(transComp	= gameState.mapTransform_[ai.second->action_target])
-				if(			gameState.mapTransform_[gameState.player_]->rect_.getCenter().x()
-						> 	gameState.mapTransform_[ai.first]->			rect_.getCenter().x()){
+				if(	gameState.mapTransform_[gameState.player_]	->rect_.getCenter().x()
+					> 	transComp 								->rect_.getCenter().x()){
 					speedComp->speed_.x(Resources::PLAYER_WALK_SPEED / 1.25);
+					stateComp->facingRight_ = true;
 				}
 				else{
 					(speedComp->speed_.x(-Resources::PLAYER_WALK_SPEED / 1.25));
+					stateComp->facingRight_ = false;
 				}
 
 

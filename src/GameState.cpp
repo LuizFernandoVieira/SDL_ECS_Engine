@@ -221,14 +221,72 @@ void GameState::loadLevel(std::string target){
 	}
 	else
 	{
-		setObjects(stage_file.child("world_objects"));
 
+		
 		if (level_ != nullptr)
 			delete level_;
 		level_ = new Level(stage_file.child("world_info"));
+
+		setTriggers(stage_file.child("world_info").child("triggers"));
+		setObjects(stage_file.child("world_objects"));
+
+		
+
 		music.Load(stage_file.child("world_info").child("music"));
 		music.Play();
 	}
+}
+
+void GameState::setTriggers(pugi::xml_node objects)
+{
+
+	std::string string_music 		= "music";
+	std::string string_checkpoint 	= "checkpoint";
+
+	for (auto obj : objects.children())
+	{
+		if (obj.name() == string_checkpoint){
+			checkpoints.emplace_back(TransformComponent(
+				Rect(	obj.attribute("x").as_float(),
+						obj.attribute("y").as_float(),
+						obj.attribute("w").as_float(),
+						obj.attribute("h").as_float() ))
+				);
+
+		}
+
+		if (obj.name() == string_music){
+			musicTriggers.emplace_back(
+				std::pair<TransformComponent, std::string>
+					(TransformComponent(Rect(
+					obj.attribute("x").as_float(),
+					obj.attribute("y").as_float(),
+					obj.attribute("w").as_float(),
+					obj.attribute("h").as_float() )),
+
+					obj.attribute("state").as_string()));
+		}
+
+		/*
+		if (obj.name() == string_music){
+			musicTriggers.emplace_back(
+				std::pair<TransformComponent, short int>
+					(TransformComponent(Rect(
+					obj.attribute("x").as_float(),
+					obj.attribute("y").as_float(),
+					obj.attribute("w").as_float(),
+					obj.attribute("h").as_float() )),
+
+					obj.attribute("state").as_int()));
+		}
+		*/
+	}
+
+
+	//Failsafe Checking:
+	if (checkpoints.empty())
+		checkpoints.emplace_back(TransformComponent(Rect(352, 100, 48, 96)));
+
 }
 
 void GameState::setObjects(pugi::xml_node objects)
@@ -376,16 +434,17 @@ void GameState::setObjects(pugi::xml_node objects)
 		if ((aux = obj.child("AI"))){
 			short int counter = 0;
 
+			//Remover switch: passar para construtor da IA
 			switch (aux.attribute("type").as_int()){
 
 				//Externally-Defined AI
 				case 0:
-					std::cout << "AI Detected. Type: " << aux.attribute("type").as_int() << std::endl;
+					//std::cout << "AI Detected. Type: " << aux.attribute("type").as_int() << std::endl;
 					mapAI_.emplace(nextId_, new AIComponent(aux.attribute("type").as_int()));
 
 					//State Emplacement
 					for (pugi::xml_node state = aux.first_child(); state; state = state.next_sibling()){
-						printf("Loading State %d (%.3f)\n", counter, state.attribute("cooldown").as_float());
+						//printf("Loading State %d (%.3f)\n", counter, state.attribute("cooldown").as_float());
 						//Exclusão de valores inválidos (e de IDLE state)
 						if (state.attribute("state").as_int() > 0){
 							if (state.attribute("cooldown").as_float() >= 0)
@@ -394,7 +453,7 @@ void GameState::setObjects(pugi::xml_node objects)
 						}
 
 						for (pugi::xml_node trigger_ = state.first_child(); trigger_; trigger_ = trigger_.next_sibling()){
-							printf("\tNow Loading Trigger: %d -> (%d) -> %d\n", counter, trigger_.attribute("verification").as_int(), trigger_.attribute("target_index").as_int());
+							//printf("\tNow Loading Trigger: %d -> (%d) -> %d\n", counter, trigger_.attribute("verification").as_int(), trigger_.attribute("target_index").as_int());
 							mapAI_[nextId_]->AddTrigger(counter, trigger_.attribute("verification").as_int(), trigger_.attribute("target_index").as_int());
 						}
 						counter++;
@@ -406,29 +465,8 @@ void GameState::setObjects(pugi::xml_node objects)
 					break;
 			}
 		}
-
-		// CHECKPOINTS :: Passar para level
-		if ((aux = obj.child("checkpoints")))
-		{
-			//Loop insere todos os spawners no vetor
-			//printf("obtaining checkpoints\n");
-			for(pugi::xml_node spawner = aux.first_child(); spawner; spawner = spawner.next_sibling())
-			{
-				spawners.emplace_back(TransformComponent(
-					Rect(	spawner.attribute("x").as_float(),
-							spawner.attribute("y").as_float(),
-							spawner.attribute("w").as_float(),
-							spawner.attribute("h").as_float() ))
-					);
-			}
-		}
 		nextId_++;
 	}
-
-
-	if (spawners.empty())	//FAILSAFE: Emplacing Default Spawner
-		spawners.emplace_back(TransformComponent(Rect(352, 100, 48, 96)));
-		//CHECKPOINTS :: Passar para Level
 }
 
 

@@ -37,6 +37,11 @@ public:
 	void resume();
 	CollisionMap& getCollisionMap();
 
+	//Environment Control methods
+	void SetVolumes(std::string state){
+		music.SetVolumes(state);
+	};
+
 	unsigned int player_;
 	unsigned int particleEmitter_;
 
@@ -59,16 +64,23 @@ public:
 	static std::map<int, std::map<int, RenderComponent*>> mapRender_;
 	PlayerRenderComponent playerRenderComponent_;
 
+
+	std::vector 		<TransformComponent> checkpoints;
+	std::vector<std::pair<TransformComponent, std::string>> musicTriggers;
+
 private:
 	void createParticleEmitter();
-	void setObjects(pugi::xml_node objects);
 	void deleteDeadEntities();
+
+
+	//Level Creation Methods
+	void setObjects(pugi::xml_node objects);
+	void setTriggers(pugi::xml_node triggers);
 	void loadLevel(std::string target);
 
 	Level* level_;
 	Music music;
 	std::vector<System*> systems_;
-	std::vector<TransformComponent> spawners;	//passar para level
 
 	static unsigned int nextId_;
 

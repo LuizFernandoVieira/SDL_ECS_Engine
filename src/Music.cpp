@@ -83,8 +83,8 @@ void Music::Update(){
 	short int i;
 	short int volume_diff;
 
-	if (In.keyPress(NUMKEY_1))	SetVolumes("default");
-	if (In.keyPress(NUMKEY_2))	SetVolumes("walking");
+	if (In.keyPress(NUMKEY_1))	SetVolumes("all_on");
+	if (In.keyPress(NUMKEY_2))	SetVolumes("all_off");
 
 	//Fading Loop
 	for (i = 0; i < AUDIO_MAXLAYERS; i++){
@@ -153,15 +153,17 @@ void Music::Load(_node source){
 		}
 	}
 	
-
+	
 	//Iterando através de padrões de volume
 	for (_node volumeNode = source.child("volume"); volumeNode; volumeNode = volumeNode.next_sibling("volume")){
 		
 		//Inserção de novo padrão de volume
 		volume_vector.emplace(volumeNode.attribute("state").as_string(), new int[AUDIO_MAXLAYERS]);
-		volumeArray = volume_vector[volumeNode.attribute("state").as_string()];
-		counter = 0;
 
+		volumeArray = volume_vector[volumeNode.attribute("state").as_string()];
+
+		
+		counter = 0;
 		//Preenchimento do vetor de volumes
 		for(_node layerVolume = volumeNode.child("layer"); layerVolume; layerVolume = layerVolume.next_sibling()){
 			volumeArray[counter] = layerVolume.attribute("value").as_int();

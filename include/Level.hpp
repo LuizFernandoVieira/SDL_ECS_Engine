@@ -28,7 +28,7 @@ private:
 	TileMap tileMap_;
 	CollisionMap collisionMap_;
 
-	//std::vector<StaticSprite> screen;
+	//std::vector<ScreenLayer*> screen;
 	std::vector<StaticSprite> screen;
 };
 
