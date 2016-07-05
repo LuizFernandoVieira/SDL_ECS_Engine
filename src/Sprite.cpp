@@ -12,6 +12,7 @@ Sprite::Sprite()
 	frameTime_ = 1;
 	timeElapsed_ = 0.0;
 	currentFrame_ = 0;
+	loopBackFrame_ = 0;
 	width_ = 0;
 	height_ = 0;
 	setClip(0, 0, 0, 0);
@@ -24,6 +25,21 @@ Sprite::Sprite(const char* file, int frameCount, float frameTime)
 	scaleY_ = 1;
 	frameCount_ = frameCount;
 	frameTime_ = frameTime;
+	loopBackFrame_ = 0;
+	timeElapsed_ = 0.0;
+	currentFrame_ = 0;
+	open(file);
+	setClip(0, 0, width_ / frameCount_, height_);
+}
+
+Sprite::Sprite(const char* file, int frameCount, float frameTime, int loopBackFrame)
+{
+	texture_ = NULL;
+	scaleX_ = 1;
+	scaleY_ = 1;
+	frameCount_ = frameCount;
+	frameTime_ = frameTime;
+	loopBackFrame_ = loopBackFrame;
 	timeElapsed_ = 0.0;
 	currentFrame_ = 0;
 	open(file);
@@ -168,7 +184,7 @@ void Sprite::update(float dt)
 void Sprite::setFrame(int frame)
 {
 	if(frame >= frameCount_) {
-		currentFrame_ = frame % frameCount_;
+		currentFrame_ = loopBackFrame_;
 	} else {
 		currentFrame_ = frame;
 	}

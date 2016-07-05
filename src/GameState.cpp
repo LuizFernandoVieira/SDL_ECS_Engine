@@ -260,9 +260,15 @@ void GameState::setObjects(pugi::xml_node objects)
 			for (auto sprite : aux.children())
 			{
 				State state = (State)sprite.attribute("state").as_int();
-				renderComp->addSprite(state, Sprite(sprite.attribute("filename").value(), 
-				                                    sprite.attribute("frame_count").as_int(),
-				                                    sprite.attribute("frame_time").as_float()));
+				if (!sprite.attribute("loop_back_frame"))
+					renderComp->addSprite(state, Sprite(sprite.attribute("filename").value(), 
+					                                    sprite.attribute("frame_count").as_int(),
+					                                    sprite.attribute("frame_time").as_float()));
+				else
+					renderComp->addSprite(state, Sprite(sprite.attribute("filename").value(), 
+					                                    sprite.attribute("frame_count").as_int(),
+					                                    sprite.attribute("frame_time").as_float(),
+					                                    sprite.attribute("loop_back_frame").as_int()));
 			}
 
 			if (obj.attribute("layer"))
@@ -279,9 +285,15 @@ void GameState::setObjects(pugi::xml_node objects)
 				State state = (State)sprite.attribute("state").as_int();
 				UmbrellaState umb = (UmbrellaState)sprite.attribute("umbrella_state").as_int();
 				UmbrellaDirection umbDir = (UmbrellaDirection)sprite.attribute("umbrella_direction").as_int();
-				playerRenderComponent_.addSprite(state, umb, umbDir, Sprite(sprite.attribute("filename").value(), 
-				                                                            sprite.attribute("frame_count").as_int(),
-				                                                            sprite.attribute("frame_time").as_float()));
+				if (!sprite.attribute("loop_back_frame"))
+					playerRenderComponent_.addSprite(state, umb, umbDir, Sprite(sprite.attribute("filename").value(), 
+					                                                            sprite.attribute("frame_count").as_int(),
+					                                                            sprite.attribute("frame_time").as_float()));
+				else
+					playerRenderComponent_.addSprite(state, umb, umbDir, Sprite(sprite.attribute("filename").value(), 
+					                                                            sprite.attribute("frame_count").as_int(),
+					                                                            sprite.attribute("frame_time").as_float(),
+					                                                            sprite.attribute("loop_back_frame").as_int()));
 			}
 
 			player_ = nextId_;

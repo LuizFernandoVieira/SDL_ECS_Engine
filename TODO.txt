@@ -1,6 +1,5 @@
 Fazendo:
 
-- Inserir zipline pelo editor (ponto inicial e final);
 - Animação do tipo começo + loop (grapple);
 - Trigger (abrir portoes);
 - Checkpoints;

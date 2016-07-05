@@ -65,7 +65,7 @@ private:
 
 	LevelEditorState::Tools* selectedTool_;
 
-	std::vector<Object> objects_;
+	static std::vector<Object> objects_;
 
 	static int nextId;
 

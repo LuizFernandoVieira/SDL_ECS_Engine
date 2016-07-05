@@ -14,6 +14,7 @@ class Sprite
 public:
 	Sprite();
 	Sprite(const char* file, int frameCount = 1, float frameTime = 1);
+	Sprite(const char* file, int frameCount, float frameTime, int loopBackFrame);
 	virtual ~Sprite();
 	void open(const char* file);
 	void setClip(int x, int y, int w, int h);
@@ -39,6 +40,7 @@ protected:
 	int currentFrame_;
 	float timeElapsed_;
 	float frameTime_;
+	int loopBackFrame_;
 };
 
 #endif

@@ -7,6 +7,7 @@
 #include "../include/Camera.hpp"
 
 int TileMapPanel::nextId;
+std::vector<Object> TileMapPanel::objects_;
 
 TileMapPanel::TileMapPanel(TileSet& tileSet, TileMap& tileMap, CollisionMap& collisionMap, ObjectMap& objectMap, Rect rect, std::string imgPath, int& selectedTile, int& selectedLayer, int& selectedCollision, int* selectedTab, int& selectedObject, LevelEditorState::Tools& selectedTool) :
 	Panel(rect, imgPath),

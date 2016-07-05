@@ -49,6 +49,7 @@
 			<rotation value="0" />
 		</transform>
 		<player_render>
+			<!-- IDLE -->
 			<sprite state="0" umbrella_state="0" umbrella_direction="0" filename="../img/characters/player/idle.png" frame_count="24" frame_time="0.01" />
 			<sprite state="0" umbrella_state="0" umbrella_direction="1" filename="../img/characters/player/idle.png" frame_count="24" frame_time="0.01" />
 			<sprite state="0" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/idle.png" frame_count="24" frame_time="0.01" />
@@ -57,6 +58,8 @@
 			<sprite state="0" umbrella_state="1" umbrella_direction="1" filename="../img/characters/player/idle apontado pra frente.png" frame_count="24" frame_time="0.01" />
 			<sprite state="0" umbrella_state="1" umbrella_direction="2" filename="../img/characters/player/idle.png" frame_count="24" frame_time="0.01" />
 			<sprite state="0" umbrella_state="1" umbrella_direction="3" filename="../img/characters/player/Parada apontado pra tras.png" frame_count="24" frame_time="0.01" />
+
+			<!-- WALKING -->
 			<sprite state="1" umbrella_state="0" umbrella_direction="0" filename="../img/characters/player/running_front_closed.png" frame_count="24" frame_time="0.02" />
 			<sprite state="1" umbrella_state="0" umbrella_direction="1" filename="../img/characters/player/running_front_closed.png" frame_count="24" frame_time="0.02" />
 			<sprite state="1" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/running_front_closed.png" frame_count="24" frame_time="0.02" />
@@ -65,6 +68,8 @@
 			<sprite state="1" umbrella_state="1" umbrella_direction="1" filename="../img/characters/player/andando apontado pra frente.png" frame_count="24" frame_time="0.02" />
 			<sprite state="1" umbrella_state="1" umbrella_direction="2" filename="../img/characters/player/andando apontado pra frente.png" frame_count="24" frame_time="0.02" />
 			<sprite state="1" umbrella_state="1" umbrella_direction="3" filename="../img/characters/player/andando apontado pra tras.png" frame_count="24" frame_time="0.02" />
+
+			<!-- JUMPING -->
 			<sprite state="2" umbrella_state="0" umbrella_direction="0" filename="../img/characters/player/jumping_front_closed.png" frame_count="23" frame_time="0.01" />
 			<sprite state="2" umbrella_state="0" umbrella_direction="1" filename="../img/characters/player/jumping_front_closed.png" frame_count="23" frame_time="0.01" />
 			<sprite state="2" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/jumping_front_closed.png" frame_count="23" frame_time="0.01" />
@@ -73,6 +78,8 @@
 			<sprite state="2" umbrella_state="1" umbrella_direction="1" filename="../img/characters/player/jumping_front_closed.png" frame_count="23" frame_time="0.01" />
 			<sprite state="2" umbrella_state="1" umbrella_direction="2" filename="../img/characters/player/jumping_front_closed.png" frame_count="23" frame_time="0.01" />
 			<sprite state="2" umbrella_state="1" umbrella_direction="3" filename="../img/characters/player/jumping_front_closed.png" frame_count="23" frame_time="0.01" />
+
+			<!-- FALLING -->
 			<sprite state="3" umbrella_state="0" umbrella_direction="0" filename="../img/characters/player/falling_front_closed.png" frame_count="11" frame_time="0.01" />
 			<sprite state="3" umbrella_state="0" umbrella_direction="1" filename="../img/characters/player/falling_front_closed.png" frame_count="11" frame_time="0.01" />
 			<sprite state="3" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/falling_front_closed.png" frame_count="11" frame_time="0.01" />
@@ -81,6 +88,8 @@
 			<sprite state="3" umbrella_state="1" umbrella_direction="1" filename="../img/characters/player/falling_front_closed.png" frame_count="11" frame_time="0.01" />
 			<sprite state="3" umbrella_state="1" umbrella_direction="2" filename="../img/characters/player/falling_front_closed.png" frame_count="11" frame_time="0.01" />
 			<sprite state="3" umbrella_state="1" umbrella_direction="3" filename="../img/characters/player/falling_front_closed.png" frame_count="11" frame_time="0.01" />
+
+			<!-- ATTACKING -->
 			<sprite state="4" umbrella_state="0" umbrella_direction="0" filename="../img/characters/player/attacking_front_closed.png" frame_count="12" frame_time="0.02" />
 			<sprite state="4" umbrella_state="0" umbrella_direction="1" filename="../img/characters/player/attacking_front_closed.png" frame_count="12" frame_time="0.02" />
 			<sprite state="4" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/attacking_front_closed.png" frame_count="12" frame_time="0.02" />
@@ -89,14 +98,18 @@
 			<sprite state="4" umbrella_state="1" umbrella_direction="1" filename="../img/characters/player/attacking_front_closed.png" frame_count="12" frame_time="0.02" />
 			<sprite state="4" umbrella_state="1" umbrella_direction="2" filename="../img/characters/player/attacking_front_closed.png" frame_count="12" frame_time="0.02" />
 			<sprite state="4" umbrella_state="1" umbrella_direction="3" filename="../img/characters/player/attacking_front_closed.png" frame_count="12" frame_time="0.02" />
-			<sprite state="5" umbrella_state="0" umbrella_direction="0" filename="../img/characters/player/zipline_grapple.png" frame_count="11" frame_time="0.02" />
-			<sprite state="5" umbrella_state="0" umbrella_direction="1" filename="../img/characters/player/zipline_grapple.png" frame_count="11" frame_time="0.02" />
-			<sprite state="5" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/zipline_grapple.png" frame_count="11" frame_time="0.02" />
-			<sprite state="5" umbrella_state="0" umbrella_direction="3" filename="../img/characters/player/zipline_grapple.png" frame_count="11" frame_time="0.02" />
-			<sprite state="5" umbrella_state="1" umbrella_direction="0" filename="../img/characters/player/zipline_grapple.png" frame_count="11" frame_time="0.02" />
-			<sprite state="5" umbrella_state="1" umbrella_direction="1" filename="../img/characters/player/zipline_grapple.png" frame_count="11" frame_time="0.02" />
-			<sprite state="5" umbrella_state="1" umbrella_direction="2" filename="../img/characters/player/zipline_grapple.png" frame_count="11" frame_time="0.02" />
-			<sprite state="5" umbrella_state="1" umbrella_direction="3" filename="../img/characters/player/zipline_grapple.png" frame_count="11" frame_time="0.02" />
+
+			<!-- GRAPPLE -->
+			<sprite state="5" umbrella_state="0" umbrella_direction="0" filename="../img/characters/player/zipline_grapple2.png" frame_count="30" frame_time="0.02" loop_back_frame="11" />
+			<sprite state="5" umbrella_state="0" umbrella_direction="1" filename="../img/characters/player/zipline_grapple2.png" frame_count="30" frame_time="0.02" loop_back_frame="11" />
+			<sprite state="5" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/zipline_grapple2.png" frame_count="30" frame_time="0.02" loop_back_frame="11" />
+			<sprite state="5" umbrella_state="0" umbrella_direction="3" filename="../img/characters/player/zipline_grapple2.png" frame_count="30" frame_time="0.02" loop_back_frame="11" />
+			<sprite state="5" umbrella_state="1" umbrella_direction="0" filename="../img/characters/player/zipline_grapple2.png" frame_count="30" frame_time="0.02" loop_back_frame="11" />
+			<sprite state="5" umbrella_state="1" umbrella_direction="1" filename="../img/characters/player/zipline_grapple2.png" frame_count="30" frame_time="0.02" loop_back_frame="11" />
+			<sprite state="5" umbrella_state="1" umbrella_direction="2" filename="../img/characters/player/zipline_grapple2.png" frame_count="30" frame_time="0.02" loop_back_frame="11" />
+			<sprite state="5" umbrella_state="1" umbrella_direction="3" filename="../img/characters/player/zipline_grapple2.png" frame_count="30" frame_time="0.02" loop_back_frame="11" />
+
+			<!-- ZIPLINE -->
 			<sprite state="6" umbrella_state="0" umbrella_direction="0" filename="../img/characters/player/zipline.png" frame_count="19" frame_time="0.01" />
 			<sprite state="6" umbrella_state="0" umbrella_direction="1" filename="../img/characters/player/zipline.png" frame_count="19" frame_time="0.01" />
 			<sprite state="6" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/zipline.png" frame_count="19" frame_time="0.01" />
@@ -172,35 +185,5 @@
 				<trigger verification="2" target_index="1" />
 			</state_index>
 		</AI>
-	</object>
-	<object name="Zipline NAO USE" id="1" layer="2">
-		<transform>
-			<rect x="342" y="447" w="48" h="2" />
-			<scale x="12" y="1" />
-			<rotation value="163" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-		<zipline>
-			<start x="0" y="0" />
-			<end x="0" y="0" />
-		</zipline>
-	</object>
-	<object name="Zipline NAO USE" id="2" layer="2">
-		<transform>
-			<rect x="1063" y="416" w="48" h="2" />
-			<scale x="15" y="1" />
-			<rotation value="150" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-		<zipline>
-			<start x="0" y="0" />
-			<end x="0" y="0" />
-		</zipline>
 	</object>
 </world_objects>
