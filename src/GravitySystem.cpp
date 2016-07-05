@@ -29,7 +29,10 @@ void GravitySystem::update(float dt, GameState& gameState)
 			if (state[phys.first]->state_ != State::ZIPLINE)
 			{
 				speed[phys.first]->speed_.y(Resources::GRAVITY * phys.second->gravityScale_);
-				if (state[phys.first]->state_ != State::GRAPPLE && state[phys.first]->state_ != State::ATTACKING)
+				if (state[phys.first]->state_ != State::GRAPPLE && 
+					state[phys.first]->state_ != State::ATTACKING && 
+					state[phys.first]->state_ != State::DYING && 
+					state[phys.first]->state_ != State::DEAD)
 				{
 					state[phys.first]->state_ = State::FALLING;
 				}

@@ -20,6 +20,7 @@
 #include "../include/MoveSystem.hpp"
 #include "../include/GravitySystem.hpp"
 #include "../include/CollisionSystem.hpp"
+#include "../include/HealthSystem.hpp"
 #include "../include/SoundSystem.hpp"
 #include "../include/AttackSystem.hpp"
 #include "../include/AISystem.hpp"
@@ -57,10 +58,11 @@ GameState::GameState()
 		systems_.emplace_back(new MoveSystem());
 		systems_.emplace_back(new AttackSystem());
 		systems_.emplace_back(new CollisionSystem());
+		systems_.emplace_back(new HealthSystem());
 		systems_.emplace_back(new RenderSystem());
 		systems_.emplace_back(new PlayerRenderSystem());
 		systems_.emplace_back(new SoundSystem());
-		systems_.emplace_back(new AISystem());
+		// systems_.emplace_back(new AISystem());
 		// systems_.emplace_back(new ParticleEmitterSystem());
 
 		// createParticleEmitter();
@@ -148,7 +150,11 @@ void GameState::update(float dt)
 	else if (mapState_[player_]->state_ == State::ZIPLINE)
 		std::cout << "ZIPLINE" << std::endl;
 	else if (mapState_[player_]->state_ == State::ATTACKING)
-		std::cout << "ATTACKING" << std::endl;*/
+		std::cout << "ATTACKING" << std::endl;
+	else if (mapState_[player_]->state_ == State::DYING)
+		std::cout << "DYING" << std::endl;
+	else if (mapState_[player_]->state_ == State::DEAD)
+		std::cout << "DEAD" << std::endl;*/
 
 	if (InputHandler::getInstance().keyPress(ESCAPE_KEY)) {
 		pop_ = true;
@@ -161,9 +167,9 @@ void GameState::update(float dt)
 void GameState::render()
 {	
 	//Setting Rendering Systems
-	RenderSystem& renderSystem = *(RenderSystem*)systems_[5];
-	PlayerRenderSystem& playerRenderSystem = *(PlayerRenderSystem*)systems_[6];
-	// ParticleEmitterSystem& particleEmitterSystem = *(ParticleEmitterSystem*)systems_[8];
+	RenderSystem& renderSystem = *(RenderSystem*)systems_[6];
+	PlayerRenderSystem& playerRenderSystem = *(PlayerRenderSystem*)systems_[7];
+	// ParticleEmitterSystem& particleEmitterSystem = *(ParticleEmitterSystem*)systems_[9];
 
 
 
@@ -486,25 +492,37 @@ void GameState::deleteDeadEntities()
 {
 	int max_layers = 5;
 
-	for (auto& health : mapHealth_ )
+	for (auto& state : mapState_ )
 	{
-		if (health.second->health_ <= 0)
+		if (state.second->state_ == State::DEAD)
 		{
-			int id = health.first;
-			
-			mapTransform_.erase(id);
-			mapState_.erase(id);
-			mapPhysics_.erase(id);
-			mapCollider_.erase(id);
-			mapSpeed_.erase(id);
-			mapEmitter_.erase(id);
-			mapTimer_.erase(id);
-			mapZipline_.erase(id);
-			mapSound_.erase(id);
-			mapHealth_.erase(id);
+			int id = state.first;
+			if (id == (int)player_)
+			{
+				// FAZ ALGUMA COISA
+				// VOLTA PRO CHECKPOINT
+				std::cout << "MORREU COITADA" << std::endl;
+				state.second->state_ = State::IDLE;
+				mapTransform_[player_]->rect_.x(200);
+				mapTransform_[player_]->rect_.y(400);
+				mapHealth_[player_]->health_ = 1;
+			}
+			else
+			{
+				mapTransform_.erase(id);
+				mapState_.erase(id);
+				mapPhysics_.erase(id);
+				mapCollider_.erase(id);
+				mapSpeed_.erase(id);
+				mapEmitter_.erase(id);
+				mapTimer_.erase(id);
+				mapZipline_.erase(id);
+				mapSound_.erase(id);
+				mapHealth_.erase(id);
 
-			for (int i = 0; i <= max_layers; i++)	//era para ser i < max_layers, segundo o que estava escrito
-				mapRender_[i].erase(id);
+				for (int i = 0; i <= max_layers; i++)	//era para ser i < max_layers, segundo o que estava escrito
+					mapRender_[i].erase(id);
+			}
 		}
 	}
 }

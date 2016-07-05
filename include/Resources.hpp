@@ -40,6 +40,8 @@ public:
 	static float PLAYER_JUMP_SPEED;
 	static float PLAYER_ZIPLINE_SPEED;
 
+	static float DYING_TIME;
+
 	static int MAP_WIDTH;
 	static int MAP_HEIGHT;
 

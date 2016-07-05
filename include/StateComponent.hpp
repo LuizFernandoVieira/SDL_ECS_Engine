@@ -13,6 +13,7 @@ enum State
 	GRAPPLE,
 	ZIPLINE,
 	SHOOT,
+	DYING,
 	DEAD
 };
 

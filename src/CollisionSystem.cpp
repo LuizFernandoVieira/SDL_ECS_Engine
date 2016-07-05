@@ -138,7 +138,7 @@ void CollisionSystem::updateTerrain(
 						
 					}
 
-					if (speed[col.first]->speed_.y() == 0 && state[col.first]->state_ != State::ATTACKING)
+					if (speed[col.first]->speed_.y() == 0 && state[col.first]->state_ != State::ATTACKING && state[col.first]->state_ != State::DYING)
 					{
 						state[col.first]->state_ = speed[col.first]->speed_.x() == 0 ? State::IDLE : State::WALKING;
 					}
@@ -172,7 +172,7 @@ void CollisionSystem::updateCollider(
 			                 transform[col->first]->rotation_,
 			                 transform[col2->first]->rotation_))
 			{
-				// health[col2->first]->health_--;
+				health[col2->first]->health_--;
 			}
 		}
 	}
@@ -190,7 +190,9 @@ void CollisionSystem::updateCollider(
 				if (speed.find(col->first) != speed.end())
 				{
 					correctAllSides(transform[col->first]->rect_, col->second->hurtbox_, col2->second->hurtbox_ + transform[col2->first]->rect_.getPivot(), speed[col->first]->speed_);
-					if (speed[col->first]->speed_.y() == 0 && state[col->first]->state_ != State::ATTACKING)
+					if (speed[col->first]->speed_.y() == 0 && 
+						state[col->first]->state_ != State::ATTACKING && 
+						state[col->first]->state_ != State::DYING)
 					{
 						state[col->first]->state_ = speed[col->first]->speed_.x() == 0 ? State::IDLE : State::WALKING;
 					}
@@ -198,7 +200,9 @@ void CollisionSystem::updateCollider(
 				else if (speed.find(col2->first) != speed.end())
 				{
 					correctAllSides(transform[col2->first]->rect_, col2->second->hurtbox_, col->second->hurtbox_ + transform[col->first]->rect_.getPivot(), speed[col2->first]->speed_);
-					if (speed[col2->first]->speed_.y() == 0 && state[col2->first]->state_ != State::ATTACKING)
+					if (speed[col2->first]->speed_.y() == 0 && 
+						state[col2->first]->state_ != State::ATTACKING && 
+						state[col2->first]->state_ != State::DYING)
 					{
 						state[col2->first]->state_ = speed[col2->first]->speed_.x() == 0 ? State::IDLE : State::WALKING;
 					}
