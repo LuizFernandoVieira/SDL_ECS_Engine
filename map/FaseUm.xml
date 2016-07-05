@@ -125,7 +125,7 @@
 			<sound state="4" filename="../audio/character_attack.wav" />
 		</sound>
 		<collider>
-			<hurtbox x="0" y="0" w="52" h="90" />
+			<hurtbox x="0" y="-10" w="52" h="90" />
 			<hitbox x="10" y="-10" w="20" h="20" />
 		</collider>
 		<speed />
