@@ -20,17 +20,18 @@ public:
 	ParticleEmitterSystem();
 	void update(float dt, GameState& gameState);
 	void render();
+	void destroyParticleNow(int particle);
 	void destroyParticle(int particle);
 private:
 	static unsigned int nextId_;
 
-	std::map<int, TransformComponent*> mapTransform_;
-	std::map<int, RenderComponent*> mapRender_;
+	static std::map<int, TransformComponent*> mapTransform_;
+	static std::map<int, RenderComponent*> mapR_;
 	std::map<int, TimerComponent*> mapTimer_;
 	std::map<int, SpeedComponent*> mapSpeed_;
 	std::map<int, ColliderComponent*> mapCollider_;
 
-	std::map<int, Timer> mapT_;
+	std::map<int, Timer*> mapT_;
 
 	EmissionRateSystem emissionRateSystem_;
 	CollisionRainTerrainSystem collisionRainTerrainSystem_;

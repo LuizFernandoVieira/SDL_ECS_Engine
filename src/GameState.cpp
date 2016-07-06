@@ -63,9 +63,9 @@ GameState::GameState()
 		systems_.emplace_back(new PlayerRenderSystem());
 		systems_.emplace_back(new SoundSystem());
 		systems_.emplace_back(new AISystem());
-		//systems_.emplace_back(new ParticleEmitterSystem());
+		systems_.emplace_back(new ParticleEmitterSystem());
 
-		//createParticleEmitter();
+		createParticleEmitter();
 
 		Camera::follow(mapTransform_[player_]);
 	}
@@ -165,7 +165,7 @@ void GameState::update(float dt)
 }
 
 void GameState::render()
-{	
+{
 	//Setting Rendering Systems
 	RenderSystem& renderSystem = *(RenderSystem*)systems_[6];
 	PlayerRenderSystem& playerRenderSystem = *(PlayerRenderSystem*)systems_[7];
@@ -184,7 +184,7 @@ void GameState::render()
 		renderSystem.render(i, *this);
 		if (i == main_layer){
 			playerRenderSystem.render(*this);
-			//particleEmitterSystem.render();
+			particleEmitterSystem.render();
 		}
 	}
 
@@ -233,7 +233,7 @@ void GameState::loadLevel(std::string target){
 	else
 	{
 
-		
+
 		if (level_ != nullptr)
 			delete level_;
 		level_ = new Level(stage_file.child("world_info"));
@@ -241,7 +241,7 @@ void GameState::loadLevel(std::string target){
 		setTriggers(stage_file.child("world_info").child("triggers"));
 		setObjects(stage_file.child("world_objects"));
 
-		
+
 
 		music.Load(stage_file.child("world_info").child("music"));
 		music.Play();
@@ -330,11 +330,11 @@ void GameState::setObjects(pugi::xml_node objects)
 			{
 				State state = (State)sprite.attribute("state").as_int();
 				if (!sprite.attribute("loop_back_frame"))
-					renderComp->addSprite(state, Sprite(sprite.attribute("filename").value(), 
+					renderComp->addSprite(state, Sprite(sprite.attribute("filename").value(),
 					                                    sprite.attribute("frame_count").as_int(),
 					                                    sprite.attribute("frame_time").as_float()));
 				else
-					renderComp->addSprite(state, Sprite(sprite.attribute("filename").value(), 
+					renderComp->addSprite(state, Sprite(sprite.attribute("filename").value(),
 					                                    sprite.attribute("frame_count").as_int(),
 					                                    sprite.attribute("frame_time").as_float(),
 					                                    sprite.attribute("loop_back_frame").as_int()));
@@ -355,11 +355,11 @@ void GameState::setObjects(pugi::xml_node objects)
 				UmbrellaState umb = (UmbrellaState)sprite.attribute("umbrella_state").as_int();
 				UmbrellaDirection umbDir = (UmbrellaDirection)sprite.attribute("umbrella_direction").as_int();
 				if (!sprite.attribute("loop_back_frame"))
-					playerRenderComponent_.addSprite(state, umb, umbDir, Sprite(sprite.attribute("filename").value(), 
+					playerRenderComponent_.addSprite(state, umb, umbDir, Sprite(sprite.attribute("filename").value(),
 					                                                            sprite.attribute("frame_count").as_int(),
 					                                                            sprite.attribute("frame_time").as_float()));
 				else
-					playerRenderComponent_.addSprite(state, umb, umbDir, Sprite(sprite.attribute("filename").value(), 
+					playerRenderComponent_.addSprite(state, umb, umbDir, Sprite(sprite.attribute("filename").value(),
 					                                                            sprite.attribute("frame_count").as_int(),
 					                                                            sprite.attribute("frame_time").as_float(),
 					                                                            sprite.attribute("loop_back_frame").as_int()));
@@ -542,7 +542,7 @@ void GameState::showTriggers(){
 
 	SDL_SetRenderDrawColor(context, 0, 0, 255, 128);
 	for (auto& box : checkpoints){
-		
+
 		colRect_ = box.rect_;
 		drawRect_.x = (colRect_.x() - Camera::pos_.x());
 		drawRect_.y = (colRect_.y() - Camera::pos_.y());
@@ -553,7 +553,7 @@ void GameState::showTriggers(){
 
 	SDL_SetRenderDrawColor(context, 255, 0, 0, 128);
 	for (auto& box : musicTriggers){
-		
+
 		colRect_ = box.first.rect_;
 		drawRect_.x = (colRect_.x() - Camera::pos_.x());
 		drawRect_.y = (colRect_.y() - Camera::pos_.y());

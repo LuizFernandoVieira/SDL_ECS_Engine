@@ -24,6 +24,7 @@ void CollisionRainTerrainSystem::update(
 	// coisaFeia.clear();
 
   std::vector<int> toDelete;
+  std::vector<int> toDeleteNow;
 
 	// Colisao com o terreno
 	for (auto& col : colComp)
@@ -45,7 +46,8 @@ void CollisionRainTerrainSystem::update(
 					Resources::TILE_HEIGHT
 				);
 
-				if (collisionMap.at(x,y) == 0 && isColliding(collider, terrain, 0, 0))
+				if ( (collisionMap.at(x,y) == 0 || collisionMap.at(x,y) == 3 || collisionMap.at(x,y) == 4) &&
+              isColliding(collider, terrain, 0, 0))
 				{
           if(std::find(toDelete.begin(), toDelete.end(), col.first) == toDelete.end())
           {
@@ -53,6 +55,12 @@ void CollisionRainTerrainSystem::update(
           }
 					// coisaFeia.emplace_back(terrain);
 				}
+        else if ( collisionMap.at(x,y) == 5 || collisionMap.at(x,y) == 6 &&
+              isColliding(collider, terrain, 0, 0))
+        {
+          toDeleteNow.emplace_back(col.first);
+        }
+
 			}
 		}
 	}
@@ -60,6 +68,11 @@ void CollisionRainTerrainSystem::update(
   for(auto d : toDelete)
   {
     particleEmitterSystem.destroyParticle(d);
+  }
+
+  for(auto d : toDeleteNow)
+  {
+    particleEmitterSystem.destroyParticleNow(d);
   }
 }
 
