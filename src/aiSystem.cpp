@@ -4,7 +4,7 @@
 
 #define AI_DEBUG false
 
-#define AI_PROCESSING_DISTANCE	Resources::WINDOW_WIDTH
+#define AI_PROCESSING_DISTANCE	(Resources::WINDOW_WIDTH / 2)
 #define FOLLOW_DISTANCE 		100.0f
 #define FOLLOW_TARGET 			gameState.player_
 
@@ -15,7 +15,7 @@ AISystem::AISystem()
 
 void AISystem::update(float dt, GameState& gameState)
 {
-	
+
 	std::map<int, AIComponent*> aiComp	= gameState.mapAI_;
 
 	StateComponent* stateComp;
@@ -66,11 +66,6 @@ void AISystem::update(float dt, GameState& gameState)
 					//move = Distance(ai.first, gameState.player_, FOLLOW_DISTANCE);
 					move = (FOLLOW_DISTANCE < Distance( transComp->rect_,
 								gameState.mapTransform_[FOLLOW_TARGET]->rect_));
-
-					/*
-					move = (gameState.mapTransform_[gameState.player_]->rect_.getCenter().x() - 
-							gameState.mapTransform_[ai.first]->			rect_.getCenter().x())
-					*/
 					break;
 
 				//Caso: Perto Demais do Alvo
@@ -98,22 +93,27 @@ void AISystem::update(float dt, GameState& gameState)
 					move = false;
 					break;
 
+				//Caso: Not-Airborne
+				case 7:
+					move = (gameState.mapState_[ai.first]->state_ != State::JUMPING); // && != FALLING
+					break;
+
 				//Ué
 				default:
 					move = false;
 					break;
 			}
 
-
-			//Se movimento for válido
+				//Se movimento for válido
 			if (move && current_state.action_timer.get() >= current_state.cooldown){				
 				ai.second->state_index = trigger.second;
-				current_state.action_timer.restart();	
+				current_state.action_timer.restart();
+				break;
 			}
-
 			//Não houve mudança de estado no frame
 			else move = false; 
 		}
+
 
 	if (AI_DEBUG){
 		ai.second->PrintCurrentState();
@@ -138,8 +138,7 @@ void AISystem::update(float dt, GameState& gameState)
 			SHOOT,		//7
 			DEAD,		//8
 			FOLLOW		//9
-		};
-	*/
+		};*/
 			//IDLE
 			case 0:				
 				speedComp->speed_.y(0);
@@ -155,7 +154,6 @@ void AISystem::update(float dt, GameState& gameState)
 			//JUMP
 			case 2:
 				if (move){
-					std::cout << "Bam" << std::endl;
 					speedComp->speed_.y(-Resources::PLAYER_JUMP_SPEED);
 					stateComp->state_ = State::JUMPING;
 				}
@@ -192,30 +190,4 @@ void AISystem::update(float dt, GameState& gameState)
 				break;
 		}
 	}
-
-
-/*
-	//---------------------------------------------------------------------------
-	for (auto& phys : physics)
-	{
-		if (speed[phys.first]->speed_.y() < 0)
-		{
-			// TA PULANDO
-			// Agora sim gravidade funciona como uma aceleracao (desaceleracao do pulo nesse caso)
-			speed[phys.first]->speed_ += Vec2(0, Resources::GRAVITY * phys.second->gravityScale_ * dt * 4);
-		}
-		else
-		{
-			// TA CAINDO (A MENOS QUE ESTEJA COLIDINDO)
-			if (state[phys.first]->state_ != State::ZIPLINE)
-			{
-				speed[phys.first]->speed_.y(Resources::GRAVITY * phys.second->gravityScale_);
-				if (state[phys.first]->state_ != State::GRAPPLE && state[phys.first]->state_ != State::ATTACKING)
-				{
-					state[phys.first]->state_ = State::FALLING;
-				}
-			}
-		}
-	}
-*/
 }
