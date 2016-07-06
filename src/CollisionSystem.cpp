@@ -165,12 +165,12 @@ void CollisionSystem::updateCollider(
 	{
 		for (auto col2 = collider.begin(); col2 != collider.end(); ++col2)
 		{
-			if (col != col2 &&
-				health.find(col2->first) != health.end() &&
-				isColliding( col->second->hurtbox_ + transform[col->first]->rect_.getPivot(),
-			                 col2->second->hurtbox_ + transform[col2->first]->rect_.getPivot(),
-			                 transform[col->first]->rotation_,
-			                 transform[col2->first]->rotation_))
+			if ( col != col2 &&
+			     health.find(col2->first) != health.end() &&
+			     isColliding( col->second->hitbox_ + transform[col->first]->rect_.getPivot(),
+			                  col2->second->hurtbox_ + transform[col2->first]->rect_.getPivot(),
+			                  transform[col->first]->rotation_,
+			                  transform[col2->first]->rotation_))
 			{
 				health[col2->first]->health_--;
 			}

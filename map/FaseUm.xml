@@ -169,6 +169,7 @@
 		<render>
 			<sprite state="0" filename="../img/characters/enemies/agonia/Agonia_Andando.png" frame_count="42" frame_time="0.01" />
 		</render>
+		<health value="1" />
 		<physics gravity_scale="1.0" />
 		<collider>
 			<hurtbox x="0" y="0" w="115" h="158" />
