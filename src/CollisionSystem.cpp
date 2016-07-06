@@ -161,11 +161,13 @@ void CollisionSystem::updateCollider(
 		{
 			if ( col != col2 &&
 			     health.find(col2->first) != health.end() &&
+			     col->second->hitbox_ != Rect() &&
 			     isColliding( col->second->hitbox_ + transform[col->first]->rect_.getPivot(),
 			                  col2->second->hurtbox_ + transform[col2->first]->rect_.getPivot(),
 			                  transform[col->first]->rotation_,
 			                  transform[col2->first]->rotation_))
 			{
+				std::cout << col->second->hitbox_.x() << ", " << col->second->hitbox_.y() << ", " << col->second->hitbox_.w() << ", " << col->second->hitbox_.h() << std::endl; 
 				health[col2->first]->health_--;
 			}
 		}

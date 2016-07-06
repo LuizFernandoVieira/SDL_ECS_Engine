@@ -65,6 +65,17 @@ Rect Rect::operator* (const Rect& r)
 	return rect;
 }
 
+
+bool Rect::operator== (const Rect& rect)
+{
+	return ( x_ == rect.x() && y_ == rect.y() && w_ == rect.w() && h_ == rect.h() );
+}
+
+bool Rect::operator!= (const Rect& rect)
+{
+	return ( !(*this == rect) );
+}
+
 bool Rect::isInside(Vec2 vec2)
 {
 	if ( vec2.x() >= x_ &&

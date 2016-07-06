@@ -27,6 +27,9 @@ public:
 	Rect& operator+= (const Vec2&);
 	Rect operator* (const Rect&);
 
+	bool operator== (const Rect&);
+	bool operator!= (const Rect&);
+
 	bool isInside(Vec2 vec2);
 
 	float x() const { return x_; }
