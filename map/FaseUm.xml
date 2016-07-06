@@ -36,29 +36,19 @@
 			<layer channel="8" value="0" />
 		</volume>
 	</music>
-
 	<checkpoints name="checkpoints">
 		<spawner name="default" x="288" y="150" w="48" h="96" />
-		<!--spawner name="default" x="288" y="500" w="48" h="96" /-->
 		<spawner name="test" x="864" y="500" w="48" h="96" />
 	</checkpoints>
-
 	<triggers>
-		<!-- 	Colisores Genéricos Multifuncionais -->
 		<checkpoint x="288" y="500" w="800" h="500" />
 		<checkpoint x="288" y="500" w="48" h="96" />
-
-		<switch target=""/>
-
-		<!-- Controlar estado da música -->
-		<music state="all_on"  state_int="0" play="false" x="288" y="500" w="10" h="500"/>
-		<music state="all_off" state_int="1" play="true" x="576" y="500" w="10" h="96"/>
-
-		<!-- TODO :: Controlar renderização das camadas da frente -->
-		<front state="0" play="true" x="288" y="500" w="48" h="96"/>
+		<switch target="" />
+		<music state="all_on" state_int="0" play="false" x="288" y="500" w="10" h="500" />
+		<music state="all_off" state_int="1" play="true" x="576" y="500" w="10" h="96" />
+		<front state="0" play="true" x="288" y="500" w="48" h="96" />
 	</triggers>
 </world_info>
-
 <world_objects>
 	<object name="player">
 		<transform>
@@ -161,7 +151,6 @@
 		</transform>
 		<wind direction="0" speed="100" />
 	</object>
-
 	<object name="ai_test">
 		<transform>
 			<rect x="288" y="350" w="115" h="158" />
@@ -198,7 +187,6 @@
 			</state_index>
 		</AI>
 	</object>
-
 	<object name="Comoda" id="1" layer="2">
 		<transform>
 			<rect x="897" y="518" w="54" h="96" />

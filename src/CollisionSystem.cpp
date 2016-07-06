@@ -33,7 +33,7 @@ void CollisionSystem::update(float dt, GameState& gameState)
 
 	updateZipline(player, transform, collider, speed, oldState, state, zipline);
 	updateWind(dt, player, transform, collider, /*speed, oldState,*/ state, wind);
-	updateTerrain(collisionMap, oldTransform, transform, collider, speed, state);
+	updateTerrain(collisionMap, oldTransform, transform, collider, speed, state, health);
 	updateCollider(transform, collider, speed, state, health);
 
 	updateTriggers(gameState);
@@ -80,7 +80,8 @@ void CollisionSystem::updateTerrain(
 	std::map<int, TransformComponent*> transform,
 	std::map<int, ColliderComponent*> collider,
 	std::map<int, SpeedComponent*> speed,
-	std::map<int, StateComponent*> state)
+	std::map<int, StateComponent*> state,
+	std::map<int, HealthComponent*> health)
 {
 	// Colisao com o terreno
 	for (auto& col : collider)
@@ -129,7 +130,10 @@ void CollisionSystem::updateTerrain(
 							if (state[col.first]->state_ != State::JUMPING)
 								correctDiagonalDown(transform[col.first]->rect_, col.second->hurtbox_, terrain, speed[col.first]->speed_);
 							break;
-						
+						case 7:
+							if (health.find(col.first) != health.end())
+								health[col.first]->health_--;
+							break;
 					}
 
 					if (speed[col.first]->speed_.y() == 0 && state[col.first]->state_ != State::ATTACKING && state[col.first]->state_ != State::DYING)
