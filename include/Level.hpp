@@ -12,6 +12,8 @@
 #include "StaticSprite.hpp"
 #include "pugixml.hpp"
 
+#include "../include/ScreenLayer.hpp"
+
 class Level
 {
 public:
@@ -22,14 +24,17 @@ public:
 	// std::vector<std::pair<int, TransformComponent*>> createTerrain(unsigned int&);
 	CollisionMap& getCollisionMap();
 
+	short int max_layers;
+	short int main_layer;
+
 private:
 	//StaticSprite bg;
 	TileSet tileSet_;
 	TileMap tileMap_;
 	CollisionMap collisionMap_;
 
-	//std::vector<ScreenLayer*> screen;
-	std::vector<StaticSprite> screen;
+	std::vector<ScreenLayer*> screen;
+	//std::vector<StaticSprite> screen;
 };
 
 
