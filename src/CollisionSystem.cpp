@@ -117,6 +117,7 @@ void CollisionSystem::updateTerrain(
 							correctWall(transform[col.first]->rect_, col.second->hurtbox_, terrain, speed[col.first]->speed_);
 							break;
 						case 3:
+							std::cout << "Floor ceiling" << std::endl;
 							correctFloorCeiling(transform[col.first]->rect_, col.second->hurtbox_, terrain, speed[col.first]->speed_);
 							break;
 						case 4:
@@ -124,11 +125,17 @@ void CollisionSystem::updateTerrain(
 							break;
 						case 5:
 							if (state[col.first]->state_ != State::JUMPING)
+							{
+								std::cout << "Diag up" << std::endl;
 								correctDiagonalUp(transform[col.first]->rect_, col.second->hurtbox_, terrain, speed[col.first]->speed_);
+							}
 							break;
 						case 6:
 							if (state[col.first]->state_ != State::JUMPING)
+							{
+								std::cout << "Diag down" << std::endl;
 								correctDiagonalDown(transform[col.first]->rect_, col.second->hurtbox_, terrain, speed[col.first]->speed_);
+							}
 							break;
 						case 7:
 							if (health.find(col.first) != health.end())
@@ -451,12 +458,12 @@ void CollisionSystem::correctAllSides(Rect& entityPos, Rect collider, Rect terra
 void CollisionSystem::correctDiagonalUp(Rect& entityPos, Rect collider, Rect terrain, Vec2& speed)
 {
 	float angle = LineInclination(entityPos.getCenter(), terrain.getCenter());
-	if (angle >= -55 && angle <= 125)
+	if ( angle >= -55 && angle <= 125 )
 	{
-		if (collider.getCenter().x() - collider.x() / 2 >= terrain.x() && 
-			collider.getCenter().x() - collider.x() / 2 <= terrain.x() + terrain.w())
+		if (collider.getCenter().x() + entityPos.x() - collider.x() >= terrain.x() && 
+			collider.getCenter().x() + entityPos.x() - collider.x() <= terrain.x() + terrain.w())
 		{
-			entityPos.y( terrain.y() + terrain.h() - collider.h() - collider.y() - (collider.getCenter().x() - terrain.x()) );
+			entityPos.y( terrain.y() + terrain.h() - collider.h() - collider.y() - (collider.getCenter().x() + entityPos.x() - collider.x() - terrain.x()) );
 			speed.y(0.0);
 		}
 	}
@@ -466,12 +473,12 @@ void CollisionSystem::correctDiagonalUp(Rect& entityPos, Rect collider, Rect ter
 void CollisionSystem::correctDiagonalDown(Rect& entityPos, Rect collider, Rect terrain, Vec2& speed)
 {
 	float angle = LineInclination(entityPos.getCenter(), terrain.getCenter());
-	if (angle >= 55 && angle < 235)
+	if ( angle >= 55 && angle <= 235 )
 	{
-		if (collider.getCenter().x() - collider.x() / 2 >= terrain.x() && 
-			collider.getCenter().x() - collider.x() / 2 <= terrain.x() + terrain.w())
+		if (collider.getCenter().x() + entityPos.x() - collider.x() >= terrain.x() && 
+			collider.getCenter().x() + entityPos.x() - collider.x() <= terrain.x() + terrain.w())
 		{
-			entityPos.y( terrain.y() - collider.h() - collider.y() + (collider.getCenter().x() - terrain.x()) );
+			entityPos.y( terrain.y() - collider.h() - collider.y() + (collider.getCenter().x() + entityPos.x() - collider.x() - terrain.x()) );
 			speed.y(0.0);
 		}
 	}

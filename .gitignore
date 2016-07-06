@@ -9,7 +9,7 @@
 *.d
 *.so
 makefile
-
+prog
 
 # OS generated files #
 ######################

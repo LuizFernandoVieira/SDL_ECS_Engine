@@ -91,10 +91,10 @@
 			<sprite state="0" umbrella_state="1" umbrella_direction="1" filename="../img/characters/player/idle apontado pra frente.png" frame_count="24" frame_time="0.01" />
 			<sprite state="0" umbrella_state="1" umbrella_direction="2" filename="../img/characters/player/idle.png" frame_count="24" frame_time="0.01" />
 			<sprite state="0" umbrella_state="1" umbrella_direction="3" filename="../img/characters/player/Parada apontado pra tras.png" frame_count="24" frame_time="0.01" />
-			<sprite state="1" umbrella_state="0" umbrella_direction="0" filename="../img/characters/player/running_front_closed.png" frame_count="24" frame_time="0.02" />
-			<sprite state="1" umbrella_state="0" umbrella_direction="1" filename="../img/characters/player/running_front_closed.png" frame_count="24" frame_time="0.02" />
-			<sprite state="1" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/running_front_closed.png" frame_count="24" frame_time="0.02" />
-			<sprite state="1" umbrella_state="0" umbrella_direction="3" filename="../img/characters/player/running_front_closed.png" frame_count="24" frame_time="0.02" />
+			<sprite state="1" umbrella_state="0" umbrella_direction="0" filename="../img/characters/player/Correndo.png" frame_count="24" frame_time="0.02" />
+			<sprite state="1" umbrella_state="0" umbrella_direction="1" filename="../img/characters/player/Correndo.png" frame_count="24" frame_time="0.02" />
+			<sprite state="1" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/Correndo.png" frame_count="24" frame_time="0.02" />
+			<sprite state="1" umbrella_state="0" umbrella_direction="3" filename="../img/characters/player/Correndo.png" frame_count="24" frame_time="0.02" />
 			<sprite state="1" umbrella_state="1" umbrella_direction="0" filename="../img/characters/player/andando.png" frame_count="24" frame_time="0.02" />
 			<sprite state="1" umbrella_state="1" umbrella_direction="1" filename="../img/characters/player/andando apontado pra frente.png" frame_count="24" frame_time="0.02" />
 			<sprite state="1" umbrella_state="1" umbrella_direction="2" filename="../img/characters/player/andando apontado pra frente.png" frame_count="24" frame_time="0.02" />
