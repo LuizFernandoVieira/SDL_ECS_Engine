@@ -14,6 +14,6 @@
 
 	<debug>
 		<collision show="false"/>
-		<triggers show="false"/>
+		<triggers show="true"/>
 	</debug>
 </config>
