@@ -125,17 +125,11 @@ void CollisionSystem::updateTerrain(
 							break;
 						case 5:
 							if (state[col.first]->state_ != State::JUMPING)
-							{
-								std::cout << "Diag up" << std::endl;
 								correctDiagonalUp(transform[col.first]->rect_, col.second->hurtbox_, terrain, speed[col.first]->speed_);
-							}
 							break;
 						case 6:
 							if (state[col.first]->state_ != State::JUMPING)
-							{
-								std::cout << "Diag down" << std::endl;
 								correctDiagonalDown(transform[col.first]->rect_, col.second->hurtbox_, terrain, speed[col.first]->speed_);
-							}
 							break;
 						case 7:
 							if (health.find(col.first) != health.end())

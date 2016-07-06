@@ -305,7 +305,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/portão-trás.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/portao-tras.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -316,7 +316,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/portão-frente.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/portao-frente.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -338,7 +338,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações chão/estátua do chafariz.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes chao/estatua do chafariz.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -349,7 +349,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações chão/lâmpada1.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes chao/lampada1.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -360,7 +360,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações chão/lâmpada2.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes chao/lampada2.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -371,7 +371,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações chão/lâmpada3.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes chao/lampada3.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -382,7 +382,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações chão/lâmpada4.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes chao/lampada4.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -393,7 +393,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações de parede/crack1.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes de parede/crack1.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -404,7 +404,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações de parede/crack2.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes de parede/crack2.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -415,7 +415,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações de parede/crack3.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes de parede/crack3.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -426,7 +426,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações de parede/JI1.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes de parede/JI1.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -437,7 +437,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações de parede/JI2.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes de parede/JI2.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -448,7 +448,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações de parede/JI3.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes de parede/JI3.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -459,7 +459,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações de parede/JI4.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes de parede/JI4.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -470,7 +470,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações de parede/JI5.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes de parede/JI5.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -481,7 +481,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações de parede/JI6.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes de parede/JI6.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -492,7 +492,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações de parede/JI7.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes de parede/JI7.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -503,7 +503,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações de parede/JI8.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes de parede/JI8.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -514,7 +514,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações de parede/JI9.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes de parede/JI9.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -525,7 +525,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações de parede/JO1.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes de parede/JO1.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -536,7 +536,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações de parede/JO2.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes de parede/JO2.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -547,7 +547,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações de parede/JO3.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes de parede/JO3.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -558,7 +558,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações de parede/JO4.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes de parede/JO4.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -569,7 +569,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações de parede/JO5.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes de parede/JO5.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -580,7 +580,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações de parede/JO6.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes de parede/JO6.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -591,7 +591,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações de parede/JO7.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes de parede/JO7.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -602,7 +602,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações de parede/JO8.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes de parede/JO8.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -613,7 +613,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações de parede/JO9.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes de parede/JO9.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -624,7 +624,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações de parede/P1.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes de parede/P1.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -635,7 +635,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações de parede/P2.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes de parede/P2.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -646,7 +646,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações de parede/P3.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes de parede/P3.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -657,7 +657,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações de parede/P4.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes de parede/P4.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -668,7 +668,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações de parede/P5.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes de parede/P5.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -679,7 +679,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações de parede/P6.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes de parede/P6.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -690,7 +690,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações de parede/P7.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes de parede/P7.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -701,7 +701,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações de parede/P8.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes de parede/P8.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -712,7 +712,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações de parede/P9.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes de parede/P9.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -723,7 +723,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações de parede/quadro.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes de parede/quadro.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -734,7 +734,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações de parede/web1.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes de parede/web1.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -745,7 +745,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações de parede/web2.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes de parede/web2.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
@@ -756,7 +756,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/objetos/decorações de teto/chandelier.png" frame_count="1" frame_time="1.0" />
+		<sprite state="0" filename="../img/objetos/decoracoes de teto/chandelier.png" frame_count="1" frame_time="1.0" />
 	</render>
 	<state />
 </object>
