@@ -4,8 +4,9 @@
 	<tilemap file="../map/FaseUm_tilemap.txt" />
 	<collision_map file="../map/FaseUm_colmap.txt" />
 	<layers>
-		<screen main="false" parallax="0" static="true" file="../img/cidade_bg.png" />
-		<screen main="false" parallax="0" type="sprite" file="../img/bg.png" />
+		<screen main="false" tiled="false" file="../img/screen_layers/cidade_1.png" parallax_x="0.02" parallax_y="0" />
+		<screen main="false" tiled="false" file="../img/screen_layers/cidade_2.png" parallax_x="0.01" parallax_y="0" />
+		<screen main="false" tiled="false" file="../img/screen_layers/cidade_3.png" parallax_x="0" parallax_y="0" />
 	</layers>
 	<music>
 		<assets>
@@ -216,6 +217,7 @@
 			<sprite state="0" filename="../img/objetos/armoire.png" frame_count="1" frame_time="1.0" />
 		</render>
 		<state />
+		<speed />
 		<collider>
 			<hurtbox x="0" y="0" w="54" h="96" />
 		</collider>
