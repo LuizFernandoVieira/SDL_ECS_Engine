@@ -51,7 +51,7 @@ private:
 	Sprite cursorBg_;
 
 	Sprite* objectSp_;
-	float objectSpRotation_;
+	// float objectSpRotation_;
 
 	Vec2 firstDragClick_;
 	Vec2 curDragClick_;

@@ -117,7 +117,6 @@ void CollisionSystem::updateTerrain(
 							correctWall(transform[col.first]->rect_, col.second->hurtbox_, terrain, speed[col.first]->speed_);
 							break;
 						case 3:
-							std::cout << "Floor ceiling" << std::endl;
 							correctFloorCeiling(transform[col.first]->rect_, col.second->hurtbox_, terrain, speed[col.first]->speed_);
 							break;
 						case 4:

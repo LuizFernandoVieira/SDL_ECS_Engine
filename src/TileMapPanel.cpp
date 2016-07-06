@@ -38,12 +38,12 @@ TileMapPanel::TileMapPanel(TileSet& tileSet, TileMap& tileMap, CollisionMap& col
 		objectSp_ = new Sprite(info.filename.c_str(), info.frameCount, info.frameTime);
 		objectSp_->setScaleX(info.scaleX);
 		objectSp_->setScaleY(info.scaleY);
-		objectSpRotation_ = info.rotation;
+		// objectSpRotation_ = info.rotation;
 	}
 	else
 	{
 		objectSp_ = new Sprite("../img/interface/editor/btn_4.png");
-		objectSpRotation_ = 0;
+		// objectSpRotation_ = 0;
 	}
 
 	nextId = objectMap_->getLastObjectId() + 1;
@@ -79,12 +79,12 @@ void TileMapPanel::update()
 			objectSp_ = new Sprite(info.filename.c_str(), info.frameCount, info.frameTime);
 			objectSp_->setScaleX(info.scaleX);
 			objectSp_->setScaleY(info.scaleY);
-			objectSpRotation_ = info.rotation;
+			// objectSpRotation_ = info.rotation;
 		}
 		else
 		{
 			objectSp_ = new Sprite("../img/interface/editor/btn_4.png");
-			objectSpRotation_ = 0;
+			// objectSpRotation_ = 0;
 		}
 	}
 
