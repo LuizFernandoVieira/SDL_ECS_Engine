@@ -1,9 +1,9 @@
 Fazendo:
 
-- Colisao entre objetos / entities;
-- Trigger (abrir portoes);
 - Morrer quando ta caindo de certa altura;
 - Checkpoints;
+- Botar objetos na fase;
+- Botar ziplines na fase;
 - Fullscreen;
 
 
@@ -11,7 +11,6 @@ Probleminhas a resolver:
 
 - Bug do editor, mousePress e isMouseDown;
 - Posicionamento dos sprites da menina;
-- Problema das camadas da frente (range que manda renderizar no tile map);
 
 
 ============== PROXIMA AULA ==================

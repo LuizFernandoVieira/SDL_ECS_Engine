@@ -451,12 +451,12 @@ void CollisionSystem::correctAllSides(Rect& entityPos, Rect collider, Rect terra
 void CollisionSystem::correctDiagonalUp(Rect& entityPos, Rect collider, Rect terrain, Vec2& speed)
 {
 	float angle = LineInclination(entityPos.getCenter(), terrain.getCenter());
-	if (angle >= -55 && angle <= 125)
+	if (angle >= -56 && angle <= 130)
 	{
-		if (collider.getCenter().x() - collider.x() / 2 >= terrain.x() && 
-			collider.getCenter().x() - collider.x() / 2 <= terrain.x() + terrain.w())
+		if (collider.getCenter().x() + entityPos.x() - collider.x() >= terrain.x() && 
+			collider.getCenter().x() + entityPos.x() - collider.x() <= terrain.x() + terrain.w())
 		{
-			entityPos.y( terrain.y() + terrain.h() - collider.h() - collider.y() - (collider.getCenter().x() - terrain.x()) );
+			entityPos.y( terrain.y() + terrain.h() - collider.h() - collider.y() - (collider.getCenter().x() + entityPos.x() - collider.x() - terrain.x()) );
 			speed.y(0.0);
 		}
 	}
@@ -468,10 +468,10 @@ void CollisionSystem::correctDiagonalDown(Rect& entityPos, Rect collider, Rect t
 	float angle = LineInclination(entityPos.getCenter(), terrain.getCenter());
 	if (angle >= 55 && angle < 235)
 	{
-		if (collider.getCenter().x() - collider.x() / 2 >= terrain.x() && 
-			collider.getCenter().x() - collider.x() / 2 <= terrain.x() + terrain.w())
+		if (collider.getCenter().x() + entityPos.x() - collider.x() >= terrain.x() && 
+			collider.getCenter().x() + entityPos.x() - collider.x() <= terrain.x() + terrain.w())
 		{
-			entityPos.y( terrain.y() - collider.h() - collider.y() + (collider.getCenter().x() - terrain.x()) );
+			entityPos.y( terrain.y() - collider.h() - collider.y() + (collider.getCenter().x() + entityPos.x() - collider.x() - terrain.x()) );
 			speed.y(0.0);
 		}
 	}

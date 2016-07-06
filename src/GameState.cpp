@@ -504,11 +504,9 @@ void GameState::deleteDeadEntities()
 			int id = state->first;
 			if (id == (int)player_)
 			{
-				// FAZ ALGUMA COISA
-				// VOLTA PRO CHECKPOINT
 				state->second->state_ = State::IDLE;
-				mapTransform_[player_]->rect_.x(400);
-				mapTransform_[player_]->rect_.y(400);
+				mapTransform_[player_]->rect_.x( checkpoints[((PlayerStateComponent*)mapState_[player_])->current_checkpoint].rect_.x() );
+				mapTransform_[player_]->rect_.y( checkpoints[((PlayerStateComponent*)mapState_[player_])->current_checkpoint].rect_.y() );
 				mapHealth_[player_]->health_ = 1;
 			}
 			else
