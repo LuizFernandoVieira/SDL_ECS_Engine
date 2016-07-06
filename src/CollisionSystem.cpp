@@ -2,6 +2,7 @@
 #include "../include/Resources.hpp"
 #include "../include/Camera.hpp"
 #include "../include/Sprite.hpp"
+#include "../include/Game.hpp"
 /*#include "../include/TransformComponent.hpp"
 #include "../include/ColliderComponent.hpp"
 #include "../include/SpeedComponent.hpp"
@@ -46,10 +47,6 @@ void CollisionSystem::updateTriggers(GameState& gameState)
 	TransformComponent& playerTransform = *gameState.mapTransform_[gameState.player_];
 	short unsigned int& player_checkpoint = ((PlayerStateComponent*) gameState.mapState_[gameState.player_])->current_checkpoint;
 	
-	//Rect player_collider = gameState.mapCollider_[player_]->hitbox_ + Vec2(transform[col.first]->rect_.x(), transform[col.first]->rect_.y() );
-
-	//std::vector<TransformComponent> 	checkpoints;
-	//std::vector<std::pair<TransformComponent, short int>> musicTriggers;
 	int counter = 0;
 	for(auto& triggerbox : gameState.checkpoints){
 		if (isColliding(playerTransform.rect_, triggerbox.rect_, 0, 0))
@@ -57,17 +54,14 @@ void CollisionSystem::updateTriggers(GameState& gameState)
 				player_checkpoint = counter;
 				std::cout << "Player obtained checkpoint: " << counter << std::endl;
 			}
-			/* do stuff*/
 		counter++;
 	}
 
 	for(auto& triggerbox : gameState.musicTriggers)
 		if (isColliding(playerTransform.rect_, triggerbox.first.rect_, 0, 0)){
 			gameState.SetVolumes(triggerbox.second);
-			//std::cout << "GRITEI CARAIO" << std::endl;
 		}
 
-	//TransformComponent	playerTransform = gameState.mapTransform_[player_];
 	/*
 	void updateCollider(
 	CollisionMap& collisionMap,
@@ -480,12 +474,42 @@ void CollisionSystem::correctDiagonalDown(Rect& entityPos, Rect collider, Rect t
 
 
 
-void CollisionSystem::render()
+void CollisionSystem::render(GameState& gameState)
 {
+	Rect colRect_;
+	Rect transRect_;
+	SDL_Rect drawRect_;
+	SDL_Renderer* context = Game::getInstance().getRenderer();
+
+	SDL_SetRenderDrawBlendMode(context, SDL_BLENDMODE_BLEND);
+	for (auto& collider : gameState.mapCollider_){
+		//drawing hitbox
+		colRect_ = collider.second->hitbox_;
+		transRect_ = gameState.mapTransform_[collider.first]->rect_;
+		drawRect_.x = (transRect_.x() + colRect_.x() - Camera::pos_.x());
+		drawRect_.y = (transRect_.y() + colRect_.y() - Camera::pos_.y());
+		drawRect_.w = colRect_.w();
+		drawRect_.h = colRect_.h();
+
+		SDL_SetRenderDrawColor(context, 0, 0, 255, 128);
+		SDL_RenderFillRect(context,	&drawRect_);
+
+		colRect_ = collider.second->hurtbox_;
+		transRect_ = gameState.mapTransform_[collider.first]->rect_;
+		drawRect_.x = (transRect_.x() + colRect_.x() - Camera::pos_.x());
+		drawRect_.y = (transRect_.y() + colRect_.y() - Camera::pos_.y());
+		drawRect_.w = colRect_.w();
+		drawRect_.h = colRect_.h();
+
+		SDL_SetRenderDrawColor(context, 255, 0, 0, 128);
+		SDL_RenderFillRect(context,	&drawRect_);
+	}
+	/*
 	for (int i = 0; i < (int)collidersToRender.size(); i++)
 	{
 		Sprite sp = Sprite();
 		sp.setClip(collidersToRender[i].x(), collidersToRender[i].y(), collidersToRender[i].w(), collidersToRender[i].h());
 		sp.renderSelection(collidersToRender[i].x() - Camera::pos_.x(), collidersToRender[i].y() - Camera::pos_.y());
 	}
+	*/
 }

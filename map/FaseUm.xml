@@ -38,7 +38,8 @@
 	</music>
 
 	<checkpoints name="checkpoints">
-		<spawner name="default" x="288" y="500" w="48" h="96" />
+		<spawner name="default" x="288" y="150" w="48" h="96" />
+		<!--spawner name="default" x="288" y="500" w="48" h="96" /-->
 		<spawner name="test" x="864" y="500" w="48" h="96" />
 	</checkpoints>
 
@@ -160,19 +161,21 @@
 		</transform>
 		<wind direction="0" speed="100" />
 	</object>
+
 	<object name="ai_test">
 		<transform>
 			<rect x="288" y="350" w="115" h="158" />
 			<scale x="0.3" y="0.3" />
 			<rotation value="0" />
 		</transform>
+		<health value="1" />
 		<render>
 			<sprite state="0" filename="../img/characters/enemies/agonia/Agonia_Andando.png" frame_count="42" frame_time="0.01" />
 		</render>
 		<health value="1" />
 		<physics gravity_scale="1.0" />
 		<collider>
-			<hurtbox x="0" y="0" w="115" h="158" />
+			<hurtbox x="0" y="0" w="48" h="120" />
 			<hitbox x="10" y="-10" w="20" h="20" />
 		</collider>
 		<speed jump="10" walk="10" />
@@ -195,6 +198,7 @@
 			</state_index>
 		</AI>
 	</object>
+
 	<object name="Comoda" id="1" layer="2">
 		<transform>
 			<rect x="897" y="518" w="54" h="96" />

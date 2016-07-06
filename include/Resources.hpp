@@ -45,6 +45,10 @@ public:
 	static int MAP_WIDTH;
 	static int MAP_HEIGHT;
 
+	//DEBUG
+	static bool DEBUG_COLLISION;
+	static bool DEBUG_AI;
+
 	static std::string TILE_SET_IMG;
 	static std::string TILE_MAP_TXT;
 	static std::string COLLISION_MAP_TXT;

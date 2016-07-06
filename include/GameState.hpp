@@ -22,6 +22,7 @@
 
 
 #include "Music.hpp"
+#include "Resources.hpp"
 #include "CollisionMap.hpp"
 
 class GameState: public IState

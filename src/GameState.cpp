@@ -185,9 +185,12 @@ void GameState::render()
 		if (i == main_layer){
 			playerRenderSystem.render(*this);
 			particleEmitterSystem.render();
-			// collisionSystem_.render();
 		}
 	}
+
+	/* if (Resources::collisionDebug) ==> booleana a ser lida de config.xml */
+	if (Resources::DEBUG_COLLISION)
+		((CollisionSystem*)systems_[5])->render(*this);
 }
 
 
