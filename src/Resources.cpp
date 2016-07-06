@@ -24,6 +24,10 @@ float Resources::DYING_TIME            = 3; // seconds
 int Resources::MAP_WIDTH               = 0;
 int Resources::MAP_HEIGHT              = 0;
 
+//Debug Modes
+bool Resources::DEBUG_COLLISION	= false;
+bool Resources::DEBUG_AI		= false;
+
 std::string Resources::TILE_SET_IMG           = "../img/maps/tilesetcidade1.png";
 std::string Resources::TILE_MAP_TXT           = "../map/FaseUm_tilemap.txt";
 std::string Resources::COLLISION_MAP_TXT      = "../map/FaseUm_colmap.txt";
@@ -175,12 +179,31 @@ void Resources::Read(std::string _filename){
 	_node node = doc.first_child();
 
 	//Fetching Globals
-	for(_node data = node.child("globals").first_child(); data; data = data.next_sibling()){
-		std::cout << "count: " << tempInt << "\t";
+	_node data;
+	for(data = node.child("globals").first_child(); data; data = data.next_sibling()){
+		//std::cout << "count: " << tempInt << "\t";
 		tempInt++;
 
 		varName = data.attribute("name").value();
 		varType = data.attribute("type").value();
+
+
+		if (varType == "int"){
+			intTable.emplace(varName, 		data.attribute("value").as_int());
+			//std::cout << "Fetched value: " << varName << " = " << intTable[varName] << std::endl;
+		}else{
+			floatTable.emplace(varName, 	data.attribute("value").as_float());
+			//std::cout << "Fetched value: " << varName << " = " << floatTable[varName] << std::endl;
+		}
+	}
+	std::cout << std::endl;
+
+
+
+	//Debug Mode
+	data = node.child("debug");
+	if(data.child("collision").attribute("show").as_bool()){
+		Resources::DEBUG_COLLISION = true;
 
 
 		if (varType == "int"){
@@ -191,8 +214,6 @@ void Resources::Read(std::string _filename){
 			std::cout << "Fetched value: " << varName << " = " << floatTable[varName] << std::endl;
 		}
 	}
-	std::cout << std::endl;
-
 
 	//Assossiação de Valores (Temporário, substituir por função getValue)
 	WINDOW_WIDTH 		= intTable["WINDOW_WIDTH"];
@@ -203,6 +224,7 @@ void Resources::Read(std::string _filename){
 
 	PLAYER_JUMP_SPEED 	= floatTable["PLAYER_JUMP_SPEED"];
 	PLAYER_WALK_SPEED 	= floatTable["PLAYER_WALK_SPEED"];
+
 
 
 	//Test Printing
@@ -230,6 +252,6 @@ void Resources::Read(std::string _filename){
 		std::cout << std::endl;
 	}
 
-	std::cout << std::endl << "Resources Loaded Successfully" << std::endl;
+	//std::cout << std::endl << "Resources Loaded Successfully" << std::endl;
 
 }

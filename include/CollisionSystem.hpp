@@ -16,7 +16,7 @@ class CollisionSystem : public System
 public:
 	CollisionSystem();
 	void update(float dt, GameState& gameState);
-	void render();
+	void render(GameState& gameState);
 
 private:
 	bool isColliding(const Rect& a, const Rect& b, float angleOfA, float angleOfB);

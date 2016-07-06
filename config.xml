@@ -45,4 +45,8 @@
 			</volume>
 		</music>
 	</state-->
+
+	<debug>
+		<collision show="true"/>
+	</debug>
 </config>
