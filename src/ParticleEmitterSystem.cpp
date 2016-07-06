@@ -32,9 +32,8 @@ void ParticleEmitterSystem::update(float dt, GameState& gameState)
 
 		std::cout << "B" << std::endl;
 		// Exemplo soh pra testar, nao esquecer de mudar depois
-		std::unordered_map<State, Sprite> particleSprite;
-		particleSprite.emplace(State::IDLE, Sprite("../img/gota.png", 1, 0.1));
-		mapRender_.emplace(particle_, new RenderComponent(particleSprite));
+		mapRender_.emplace(particle_, new RenderComponent(/*particleSprite*/));
+		mapRender_[particle_]->addSprite(State::IDLE, Sprite("../img/gota.png", 1, 0.1));
 		// mapRender_[particle_]->setCurrentSprite("IdleState");
 
 		std::cout << "C" << std::endl;
@@ -94,33 +93,43 @@ void ParticleEmitterSystem::update(float dt, GameState& gameState)
 	}
 
 	std::cout << "I" << std::endl;
-	for(auto& timer : mapTimer_)
+	for(auto timer = mapTimer_.begin(); timer != mapTimer_.end(); ++timer)
 	{
-		emissionRateSystem_.update(dt, timer.second);
-		if (timer.second->time_  > 20) {
+		emissionRateSystem_.update(dt, timer->second);
+		if (timer->second->time_  > 20) {
 			// Deleta os componentes inuteis
-			mapTransform_.erase(timer.first);
-			mapRender_.erase(timer.first);
-			mapSpeed_.erase(timer.first);
-			mapCollider_.erase(timer.first);
-			mapTimer_.erase(timer.first); // o iterador do tempo deve ser o ultimo a ser deletado
+			mapTransform_.erase(timer->first);
+			mapRender_.erase(timer->first);
+			mapSpeed_.erase(timer->first);
+			mapCollider_.erase(timer->first);
+			timer = mapTimer_.erase(timer); // o iterador do tempo deve ser o ultimo a ser deletado
+			--timer;
 		}
 	}
+	std::cout << "J" << std::endl;
 }
 
 void ParticleEmitterSystem::render()
 {
-	for(auto& render : mapRender_)
+	std::cout << "K" << std::endl;
+	std::cout << mapRender_.size() << std::endl;
+/*	for(auto render = mapRender_.begin(); render != mapRender_.end(); render++)
 	{
-		Rect transform = mapTransform_[render.first]->rect_;
-		render.second->getSprite(State::IDLE).render(
+		std::cout << "oi" << std::endl;
+		std::cout << render->first << std::endl;
+		std::cout << mapTransform_[render->first]->rect_.x() << std::endl;
+		Rect transform = mapTransform_[render->first]->rect_;
+		std::cout << "K.2" << std::endl;
+		render->second->getSprite(State::IDLE).render(
 			transform.x(),
 			transform.y(),
 			0,
 			0
 		);
-	}
-	// collisionRainTerrainSystem_.render(mapCollider_);
+		std::cout << "K.3" << std::endl;
+	}*/
+	std::cout << "L" << std::endl;
+	collisionRainTerrainSystem_.render(mapCollider_);
 }
 
 void ParticleEmitterSystem::destroyParticle(int particle)

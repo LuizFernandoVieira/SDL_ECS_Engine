@@ -169,7 +169,7 @@ void GameState::render()
 	//Setting Rendering Systems
 	RenderSystem& renderSystem = *(RenderSystem*)systems_[6];
 	PlayerRenderSystem& playerRenderSystem = *(PlayerRenderSystem*)systems_[7];
-	//ParticleEmitterSystem& particleEmitterSystem = *(ParticleEmitterSystem*)systems_[9];
+	ParticleEmitterSystem& particleEmitterSystem = *(ParticleEmitterSystem*)systems_[9];
 
 
 
@@ -497,16 +497,16 @@ void GameState::deleteDeadEntities()
 {
 	int max_layers = 5;
 
-	for (auto& state : mapState_ )
+	for (auto state = mapState_.begin(); state != mapState_.end(); ++state )
 	{
-		if (state.second->state_ == State::DEAD)
+		if (state->second->state_ == State::DEAD)
 		{
-			int id = state.first;
+			int id = state->first;
 			if (id == (int)player_)
 			{
 				// FAZ ALGUMA COISA
 				// VOLTA PRO CHECKPOINT
-				state.second->state_ = State::IDLE;
+				state->second->state_ = State::IDLE;
 				mapTransform_[player_]->rect_.x(400);
 				mapTransform_[player_]->rect_.y(400);
 				mapHealth_[player_]->health_ = 1;
@@ -514,7 +514,7 @@ void GameState::deleteDeadEntities()
 			else
 			{
 				mapTransform_.erase(id);
-				mapState_.erase(id);
+				state = mapState_.erase(state);
 				mapPhysics_.erase(id);
 				mapCollider_.erase(id);
 				mapSpeed_.erase(id);
@@ -526,6 +526,8 @@ void GameState::deleteDeadEntities()
 
 				for (int i = 0; i <= max_layers; i++)	//era para ser i < max_layers, segundo o que estava escrito
 					mapRender_[i].erase(id);
+
+				--state;
 			}
 		}
 	}

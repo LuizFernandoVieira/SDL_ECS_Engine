@@ -154,10 +154,10 @@ void TileMap::renderLayer(int layer, int x, int y)
 			break;
 	}
 
-	tileX = (Camera::pos_.x() /*- layerSpeed.x()*/ / tileSet_->getTileWidth()) - 8;
-	tileY = (Camera::pos_.y() /*- layerSpeed.y()*/ / tileSet_->getTileHeight()) - 8;
-	tileW = ((Camera::pos_.x() /*+ layerSpeed.x()*/ + Resources::WINDOW_WIDTH) / tileSet_->getTileWidth()) + 8;
-	tileH = ((Camera::pos_.y() /*+ layerSpeed.y()*/ + Resources::WINDOW_HEIGHT) / tileSet_->getTileHeight()) + 8;
+	tileX = ((Camera::pos_.x() - layerSpeed.x() * Camera::pos_.x()) / tileSet_->getTileWidth()) - 8;
+	tileY = ((Camera::pos_.y() - layerSpeed.y() * Camera::pos_.y()) / tileSet_->getTileHeight()) - 8;
+	tileW = ((Camera::pos_.x() + layerSpeed.x() * Camera::pos_.x() + Resources::WINDOW_WIDTH) / tileSet_->getTileWidth()) + 8;
+	tileH = ((Camera::pos_.y() + layerSpeed.y() * Camera::pos_.y() + Resources::WINDOW_HEIGHT) / tileSet_->getTileHeight()) + 8;
 
 
 	for (int i = tileY >= 0 ? tileY : 0; 

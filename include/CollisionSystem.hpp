@@ -27,7 +27,8 @@ private:
 		std::map<int, TransformComponent*> transform,
 		std::map<int, ColliderComponent*> collider,
 		std::map<int, SpeedComponent*> speed,
-		std::map<int, StateComponent*> state
+		std::map<int, StateComponent*> state,
+		std::map<int, HealthComponent*> health
 	);
 	void updateCollider(
 		std::map<int, TransformComponent*> transform,

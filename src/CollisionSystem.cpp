@@ -33,7 +33,7 @@ void CollisionSystem::update(float dt, GameState& gameState)
 
 	updateZipline(player, transform, collider, speed, oldState, state, zipline);
 	updateWind(dt, player, transform, collider, /*speed, oldState,*/ state, wind);
-	updateTerrain(collisionMap, oldTransform, transform, collider, speed, state);
+	updateTerrain(collisionMap, oldTransform, transform, collider, speed, state, health);
 	updateCollider(transform, collider, speed, state, health);
 
 	updateTriggers(gameState);
@@ -80,7 +80,8 @@ void CollisionSystem::updateTerrain(
 	std::map<int, TransformComponent*> transform,
 	std::map<int, ColliderComponent*> collider,
 	std::map<int, SpeedComponent*> speed,
-	std::map<int, StateComponent*> state)
+	std::map<int, StateComponent*> state,
+	std::map<int, HealthComponent*> health)
 {
 	// Colisao com o terreno
 	for (auto& col : collider)
@@ -129,7 +130,10 @@ void CollisionSystem::updateTerrain(
 							if (state[col.first]->state_ != State::JUMPING)
 								correctDiagonalDown(transform[col.first]->rect_, col.second->hurtbox_, terrain, speed[col.first]->speed_);
 							break;
-						
+						case 7:
+							if (health.find(col.first) != health.end())
+								health[col.first]->health_--;
+							break;
 					}
 
 					if (speed[col.first]->speed_.y() == 0 && state[col.first]->state_ != State::ATTACKING && state[col.first]->state_ != State::DYING)
@@ -159,12 +163,13 @@ void CollisionSystem::updateCollider(
 	{
 		for (auto col2 = collider.begin(); col2 != collider.end(); ++col2)
 		{
-			if (col != col2 &&
-				health.find(col2->first) != health.end() &&
-				isColliding( col->second->hurtbox_ + transform[col->first]->rect_.getPivot(),
-			                 col2->second->hurtbox_ + transform[col2->first]->rect_.getPivot(),
-			                 transform[col->first]->rotation_,
-			                 transform[col2->first]->rotation_))
+			if ( col != col2 &&
+			     health.find(col2->first) != health.end() &&
+			     col->second->hitbox_ != Rect() &&
+			     isColliding( col->second->hitbox_ + transform[col->first]->rect_.getPivot(),
+			                  col2->second->hurtbox_ + transform[col2->first]->rect_.getPivot(),
+			                  transform[col->first]->rotation_,
+			                  transform[col2->first]->rotation_))
 			{
 				health[col2->first]->health_--;
 			}
@@ -367,7 +372,7 @@ bool CollisionSystem::isColliding(const Rect& a, const Rect& b, float angleOfA, 
 void CollisionSystem::correctFloor(Rect& entityPos, Rect collider, Rect terrain, Vec2& speed)
 {
 	float angle = LineInclination(entityPos.getCenter(), terrain.getCenter());
-	if (angle >= 40 && angle <= 140 && entityPos.y() + entityPos.h() <= terrain.y() + terrain.h() / 2 )
+	if (angle >= 40 && angle <= 140 && entityPos.y() + collider.h() - collider.y() <= terrain.y() + terrain.h() / 2 )
 	{
 		entityPos.y( terrain.y() - collider.h() - collider.y() );
 		speed.y(0.0);
@@ -390,7 +395,7 @@ void CollisionSystem::correctWall(Rect& entityPos, Rect collider, Rect terrain, 
 void CollisionSystem::correctCeiling(Rect& entityPos, Rect collider, Rect terrain, Vec2& speed)
 {
 	float angle = LineInclination(entityPos.getCenter(), terrain.getCenter());
-	if ( ( (angle >= 220 && angle <= 320) || (angle >= -140 && angle <= -40) ) && entityPos.y() >= terrain.y() + terrain.h() / 2 )
+	if ( ( (angle >= 220 && angle <= 320) || (angle >= -140 && angle <= -40) ) && entityPos.y() - collider.y() >= terrain.y() + terrain.h() / 2 )
 	{
 		entityPos.y( terrain.y() + terrain.h() - collider.y() );
 		speed.y(0.0);
@@ -400,12 +405,12 @@ void CollisionSystem::correctCeiling(Rect& entityPos, Rect collider, Rect terrai
 void CollisionSystem::correctFloorCeiling(Rect& entityPos, Rect collider, Rect terrain, Vec2& speed)
 {
 	float angle = LineInclination(entityPos.getCenter(), terrain.getCenter());
-	if (angle >= 40 && angle <= 140 && entityPos.y() + entityPos.h() <= terrain.y() + terrain.h() / 2 )
+	if (angle >= 40 && angle <= 140 && entityPos.y() + collider.h() - collider.y() <= terrain.y() + terrain.h() / 2 )
 	{
 		entityPos.y( terrain.y() - collider.h() - collider.y() );
 		speed.y(0.0);
 	}
-	else if ( ( (angle >= 220 && angle <= 320) || (angle >= -140 && angle <= -40) ) && entityPos.y() >= terrain.y() + terrain.h() / 2 )
+	else if ( ( (angle >= 220 && angle <= 320) || (angle >= -140 && angle <= -40) ) && entityPos.y() - collider.y() >= terrain.y() + terrain.h() / 2 )
 	{
 		entityPos.y( terrain.y() + terrain.h() - collider.y() );
 		speed.y(0.0);
@@ -448,8 +453,8 @@ void CollisionSystem::correctDiagonalUp(Rect& entityPos, Rect collider, Rect ter
 	float angle = LineInclination(entityPos.getCenter(), terrain.getCenter());
 	if (angle >= -55 && angle <= 125)
 	{
-		if (entityPos.getCenter().x() >= terrain.x() && 
-			entityPos.getCenter().x() <= terrain.x() + terrain.w())
+		if (collider.getCenter().x() - collider.x() / 2 >= terrain.x() && 
+			collider.getCenter().x() - collider.x() / 2 <= terrain.x() + terrain.w())
 		{
 			entityPos.y( terrain.y() + terrain.h() - collider.h() - collider.y() - (collider.getCenter().x() - terrain.x()) );
 			speed.y(0.0);
@@ -463,8 +468,8 @@ void CollisionSystem::correctDiagonalDown(Rect& entityPos, Rect collider, Rect t
 	float angle = LineInclination(entityPos.getCenter(), terrain.getCenter());
 	if (angle >= 55 && angle < 235)
 	{
-		if (entityPos.getCenter().x() >= terrain.x() && 
-			entityPos.getCenter().x() <= terrain.x() + terrain.w())
+		if (collider.getCenter().x() - collider.x() / 2 >= terrain.x() && 
+			collider.getCenter().x() - collider.x() / 2 <= terrain.x() + terrain.w())
 		{
 			entityPos.y( terrain.y() - collider.h() - collider.y() + (collider.getCenter().x() - terrain.x()) );
 			speed.y(0.0);
