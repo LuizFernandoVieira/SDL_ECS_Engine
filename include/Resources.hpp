@@ -47,6 +47,7 @@ public:
 
 	//DEBUG
 	static bool DEBUG_COLLISION;
+	static bool DEBUG_TRIGGERS;
 	static bool DEBUG_AI;
 
 	static std::string TILE_SET_IMG;
@@ -56,7 +57,6 @@ public:
 	static std::string GLOBAL_OBJECT_MAP_XML;
 
 	static void Read(std::string filename_);
-	//static void ReadVolumes(std::string filename_);
 
 	// Global Values
 	static std::unordered_map<std::string, int>			intTable;

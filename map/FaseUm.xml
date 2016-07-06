@@ -45,13 +45,17 @@
 
 	<triggers>
 		<!-- 	Colisores Genéricos Multifuncionais -->
-		<checkpoint x="288" y="500" w="800" h="500" />
+
+		<!-- Checkpoints -->
+		<checkpoint x="288" y="500" w="48" h="96" />
 		<checkpoint x="288" y="500" w="48" h="96" />
 
 		<switch target=""/>
 
 		<!-- Controlar estado da música -->
 		<music state="all_on"  state_int="0" play="false" x="288" y="500" w="10" h="500"/>
+
+
 		<music state="all_off" state_int="1" play="true" x="576" y="500" w="10" h="96"/>
 
 		<!-- TODO :: Controlar renderização das camadas da frente -->
@@ -162,7 +166,7 @@
 		<wind direction="0" speed="100" />
 	</object>
 
-	<object name="ai_test">
+	<object name="follower">
 		<transform>
 			<rect x="288" y="350" w="115" h="158" />
 			<scale x="0.3" y="0.3" />
@@ -174,16 +178,15 @@
 		</render>
 		<physics gravity_scale="1.0" />
 		<collider>
-			<hurtbox x="0" y="0" w="48" h="120" />
-			<hitbox x="10" y="-10" w="20" h="20" />
+			<hurtbox x="10" y="20" w="48" h="120" />
+			<hitbox x="10" y="20" w="48" h="120" />
 		</collider>
 		<speed jump="10" walk="10" />
 		<state />
 		<AI type="0" debug="true">
 			<state_index state="0" cooldown="0.3">
-				<trigger verification="5" target_index="1" />
 				<trigger verification="2" target_index="1" />
-				<trigger verification="4" target_index="1" />
+				<trigger verification="4" target_index="2" />
 			</state_index>
 			<state_index state="9" cooldown="0.3">
 				<trigger verification="3" target_index="0" />
@@ -191,9 +194,6 @@
 			</state_index>
 			<state_index state="2" cooldown="2.0">
 				<trigger verification="2" target_index="1" />
-			</state_index>
-			<state_index state="4" cooldown="2.0">
-				<trigger verification="0" target_index="0" />
 			</state_index>
 		</AI>
 	</object>

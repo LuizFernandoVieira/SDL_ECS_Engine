@@ -12,41 +12,8 @@
 		<data type="float" value="500" name="PLAYER_JUMP_SPEED">500</data>
 	</globals>
 
-	<!--state name="prototype">
-		<music>
-			<assets>
-				<layer channel="1" file="audio/umbra_test_bass.wav"/>
-				<layer channel="2" file="audio/umbra_test_flute.wav"/>
-				<layer channel="3" file="audio/umbra_test_piano.wav"/>
-				<layer channel="4" file="audio/umbra_test_synth.wav"/>
-				<layer channel="5" file="audio/umbra_test_violin.wav"/>
-			</assets>
-
-			<volume state="default">
-				<layer channel="1" value="128"/>
-				<layer channel="2" value="128"/>
-				<layer channel="3" value="128"/>
-				<layer channel="4" value="128"/>
-				<layer channel="5" value="128"/>
-				<layer channel="6" value="128"/>
-				<layer channel="7" value="128"/>
-				<layer channel="8" value="128"/>
-			</volume>
-
-			<volume state="walking">
-				<layer channel="1" value="0"/>
-				<layer channel="2" value="0"/>
-				<layer channel="3" value="0"/>
-				<layer channel="4" value="0"/>
-				<layer channel="5" value="0"/>
-				<layer channel="6" value="0"/>
-				<layer channel="7" value="0"/>
-				<layer channel="8" value="0"/>
-			</volume>
-		</music>
-	</state-->
-
 	<debug>
-		<collision show="true"/>
+		<collision show="false"/>
+		<triggers show="false"/>
 	</debug>
 </config>

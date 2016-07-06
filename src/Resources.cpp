@@ -26,6 +26,7 @@ int Resources::MAP_HEIGHT              = 0;
 
 //Debug Modes
 bool Resources::DEBUG_COLLISION	= false;
+bool Resources::DEBUG_TRIGGERS	= false;
 bool Resources::DEBUG_AI		= false;
 
 std::string Resources::TILE_SET_IMG           = "../img/maps/tilesetcidade1.png";
@@ -202,18 +203,11 @@ void Resources::Read(std::string _filename){
 
 	//Debug Mode
 	data = node.child("debug");
-	if(data.child("collision").attribute("show").as_bool()){
+	if(data.child("collision").attribute("show").as_bool())
 		Resources::DEBUG_COLLISION = true;
 
-
-		if (varType == "int"){
-			intTable.emplace(varName, 		data.attribute("value").as_int());
-			std::cout << "Fetched value: " << varName << " = " << intTable[varName] << std::endl;
-		}else{
-			floatTable.emplace(varName, 	data.attribute("value").as_float());
-			std::cout << "Fetched value: " << varName << " = " << floatTable[varName] << std::endl;
-		}
-	}
+	if(data.child("triggers").attribute("show").as_bool())
+		Resources::DEBUG_TRIGGERS = true;
 
 	//Assossiação de Valores (Temporário, substituir por função getValue)
 	WINDOW_WIDTH 		= intTable["WINDOW_WIDTH"];

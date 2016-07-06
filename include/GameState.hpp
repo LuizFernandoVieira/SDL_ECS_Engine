@@ -79,6 +79,8 @@ private:
 	void setTriggers(pugi::xml_node triggers);
 	void loadLevel(std::string target);
 
+	void showTriggers();
+
 	Level* level_;
 	Music music;
 	std::vector<System*> systems_;

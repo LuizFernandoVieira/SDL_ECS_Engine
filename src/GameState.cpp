@@ -63,9 +63,9 @@ GameState::GameState()
 		systems_.emplace_back(new PlayerRenderSystem());
 		systems_.emplace_back(new SoundSystem());
 		systems_.emplace_back(new AISystem());
-		// systems_.emplace_back(new ParticleEmitterSystem());
+		//systems_.emplace_back(new ParticleEmitterSystem());
 
-		// createParticleEmitter();
+		//createParticleEmitter();
 
 		Camera::follow(mapTransform_[player_]);
 	}
@@ -169,7 +169,7 @@ void GameState::render()
 	//Setting Rendering Systems
 	RenderSystem& renderSystem = *(RenderSystem*)systems_[6];
 	PlayerRenderSystem& playerRenderSystem = *(PlayerRenderSystem*)systems_[7];
-	// ParticleEmitterSystem& particleEmitterSystem = *(ParticleEmitterSystem*)systems_[9];
+	//ParticleEmitterSystem& particleEmitterSystem = *(ParticleEmitterSystem*)systems_[9];
 
 
 
@@ -184,13 +184,15 @@ void GameState::render()
 		renderSystem.render(i, *this);
 		if (i == main_layer){
 			playerRenderSystem.render(*this);
-			// particleEmitterSystem.render();
+			//particleEmitterSystem.render();
 		}
 	}
 
-	/* if (Resources::collisionDebug) ==> booleana a ser lida de config.xml */
 	if (Resources::DEBUG_COLLISION)
 		((CollisionSystem*)systems_[5])->render(*this);
+
+	if (Resources::DEBUG_TRIGGERS)
+		showTriggers();
 }
 
 
@@ -526,5 +528,38 @@ void GameState::deleteDeadEntities()
 					mapRender_[i].erase(id);
 			}
 		}
+	}
+}
+
+//----------------------------------------------------------------------
+
+void GameState::showTriggers(){
+	Rect colRect_;
+	SDL_Rect drawRect_;
+
+	SDL_Renderer* context = Game::getInstance().getRenderer();
+	SDL_SetRenderDrawBlendMode(context, SDL_BLENDMODE_BLEND);
+
+	SDL_SetRenderDrawColor(context, 0, 0, 255, 128);
+	for (auto& box : checkpoints){
+		
+		colRect_ = box.rect_;
+		drawRect_.x = (colRect_.x() - Camera::pos_.x());
+		drawRect_.y = (colRect_.y() - Camera::pos_.y());
+		drawRect_.w = colRect_.w();
+		drawRect_.h = colRect_.h();
+		SDL_RenderFillRect(context,	&drawRect_);
+	}
+
+	SDL_SetRenderDrawColor(context, 255, 0, 0, 128);
+	for (auto& box : musicTriggers){
+		
+		colRect_ = box.first.rect_;
+		drawRect_.x = (colRect_.x() - Camera::pos_.x());
+		drawRect_.y = (colRect_.y() - Camera::pos_.y());
+		drawRect_.w = colRect_.w();
+		drawRect_.h = colRect_.h();
+
+		SDL_RenderFillRect(context,	&drawRect_);
 	}
 }
