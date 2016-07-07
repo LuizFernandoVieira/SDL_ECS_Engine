@@ -1,3 +1,5 @@
+#include <sstream>
+
 #include "../include/EditorSelectState.hpp"
 #include "../include/InputHandler.hpp"
 #include "../include/Resources.hpp"
@@ -6,18 +8,15 @@
 #include "../include/TileMap.hpp"
 #include "../include/CollisionMap.hpp"
 
-#include <sstream>
-
-
 EditorSelectState::EditorSelectState() :
-	bg_("../img/bgEditor.png"),
+	bg_("../img/build.png"),
 	mode(INIT),
 	btnNewMap("../img/interface/editor/btn.png"),
 	btnNewMapPos(300, 250, 200, 100),
-	btnNewMapText("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Novo mapa", Colors::purple),
+	btnNewMapText("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Criar Mapa", Colors::purple),
 	btnEditMap("../img/interface/editor/btn.png"),
 	btnEditMapPos(600, 250, 200, 100),
-	btnEditMapText("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Editar mapa", Colors::purple),
+	btnEditMapText("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Editar Mapa", Colors::purple),
 	btnAccept("../img/interface/editor/btn.png"),
 	btnAcceptPos(900, 500, 100, 60),
 	btnAcceptText("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Proximo", Colors::purple),
@@ -160,7 +159,8 @@ void EditorSelectState::update(float dt)
 
 	}
 
-	if (input.quitRequested()) {
+	if (input.quitRequested())
+	{
 		quit_ = true;
 	}
 }

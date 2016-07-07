@@ -5,11 +5,22 @@
 #include "../include/GameState.hpp"
 #include "../include/EditorSelectState.hpp"
 
-MainMenuState::MainMenuState() : 
-	info_("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "PRESS SPACE BAR TO START GAME, E TO START THE LEVEL EDITOR", Colors::white),
-	bg_("../img/loading.png")
+MainMenuState::MainMenuState() :
+	bg_("../img/loading.png"),
+	btnPlay_("../img/interface/editor/btn.png"),
+	btnPlayPos_(300, 250, 200, 100),
+	btnPlayText_("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Jogar", Colors::purple),
+	btnMapEditor_("../img/interface/editor/btn.png"),
+	btnMapEditorPos_(600, 250, 200, 100),
+	btnMapEditorText_("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Editar", Colors::purple)
 {
-	info_.setPos(Resources::WINDOW_WIDTH / 2, Resources::WINDOW_HEIGHT / 2);
+	btnPlayText_.setPos(400, 300);
+	btnMapEditorText_.setPos(700, 300);
+
+	btnPlay_.setScaleX(200 / btnPlay_.getWidth());
+	btnPlay_.setScaleY(100 / btnPlay_.getHeight());
+	btnMapEditor_.setScaleX(200 / btnMapEditor_.getWidth());
+	btnMapEditor_.setScaleY(100 / btnMapEditor_.getHeight());
 }
 
 MainMenuState::~MainMenuState()
@@ -23,16 +34,20 @@ void MainMenuState::update(float dt)
 	InputHandler& input = InputHandler::getInstance();
 	input.update();
 
-	if (input.keyPress('e'))
+	if (input.mousePress(LEFT_MOUSE_BUTTON))
 	{
-		Game::getInstance().push(new EditorSelectState());
-	}
-	else if (input.keyPress(SPACE_BAR))
-	{
-		Game::getInstance().push(new GameState());
+		if (btnPlayPos_.isInside(input.getMouse()))
+		{
+			Game::getInstance().push(new GameState());
+		}
+		else if(btnMapEditorPos_.isInside(input.getMouse()))
+		{
+			Game::getInstance().push(new EditorSelectState());
+		}
 	}
 
-	if (input.quitRequested()) {
+	if (input.quitRequested())
+	{
 		quit_ = true;
 	}
 }
@@ -41,10 +56,13 @@ void MainMenuState::update(float dt)
 void MainMenuState::render()
 {
 	bg_.render(0,0);
-	info_.render();
+
+	btnPlay_.render(btnPlayPos_.x(), btnPlayPos_.y());
+	btnPlayText_.render();
+
+	btnMapEditor_.render(btnMapEditorPos_.x(), btnMapEditorPos_.y());
+	btnMapEditorText_.render();
 }
-
-
 
 void MainMenuState::pause()
 {
