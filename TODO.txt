@@ -1,5 +1,7 @@
 Fazendo:
 
+- Macaco;
+- Controles guarda chuva;
 - Fullscreen;
 
 

@@ -20,6 +20,8 @@ void InputSystem::update(float dt, GameState& gameState)
 	PhysicsComponent* physicsComp = gameState.mapPhysics_[gameState.player_];
 	ColliderComponent* colComp = gameState.mapCollider_[gameState.player_];
 
+	physicsComp->gravityScale_ = 1.0;
+
 	if (stateComp->state_ != State::DYING && stateComp->state_ != State::DEAD)
 	{
 		if (stateComp->state_ != State::ZIPLINE && stateComp->state_ != State::ATTACKING)

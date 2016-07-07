@@ -26,7 +26,7 @@ private:
 
 	class AIState{
 		public:
-			AIState(EntityState state_new, float action_hold = 0) : action_timer() {
+			AIState(EntityState state_new, float action_hold = 0) {
 				state 		= state_new;
 				cooldown	= action_hold;
 			};
