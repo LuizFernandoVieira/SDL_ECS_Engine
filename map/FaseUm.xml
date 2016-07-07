@@ -117,14 +117,14 @@
 			<sprite state="2" umbrella_state="1" umbrella_direction="1" filename="../img/characters/player/jumping_front_closed.png" frame_count="23" frame_time="0.01" />
 			<sprite state="2" umbrella_state="1" umbrella_direction="2" filename="../img/characters/player/jumping_front_closed.png" frame_count="23" frame_time="0.01" />
 			<sprite state="2" umbrella_state="1" umbrella_direction="3" filename="../img/characters/player/jumping_front_closed.png" frame_count="23" frame_time="0.01" />
-			<sprite state="3" umbrella_state="0" umbrella_direction="0" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.01" />
-			<sprite state="3" umbrella_state="0" umbrella_direction="1" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.01" />
-			<sprite state="3" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.01" />
-			<sprite state="3" umbrella_state="0" umbrella_direction="3" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.01" />
-			<sprite state="3" umbrella_state="1" umbrella_direction="0" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.01" />
-			<sprite state="3" umbrella_state="1" umbrella_direction="1" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.01" />
-			<sprite state="3" umbrella_state="1" umbrella_direction="2" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.01" />
-			<sprite state="3" umbrella_state="1" umbrella_direction="3" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.01" />
+			<sprite state="3" umbrella_state="0" umbrella_direction="0" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.02" />
+			<sprite state="3" umbrella_state="0" umbrella_direction="1" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.02" />
+			<sprite state="3" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.02" />
+			<sprite state="3" umbrella_state="0" umbrella_direction="3" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.02" />
+			<sprite state="3" umbrella_state="1" umbrella_direction="0" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.02" />
+			<sprite state="3" umbrella_state="1" umbrella_direction="1" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.02" />
+			<sprite state="3" umbrella_state="1" umbrella_direction="2" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.02" />
+			<sprite state="3" umbrella_state="1" umbrella_direction="3" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.02" />
 			<sprite state="4" umbrella_state="0" umbrella_direction="0" filename="../img/characters/player/attacking_front_closed.png" frame_count="12" frame_time="0.02" />
 			<sprite state="4" umbrella_state="0" umbrella_direction="1" filename="../img/characters/player/attacking_front_closed.png" frame_count="12" frame_time="0.02" />
 			<sprite state="4" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/attacking_front_closed.png" frame_count="12" frame_time="0.02" />
@@ -187,15 +187,15 @@
 		</transform>
 		<wind direction="0" speed="100" />
 	</object>
-	<object name="follower">
+<!-- 	<object name="follower">
 		<transform>
 			<rect x="288" y="350" w="115" h="158" />
-			<scale x="0.3" y="0.3" />
+			<scale x="0.6" y="0.6" />
 			<rotation value="0" />
 		</transform>
 		<health value="1" />
 		<render>
-			<sprite state="0" filename="../img/characters/enemies/agonia/Agonia_Andando.png" frame_count="42" frame_time="0.01" />
+			<sprite state="0" filename="../img/characters/enemies/Andando menor.png" frame_count="44" frame_time="0.01" />
 		</render>
 		<health value="1" />
 		<physics gravity_scale="1.0" />
@@ -216,7 +216,7 @@
 				<trigger verification="6" target_index="0" />
 			</state_index>
 		</AI>
-	</object>
+	</object> -->
 	<object name="Comoda" id="2" layer="2">
 		<transform>
 			<rect x="897" y="528" w="54" h="96" />
@@ -231,4 +231,26 @@
 			<hurtbox x="0" y="0" w="54" h="96" />
 		</collider>
 	</object>
+	<!-- <object name="estatua_vento">
+		<transform>
+			<rect x="288" y="350" w="120" h="162" />
+			<scale x="0.6" y="0.6" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/characters/enemies/Tormenta 1.png" frame_count="30" frame_time="0.01" />
+		</render>
+		<state />
+		<AI type="0" debug="true">
+			<state_index state="0" cooldown="-0.1">
+				<trigger verification="10" target_index="0" />
+				<trigger verification="7" target_index="1" />
+			</state_index>
+			<state_index state="9" cooldown="0.3">
+				<trigger verification="10" target_index="0" />
+				<trigger verification="3" target_index="0" />
+				<trigger verification="6" target_index="0" />
+			</state_index>
+		</AI>
+	</object> -->
 </world_objects>

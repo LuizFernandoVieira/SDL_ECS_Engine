@@ -21,7 +21,9 @@ private:
 		ZIPLINE,
 		SHOOT,
 		DEAD,
-		FOLLOW
+		FOLLOW,
+		BLOWING,
+		SUCKING
 	};
 
 	class AIState{
