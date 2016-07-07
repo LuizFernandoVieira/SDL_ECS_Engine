@@ -1,9 +1,5 @@
 Fazendo:
 
-- Morrer quando ta caindo de certa altura;
-- Checkpoints;
-- Botar objetos na fase;
-- Botar ziplines na fase;
 - Fullscreen;
 
 

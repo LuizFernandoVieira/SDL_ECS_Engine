@@ -19,6 +19,7 @@
 #include "HealthComponent.hpp"
 #include "WindComponent.hpp"
 #include "AIComponent.hpp"
+#include "CoinComponent.hpp"
 
 
 #include "Music.hpp"
@@ -58,6 +59,7 @@ public:
 	std::map<int, HealthComponent*> mapHealth_;
 	std::map<int, WindComponent*> mapWind_;
 	std::map<int, AIComponent*> mapAI_;
+	std::map<int, CoinComponent*> mapCoin_;
 
 	std::map<int, TransformComponent*> oldTransform_;
 	std::map<int, StateComponent*> oldState_;
@@ -68,6 +70,10 @@ public:
 
 	std::vector 		<TransformComponent> checkpoints;
 	std::vector<std::pair<TransformComponent, std::string>> musicTriggers;
+
+	static unsigned int nextId_;
+
+	void deleteEntity(int id);
 
 private:
 	void createParticleEmitter();
@@ -84,8 +90,6 @@ private:
 	Level* level_;
 	Music music;
 	std::vector<System*> systems_;
-
-	static unsigned int nextId_;
 
 };
 

@@ -6,7 +6,7 @@
 		<data type="int" value="600" name="WINDOW_HEIGHT"/>
 		<data type="int" value="48" name="TILE_WIDTH"/>
 		<data type="int" value="48" name="TILE_HEIGHT"/>
-		<data type="int" value="200" name="GRAVITY"/>
+		<data type="int" value="250" name="GRAVITY"/>
 
 		<data type="float" value="200" name="PLAYER_WALK_SPEED"/>
 		<data type="float" value="500" name="PLAYER_JUMP_SPEED"/>
@@ -16,6 +16,6 @@
 		<resources show="false"/>
 		<collision show="true"/>
 		<triggers show="false"/>
-		<ai show="false"/>
+		<ai show="true"/>
 	</debug>
 </config>

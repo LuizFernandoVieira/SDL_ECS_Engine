@@ -98,6 +98,7 @@ GameState::~GameState()
 	mapWind_.clear();
 	oldTransform_.clear();
 	oldState_.clear();
+	mapAI_.clear();
 
 	mapRender_[0].clear();
 	mapRender_[1].clear();
@@ -453,6 +454,12 @@ void GameState::setObjects(pugi::xml_node objects)
 			                                             aux.attribute("speed").as_float() ));
 		}
 
+		// COIN
+		if ((aux = obj.child("coin")))
+		{
+			mapCoin_.emplace(nextId_, new CoinComponent());
+		}
+
 		// AI
 		if ((aux = obj.child("AI"))){
 			short int counter = 0;
@@ -511,6 +518,8 @@ void GameState::deleteDeadEntities()
 				mapZipline_.erase(id);
 				mapSound_.erase(id);
 				mapHealth_.erase(id);
+				mapWind_.erase(id);
+				mapAI_.erase(id);
 
 				for (int i = 0; i <= max_layers; i++)	//era para ser i < max_layers, segundo o que estava escrito
 					mapRender_[i].erase(id);
@@ -519,6 +528,27 @@ void GameState::deleteDeadEntities()
 			}
 		}
 	}
+}
+
+void GameState::deleteEntity(int id)
+{
+	int max_layers = 5;
+	
+	mapTransform_.erase(id);
+	mapState_.erase(id);
+	mapPhysics_.erase(id);
+	mapCollider_.erase(id);
+	mapSpeed_.erase(id);
+	mapEmitter_.erase(id);
+	mapTimer_.erase(id);
+	mapZipline_.erase(id);
+	mapSound_.erase(id);
+	mapHealth_.erase(id);
+	mapWind_.erase(id);
+	mapAI_.erase(id);
+
+	for (int i = 0; i <= max_layers; i++)	//era para ser i < max_layers, segundo o que estava escrito
+		mapRender_[i].erase(id);
 }
 
 //----------------------------------------------------------------------

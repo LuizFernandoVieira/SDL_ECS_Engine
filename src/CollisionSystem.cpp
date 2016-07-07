@@ -300,7 +300,7 @@ void CollisionSystem::updateWind(
 						else if ((playerState.facingRight_ && playerState.umbrellaDirection_ != UmbrellaDirection::FRONT) || 
 						         (!playerState.facingRight_ && playerState.umbrellaDirection_ != UmbrellaDirection::BACK))
 						{
-							speed = Vec2(2 * w.second->speed_, 0);
+							speed = Vec2(2 * -w.second->speed_, 0);
 						}
 					}
 					else
@@ -319,7 +319,7 @@ void CollisionSystem::updateWind(
 						else if ((playerState.facingRight_ && playerState.umbrellaDirection_ != UmbrellaDirection::BACK) || 
 						         (!playerState.facingRight_ && playerState.umbrellaDirection_ != UmbrellaDirection::FRONT))
 						{
-							speed = Vec2(2 * -w.second->speed_, 0);
+							speed = Vec2(2 * w.second->speed_, 0);
 						}
 					}
 					else

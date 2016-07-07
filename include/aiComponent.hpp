@@ -21,7 +21,9 @@ private:
 		ZIPLINE,
 		SHOOT,
 		DEAD,
-		FOLLOW
+		FOLLOW,
+		BLOWING,
+		SUCKING
 	};
 
 	class AIState{
@@ -78,6 +80,7 @@ public:
 	AIComponent(int type){
 		terrain = nullptr;
 		state_index = 0;
+		action_target = 0;
 
 		switch(type){
 
@@ -94,23 +97,15 @@ public:
 				states[1].addTrigger(6, 0);
 			break;
 
+			//Estátua
 			case 2:
-				AddState((int) IDLE);
+			break;
+
+			default:
+			AddState((int) IDLE);
 			break;
 		}
 	};
-
-	/*
-	//Template AI
-	AIComponent(int type){
-		//Jumper AKA test AI
-		AddState((int) IDLE);
-		AddState((int) JUMPING);
-		states[1].addTrigger(0, 0);
-
-		state_index = 0;
-	};
-	*/
 	~AIComponent(){};
 
 	void PrintAI(){
