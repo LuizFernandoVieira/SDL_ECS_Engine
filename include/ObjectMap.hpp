@@ -13,7 +13,6 @@
 #include <fstream>
 
 #include "pugixml.hpp"
-// #include "Rect.hpp"
 
 struct ObjectInfo
 {
@@ -39,9 +38,7 @@ struct LocalObjectInfo
 class ObjectMap
 {
 public:
-	// Construtor pro editor
 	ObjectMap(std::string globalObjects, std::string localObjects);
-	// Construtor pro jogo
 	ObjectMap(std::string localObjects);
 
 	void save();
@@ -63,11 +60,10 @@ public:
 private:
 	pugi::xml_node getGlobalObjectNode(int index);
 
-	pugi::xml_document globalObjects_;	// temporario?
+	pugi::xml_document globalObjects_;
 	pugi::xml_document localObjects_;
 	std::string globalFilename_;
 	std::string localFilename_;
 };
-
 
 #endif

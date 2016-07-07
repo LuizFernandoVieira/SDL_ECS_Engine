@@ -60,7 +60,4 @@ private:
 	int* tilesScroll_;
 };
 
-// void tileBtnExecute(IState* state);
-
-
 #endif

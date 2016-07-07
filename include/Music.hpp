@@ -46,6 +46,6 @@ private:
 	float 		volumeCurrent[AUDIO_MAXLAYERS];
 
 	std::unordered_map<std::string, int*>	volume_vector;
-
 };
+
 #endif

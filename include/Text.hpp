@@ -14,8 +14,8 @@
 
 #include "Rect.hpp"
 
-
-namespace Colors {
+namespace Colors
+{
 	static SDL_Color black = {0, 0, 0, 255};
 	static SDL_Color white = {255, 255, 255, 0};
 	static SDL_Color blue = {0, 0, 255, 255};
@@ -62,5 +62,4 @@ private:
 	Rect box;
 };
 
-
-#endif // TEXT_H
+#endif
