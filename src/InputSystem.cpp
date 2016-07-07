@@ -68,6 +68,7 @@ void InputSystem::update(float dt, GameState& gameState)
 				// PULO
 				speedComp->speed_.y(-Resources::PLAYER_JUMP_SPEED);
 				stateComp->state_ = State::JUMPING;
+				stateComp->fallTime_.restart();
 			}
 			else
 			{
@@ -130,11 +131,16 @@ void InputSystem::update(float dt, GameState& gameState)
 			std::cout << "State: Dead // Code:" << stateComp->state_ << std::endl;
 		}
 
-		if (stateComp->state_ == State::FALLING &&
-			stateComp->umbrellaState_ == UmbrellaState::OPEN &&
-			stateComp->umbrellaDirection_ == UmbrellaDirection::UP)
-			physicsComp->gravityScale_ = 0.5;
-		else
-			physicsComp->gravityScale_ = 1.0;
+		if (stateComp->state_ == State::FALLING)
+		{
+			if (stateComp->umbrellaState_ == UmbrellaState::OPEN &&
+				stateComp->umbrellaDirection_ == UmbrellaDirection::UP)
+				physicsComp->gravityScale_ = 0.5;
+			else
+			{
+				physicsComp->gravityScale_ = 1.0;
+				stateComp->fallTime_.update(dt);
+			}
+		}
 	}
 }

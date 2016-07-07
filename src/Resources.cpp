@@ -20,6 +20,7 @@ float Resources::PLAYER_WALK_SPEED     = 0; // pixels per second
 float Resources::PLAYER_JUMP_SPEED     = 0; // pixels per second
 float Resources::PLAYER_ZIPLINE_SPEED  = 300; 
 float Resources::DYING_TIME            = 3; // seconds
+float Resources::MAX_SAFE_FALL_TIME    = 2; // seconds
 
 int Resources::MAP_WIDTH               = 0;
 int Resources::MAP_HEIGHT              = 0;

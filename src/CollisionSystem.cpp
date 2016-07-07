@@ -33,7 +33,7 @@ void CollisionSystem::update(float dt, GameState& gameState)
 
 	updateZipline(player, transform, collider, speed, oldState, state, zipline);
 	updateWind(dt, player, transform, collider, /*speed, oldState,*/ state, wind);
-	updateTerrain(collisionMap, oldTransform, transform, collider, speed, state, health);
+	updateTerrain(player, collisionMap, oldTransform, transform, collider, speed, state, health);
 	updateCollider(transform, collider, speed, state, health);
 
 	updateTriggers(gameState);
@@ -75,6 +75,7 @@ void CollisionSystem::updateTriggers(GameState& gameState)
 }
 
 void CollisionSystem::updateTerrain(
+	int player,
 	CollisionMap& collisionMap,
 	std::map<int, TransformComponent*> oldTransform,
 	std::map<int, TransformComponent*> transform,
@@ -138,13 +139,19 @@ void CollisionSystem::updateTerrain(
 							break;
 						case 7:
 							if (health.find(col.first) != health.end())
-								health[col.first]->health_--;
+								health[col.first]->health_ = 0;
 							break;
 					}
 
 					if (speed[col.first]->speed_.y() == 0 && state[col.first]->state_ != State::ATTACKING && state[col.first]->state_ != State::DYING)
 					{
 						state[col.first]->state_ = speed[col.first]->speed_.x() == 0 ? State::IDLE : State::WALKING;
+						if (col.first == player && 
+						    ((PlayerStateComponent*)state[player])->fallTime_.get() >= Resources::MAX_SAFE_FALL_TIME)
+						{
+							health[player]->health_--;
+							((PlayerStateComponent*)state[player])->fallTime_.restart();
+						}
 					}
 
 					// Atualizar colisor que foi movido
