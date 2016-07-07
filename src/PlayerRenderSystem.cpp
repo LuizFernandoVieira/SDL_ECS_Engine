@@ -3,11 +3,10 @@
 #include "../include/StateComponent.hpp"
 #include "../include/RenderComponent.hpp"
 
-
 PlayerRenderSystem::PlayerRenderSystem()
 {
-}
 
+}
 
 void PlayerRenderSystem::update(float dt, GameState& gameState)
 {
@@ -20,8 +19,8 @@ void PlayerRenderSystem::update(float dt, GameState& gameState)
 	spriteKey.umbrellaState = stateComp->umbrellaState_;
 	spriteKey.umbrellaDirection = stateComp->umbrellaDirection_;
 
-	if (stateComp->state_ != oldState->state_ || 
-		stateComp->umbrellaState_ != oldState->umbrellaState_ || 
+	if (stateComp->state_ != oldState->state_ ||
+		stateComp->umbrellaState_ != oldState->umbrellaState_ ||
 		stateComp->umbrellaDirection_ != oldState->umbrellaDirection_)
 	{
 		renderComp.getSprite(spriteKey).setFrame(0);

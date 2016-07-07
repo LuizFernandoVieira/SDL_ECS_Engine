@@ -2,7 +2,6 @@
 
 #include "../include/TileSet.hpp"
 
-
 TileSet::TileSet(int tileWidth, int tileHeight, const char* file)
 {
 	tileWidth_ 	= tileWidth;
@@ -27,10 +26,10 @@ void TileSet::render(unsigned index, float x, float y)
 		std::cout << "rows*cols: " << rows_*columns_ << std::endl;
 	}
 
-	tileSet_->setClip( 
+	tileSet_->setClip(
 		(index%columns_) * tileWidth_,
 		(int)(index/columns_) * tileHeight_,
-	 	tileWidth_, tileHeight_ 
+	 	tileWidth_, tileHeight_
 	);
 	tileSet_->render(std::round(x), std::round(y));
 }

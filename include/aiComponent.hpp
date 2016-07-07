@@ -5,8 +5,6 @@
 #include "Component.hpp"
 #include "CollisionMap.hpp"
 
-
-
 class AIComponent : public Component{
 private:
 
@@ -28,18 +26,10 @@ private:
 
 	class AIState{
 		public:
-			/*
-			AIState(int state_new, float action_hold = 0){
-				state 	= state_new;
-				hold	= action_hold;
-			};
-			*/
-			AIState(EntityState state_new, float action_hold = 0){
+			AIState(EntityState state_new, float action_hold = 0) : action_timer() {
 				state 		= state_new;
 				cooldown	= action_hold;
 			};
-
-			
 
 			AIState();
 			void addTrigger(short unsigned int condition_index,
@@ -54,8 +44,6 @@ private:
 
 			float cooldown;
 	};
-
-
 
 public:
 
@@ -76,23 +64,25 @@ public:
 		action_target = 0;
 	}
 
-
 	//Template AI: Jumper
 	AIComponent(int type) : action_timer(){
 		terrain = nullptr;
 		state_index = 0;
 		action_target = 0;
 
-		switch (type){
-			case 0:
-			AddState((int) IDLE);
-			break;
+		switch(type){
 
 			case 1:
-			//Jumper AKA test AI
-			AddState((int) FOLLOW, 2.0f);
-			states[0].addTrigger(10, 0);
-			states[1].addTrigger(10, 0);
+			//Follower
+				AddState((int) IDLE, -0.1f);
+				AddState((int) FOLLOW, 0.3f);
+				
+				states[0].addTrigger(10, 0);
+				states[0].addTrigger(7, 1);
+
+				states[1].addTrigger(10, 0);
+				states[1].addTrigger(3, 0);
+				states[1].addTrigger(6, 0);
 			break;
 
 			//Estátua
@@ -112,12 +102,11 @@ public:
 			std::cout << "State: " << st.state << std::endl;
 			for (auto trigger_it : st.triggers)
 				std::cout << "\t	Trigger - Condition:  " << trigger_it.first << " Target: " << trigger_it.second << std::endl;
-			//std::cout << "\t 	Action Timer: " << current_action_timer.get() << std::endl << std::endl;
 		}
 	}
 	void PrintCurrentState(){
 		std::cout << "Current State: " << states[state_index].state << std::endl;
-		std::cout << std::endl; 
+		std::cout << std::endl;
 	}
 
 	void AddState(int entityState, float action_hold = 0.0f){
@@ -137,16 +126,8 @@ public:
 		states[state_].addTrigger(condition_index, target_);
 	}
 
-
-	/*
-	void AddState(short unsigned int index){
-		states.push_back(index);
-	}
-	*/
 	void SetTerrain(CollisionMap* target){terrain = target; };
 };
-
-
 
 namespace std
 {

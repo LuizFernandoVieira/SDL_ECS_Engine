@@ -17,14 +17,14 @@ public:
 	Vec2 GetParallax() 	{ return Vec2(parallax_x, parallax_y);}
 	Vec2 GetScale() 	{ return Vec2(scale_x, scale_y);}
 
-	void SetParallax(float x, float y){
-		parallax_x = x;
-		parallax_y = y;
-	}
-
 	void SetScale(float x, float y){
 		scale_x = x;
 		scale_y = y;
+	}
+
+	void SetParallax(float x, float y){
+		parallax_x = x;
+		parallax_y = y;
 	}
 
 	void SetOffset(float x, float y){

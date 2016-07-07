@@ -7,8 +7,8 @@
 
 RenderSystem::RenderSystem()
 {
-}
 
+}
 
 void RenderSystem::update(float dt, GameState& gameState)
 {
@@ -50,7 +50,7 @@ void RenderSystem::render(int layer, GameState& gameState)
 		default:
 			break;
 	}
-	
+
 	for(auto& render : renderComp)
 	{
 		Rect transform = transfComp[render.first]->rect_;

@@ -4,7 +4,7 @@
 #include "../include/Game.hpp"
 
 TileSetAndObjectsPanel::TileSetAndObjectsPanel(Rect rect, std::string imgPath, ObjectMap* objectMap, int& selectedObject) :
-	Panel(rect, imgPath), scroll_(0), selectedObject_(selectedObject), 
+	Panel(rect, imgPath), scroll_(0), selectedObject_(selectedObject),
 	objectName_("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "", Colors::black)
 {
 	selectedTab_ = TILES;
@@ -15,12 +15,10 @@ TileSetAndObjectsPanel::TileSetAndObjectsPanel(Rect rect, std::string imgPath, O
 	createObjectSprite();
 }
 
-
 TileSetAndObjectsPanel::~TileSetAndObjectsPanel()
 {
 	tileButtons_.clear();
 }
-
 
 void TileSetAndObjectsPanel::createButtons()
 {
@@ -90,7 +88,6 @@ void TileSetAndObjectsPanel::createButtons()
 	createObjectSprite();
 }
 
-
 void TileSetAndObjectsPanel::createObjectSprite()
 {
 	if (objectSp_ != NULL)
@@ -102,7 +99,7 @@ void TileSetAndObjectsPanel::createObjectSprite()
 		objectSp_ = new StaticSprite(objectInfo.filename.c_str(), objectInfo.frameCount, objectInfo.frameTime);
 	else
 		objectSp_ = new StaticSprite("../img/interface/editor/btn_4.png");
-	
+
 	// escala do sprite, sem mudar proporcao largura/altura
 	// objectSp_->setScaleX(1.0);
 	// objectSp_->setScaleY(1.0);
@@ -111,7 +108,6 @@ void TileSetAndObjectsPanel::createObjectSprite()
 	objectSp_->setScaleX(scaleX);
 	objectSp_->setScaleY(scaleX / proportion);
 }
-
 
 void TileSetAndObjectsPanel::update()
 {
@@ -159,7 +155,6 @@ void TileSetAndObjectsPanel::update()
 	}
 }
 
-
 void TileSetAndObjectsPanel::render()
 {
 	Panel::render();
@@ -203,7 +198,6 @@ void TileSetAndObjectsPanel::addButton(Button& button, Tab tab)
 		collisionButtons_.emplace_back(&button);
 }
 
-
 TileSetAndObjectsPanel::Tab& TileSetAndObjectsPanel::getSelectedTab()
 {
 	return selectedTab_;
@@ -213,7 +207,6 @@ int& TileSetAndObjectsPanel::getScroll()
 {
 	return scroll_;
 }
-
 
 void TileSetAndObjectsPanel::resize()
 {

@@ -2,7 +2,6 @@
 #define PHYSICSCOMPONENT_HPP
 
 #include "Component.hpp"
-// #include "Vec2.hpp"
 
 class PhysicsComponent : public Component
 {

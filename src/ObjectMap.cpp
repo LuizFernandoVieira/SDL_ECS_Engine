@@ -2,7 +2,7 @@
 
 #include "../include/ObjectMap.hpp"
 
-ObjectMap::ObjectMap(std::string globalObjects, std::string localObjects) : 
+ObjectMap::ObjectMap(std::string globalObjects, std::string localObjects) :
 	globalFilename_(globalObjects),
 	localFilename_(localObjects)
 {
@@ -14,7 +14,6 @@ ObjectMap::ObjectMap(std::string localObjects) : localFilename_(localObjects)
 {
 	loadLocals();
 }
-
 
 void ObjectMap::loadGlobals()
 {
@@ -32,12 +31,10 @@ void ObjectMap::loadLocals()
 		std::cout << "Erros ao carregar o mapa de objetos: " << result.description() << std::endl;
 }
 
-
 void ObjectMap::save()
 {
 	localObjects_.save_file(localFilename_.c_str());
 }
-
 
 ObjectInfo ObjectMap::getGlobalObject(int index)
 {

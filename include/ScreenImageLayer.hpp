@@ -9,9 +9,7 @@
 	#include "SDL.h"
 #endif
 
-
 #include "ScreenLayer.hpp"
-
 
 class ImageLayer : public ScreenLayer{
 public:
@@ -21,6 +19,7 @@ public:
 	void Render();
 	void open(const char* file);
 
+	void SetScale(int x, int y, int w, int h);
 	void setClip(int x, int y, int w, int h);
 
 private:

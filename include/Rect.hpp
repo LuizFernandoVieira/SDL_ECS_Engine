@@ -8,19 +8,9 @@ class Rect
 public:
 	Rect();
 	Rect(float x, float y, float w, float h);
-	// Rect(Rect rect);
 
-	/*  -------
-	    |  X  |
-		-------   */
 	Vec2 getCenter() const;
-	/*  X------
-	    |     |
-		-------   */
 	Vec2 getPivot() const;
-	/*  -------
-	    |     |
-		---X---   */
 	Vec2 getBase() const;
 
 	Rect operator+ (const Vec2&);

@@ -58,7 +58,6 @@ SDL_Renderer* Game::getRenderer()
 
 	if (SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1") == SDL_FALSE)
 		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR , "SCALE QUALITY" ,"Could not set linear scaling quality", NULL);
-	/* --- */
 	return renderer_;
 }
 
@@ -74,7 +73,6 @@ void Game::calculateDeltaTime()
 	dt_ = (float)(frameStart_ - lastFrameStart) / 1000.0;
 	if (dt_ > 0.1) dt_ = 0.1;
 }
-
 
 void Game::run()
 {
@@ -95,7 +93,6 @@ void Game::run()
 		if (stateStack_.top()->popRequested())
 		{
 			stateStack_.pop();
-			// Destruir todos os recursos carregados
 			Resources::ClearImages();
 			Resources::ClearSounds();
 			Resources::ClearFonts();
@@ -107,7 +104,7 @@ void Game::run()
 			stateStack_.emplace(storedState_);
 			storedState_ = NULL;
 		}
-		
+
 		float frameEnd = (float)SDL_GetTicks();
 
 		if((frameEnd-frameStart_) < (float)(1000.f / 60.0))
@@ -126,7 +123,7 @@ void Game::run()
 void Game::initSDL()
 {
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
-		std::cout << "SDL_Init Error: " << SDL_GetError() << 
+		std::cout << "SDL_Init Error: " << SDL_GetError() <<
 			std::endl;
 		exit(1);
 	}
@@ -136,26 +133,26 @@ void Game::initWindow(const char* name, int width, int height)
 {
 	SDL_DisplayMode mode;
 	if (SDL_GetDesktopDisplayMode(0, &mode) != 0) {
-		std::cerr << "Erro na criacao da janela do jogo" << 
+		std::cerr << "Erro na criacao da janela do jogo" <<
 			std::endl << SDL_GetError() << std::endl;
 		exit(1);
 	}
 
-	window_ = SDL_CreateWindow 
-	( 	
-		name, 
-		SDL_WINDOWPOS_CENTERED, 
-		SDL_WINDOWPOS_CENTERED, 
-		/*mode.w*/width, /*mode.h*/height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE 
+	window_ = SDL_CreateWindow
+	(
+		name,
+		SDL_WINDOWPOS_CENTERED,
+		SDL_WINDOWPOS_CENTERED,
+		/*mode.w*/width, /*mode.h*/height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE
 	);
 	if (window_ == NULL) {
-		std::cerr << "Erro na criacao da janela do jogo" << 
+		std::cerr << "Erro na criacao da janela do jogo" <<
 			std::endl << SDL_GetError() << std::endl;
 		exit(1);
 	}
 
 	// if (SDL_SetWindowFullscreen(window_, SDL_WINDOW_FULLSCREEN) != 0) {
-	// 	std::cerr << "Erro na criacao da janela do jogo" << 
+	// 	std::cerr << "Erro na criacao da janela do jogo" <<
 	// 		std::endl << SDL_GetError() << std::endl;
 	// 	exit(1);
 	// }
@@ -164,13 +161,13 @@ void Game::initWindow(const char* name, int width, int height)
 
 void Game::initRenderer()
 {
-	renderer_ = SDL_CreateRenderer 
-	( 
-		window_, -1, 
-		SDL_RENDERER_ACCELERATED 
+	renderer_ = SDL_CreateRenderer
+	(
+		window_, -1,
+		SDL_RENDERER_ACCELERATED
 	);
 	if (renderer_ == NULL) {
-		std::cerr << "Erro na criacao do renderizador do jogo" << 
+		std::cerr << "Erro na criacao do renderizador do jogo" <<
 			std::endl << SDL_GetError() << std::endl;
 		exit(1);
 	}
@@ -195,7 +192,7 @@ void Game::initAudio(){
 	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024)){
 		printf( "SDL_mixer could not Open Audio! SDL_mixer Error: %s\n", Mix_GetError() );
 		//system("PAUSE");
-		exit(1);		
+		exit(1);
 	}
 
 	/*	Como nossa música será simulada por áudio, não há sentido na inicialização

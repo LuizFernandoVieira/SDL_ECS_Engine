@@ -8,13 +8,11 @@ Panel::Panel(Rect rect, std::string imgPath) : rect_(rect), bg_(imgPath.c_str())
 	bg_.setScaleY( rect_.h() / (float)bg_.getHeight() );
 }
 
-
 Panel::~Panel()
 {
 	panels_.clear();
 	buttons_.clear();
 }
-
 
 void Panel::update()
 {
@@ -56,10 +54,10 @@ void Panel::update()
 					curColumn = 0;
 				}
 				it->first->setRect(
-					Rect( 
+					Rect(
 						curColumn * (Resources::TILE_WIDTH + 2) + 2 + rect_.x(),
 						curRow * (Resources::TILE_HEIGHT + 2) + 2 + rect_.y(),
-						Resources::TILE_WIDTH, 
+						Resources::TILE_WIDTH,
 						Resources::TILE_HEIGHT)
 				);
 			}

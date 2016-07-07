@@ -28,7 +28,6 @@ MainMenuState::~MainMenuState()
 
 }
 
-
 void MainMenuState::update(float dt)
 {
 	InputHandler& input = InputHandler::getInstance();
@@ -51,7 +50,6 @@ void MainMenuState::update(float dt)
 		quit_ = true;
 	}
 }
-
 
 void MainMenuState::render()
 {

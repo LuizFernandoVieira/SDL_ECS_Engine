@@ -51,6 +51,11 @@ Level::Level(pugi::xml_node source) :
 					layer.attribute("scale_x").as_float(),
 					layer.attribute("scale_y").as_float());
 
+			if(layer.attribute("offset_x") && layer.attribute("offset_y"))
+				screen[current_layer]->SetOffset(
+					layer.attribute("offset_x").as_float(),
+					layer.attribute("offset_y").as_float());
+
 			if (layer.attribute("main").as_bool())
 				main_layer = current_layer;
 

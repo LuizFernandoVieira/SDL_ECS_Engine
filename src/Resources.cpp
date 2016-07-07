@@ -10,7 +10,6 @@
 
 #define PRINTITALL 	false
 
-
 int Resources::WINDOW_WIDTH            = 0;
 int Resources::WINDOW_HEIGHT           = 0;
 int Resources::TILE_WIDTH              = 0;
@@ -18,7 +17,7 @@ int Resources::TILE_HEIGHT             = 0;
 int Resources::GRAVITY                 = 0; // pixels per second
 float Resources::PLAYER_WALK_SPEED     = 0; // pixels per second
 float Resources::PLAYER_JUMP_SPEED     = 0; // pixels per second
-float Resources::PLAYER_ZIPLINE_SPEED  = 300; 
+float Resources::PLAYER_ZIPLINE_SPEED  = 300;
 float Resources::DYING_TIME            = 3; // seconds
 float Resources::MAX_SAFE_FALL_TIME    = 2; // seconds
 
@@ -44,11 +43,6 @@ std::unordered_map<std::string, int> 	Resources::intTable;
 std::unordered_map<std::string, std::shared_ptr<SDL_Texture>> 	Resources::imageTable;
 std::unordered_map<std::string, Mix_Chunk*> 					Resources::soundTable;
 std::unordered_map<std::string, std::shared_ptr<TTF_Font>> 		Resources::fontTable;
-
-
-
-
-
 
 std::shared_ptr<SDL_Texture> Resources::GetImage(std::string file)
 {
@@ -87,10 +81,6 @@ void Resources::ClearImages()
 	}
 }
 
-
-
-
-
 //Sound
 Mix_Chunk* Resources::GetSound(std::string file){
 	std::unordered_map<std::string, Mix_Chunk*>::iterator asset;
@@ -111,7 +101,6 @@ Mix_Chunk* Resources::GetSound(std::string file){
 void	Resources::ClearSounds(){
 	soundTable.clear();
 }
-
 
 // FONT
 std::shared_ptr<TTF_Font> Resources::GetFont(std::string file, int fontSize)
@@ -157,9 +146,6 @@ void Resources::ClearFonts()
 	}
 }
 
-
-
-
 void Resources::Read(std::string _filename){
 		//for(pugi::xml_node tool = tools.first_child(); tool; tool = tool.next_sibling())
 
@@ -178,7 +164,6 @@ void Resources::Read(std::string _filename){
 	else std::cout << "Load result: " << config.description() << std::endl;
 	std::cout << std::endl;
 
-
 	_node node = doc.first_child();
 	_node data;
 
@@ -189,7 +174,6 @@ void Resources::Read(std::string _filename){
 	if(data.child("ai").		attribute("show").as_bool())	Resources::DEBUG_AI = true;
 	if(data.child("resources").	attribute("show").as_bool())	Resources::DEBUG_RESOURCES = true;
 
-
 	//Fetching Globals
 	for(data = node.child("globals").first_child(); data; data = data.next_sibling()){
 		if (DEBUG_RESOURCES) std::cout << "count: " << tempInt << "\t";
@@ -197,7 +181,6 @@ void Resources::Read(std::string _filename){
 
 		varName = data.attribute("name").value();
 		varType = data.attribute("type").value();
-
 
 		if (varType == "int"){
 			intTable.emplace(varName, 		data.attribute("value").as_int());
@@ -227,12 +210,10 @@ void Resources::Read(std::string _filename){
 			std::cout << "\t" << it->first << " : " << it->second << std::endl;
 		std::cout << std::endl;
 
-
 		std::cout << "Int Values:" << std::endl;
 		for ( auto it = intTable.begin(); it != intTable.end(); ++it)
 			std::cout << "\t" << it->first << " : " << it->second << std::endl;
 		std::cout << std::endl;
-
 
 		std::cout << "Images:" << std::endl;
 		for ( auto it = imageTable.begin(); it != imageTable.end(); ++it){
@@ -243,7 +224,4 @@ void Resources::Read(std::string _filename){
 		}
 		std::cout << std::endl;
 	}
-
-	//std::cout << std::endl << "Resources Loaded Successfully" << std::endl;
-
 }

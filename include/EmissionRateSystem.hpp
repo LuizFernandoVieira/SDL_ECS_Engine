@@ -1,10 +1,9 @@
 #ifndef EMISSIONRATESYSTEM_HPP
 #define EMISSIONRATESYSTEM_HPP
 
-// #include "System.hpp"
 #include "TimerComponent.hpp"
 
-class EmissionRateSystem// : public System
+class EmissionRateSystem
 {
 public:
 	EmissionRateSystem();

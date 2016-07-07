@@ -28,7 +28,6 @@ public:
 	};
 
 	void addButton(Button& button, Tab tab);
-	// void addButton(Button& button);
 	TileSetAndObjectsPanel::Tab& getSelectedTab();
 	int& getScroll();
 
@@ -56,7 +55,5 @@ private:
 	Button* nextObject;
 	Rect nextObjectProportions;
 };
-
-
 
 #endif

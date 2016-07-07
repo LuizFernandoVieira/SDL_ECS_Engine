@@ -80,8 +80,6 @@ private:
 	static std::unordered_map<std::string, std::shared_ptr<SDL_Texture>> 	imageTable;
 	static std::unordered_map<std::string, Mix_Chunk*> 						soundTable;
 	static std::unordered_map<std::string, std::shared_ptr<TTF_Font>> 		fontTable;
-
-	//static _document config;
 };
 
 #endif

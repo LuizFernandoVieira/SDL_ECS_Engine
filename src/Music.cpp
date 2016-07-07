@@ -22,10 +22,8 @@
 #define ROOT_DIRECTORY	"../"
 #define CONFIG_XML	"../config.xml"
 
-
-
 Music::Music(){
-	int i;	
+	int i;
 	for (i = 0; i < AUDIO_MAXLAYERS; i++){
 		volumeCurrent[i] 	= 0;
 		volume[i] 			= 0;
@@ -107,8 +105,6 @@ void Music::Update(){
 	}
 }
 
-//---------------------------------------------------------------------------------------
-
 void Music::Load(_node source){
 	if (source == nullptr)	return;
 
@@ -133,7 +129,6 @@ void Music::Load(_node source){
 
 	volume_vector.clear();
 
-	
 	//Setando Arquivos de áudio a serem tocados
 	assetsNode = source.child("assets");
 	if (assetsNode != nullptr){
@@ -152,17 +147,15 @@ void Music::Load(_node source){
 			counter++;
 		}
 	}
-	
-	
+
 	//Iterando através de padrões de volume
 	for (_node volumeNode = source.child("volume"); volumeNode; volumeNode = volumeNode.next_sibling("volume")){
-		
+
 		//Inserção de novo padrão de volume
 		volume_vector.emplace(volumeNode.attribute("state").as_string(), new int[AUDIO_MAXLAYERS]);
 
 		volumeArray = volume_vector[volumeNode.attribute("state").as_string()];
 
-		
 		counter = 0;
 		//Preenchimento do vetor de volumes
 		for(_node layerVolume = volumeNode.child("layer"); layerVolume; layerVolume = layerVolume.next_sibling()){
@@ -201,7 +194,6 @@ void Music::Open(std::string file){
 		std::cout << "[MUSIC] Error Reading CONFIG_FILE: " << config.description() << std::endl;
 		std::cout << "\tStatus code: " << config.status << std::endl;
 	}
-
 
 	_node node = doc.first_child();
 

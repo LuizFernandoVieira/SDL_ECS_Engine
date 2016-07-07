@@ -254,8 +254,6 @@ void LevelEditorState::render()
 	mainPanel_.render();
 }
 
-
-
 void LevelEditorState::pause()
 {
 
@@ -266,7 +264,6 @@ void LevelEditorState::resume()
 
 }
 
-
 Rect LevelEditorState::getPanelRect(Rect& parent, Rect& proportions)
 {
 	return Rect(
@@ -276,9 +273,3 @@ Rect LevelEditorState::getPanelRect(Rect& parent, Rect& proportions)
 		proportions.h() * parent.h()
 	);
 }
-
-
-// void tileBtnExecute(State* state)
-// {
-//
-// }

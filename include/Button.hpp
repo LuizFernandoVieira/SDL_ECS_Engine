@@ -6,12 +6,11 @@
 
 #include "StaticSprite.hpp"
 #include "Rect.hpp"
-// #include "IState.hpp"
 
 class Button
 {
 public:
-	Button(Rect rect, std::string imgPath/*, std::function<void(State*)> execute*/);
+	Button(Rect rect, std::string imgPath);
 	~Button();
 	void update();
 	void render(int scroll = 0);
@@ -20,9 +19,6 @@ public:
 	bool isResizable();
 	void setResizable(bool resizable);
 	void setSpriteClip(Rect clip);
-
-	// std::function<void(State*)> execute_;
-
 private:
 	Rect rect_;
 	StaticSprite sprite_;
