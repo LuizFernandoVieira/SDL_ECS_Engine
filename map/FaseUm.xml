@@ -117,14 +117,14 @@
 			<sprite state="2" umbrella_state="1" umbrella_direction="1" filename="../img/characters/player/jumping_front_closed.png" frame_count="23" frame_time="0.01" />
 			<sprite state="2" umbrella_state="1" umbrella_direction="2" filename="../img/characters/player/jumping_front_closed.png" frame_count="23" frame_time="0.01" />
 			<sprite state="2" umbrella_state="1" umbrella_direction="3" filename="../img/characters/player/jumping_front_closed.png" frame_count="23" frame_time="0.01" />
-			<sprite state="3" umbrella_state="0" umbrella_direction="0" filename="../img/characters/player/falling_front_closed.png" frame_count="11" frame_time="0.01" />
-			<sprite state="3" umbrella_state="0" umbrella_direction="1" filename="../img/characters/player/falling_front_closed.png" frame_count="11" frame_time="0.01" />
-			<sprite state="3" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/falling_front_closed.png" frame_count="11" frame_time="0.01" />
-			<sprite state="3" umbrella_state="0" umbrella_direction="3" filename="../img/characters/player/falling_front_closed.png" frame_count="11" frame_time="0.01" />
-			<sprite state="3" umbrella_state="1" umbrella_direction="0" filename="../img/characters/player/falling_front_closed.png" frame_count="11" frame_time="0.01" />
-			<sprite state="3" umbrella_state="1" umbrella_direction="1" filename="../img/characters/player/falling_front_closed.png" frame_count="11" frame_time="0.01" />
-			<sprite state="3" umbrella_state="1" umbrella_direction="2" filename="../img/characters/player/falling_front_closed.png" frame_count="11" frame_time="0.01" />
-			<sprite state="3" umbrella_state="1" umbrella_direction="3" filename="../img/characters/player/falling_front_closed.png" frame_count="11" frame_time="0.01" />
+			<sprite state="3" umbrella_state="0" umbrella_direction="0" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.01" />
+			<sprite state="3" umbrella_state="0" umbrella_direction="1" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.01" />
+			<sprite state="3" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.01" />
+			<sprite state="3" umbrella_state="0" umbrella_direction="3" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.01" />
+			<sprite state="3" umbrella_state="1" umbrella_direction="0" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.01" />
+			<sprite state="3" umbrella_state="1" umbrella_direction="1" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.01" />
+			<sprite state="3" umbrella_state="1" umbrella_direction="2" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.01" />
+			<sprite state="3" umbrella_state="1" umbrella_direction="3" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.01" />
 			<sprite state="4" umbrella_state="0" umbrella_direction="0" filename="../img/characters/player/attacking_front_closed.png" frame_count="12" frame_time="0.02" />
 			<sprite state="4" umbrella_state="0" umbrella_direction="1" filename="../img/characters/player/attacking_front_closed.png" frame_count="12" frame_time="0.02" />
 			<sprite state="4" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/attacking_front_closed.png" frame_count="12" frame_time="0.02" />
