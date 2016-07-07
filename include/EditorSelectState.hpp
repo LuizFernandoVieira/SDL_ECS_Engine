@@ -24,7 +24,7 @@ public:
 
 private:
 	void accept();
-	
+
 	StaticSprite bg_;
 
 	Mode mode;
