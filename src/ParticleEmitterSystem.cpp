@@ -106,7 +106,7 @@ void ParticleEmitterSystem::update(float dt, GameState& gameState)
 
 void ParticleEmitterSystem::render()
 {
-	std::cout << mapR_.size() << std::endl;
+	//std::cout << mapR_.size() << std::endl;
 
 	for(auto& render : mapR_)
 	{
@@ -118,7 +118,7 @@ void ParticleEmitterSystem::render()
 			0
 		);
 	}
-		std::cout << "outro lado" << std::endl;
+		//std::cout << "outro lado" << std::endl;
 	// collisionRainTerrainSystem_.render(mapCollider_);
 }
 
