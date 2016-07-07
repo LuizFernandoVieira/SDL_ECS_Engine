@@ -63,9 +63,9 @@ GameState::GameState()
 		systems_.emplace_back(new RenderSystem());
 		systems_.emplace_back(new PlayerRenderSystem());
 		systems_.emplace_back(new SoundSystem());
-		// systems_.emplace_back(new ParticleEmitterSystem());
+		systems_.emplace_back(new ParticleEmitterSystem());
 
-		// createParticleEmitter();
+		createParticleEmitter();
 
 		Camera::follow(mapTransform_[player_]);
 	}
@@ -169,7 +169,7 @@ void GameState::render()
 	//Setting Rendering Systems
 	RenderSystem& renderSystem = *(RenderSystem*)systems_[7];
 	PlayerRenderSystem& playerRenderSystem = *(PlayerRenderSystem*)systems_[8];
-	// ParticleEmitterSystem& particleEmitterSystem = *(ParticleEmitterSystem*)systems_[10];
+	ParticleEmitterSystem& particleEmitterSystem = *(ParticleEmitterSystem*)systems_[10];
 
 
 
@@ -184,7 +184,7 @@ void GameState::render()
 		renderSystem.render(i, *this);
 		if (i == main_layer){
 			playerRenderSystem.render(*this);
-			// particleEmitterSystem.render();
+			particleEmitterSystem.render();
 		}
 	}
 

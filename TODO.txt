@@ -5,7 +5,6 @@ Fazendo:
 - Botar objetos na fase;
 - Botar ziplines na fase;
 - Fullscreen;
-- Problema colisor diagonal;
 
 
 Probleminhas a resolver:
