@@ -23,7 +23,6 @@ Sound::Sound(std::string file){
 	Open(file);
 }
 
-
 void Sound::Play(int times){
 	if (chunk != nullptr)
 		if (times >= -1){

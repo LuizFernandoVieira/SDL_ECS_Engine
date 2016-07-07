@@ -3,7 +3,6 @@
 #include "../include/Camera.hpp"
 #include "../include/Resources.hpp"
 
-
 Text::Text(	std::string fontFile,
 			int fontSize,
 			TextStyle style,
@@ -22,13 +21,11 @@ Text::Text(	std::string fontFile,
 	remakeTexture();
 }
 
-
 Text::~Text()
 {
 	if (texture != NULL)
 		SDL_DestroyTexture(texture);
 }
-
 
 void Text::render()
 {
@@ -48,7 +45,6 @@ void Text::render()
 
 	SDL_RenderCopy ( Game::getInstance().getRenderer(), texture, &srcRect, &dstRect);
 }
-
 
 void Text::setPos(int x, int y, bool centerX, bool centerY)
 {
@@ -89,7 +85,6 @@ Rect& Text::getPos()
 {
 	return box;
 }
-
 
 void Text::remakeTexture()
 {

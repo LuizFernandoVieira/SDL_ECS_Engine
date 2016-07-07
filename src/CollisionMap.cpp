@@ -13,7 +13,6 @@ CollisionMap::CollisionMap(const char* file, int width, int height) : filename_(
 	newMap(width, height);
 }
 
-
 void CollisionMap::newMap(int width, int height)
 {
 	collisionMatrix_.clear();
@@ -100,12 +99,10 @@ void CollisionMap::save()
 	ofs.close();
 }
 
-
 int& CollisionMap::at(int x, int y)
 {
 	return collisionMatrix_[ x + y*mapWidth_ ];
 }
-
 
 void CollisionMap::render(int x, int y)
 {
@@ -113,9 +110,9 @@ void CollisionMap::render(int x, int y)
 		for (int j = 0; j < mapWidth_; j++) {
 			if (at(j, i) >= 0) {
 				renderSelection(at(j, i), Rect(
-					j * Resources::TILE_WIDTH + x - Camera::pos_.x(), 
-					i * Resources::TILE_HEIGHT + y - Camera::pos_.y(), 
-					Resources::TILE_WIDTH, 
+					j * Resources::TILE_WIDTH + x - Camera::pos_.x(),
+					i * Resources::TILE_HEIGHT + y - Camera::pos_.y(),
+					Resources::TILE_WIDTH,
 					Resources::TILE_HEIGHT
 				));
 			}

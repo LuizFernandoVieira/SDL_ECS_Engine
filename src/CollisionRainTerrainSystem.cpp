@@ -1,6 +1,5 @@
 #include "../include/CollisionRainTerrainSystem.hpp"
 #include "../include/Resources.hpp"
-
 #include "../include/Camera.hpp"
 #include "../include/Sprite.hpp"
 

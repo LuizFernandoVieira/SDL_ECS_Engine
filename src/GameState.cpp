@@ -11,9 +11,7 @@
 #include "../include/GameState.hpp"
 #include "../include/Camera.hpp"
 #include "../include/InputHandler.hpp"
-
 #include "../include/StaticSprite.hpp"
-
 #include "../include/InputSystem.hpp"
 #include "../include/PlayerRenderSystem.hpp"
 #include "../include/RenderSystem.hpp"
@@ -27,16 +25,12 @@
 #include "../include/ParticleEmitterSystem.hpp"
 
 #define LEVEL_1_FILE "../map/FaseUm.xml"
-	//Ideia: Fazer um vetor estático de strings em Resources, lendo dinamicamente de config.xml as fases
-
 
 unsigned int GameState::nextId_ = 0;
 std::map<int, std::map<int, RenderComponent*>> GameState::mapRender_;
 
 GameState::GameState()
 : music()
-	//testando componente de música, não há necessidade de se carregar um arquivo
-	//A própria music está carregando um arquivo teste
 {
 	StaticSprite loadScreen("../img/loading.png");
 	loadScreen.render(0,0);
@@ -77,7 +71,6 @@ GameState::GameState()
 	{
 		std::cout << "DEU MUITA MERDA" << std::endl;
 	}
-
 }
 
 GameState::~GameState()
@@ -172,8 +165,6 @@ void GameState::render()
 	PlayerRenderSystem& playerRenderSystem = *(PlayerRenderSystem*)systems_[8];
 	ParticleEmitterSystem& particleEmitterSystem = *(ParticleEmitterSystem*)systems_[10];
 
-
-
 	//Valores supostamente contidos em level_ (aqduiridos do xml)
 	int main_layer 	= 2;
 	int max_layers	= 5;
@@ -196,8 +187,6 @@ void GameState::render()
 		showTriggers();
 }
 
-
-
 void GameState::pause()
 {
 
@@ -207,7 +196,6 @@ void GameState::resume()
 {
 
 }
-
 
 void GameState::createParticleEmitter()
 {
@@ -233,16 +221,12 @@ void GameState::loadLevel(std::string target){
 	}
 	else
 	{
-
-
 		if (level_ != nullptr)
 			delete level_;
 		level_ = new Level(stage_file.child("world_info"));
 
 		setTriggers(stage_file.child("world_info").child("triggers"));
 		setObjects(stage_file.child("world_objects"));
-
-
 
 		music.Load(stage_file.child("world_info").child("music"));
 		music.Play();
@@ -251,7 +235,6 @@ void GameState::loadLevel(std::string target){
 
 void GameState::setTriggers(pugi::xml_node objects)
 {
-
 	std::string string_music 		= "music";
 	std::string string_checkpoint 	= "checkpoint";
 
@@ -294,7 +277,6 @@ void GameState::setTriggers(pugi::xml_node objects)
 		*/
 	}
 
-
 	//Failsafe Checking:
 	if (checkpoints.empty())
 		checkpoints.emplace_back(TransformComponent(Rect(352, 100, 48, 96)));
@@ -303,7 +285,6 @@ void GameState::setTriggers(pugi::xml_node objects)
 
 void GameState::setObjects(pugi::xml_node objects)
 {
-
 	short int main_layer = 2;
 
 	for (auto obj : objects.children())
@@ -470,7 +451,7 @@ void GameState::setObjects(pugi::xml_node objects)
 			//State Emplacement
 			for (pugi::xml_node state = aux.first_child(); state; state = state.next_sibling()){
 				//printf("Loading State %d (%.3f)\n", counter, state.attribute("cooldown").as_float());
-				
+
 				//Exclusão de valores inválidos (e de IDLE state)
 				if (state.attribute("state").as_int() > 0){
 					if (state.attribute("cooldown").as_float() >= 0)
@@ -533,7 +514,7 @@ void GameState::deleteDeadEntities()
 void GameState::deleteEntity(int id)
 {
 	int max_layers = 5;
-	
+
 	mapTransform_.erase(id);
 	mapState_.erase(id);
 	mapPhysics_.erase(id);
@@ -550,8 +531,6 @@ void GameState::deleteEntity(int id)
 	for (int i = 0; i <= max_layers; i++)	//era para ser i < max_layers, segundo o que estava escrito
 		mapRender_[i].erase(id);
 }
-
-//----------------------------------------------------------------------
 
 void GameState::showTriggers(){
 	Rect colRect_;

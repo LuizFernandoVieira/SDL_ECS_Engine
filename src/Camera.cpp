@@ -2,7 +2,6 @@
 #include "../include/InputHandler.hpp"
 #include "../include/Resources.hpp"
 
-// InputHandler* Camera::inputHandler_;
 TransformComponent* Camera::focus_;
 Vec2 Camera::pos_;
 Vec2 Camera::speed_;
@@ -23,7 +22,7 @@ void Camera::update(float dt)
 	{
 		pos_ = focus_->rect_.getCenter() - Vec2(Resources::WINDOW_WIDTH / 2, Resources::WINDOW_HEIGHT / 2);
 	}
-	else 
+	else
 	{
 		if(InputHandler::getInstance().isKeyDown(LEFT_ARROW_KEY))
 		{

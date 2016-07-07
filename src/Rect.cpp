@@ -16,7 +16,7 @@ Rect::Rect(float x, float y, float w, float h)
 	h_ = h;
 }
 
-// Rect::Rect(Rect rect) 
+// Rect::Rect(Rect rect)
 // {
 // 	x_ = rect.x;
 // 	y_ = rect.y;
@@ -36,7 +36,6 @@ Vec2 Rect::getBase() const
 {
 	return Vec2( x_+(w_/2), y_ + h_ );
 }
-
 
 Rect Rect::operator+ (const Vec2& vec2)
 {
@@ -64,7 +63,6 @@ Rect Rect::operator* (const Rect& r)
 	rect.h( h_ * r.h() );
 	return rect;
 }
-
 
 bool Rect::operator== (const Rect& rect)
 {

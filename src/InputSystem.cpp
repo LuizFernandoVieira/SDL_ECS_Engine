@@ -101,8 +101,6 @@ void InputSystem::update(float dt, GameState& gameState)
 			/*
 			if (stateComp->state_ == State::Dead){
 				//stateComp->state_ = State::Respawn;
-
-
 			}
 			else
 			*/

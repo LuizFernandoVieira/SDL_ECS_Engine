@@ -11,8 +11,6 @@
 #define		CONFIG_FILE	"../config.txt"
 #define		CONFIG_XML	"../config.xml"
 
-
-
 int main(int argc, char *argv[])
 {
 	Resources::Read(CONFIG_XML);

@@ -13,8 +13,9 @@
 #include "../include/SoundComponent.hpp"
 #include "../include/StateComponent.hpp"
 
+SoundSystem::SoundSystem()
+{
 
-SoundSystem::SoundSystem(){
 }
 
 void SoundSystem::update(float dt, GameState& gameState)

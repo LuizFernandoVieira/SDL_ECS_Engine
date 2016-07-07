@@ -50,7 +50,6 @@ EditorSelectState::~EditorSelectState()
 	textAreas.clear();
 }
 
-
 void EditorSelectState::update(float dt)
 {
 	InputHandler& input = InputHandler::getInstance();
@@ -165,7 +164,6 @@ void EditorSelectState::update(float dt)
 	}
 }
 
-
 void EditorSelectState::render()
 {
 	bg_.render(0,0);
@@ -195,7 +193,6 @@ void EditorSelectState::render()
 	btnReturn.render(btnReturnPos.x(), btnReturnPos.y());
 	btnReturnText.render();
 }
-
 
 void EditorSelectState::accept()
 {
@@ -227,8 +224,6 @@ void EditorSelectState::accept()
 		Game::getInstance().push(new LevelEditorState());
 	}
 }
-
-
 
 void EditorSelectState::pause()
 {
