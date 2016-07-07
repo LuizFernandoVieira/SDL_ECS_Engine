@@ -479,9 +479,13 @@ void GameState::setObjects(pugi::xml_node objects)
 						if (state.attribute("state").as_int() > 0){
 							if (state.attribute("cooldown").as_float() >= 0)
 									mapAI_[nextId_]->AddState(state.attribute("state").as_int(), state.attribute("cooldown").as_float());
-							else	mapAI_[nextId_]->AddState(state.attribute("state").as_int(), 0.0f);
+							else	mapAI_[nextId_]->AddState(state.attribute("state").as_int());
 						}
+					}
 
+
+					//Trigger Emplacement
+					for (pugi::xml_node state = aux.first_child(); state; state = state.next_sibling()){
 						for (pugi::xml_node trigger_ = state.first_child(); trigger_; trigger_ = trigger_.next_sibling()){
 							//printf("\tNow Loading Trigger: %d -> (%d) -> %d\n", counter, trigger_.attribute("verification").as_int(), trigger_.attribute("target_index").as_int());
 							mapAI_[nextId_]->AddTrigger(counter, trigger_.attribute("verification").as_int(), trigger_.attribute("target_index").as_int());

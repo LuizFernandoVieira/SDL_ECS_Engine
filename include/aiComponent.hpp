@@ -34,7 +34,7 @@ private:
 				hold	= action_hold;
 			};
 			*/
-			AIState(EntityState state_new, float action_hold = 0) : action_timer() {
+			AIState(EntityState state_new, float action_hold = 0){
 				state 		= state_new;
 				cooldown	= action_hold;
 			};
@@ -52,7 +52,6 @@ private:
 			EntityState state;
 			std::unordered_map<short unsigned int, short unsigned int>	triggers;
 
-			Timer action_timer;
 			float cooldown;
 	};
 
@@ -66,9 +65,11 @@ public:
 	short unsigned int		action_target;
 
 	CollisionMap* 			terrain;
+	Timer action_timer;
+			
 
 	//User-Defined AI
-	AIComponent(){
+	AIComponent() : action_timer() {
 		terrain = nullptr;
 		AddState((int) IDLE);
 		state_index = 0;
@@ -77,7 +78,7 @@ public:
 
 
 	//Template AI: Jumper
-	AIComponent(int type){
+	AIComponent(int type) : action_timer(){
 		terrain = nullptr;
 		state_index = 0;
 		action_target = 0;

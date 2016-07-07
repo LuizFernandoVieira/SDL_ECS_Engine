@@ -19,11 +19,11 @@ void AISystem::update(float dt, GameState& gameState)
 
 	std::map<int, AIComponent*> aiComp	= gameState.mapAI_;
 
-	StateComponent* stateComp;
-	SpeedComponent* speedComp;
-	PhysicsComponent* physicsComp;
-	ColliderComponent* colComp;
-	TransformComponent* transComp;
+	StateComponent* stateComp = NULL;
+	SpeedComponent* speedComp = NULL;
+	PhysicsComponent* physicsComp = NULL;
+	ColliderComponent* colComp = NULL;
+	TransformComponent* transComp = NULL;
 
 
 	bool move = false;
@@ -33,16 +33,25 @@ void AISystem::update(float dt, GameState& gameState)
 			gameState.mapTransform_[gameState.player_]->rect_.getCenter())
 				< AI_PROCESSING_DISTANCE){
 
-		stateComp 	= gameState.mapState_[ai.first];
-		speedComp	= gameState.mapSpeed_[ai.first];
-		physicsComp	= gameState.mapPhysics_[ai.first];
-		colComp		= gameState.mapCollider_[ai.first];
-		transComp	= gameState.mapTransform_[ai.first];
+		if (gameState.mapState_.find(ai.first) != gameState.mapState_.end())
+			stateComp 	= gameState.mapState_[ai.first];
+		if (gameState.mapSpeed_.find(ai.first) != gameState.mapSpeed_.end())
+			speedComp	= gameState.mapSpeed_[ai.first];
+		if (gameState.mapPhysics_.find(ai.first) != gameState.mapPhysics_.end())
+			physicsComp	= gameState.mapPhysics_[ai.first];
+		if (gameState.mapCollider_.find(ai.first) != gameState.mapCollider_.end())
+			colComp		= gameState.mapCollider_[ai.first];
+		if (gameState.mapTransform_.find(ai.first) != gameState.mapTransform_.end())
+			transComp	= gameState.mapTransform_[ai.first];
 
+		/*
 		//Update de Cooldown por estado
 		for (auto& state : ai.second->states){
 			state.action_timer.update(dt);
 		}
+		*/
+
+		ai.second->action_timer.update(dt);
 
 		auto& current_state = ai.second->states[ai.second->state_index];
 
@@ -132,9 +141,9 @@ void AISystem::update(float dt, GameState& gameState)
 			}
 
 				//Se movimento for válido
-			if (move && current_state.action_timer.get() >= current_state.cooldown){				
+			if (move && ai.second->action_timer.get() >= current_state.cooldown){				
 				ai.second->state_index = trigger.second;
-				current_state.action_timer.restart();
+				ai.second->action_timer.restart();
 				goto verificationBreak;
 			}
 			//Não houve mudança de estado no frame
@@ -147,7 +156,8 @@ void AISystem::update(float dt, GameState& gameState)
 	if (Resources::DEBUG_AI){
 		printf("Player State: %d\t || AI ", gameState.mapState_[FOLLOW_TARGET]->state_);
 		ai.second->PrintCurrentState();
-		printf("\t Distance: %.0f\t || Desired Distance: %.3f\n", Distance( transComp->rect_,	gameState.mapTransform_[FOLLOW_TARGET]->rect_), centerdist);
+		printf("\t Distance: %.0f\t || Desired Distance:\t%.3f\n", Distance( transComp->rect_,	gameState.mapTransform_[FOLLOW_TARGET]->rect_), centerdist);
+		printf("\t Cooldown: %.0f\t || Action Timer: \t%.3f\n", current_state.cooldown, ai.second->action_timer.get());
 	}
 
 
@@ -172,9 +182,12 @@ void AISystem::update(float dt, GameState& gameState)
 			SUCKING		//11
 		};*/
 			//IDLE
-			case 0:				
-				speedComp->speed_.y(0);
-				speedComp->speed_.x(0);
+			case 0:
+				if (speedComp != NULL)
+				{
+					speedComp->speed_.y(0);
+					speedComp->speed_.x(0);
+				}
 				stateComp->state_ = State::IDLE;
 				break;
 
@@ -216,10 +229,9 @@ void AISystem::update(float dt, GameState& gameState)
 
 			// BLOWING
 			case 10:
-				std::cout << "blowing" << std::endl;
 				if (move)
 				{
-					if (ai.second->action_target == 0)
+					if (ai.second->action_target != 0)
 					{
 						gameState.deleteEntity(ai.second->action_target);
 					}
@@ -232,7 +244,6 @@ void AISystem::update(float dt, GameState& gameState)
 					                                                                     300,
 					                                                                     100 )));
 					gameState.mapWind_.emplace(windId, new WindComponent(Direction::W_LEFT, 100));
-					gameState.mapCollider_.emplace(windId, new ColliderComponent(Rect(0,0,300,100)));
 					ai.second->action_target = windId;
 					stateComp->state_ = State::SUCKING;
 				}
@@ -240,10 +251,9 @@ void AISystem::update(float dt, GameState& gameState)
 
 			// SUCKING
 			case 11:
-				std::cout << "sucking" << std::endl;
 				if (move)
 				{
-					if (ai.second->action_target == 0)
+					if (ai.second->action_target != 0)
 					{
 						gameState.deleteEntity(ai.second->action_target);
 					}
@@ -251,12 +261,11 @@ void AISystem::update(float dt, GameState& gameState)
 					// Instancia o vento
 					int windId = gameState.nextId_++;
 					Rect aiRect = transComp->rect_;
-					gameState.mapTransform_.emplace(windId, new TransformComponent(Rect( aiRect.w(),
+					gameState.mapTransform_.emplace(windId, new TransformComponent(Rect( aiRect.x() + aiRect.w(),
 					                                                                     aiRect.y() + aiRect.h() / 2 - 50,
 					                                                                     300,
 					                                                                     100 )));
 					gameState.mapWind_.emplace(windId, new WindComponent(Direction::W_LEFT, 100));
-					gameState.mapCollider_.emplace(windId, new ColliderComponent(Rect(0,0,300,100)));
 					ai.second->action_target = windId;
 					stateComp->state_ = State::IDLE;
 				}

@@ -847,6 +847,30 @@ WIND DIRECTIOM
 	</AI>
 </object>
 
+<object name="estatua">
+		<transform>
+			<rect x="400" y="350" w="120" h="162" />
+			<scale x="0.5" y="0.5" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/characters/enemies/Tormenta 1.png" frame_count="30" frame_time="0.02" />
+			<sprite state="10" filename="../img/characters/enemies/Tormenta 2.png" frame_count="30" frame_time="0.02" />
+		</render>
+		<state />
+		<AI>
+			<state_index state="0" cooldown="0">
+				<trigger verification="0" target_index="1" />
+			</state_index>
+			<state_index state="10" cooldown="1">
+				<trigger verification="0" target_index="2" />
+			</state_index>
+			<state_index state="11" cooldown="1">
+				<trigger verification="0" target_index="1" />
+			</state_index>
+		</AI>
+	</object>
+
 <object name="Coin">
 	<transform>
 		<rect x="0" y="0" w="48" h="48" />
