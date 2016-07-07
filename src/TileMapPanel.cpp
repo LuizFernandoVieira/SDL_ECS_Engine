@@ -324,8 +324,8 @@ void TileMapPanel::render()
 			{
 				objectSp_->render(
 					InputHandler::getInstance().getMouseX() - objectSp_->getWidth() / 2 + Camera::pos_.x(), 
-					InputHandler::getInstance().getMouseY() - objectSp_->getHeight() / 2 + Camera::pos_.y(),
-					objectSpRotation_
+					InputHandler::getInstance().getMouseY() - objectSp_->getHeight() / 2 + Camera::pos_.y()/*,
+					objectSpRotation_*/
 				);
 			}
 			else if (*selectedTab_ != 2)
@@ -429,7 +429,7 @@ void TileMapPanel::placeObject(int x, int y, int layer)
 	object.layer = layer;
 	object.sprite = *objectSp_;
 	object.pos = Rect(x, y, object.sprite.getWidth(), object.sprite.getHeight());
-	object.rotation = objectSpRotation_;
+	// object.rotation = objectSpRotation_;
 
 	objects_.emplace_back(object);
 

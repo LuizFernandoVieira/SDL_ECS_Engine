@@ -86,6 +86,8 @@ void CollisionSystem::updateTerrain(
 	// Colisao com o terreno
 	for (auto& col : collider)
 	{
+		if (speed.find(col.first) == speed.end()) break; // Se nao tem speed, nao checa colisao com terreno
+
 		Rect finalCollider = col.second->hurtbox_ + transform[col.first]->rect_.getPivot();
 
 		for ( int y = finalCollider.y() / Resources::TILE_HEIGHT;
@@ -102,7 +104,7 @@ void CollisionSystem::updateTerrain(
 				                     Resources::TILE_HEIGHT );
 
 				int collisionType;
-				if ((collisionType = collisionMap.at(x,y)) >= 0 && isColliding(finalCollider, terrain, 0, 0))
+				if ((collisionType = collisionMap.at(x,y)) >= 0/* && isColliding(finalCollider, terrain, 0, 0)*/)
 				{
 					switch(collisionType)
 					{

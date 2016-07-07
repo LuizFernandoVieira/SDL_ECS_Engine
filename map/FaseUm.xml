@@ -146,7 +146,7 @@
 			<sound state="4" filename="../audio/character_attack.wav" />
 		</sound>
 		<collider>
-			<hurtbox x="0" y="-10" w="52" h="90" />
+			<hurtbox x="0" y="0" w="52" h="90" />
 			<hitbox x="10" y="-10" w="20" h="20" />
 		</collider>
 		<speed />
@@ -207,9 +207,9 @@
 			</state_index>
 		</AI>
 	</object>
-	<object name="Comoda" id="1" layer="2">
+	<object name="Comoda" id="2" layer="2">
 		<transform>
-			<rect x="897" y="518" w="54" h="96" />
+			<rect x="897" y="528" w="54" h="96" />
 			<scale x="1" y="1" />
 			<rotation value="0" />
 		</transform>
@@ -217,7 +217,6 @@
 			<sprite state="0" filename="../img/objetos/armoire.png" frame_count="1" frame_time="1.0" />
 		</render>
 		<state />
-		<speed />
 		<collider>
 			<hurtbox x="0" y="0" w="54" h="96" />
 		</collider>

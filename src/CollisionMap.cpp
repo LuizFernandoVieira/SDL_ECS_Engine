@@ -112,7 +112,7 @@ void CollisionMap::render(int x, int y)
 	for (int i = 0; i < mapHeight_; i++) {
 		for (int j = 0; j < mapWidth_; j++) {
 			if (at(j, i) >= 0) {
-				renderSelection(Rect(
+				renderSelection(at(j, i), Rect(
 					j * Resources::TILE_WIDTH + x - Camera::pos_.x(), 
 					i * Resources::TILE_HEIGHT + y - Camera::pos_.y(), 
 					Resources::TILE_WIDTH, 
@@ -123,16 +123,59 @@ void CollisionMap::render(int x, int y)
 	}
 }
 
-void CollisionMap::renderSelection(Rect rect)
+void CollisionMap::renderSelection(int collision, Rect rect)
 {
-	SDL_Renderer* renderer = Game::getInstance().getRenderer();
-	SDL_SetRenderDrawColor(renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
+	// SDL_Renderer* renderer = Game::getInstance().getRenderer();
+/*	SDL_SetRenderDrawColor(renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
 	SDL_RenderDrawLine(renderer, rect.x(), rect.y(), rect.w() + rect.x(), rect.y());
 	SDL_RenderDrawLine(renderer, rect.x(), rect.y(), rect.x(), rect.h() + rect.y());
 	SDL_RenderDrawLine(renderer, rect.x(), rect.y(), rect.w() + rect.x(), rect.h() + rect.y());
 	SDL_RenderDrawLine(renderer, rect.w() + rect.x(), rect.y(), rect.w() + rect.x(), rect.h() + rect.y());
 	SDL_RenderDrawLine(renderer, rect.x(), rect.h() + rect.y(), rect.w() + rect.x(), rect.h() + rect.y());
-	SDL_RenderDrawLine(renderer, rect.w() + rect.x(), rect.y(), rect.x(), rect.h() + rect.y());
+	SDL_RenderDrawLine(renderer, rect.w() + rect.x(), rect.y(), rect.x(), rect.h() + rect.y());*/
+	std::string file;
+	switch (collision)
+	{
+		case 0:
+			file = "../img/interface/editor/colisao_chao.png";
+			break;
+		case 1:
+			file = "../img/interface/editor/colisao_teto.png";
+			break;
+		case 2:
+			file = "../img/interface/editor/colisao_parede.png";
+			break;
+		case 3:
+			file = "../img/interface/editor/colisao_teto_chao.png";
+			break;
+		case 4:
+			file = "../img/interface/editor/colisao_completa.png";
+			break;
+		case 5:
+			file = "../img/interface/editor/btn_collision_1.png";
+			break;
+		case 6:
+			file = "../img/interface/editor/btn_collision_2.png";
+			break;
+		case 7:
+			file = "../img/interface/editor/colisao_morte.png";
+			break;
+	}
+	std::shared_ptr<SDL_Texture> texture = Resources::GetImage(file.c_str());
+	SDL_Rect clipRect, dstRect;
+
+	clipRect.x = 0;
+	clipRect.y = 0;
+	clipRect.w = rect.w();
+	clipRect.h = rect.h();
+	dstRect.x = rect.x();
+	dstRect.y = rect.y();
+	dstRect.w = rect.w();
+	dstRect.h = rect.h();
+
+	SDL_SetTextureAlphaMod(texture.get(), 80);
+	SDL_SetTextureBlendMode(texture.get(), SDL_BLENDMODE_BLEND);
+	SDL_RenderCopy( Game::getInstance().getRenderer(), texture.get(), &clipRect, &dstRect );
 }
 
 int CollisionMap::getWidth() const

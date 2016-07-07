@@ -13,7 +13,7 @@
 	</globals>
 
 	<debug>
-		<collision show="false"/>
+		<collision show="true"/>
 		<triggers show="true"/>
 	</debug>
 </config>

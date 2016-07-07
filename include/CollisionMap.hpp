@@ -30,7 +30,7 @@ public:
 
 	std::vector<int> collisionMatrix_;
 private:
-	void renderSelection(Rect rect);
+	void renderSelection(int collision, Rect rect);
 
 	std::string filename_;
 	

@@ -54,6 +54,7 @@ GameState::GameState()
 		loadLevel(LEVEL_1_FILE);
 
 		systems_.emplace_back(new InputSystem());
+		systems_.emplace_back(new AISystem());
 		systems_.emplace_back(new GravitySystem());
 		systems_.emplace_back(new MoveSystem());
 		systems_.emplace_back(new AttackSystem());
@@ -62,7 +63,6 @@ GameState::GameState()
 		systems_.emplace_back(new RenderSystem());
 		systems_.emplace_back(new PlayerRenderSystem());
 		systems_.emplace_back(new SoundSystem());
-		systems_.emplace_back(new AISystem());
 		systems_.emplace_back(new ParticleEmitterSystem());
 
 		createParticleEmitter();
@@ -137,7 +137,7 @@ void GameState::update(float dt)
 
 	deleteDeadEntities();
 
-/*	if (mapState_[player_]->state_ == State::IDLE)
+	/*if (mapState_[player_]->state_ == State::IDLE)
 		std::cout << "IDLE" << std::endl;
 	else if (mapState_[player_]->state_ == State::WALKING)
 		std::cout << "WALKING" << std::endl;
@@ -167,9 +167,9 @@ void GameState::update(float dt)
 void GameState::render()
 {
 	//Setting Rendering Systems
-	RenderSystem& renderSystem = *(RenderSystem*)systems_[6];
-	PlayerRenderSystem& playerRenderSystem = *(PlayerRenderSystem*)systems_[7];
-	ParticleEmitterSystem& particleEmitterSystem = *(ParticleEmitterSystem*)systems_[9];
+	RenderSystem& renderSystem = *(RenderSystem*)systems_[7];
+	PlayerRenderSystem& playerRenderSystem = *(PlayerRenderSystem*)systems_[8];
+	ParticleEmitterSystem& particleEmitterSystem = *(ParticleEmitterSystem*)systems_[10];
 
 
 
