@@ -69,6 +69,10 @@ public:
 	std::vector 		<TransformComponent> checkpoints;
 	std::vector<std::pair<TransformComponent, std::string>> musicTriggers;
 
+	static unsigned int nextId_;
+
+	void deleteEntity(int id);
+
 private:
 	void createParticleEmitter();
 	void deleteDeadEntities();
@@ -84,8 +88,6 @@ private:
 	Level* level_;
 	Music music;
 	std::vector<System*> systems_;
-
-	static unsigned int nextId_;
 
 };
 

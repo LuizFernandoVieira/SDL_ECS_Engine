@@ -168,6 +168,8 @@ void AISystem::update(float dt, GameState& gameState)
 			SHOOT,		//7
 			DEAD,		//8
 			FOLLOW		//9
+			BLOWING,	//10
+			SUCKING		//11
 		};*/
 			//IDLE
 			case 0:				
@@ -210,6 +212,54 @@ void AISystem::update(float dt, GameState& gameState)
 					stateComp->facingRight_ = false;
 				}
 				stateComp->state_ = State::WALKING;
+				break;
+
+			// BLOWING
+			case 10:
+				std::cout << "blowing" << std::endl;
+				if (move)
+				{
+					if (ai.second->action_target == 0)
+					{
+						gameState.deleteEntity(ai.second->action_target);
+					}
+					// Chegou no estado blowing
+					// Instancia o vento
+					int windId = gameState.nextId_++;
+					Rect aiRect = transComp->rect_;
+					gameState.mapTransform_.emplace(windId, new TransformComponent(Rect( aiRect.x() - 300,
+					                                                                     aiRect.y() + aiRect.h() / 2 - 50,
+					                                                                     300,
+					                                                                     100 )));
+					gameState.mapWind_.emplace(windId, new WindComponent(Direction::W_LEFT, 100));
+					gameState.mapCollider_.emplace(windId, new ColliderComponent(Rect(0,0,300,100)));
+					ai.second->action_target = windId;
+					stateComp->state_ = State::SUCKING;
+				}
+				break;
+
+			// SUCKING
+			case 11:
+				std::cout << "sucking" << std::endl;
+				if (move)
+				{
+					if (ai.second->action_target == 0)
+					{
+						gameState.deleteEntity(ai.second->action_target);
+					}
+					// Chegou no estado sucking
+					// Instancia o vento
+					int windId = gameState.nextId_++;
+					Rect aiRect = transComp->rect_;
+					gameState.mapTransform_.emplace(windId, new TransformComponent(Rect( aiRect.w(),
+					                                                                     aiRect.y() + aiRect.h() / 2 - 50,
+					                                                                     300,
+					                                                                     100 )));
+					gameState.mapWind_.emplace(windId, new WindComponent(Direction::W_LEFT, 100));
+					gameState.mapCollider_.emplace(windId, new ColliderComponent(Rect(0,0,300,100)));
+					ai.second->action_target = windId;
+					stateComp->state_ = State::IDLE;
+				}
 				break;
 
 			default:

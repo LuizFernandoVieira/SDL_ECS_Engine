@@ -72,34 +72,37 @@ public:
 		terrain = nullptr;
 		AddState((int) IDLE);
 		state_index = 0;
+		action_target = 0;
 	}
 
 
 	//Template AI: Jumper
 	AIComponent(int type){
 		terrain = nullptr;
-		AddState((int) IDLE);
 		state_index = 0;
+		action_target = 0;
 
-		if(type == 1){
+		switch (type){
+			case 0:
+			AddState((int) IDLE);
+			break;
+
+			case 1:
 			//Jumper AKA test AI
 			AddState((int) FOLLOW, 2.0f);
 			states[0].addTrigger(10, 0);
 			states[1].addTrigger(10, 0);
+			break;
+
+			//Estátua
+			case 2:
+			break;
+
+			default:
+			AddState((int) IDLE);
+			break;
 		}
 	};
-
-	/*
-	//Template AI
-	AIComponent(int type){
-		//Jumper AKA test AI
-		AddState((int) IDLE);
-		AddState((int) JUMPING);
-		states[1].addTrigger(0, 0);
-
-		state_index = 0;
-	};
-	*/
 	~AIComponent(){};
 
 	void PrintAI(){

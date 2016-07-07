@@ -15,7 +15,8 @@ enum State
 	ZIPLINE,
 	SHOOT,
 	DYING,
-	DEAD
+	DEAD,
+	SUCKING
 };
 
 enum UmbrellaState
