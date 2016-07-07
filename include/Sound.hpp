@@ -12,7 +12,6 @@
 	#include "SDL_mixer.h"
 #endif
 
-
 class Sound{
 	public:
 		Sound();

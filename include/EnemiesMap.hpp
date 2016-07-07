@@ -13,7 +13,6 @@
 #include <fstream>
 
 #include "pugixml.hpp"
-// #include "Rect.hpp"
 
 struct ObjectInfo
 {
@@ -36,7 +35,6 @@ struct LocalObjectInfo
 class ObjectMap
 {
 public:
-	// Construtor pro jogo
 	ObjectMap(std::string localObjects);
 
 	void save();

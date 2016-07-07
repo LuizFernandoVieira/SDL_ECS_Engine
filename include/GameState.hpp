@@ -20,8 +20,6 @@
 #include "WindComponent.hpp"
 #include "AIComponent.hpp"
 #include "CoinComponent.hpp"
-
-
 #include "Music.hpp"
 #include "Resources.hpp"
 #include "CollisionMap.hpp"
@@ -39,7 +37,6 @@ public:
 	void resume();
 	CollisionMap& getCollisionMap();
 
-	//Environment Control methods
 	void SetVolumes(std::string state){
 		music.SetVolumes(state);
 	};
@@ -68,7 +65,7 @@ public:
 	PlayerRenderComponent playerRenderComponent_;
 
 
-	std::vector 		<TransformComponent> checkpoints;
+	std::vector<TransformComponent> checkpoints;
 	std::vector<std::pair<TransformComponent, std::string>> musicTriggers;
 
 	static unsigned int nextId_;
@@ -79,8 +76,6 @@ private:
 	void createParticleEmitter();
 	void deleteDeadEntities();
 
-
-	//Level Creation Methods
 	void setObjects(pugi::xml_node objects);
 	void setTriggers(pugi::xml_node triggers);
 	void loadLevel(std::string target);
@@ -90,7 +85,6 @@ private:
 	Level* level_;
 	Music music;
 	std::vector<System*> systems_;
-
 };
 
 #endif

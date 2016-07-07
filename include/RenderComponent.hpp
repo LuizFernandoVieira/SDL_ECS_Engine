@@ -9,8 +9,6 @@
 #include "StateComponent.hpp"
 #include "Sprite.hpp"
 
-
-
 struct SpriteKey
 {
 	State state;
@@ -19,13 +17,12 @@ struct SpriteKey
 
 	bool operator==(const SpriteKey& other) const {
 		return (
-			state == other.state && 
-			umbrellaState == other.umbrellaState && 
+			state == other.state &&
+			umbrellaState == other.umbrellaState &&
 			umbrellaDirection == other.umbrellaDirection
 		);
 	}
 };
-
 
 namespace std
 {
@@ -61,8 +58,6 @@ private:
 	std::unordered_map<State, Sprite> sprites_;
 };
 
-
-
 class PlayerRenderComponent : public Component
 {
 public:
@@ -88,7 +83,7 @@ public:
 	{
 		if (sprites_.find(spriteKey) != sprites_.end())
 			return sprites_[spriteKey];
-		else 
+		else
 		{
 			spriteKey.state = State::IDLE;
 			spriteKey.umbrellaState = UmbrellaState::CLOSED;

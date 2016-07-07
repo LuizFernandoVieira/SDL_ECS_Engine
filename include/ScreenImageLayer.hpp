@@ -9,9 +9,7 @@
 	#include "SDL.h"
 #endif
 
-
 #include "ScreenLayer.hpp"
-
 
 class ImageLayer : public ScreenLayer{
 public:

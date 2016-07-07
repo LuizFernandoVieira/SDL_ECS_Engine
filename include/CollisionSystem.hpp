@@ -52,8 +52,6 @@ private:
 		int player,
 		std::map<int, TransformComponent*> transform,
 		std::map<int, ColliderComponent*> collider,
-		// std::map<int, SpeedComponent*> speed,
-		// std::map<int, StateComponent*> oldState,
 		std::map<int, StateComponent*> state,
 		std::map<int, WindComponent*> wind
 	);
@@ -68,7 +66,7 @@ private:
 	void correctDiagonalUp(Rect& entityPos, Rect collider, Rect terrain, Vec2& speed);
 	void correctDiagonalDown(Rect& entityPos, Rect collider, Rect terrain, Vec2& speed);
 
-	std::vector<Rect> collidersToRender; // para renderizar colisores q estao colidindo
+	std::vector<Rect> collidersToRender;
 };
 
 #endif

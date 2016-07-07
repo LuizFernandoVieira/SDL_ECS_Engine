@@ -5,8 +5,6 @@
 #include "Component.hpp"
 #include "CollisionMap.hpp"
 
-
-
 class AIComponent : public Component{
 private:
 
@@ -28,18 +26,10 @@ private:
 
 	class AIState{
 		public:
-			/*
-			AIState(int state_new, float action_hold = 0){
-				state 	= state_new;
-				hold	= action_hold;
-			};
-			*/
 			AIState(EntityState state_new, float action_hold = 0) : action_timer() {
 				state 		= state_new;
 				cooldown	= action_hold;
 			};
-
-			
 
 			AIState();
 			void addTrigger(short unsigned int condition_index,
@@ -55,8 +45,6 @@ private:
 			Timer action_timer;
 			float cooldown;
 	};
-
-
 
 public:
 
@@ -74,7 +62,6 @@ public:
 		state_index = 0;
 		action_target = 0;
 	}
-
 
 	//Template AI: Jumper
 	AIComponent(int type){
@@ -111,12 +98,11 @@ public:
 			std::cout << "State: " << st.state << std::endl;
 			for (auto trigger_it : st.triggers)
 				std::cout << "\t	Trigger - Condition:  " << trigger_it.first << " Target: " << trigger_it.second << std::endl;
-			//std::cout << "\t 	Action Timer: " << current_action_timer.get() << std::endl << std::endl;
 		}
 	}
 	void PrintCurrentState(){
 		std::cout << "Current State: " << states[state_index].state << std::endl;
-		std::cout << std::endl; 
+		std::cout << std::endl;
 	}
 
 	void AddState(int entityState, float action_hold = 0.0f){
@@ -136,16 +122,8 @@ public:
 		states[state_].addTrigger(condition_index, target_);
 	}
 
-
-	/*
-	void AddState(short unsigned int index){
-		states.push_back(index);
-	}
-	*/
 	void SetTerrain(CollisionMap* target){terrain = target; };
 };
-
-
 
 namespace std
 {
