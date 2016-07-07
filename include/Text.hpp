@@ -19,6 +19,8 @@ namespace Colors {
 	static SDL_Color black = {0, 0, 0, 255};
 	static SDL_Color white = {255, 255, 255, 0};
 	static SDL_Color blue = {0, 0, 255, 255};
+	static SDL_Color purple = {95, 0, 108, 100};
+	static SDL_Color gray = {163, 163, 163, 100};
 }
 
 class Text
