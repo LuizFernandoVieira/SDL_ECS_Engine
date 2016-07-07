@@ -26,7 +26,7 @@ private:
 
 	class AIState{
 		public:
-			AIState(EntityState state_new, float action_hold = 0) : action_timer() {
+			AIState(EntityState state_new, float action_hold = 0) {
 				state 		= state_new;
 				cooldown	= action_hold;
 			};
@@ -54,7 +54,7 @@ public:
 
 	CollisionMap* 			terrain;
 	Timer action_timer;
-			
+
 
 	//User-Defined AI
 	AIComponent() : action_timer() {
@@ -76,7 +76,7 @@ public:
 			//Follower
 				AddState((int) IDLE, -0.1f);
 				AddState((int) FOLLOW, 0.3f);
-				
+
 				states[0].addTrigger(10, 0);
 				states[0].addTrigger(7, 1);
 

@@ -1,5 +1,6 @@
 #include "../include/ParticleEmitterSystem.hpp"
 #include "../include/StateComponent.hpp"
+#include "../include/Camera.hpp"
 
 #include <iostream>
 #include <time.h>
@@ -26,13 +27,13 @@ void ParticleEmitterSystem::update(float dt, GameState& gameState)
 	std::map<int, TransformComponent*> oldTransform = mapTransform_;
 
 	if(timerComponent->time_ > ec->emissionRate_){
-		for(int i=0; i<4; i++)
+		for(int i=0; i<6; i++)
 		{
 			int particle_ = nextId_;
 			nextId_++;
 
-			int xRand = rand() % (1024*15);
-			mapTransform_.emplace(particle_, new TransformComponent(Rect(xRand, 0, 16, 16)));
+			int xRand = rand() % (1024*2);
+			mapTransform_.emplace(particle_, new TransformComponent(Rect(Camera::pos_.x() + xRand - 512, 0, 16, 16)));
 
 			// Exemplo soh pra testar, nao esquecer de mudar depois
 			std::unordered_map<State, Sprite> particleSprite;
