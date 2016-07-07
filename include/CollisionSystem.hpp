@@ -22,6 +22,7 @@ private:
 	bool isColliding(const Rect& a, const Rect& b, float angleOfA, float angleOfB);
 
 	void updateTerrain(
+		int player,
 		CollisionMap& collisionMap,
 		std::map<int, TransformComponent*> oldTransform,
 		std::map<int, TransformComponent*> transform,

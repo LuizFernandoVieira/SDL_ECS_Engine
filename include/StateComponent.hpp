@@ -2,6 +2,7 @@
 #define STATECOMPONENT_HPP
 
 #include "Component.hpp"
+#include "Timer.hpp"
 
 enum State
 {
@@ -66,6 +67,7 @@ public:
 	short unsigned int current_checkpoint;
 	UmbrellaState umbrellaState_;
 	UmbrellaDirection umbrellaDirection_;
+	Timer fallTime_;
 };
 
 

@@ -41,6 +41,7 @@ public:
 	static float PLAYER_ZIPLINE_SPEED;
 
 	static float DYING_TIME;
+	static float MAX_SAFE_FALL_TIME;
 
 	static int MAP_WIDTH;
 	static int MAP_HEIGHT;

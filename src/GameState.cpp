@@ -213,7 +213,7 @@ void GameState::createParticleEmitter()
 	particleEmitter_ = nextId_;
 	nextId_++;
 
-	mapTransform_.emplace(particleEmitter_, new TransformComponent(Rect(300, 250, 32, 32)));
+	mapTransform_.emplace(particleEmitter_, new TransformComponent(Rect(100, 0, 32, 32)));
 	mapEmitter_.emplace(particleEmitter_, new EmitterComponent(0.01));
 	mapTimer_.emplace(particleEmitter_, new TimerComponent());
 }
