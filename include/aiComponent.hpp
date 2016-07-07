@@ -54,7 +54,7 @@ public:
 
 	CollisionMap* 			terrain;
 	Timer action_timer;
-			
+
 
 	//User-Defined AI
 	AIComponent() : action_timer() {
@@ -76,7 +76,7 @@ public:
 			//Follower
 				AddState((int) IDLE, -0.1f);
 				AddState((int) FOLLOW, 0.3f);
-				
+
 				states[0].addTrigger(10, 0);
 				states[0].addTrigger(7, 1);
 
