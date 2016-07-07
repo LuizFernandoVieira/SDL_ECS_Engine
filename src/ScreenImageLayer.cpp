@@ -45,4 +45,3 @@ void ImageLayer::Render(){
 
 	SDL_RenderCopy ( Game::getInstance().getRenderer(), texture_.get(), &clipRect_, &dstRect);
 }
-

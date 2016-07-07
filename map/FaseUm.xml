@@ -4,8 +4,8 @@
 	<tilemap file="../map/FaseUm_tilemap.txt" />
 	<collision_map file="../map/FaseUm_colmap.txt" />
 	<layers>
-		<screen main="false" tiled="false" file="../img/screen_layers/cidade_1.png" parallax_x="0.1" parallax_y="0" scale_x="2" scale_y="1" />
-		<screen main="false" tiled="false" file="../img/screen_layers/cidade_2.png" parallax_x="0.05" parallax_y="0" />
+		<screen main="false" tiled="false" file="../img/screen_layers/cidade_1.png" parallax_x="0.2" parallax_y="0" scale_x="0.75" scale_y="0.75" offset_x="900" offset_y="-300" />
+		<screen main="false" tiled="false" file="../img/screen_layers/cidade_2.png" parallax_x="0.1" parallax_y="0" scale_x="0.75" scale_y="0.5" offset_x="0" offset_y="0" />
 		<screen main="false" tiled="false" file="../img/screen_layers/cidade_3.png" parallax_x="0" parallax_y="0" />
 	</layers>
 	<music>
@@ -164,21 +164,6 @@
 		<health value="1" />
 		<physics gravity_scale="1.0" />
 	</object>
-	<object name="zipline">
-		<transform>
-			<rect x="930" y="870" w="48" h="2" />
-			<scale x="100" y="1" />
-			<rotation value="15" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-		<zipline>
-			<start x="0" y="0" />
-			<end x="0" y="0" />
-		</zipline>
-	</object>
 	<object name="wind">
 		<transform>
 			<rect x="0" y="500" w="500" h="200" />
@@ -205,7 +190,8 @@
 		</collider>
 		<speed jump="10" walk="10" />
 		<state />
-		<AI type="0" debug="true">
+		<AI type="1" />
+		<!-- <AI type="0" debug="true">
 			<state_index state="0" cooldown="-0.1">
 				<trigger verification="10" target_index="0" />
 				<trigger verification="7" target_index="1" />
@@ -216,7 +202,7 @@
 				<trigger verification="6" target_index="0" />
 			</state_index>
 		</AI>
-	</object>
+ -->	</object>
 	<object name="Comoda" id="2" layer="2">
 		<transform>
 			<rect x="897" y="528" w="54" h="96" />

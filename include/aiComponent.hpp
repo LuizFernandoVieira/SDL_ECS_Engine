@@ -70,20 +70,33 @@ public:
 		terrain = nullptr;
 		AddState((int) IDLE);
 		state_index = 0;
+		action_target = 0;
 	}
 
 
 	//Template AI: Jumper
 	AIComponent(int type){
 		terrain = nullptr;
-		AddState((int) IDLE);
 		state_index = 0;
 
-		if(type == 1){
-			//Jumper AKA test AI
-			AddState((int) FOLLOW, 2.0f);
-			states[0].addTrigger(10, 0);
-			states[1].addTrigger(10, 0);
+		switch(type){
+
+			case 1:
+			//Follower
+				AddState((int) IDLE, -0.1f);
+				AddState((int) FOLLOW, 0.3f);
+				
+				states[0].addTrigger(10, 0);
+				states[0].addTrigger(7, 1);
+
+				states[1].addTrigger(10, 0);
+				states[1].addTrigger(3, 0);
+				states[1].addTrigger(6, 0);
+			break;
+
+			case 2:
+				AddState((int) IDLE);
+			break;
 		}
 	};
 

@@ -457,35 +457,25 @@ void GameState::setObjects(pugi::xml_node objects)
 		if ((aux = obj.child("AI"))){
 			short int counter = 0;
 
-			//Remover switch: passar para construtor da IA
-			switch (aux.attribute("type").as_int()){
+			//std::cout << "AI Detected. Type: " << aux.attribute("type").as_int() << std::endl;
+			mapAI_.emplace(nextId_, new AIComponent(aux.attribute("type").as_int()));
 
-				//Externally-Defined AI
-				case 0:
-					//std::cout << "AI Detected. Type: " << aux.attribute("type").as_int() << std::endl;
-					mapAI_.emplace(nextId_, new AIComponent(aux.attribute("type").as_int()));
+			//State Emplacement
+			for (pugi::xml_node state = aux.first_child(); state; state = state.next_sibling()){
+				//printf("Loading State %d (%.3f)\n", counter, state.attribute("cooldown").as_float());
+				
+				//Exclusão de valores inválidos (e de IDLE state)
+				if (state.attribute("state").as_int() > 0){
+					if (state.attribute("cooldown").as_float() >= 0)
+							mapAI_[nextId_]->AddState(state.attribute("state").as_int(), state.attribute("cooldown").as_float());
+					else	mapAI_[nextId_]->AddState(state.attribute("state").as_int(), 0.0f);
+				}
 
-					//State Emplacement
-					for (pugi::xml_node state = aux.first_child(); state; state = state.next_sibling()){
-						//printf("Loading State %d (%.3f)\n", counter, state.attribute("cooldown").as_float());
-						//Exclusão de valores inválidos (e de IDLE state)
-						if (state.attribute("state").as_int() > 0){
-							if (state.attribute("cooldown").as_float() >= 0)
-									mapAI_[nextId_]->AddState(state.attribute("state").as_int(), state.attribute("cooldown").as_float());
-							else	mapAI_[nextId_]->AddState(state.attribute("state").as_int(), 0.0f);
-						}
-
-						for (pugi::xml_node trigger_ = state.first_child(); trigger_; trigger_ = trigger_.next_sibling()){
-							//printf("\tNow Loading Trigger: %d -> (%d) -> %d\n", counter, trigger_.attribute("verification").as_int(), trigger_.attribute("target_index").as_int());
-							mapAI_[nextId_]->AddTrigger(counter, trigger_.attribute("verification").as_int(), trigger_.attribute("target_index").as_int());
-						}
-						counter++;
-					}
-					break;
-
-				//Motionless AI
-				default:
-					break;
+				for (pugi::xml_node trigger_ = state.first_child(); trigger_; trigger_ = trigger_.next_sibling()){
+					//printf("\tNow Loading Trigger: %d -> (%d) -> %d\n", counter, trigger_.attribute("verification").as_int(), trigger_.attribute("target_index").as_int());
+					mapAI_[nextId_]->AddTrigger(counter, trigger_.attribute("verification").as_int(), trigger_.attribute("target_index").as_int());
+				}
+				counter++;
 			}
 		}
 		nextId_++;
