@@ -10,7 +10,7 @@
 
 
 EditorSelectState::EditorSelectState() :
-	bg_("../img/bg.png"),
+	bg_("../img/bgEditor.png"),
 	mode(INIT),
 	btnNewMap("../img/interface/editor/btn.png"),
 	btnNewMapPos(300, 250, 200, 100),
