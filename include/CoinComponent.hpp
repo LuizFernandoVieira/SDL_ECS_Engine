@@ -6,10 +6,8 @@
 class CoinComponent : public Component
 {
 public:
-	CoinComponent(): coinCounter_(0) {}
+	CoinComponent() {}
 	~CoinComponent() {}
-
-	int coinCounter_;
 };
 
 #endif

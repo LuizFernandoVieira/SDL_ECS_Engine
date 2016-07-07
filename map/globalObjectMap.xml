@@ -1,4 +1,4 @@
-<!-- 
+<!--
 
 =============== MODELO ====================
 
@@ -27,7 +27,7 @@
 	</collider>
 
 	<speed />
-	
+
 	<player_state />
 	<state />
 
@@ -845,4 +845,17 @@ WIND DIRECTIOM
 			<trigger verification="2" target_index="1" />
 		</state_index>
 	</AI>
+</object>
+
+<object name="Coin">
+	<transform>
+		<rect x="0" y="0" w="48" h="48" />
+		<scale x="1" y="1" />
+		<rotation value="0" />
+	</transform>
+	<render>
+		<sprite state="0" filename="../img/coin_32x32.png" frame_count="4" frame_time="0.1" />
+	</render>
+	<coin />
+	<state />
 </object>

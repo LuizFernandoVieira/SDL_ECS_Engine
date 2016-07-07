@@ -19,6 +19,7 @@
 #include "HealthComponent.hpp"
 #include "WindComponent.hpp"
 #include "AIComponent.hpp"
+#include "CoinComponent.hpp"
 
 
 #include "Music.hpp"
@@ -58,6 +59,7 @@ public:
 	std::map<int, HealthComponent*> mapHealth_;
 	std::map<int, WindComponent*> mapWind_;
 	std::map<int, AIComponent*> mapAI_;
+	std::map<int, CoinComponent*> mapCoin_;
 
 	std::map<int, TransformComponent*> oldTransform_;
 	std::map<int, StateComponent*> oldState_;

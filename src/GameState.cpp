@@ -453,6 +453,12 @@ void GameState::setObjects(pugi::xml_node objects)
 			                                             aux.attribute("speed").as_float() ));
 		}
 
+		// COIN
+		if ((aux = obj.child("coin")))
+		{
+			mapCoin_.emplace(nextId_, new CoinComponent());
+		}
+
 		// AI
 		if ((aux = obj.child("AI"))){
 			short int counter = 0;
