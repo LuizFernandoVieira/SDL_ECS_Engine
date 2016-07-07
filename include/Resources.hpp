@@ -49,6 +49,7 @@ public:
 	static bool DEBUG_COLLISION;
 	static bool DEBUG_TRIGGERS;
 	static bool DEBUG_AI;
+	static bool DEBUG_RESOURCES;
 
 	static std::string TILE_SET_IMG;
 	static std::string TILE_MAP_TXT;

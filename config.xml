@@ -8,12 +8,14 @@
 		<data type="int" value="48" name="TILE_HEIGHT"/>
 		<data type="int" value="200" name="GRAVITY"/>
 
-		<data type="float" value="200" name="PLAYER_WALK_SPEED">200</data>
-		<data type="float" value="500" name="PLAYER_JUMP_SPEED">500</data>
+		<data type="float" value="200" name="PLAYER_WALK_SPEED"/>
+		<data type="float" value="500" name="PLAYER_JUMP_SPEED"/>
 	</globals>
 
 	<debug>
+		<resources show="false"/>
 		<collision show="true"/>
-		<triggers show="true"/>
+		<triggers show="false"/>
+		<ai show="false"/>
 	</debug>
 </config>

@@ -2,11 +2,12 @@
 #include "../include/AIComponent.hpp"
 #include "../include/Resources.hpp"
 
-#define AI_DEBUG false
+#include "../include/Text.hpp"
 
 #define AI_PROCESSING_DISTANCE	(Resources::WINDOW_WIDTH / 2)
-#define FOLLOW_DISTANCE 		100.0f
 #define FOLLOW_TARGET 			gameState.player_
+#define FOLLOW_DISTANCE 		50.0f
+#define X_FOLLOW_DISTANCE 		20.0f
 
 AISystem::AISystem()
 {
@@ -46,6 +47,7 @@ void AISystem::update(float dt, GameState& gameState)
 		auto& current_state = ai.second->states[ai.second->state_index];
 
 		//Loop de verificação de condições
+		float centerdist;
 		for (auto& trigger : current_state.triggers){
 			switch(trigger.first){
 				//trigger agora contém o código equivalente à verificação necessária para a mudança de estado definida
@@ -63,16 +65,18 @@ void AISystem::update(float dt, GameState& gameState)
 
 				//Caso: Longe Demais do Alvo
 				case 2:
-					//move = Distance(ai.first, gameState.player_, FOLLOW_DISTANCE);
-					move = (FOLLOW_DISTANCE < Distance( transComp->rect_,
-								gameState.mapTransform_[FOLLOW_TARGET]->rect_));
+					centerdist = (colComp->hitbox_.w() + gameState.mapCollider_[FOLLOW_TARGET]->hurtbox_.w()) / 2;
+
+					move = (centerdist < Distance( colComp->hitbox_.getCenter(),
+								gameState.mapCollider_[FOLLOW_TARGET]->hurtbox_.getCenter()));
 					break;
 
 				//Caso: Perto Demais do Alvo
 				case 3:
-					//move = Distance(ai.first, gameState.player_, FOLLOW_DISTANCE);
-					move = (FOLLOW_DISTANCE > Distance( transComp->rect_,
-								gameState.mapTransform_[FOLLOW_TARGET]->rect_));
+					centerdist = (colComp->hitbox_.w() + gameState.mapCollider_[FOLLOW_TARGET]->hurtbox_.w()) / 2;
+
+					move = (centerdist > Distance( colComp->hitbox_.getCenter(),
+								gameState.mapCollider_[FOLLOW_TARGET]->hurtbox_.getCenter()));
 					break;
 
 				//Caso: Abaixo do Alvo	
@@ -88,15 +92,38 @@ void AISystem::update(float dt, GameState& gameState)
 								gameState.mapTransform_[FOLLOW_TARGET]->rect_));
 					break;
 
-				//Caso: Falso
+				//Caso: Perto demais em X
 				case 6:
+					move = (X_FOLLOW_DISTANCE > abs(
+						gameState.mapTransform_[FOLLOW_TARGET]->rect_.getCenter().x()
+						- transComp->rect_.getCenter().x())); // && != FALLING
+					break;
+
+
+				//Caso: Longe demais em X
+				case 7:
+					move = (X_FOLLOW_DISTANCE < abs(
+						gameState.mapTransform_[FOLLOW_TARGET]->rect_.getCenter().x()
+						- transComp->rect_.getCenter().x())); // && != FALLING
+					break;
+
+				//Caso: Falso
+				case 8:
 					move = false;
 					break;
 
 				//Caso: Not-Airborne
-				case 7:
+				case 9:
 					move = (gameState.mapState_[ai.first]->state_ != State::JUMPING); // && != FALLING
 					break;
+
+				//Caso: Player is Dead
+				case 10:
+					/* Verificação funciona */
+					move = (gameState.mapState_[FOLLOW_TARGET]->state_ == State::DYING)
+						|| (gameState.mapState_[FOLLOW_TARGET]->state_ == State::DEAD);
+					break;
+
 
 				//Ué
 				default:
@@ -108,16 +135,19 @@ void AISystem::update(float dt, GameState& gameState)
 			if (move && current_state.action_timer.get() >= current_state.cooldown){				
 				ai.second->state_index = trigger.second;
 				current_state.action_timer.restart();
-				break;
+				goto verificationBreak;
 			}
 			//Não houve mudança de estado no frame
 			else move = false; 
 		}
+		
+	verificationBreak:
 
 
-	if (AI_DEBUG){
+	if (Resources::DEBUG_AI){
+		printf("Player State: %d\t || AI ", gameState.mapState_[FOLLOW_TARGET]->state_);
 		ai.second->PrintCurrentState();
-		printf("\t Distance: %.0f\n", Distance( transComp->rect_,	gameState.mapTransform_[FOLLOW_TARGET]->rect_));
+		printf("\t Distance: %.0f\t || Desired Distance: %.3f\n", Distance( transComp->rect_,	gameState.mapTransform_[FOLLOW_TARGET]->rect_), centerdist);
 	}
 
 
@@ -163,7 +193,6 @@ void AISystem::update(float dt, GameState& gameState)
 			//ATTACKING
 			case 4:
 				if (move){
-					std::cout << "Bam" << std::endl;
 					stateComp->state_ = State::ATTACKING;
 					colComp->hitbox_ = Rect( stateComp->facingRight_ ? 58 : -40, 30, 52, 48);
 				}
@@ -171,7 +200,6 @@ void AISystem::update(float dt, GameState& gameState)
 
 			//FOLLOW
 			case 9:
-				//if(transComp	= gameState.mapTransform_[ai.second->action_target])
 				if(	gameState.mapTransform_[gameState.player_]	->rect_.getCenter().x()
 					> 	transComp 								->rect_.getCenter().x()){
 					speedComp->speed_.x(Resources::PLAYER_WALK_SPEED / 1.25);
@@ -181,8 +209,6 @@ void AISystem::update(float dt, GameState& gameState)
 					(speedComp->speed_.x(-Resources::PLAYER_WALK_SPEED / 1.25));
 					stateComp->facingRight_ = false;
 				}
-
-
 				stateComp->state_ = State::WALKING;
 				break;
 
@@ -190,4 +216,15 @@ void AISystem::update(float dt, GameState& gameState)
 				break;
 		}
 	}
+
+/*
+	if (AI_DEBUG)
+		Show();
+*/
 }
+
+/*
+void aiSystem::Show(){
+	usar text para printar estado corrente acima da cabeça da AI 
+}
+*/

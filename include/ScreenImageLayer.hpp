@@ -16,6 +16,7 @@
 class ImageLayer : public ScreenLayer{
 public:
 	ImageLayer(const char* file);
+	ImageLayer();
 
 	void Render();
 	void open(const char* file);

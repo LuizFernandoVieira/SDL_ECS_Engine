@@ -26,7 +26,6 @@ void ImageLayer::open(const char* file)
 	texture_ = Resources::GetImage(file);
 	SDL_QueryTexture ( texture_.get(), NULL, NULL, &width_, &height_ );
 }
-
 void ImageLayer::setClip(int x, int y, int w, int h)
 {
 	clipRect_.x = x;
@@ -46,3 +45,4 @@ void ImageLayer::Render(){
 
 	SDL_RenderCopy ( Game::getInstance().getRenderer(), texture_.get(), &clipRect_, &dstRect);
 }
+

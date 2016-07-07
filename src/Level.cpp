@@ -4,6 +4,7 @@
 
 #include "../include/ScreenImageLayer.hpp"
 
+#include "../include/game.hpp"
 Level::Level() :
 	tileSet_(Resources::TILE_WIDTH, Resources::TILE_HEIGHT, Resources::TILE_SET_IMG.c_str()),
 	tileMap_(Resources::TILE_MAP_TXT.c_str(), &tileSet_),
@@ -29,13 +30,16 @@ Level::Level(pugi::xml_node source) :
 	for (pugi::xml_node layer = source.child("layers").first_child(); layer ; layer = layer.next_sibling()){
 		
 		if (!layer.attribute("tiled").as_bool())
+			/*
+				Quando implementação de tiles for feita
+			if (layer.attribute("tiled").as_bool())
+					screen.emplace_back(new TiledLayer(layer.attribute("file").value(), &tileSet_));
+			else 	screen.emplace_back(new ImageLayer(layer.attribute("file").value()));
+			*/
+
 			screen.emplace_back(new ImageLayer(layer.attribute("file").value()));
-		/*
-			Quando implementação de tiles for feita
-		if (layer.attribute("tiled").as_bool())
-				screen.emplace_back(new TiledLayer(layer.attribute("file").value(), &tileSet_));
-		else 	screen.emplace_back(new ImageLayer(layer.attribute("file").value()));
-		*/
+			//screen.emplace_back(new ImageLayer());
+
 
 			if(layer.attribute("parallax_x") && layer.attribute("parallax_y"))
 				screen[current_layer]->SetParallax(
@@ -46,7 +50,6 @@ Level::Level(pugi::xml_node source) :
 				screen[current_layer]->SetScale(
 					layer.attribute("scale_x").as_float(),
 					layer.attribute("scale_y").as_float());
-			
 
 			if (layer.attribute("main").as_bool())
 				main_layer = current_layer;
@@ -72,9 +75,11 @@ void Level::render(int layer)
 {
 
 	/* Forma temporária da implementação */
-	if (layer == 5)
-		for (int i = max_layers - 1; i >= 0; i--)
+	if (layer == 5){
+		for (int i = max_layers - 1; i >= 0; i--){
 			screen[i]->Render();
+		}
+	}
 	
 	tileMap_.renderLayer(layer, 0, 0);
 	// collisionMap_.render(0,0);

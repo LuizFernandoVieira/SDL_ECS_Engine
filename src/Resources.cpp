@@ -27,6 +27,7 @@ int Resources::MAP_HEIGHT              = 0;
 //Debug Modes
 bool Resources::DEBUG_COLLISION	= false;
 bool Resources::DEBUG_TRIGGERS	= false;
+bool Resources::DEBUG_RESOURCES	= false;
 bool Resources::DEBUG_AI		= false;
 
 std::string Resources::TILE_SET_IMG           = "../img/maps/tilesetcidade1.png";
@@ -96,7 +97,7 @@ Mix_Chunk* Resources::GetSound(std::string file){
 
 	if (asset == soundTable.end()){
 		asset = (soundTable.emplace(file, Mix_LoadWAV(file.c_str()))).first;
-		std::cout << "new sound loaded: " << file << std::endl;
+		if (DEBUG_RESOURCES) std::cout << "new sound loaded: " << file << std::endl;
 	}
 
 	if (asset->second == nullptr){
@@ -178,11 +179,19 @@ void Resources::Read(std::string _filename){
 
 
 	_node node = doc.first_child();
+	_node data;
+
+	//Debug Modes (Prioritized)
+	data = node.child("debug");
+	if(data.child("collision").	attribute("show").as_bool())	Resources::DEBUG_COLLISION = true;
+	if(data.child("triggers").	attribute("show").as_bool())	Resources::DEBUG_TRIGGERS = true;
+	if(data.child("ai").		attribute("show").as_bool())	Resources::DEBUG_AI = true;
+	if(data.child("resources").	attribute("show").as_bool())	Resources::DEBUG_RESOURCES = true;
+
 
 	//Fetching Globals
-	_node data;
 	for(data = node.child("globals").first_child(); data; data = data.next_sibling()){
-		//std::cout << "count: " << tempInt << "\t";
+		if (DEBUG_RESOURCES) std::cout << "count: " << tempInt << "\t";
 		tempInt++;
 
 		varName = data.attribute("name").value();
@@ -191,23 +200,13 @@ void Resources::Read(std::string _filename){
 
 		if (varType == "int"){
 			intTable.emplace(varName, 		data.attribute("value").as_int());
-			//std::cout << "Fetched value: " << varName << " = " << intTable[varName] << std::endl;
+			if (DEBUG_RESOURCES) std::cout << "Fetched value: " << varName << " = " << intTable[varName] << std::endl;
 		}else{
 			floatTable.emplace(varName, 	data.attribute("value").as_float());
-			//std::cout << "Fetched value: " << varName << " = " << floatTable[varName] << std::endl;
+			if (DEBUG_RESOURCES) std::cout << "Fetched value: " << varName << " = " << floatTable[varName] << std::endl;
 		}
 	}
 	std::cout << std::endl;
-
-
-
-	//Debug Mode
-	data = node.child("debug");
-	if(data.child("collision").attribute("show").as_bool())
-		Resources::DEBUG_COLLISION = true;
-
-	if(data.child("triggers").attribute("show").as_bool())
-		Resources::DEBUG_TRIGGERS = true;
 
 	//Assossiação de Valores (Temporário, substituir por função getValue)
 	WINDOW_WIDTH 		= intTable["WINDOW_WIDTH"];
@@ -219,10 +218,8 @@ void Resources::Read(std::string _filename){
 	PLAYER_JUMP_SPEED 	= floatTable["PLAYER_JUMP_SPEED"];
 	PLAYER_WALK_SPEED 	= floatTable["PLAYER_WALK_SPEED"];
 
-
-
 	//Test Printing
-	if (PRINTITALL){
+	if (DEBUG_RESOURCES){
 
 		std::cout << "Float Values:" << std::endl;
 		for ( auto it = floatTable.begin(); it != floatTable.end(); ++it)

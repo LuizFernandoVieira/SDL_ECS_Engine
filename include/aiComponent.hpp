@@ -20,7 +20,8 @@ private:
 		GRAPPLE,
 		ZIPLINE,
 		SHOOT,
-		DEAD
+		DEAD,
+		FOLLOW
 	};
 
 	class AIState{
@@ -80,9 +81,9 @@ public:
 
 		if(type == 1){
 			//Jumper AKA test AI
-			AddState((int) JUMPING, 2.0f);
-			states[0].addTrigger(0, 1);
-			states[1].addTrigger(0, 1);
+			AddState((int) FOLLOW, 2.0f);
+			states[0].addTrigger(10, 0);
+			states[1].addTrigger(10, 0);
 		}
 	};
 
