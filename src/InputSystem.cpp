@@ -73,7 +73,7 @@ void InputSystem::update(float dt, GameState& gameState)
 			{
 				// GRAPPLE
 				stateComp->state_ = State::GRAPPLE;
-				colComp->hitbox_ = Rect( stateComp->facingRight_ ? 15 : 15, -10, 20, 20);
+				colComp->hitbox_ = Rect( stateComp->facingRight_ ? 15 : 15, -25, 20, 20);
 			}
 		}
 
@@ -101,7 +101,7 @@ void InputSystem::update(float dt, GameState& gameState)
 			if (stateComp->state_ == State::Dead){
 				//stateComp->state_ = State::Respawn;
 
-				
+
 			}
 			else
 			*/

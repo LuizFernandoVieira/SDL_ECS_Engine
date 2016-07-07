@@ -12,18 +12,18 @@
 EditorSelectState::EditorSelectState() :
 	bg_("../img/bg.png"),
 	mode(INIT),
-	btnNewMap("../img/interface/editor/btn_1.png"),
+	btnNewMap("../img/interface/editor/btn.png"),
 	btnNewMapPos(300, 250, 200, 100),
-	btnNewMapText("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Novo mapa", Colors::black),
-	btnEditMap("../img/interface/editor/btn_1.png"),
+	btnNewMapText("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Novo mapa", Colors::purple),
+	btnEditMap("../img/interface/editor/btn.png"),
 	btnEditMapPos(600, 250, 200, 100),
-	btnEditMapText("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Editar mapa", Colors::black),
-	btnAccept("../img/interface/editor/btn_1.png"),
+	btnEditMapText("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Editar mapa", Colors::purple),
+	btnAccept("../img/interface/editor/btn.png"),
 	btnAcceptPos(900, 500, 100, 60),
-	btnAcceptText("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Proximo", Colors::black),
-	btnReturn("../img/interface/editor/btn_1.png"),
+	btnAcceptText("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Proximo", Colors::purple),
+	btnReturn("../img/interface/editor/btn.png"),
 	btnReturnPos(750, 500, 100, 60),
-	btnReturnText("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Voltar", Colors::black),
+	btnReturnText("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Voltar", Colors::purple),
 	textLabels(),
 	textAreas(),
 	selectedTextArea(0)
@@ -68,24 +68,24 @@ void EditorSelectState::update(float dt)
 				textAreas.clear();
 				textLabels.clear();
 
-				textLabels.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Nome:", Colors::black));
+				textLabels.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Nome:", Colors::white));
 				textLabels[0]->setPos(200, 150, false, false);
-				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Fase", Colors::blue));
+				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Fase", Colors::gray));
 				textAreas[0]->setPos(400, 150, false, false);
 
-				textLabels.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Imagem tile set:", Colors::black));
+				textLabels.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Imagem tile set:", Colors::white));
 				textLabels[1]->setPos(200, 250, false, false);
-				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "../img/maps/test/tile_set.png", Colors::black));
+				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "../img/maps/test/tile_set.png", Colors::white));
 				textAreas[1]->setPos(400, 250, false, false);
 
-				textLabels.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Largura:", Colors::black));
+				textLabels.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Largura:", Colors::white));
 				textLabels[2]->setPos(200, 350, false, false);
-				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "50", Colors::black));
+				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "50", Colors::white));
 				textAreas[2]->setPos(400, 350, false, false);
 
-				textLabels.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Altura:", Colors::black));
+				textLabels.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Altura:", Colors::white));
 				textLabels[3]->setPos(200, 450, false, false);
-				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "30", Colors::black));
+				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "30", Colors::white));
 				textAreas[3]->setPos(400, 450, false, false);
 			}
 			else if (btnEditMapPos.isInside(input.getMouse()))
@@ -95,24 +95,24 @@ void EditorSelectState::update(float dt)
 				textAreas.clear();
 				textLabels.clear();
 
-				textLabels.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Imagem tile set:", Colors::black));
+				textLabels.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Imagem tile set:", Colors::white));
 				textLabels[0]->setPos(200, 150, false, false);
-				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "../img/maps/tilesetcidade1.png", Colors::blue));
+				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "../img/maps/tilesetcidade1.png", Colors::gray));
 				textAreas[0]->setPos(400, 150, false, false);
 
-				textLabels.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Tile map:", Colors::black));
+				textLabels.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Tile map:", Colors::white));
 				textLabels[1]->setPos(200, 250, false, false);
-				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "../map/FaseUm_tilemap.txt", Colors::black));
+				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "../map/FaseUm_tilemap.txt", Colors::white));
 				textAreas[1]->setPos(400, 250, false, false);
 
-				textLabels.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Collision map:", Colors::black));
+				textLabels.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Collision map:", Colors::white));
 				textLabels[2]->setPos(200, 350, false, false);
-				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "../map/FaseUm_colmap.txt", Colors::black));
+				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "../map/FaseUm_colmap.txt", Colors::white));
 				textAreas[2]->setPos(400, 350, false, false);
 
-				textLabels.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Object map:", Colors::black));
+				textLabels.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Object map:", Colors::white));
 				textLabels[3]->setPos(200, 450, false, false);
-				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "../map/FaseUm.xml", Colors::black));
+				textAreas.emplace_back(new Text("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "../map/FaseUm.xml", Colors::white));
 				textAreas[3]->setPos(400, 450, false, false);
 
 			}
@@ -140,8 +140,8 @@ void EditorSelectState::update(float dt)
 				{
 					if (textAreas[i]->getPos().isInside(input.getMouse()))
 					{
-						textAreas[selectedTextArea]->setColor(Colors::black);
-						textAreas[i]->setColor(Colors::blue);
+						textAreas[selectedTextArea]->setColor(Colors::white);
+						textAreas[i]->setColor(Colors::gray);
 						selectedTextArea = i;
 						break;
 					}
