@@ -152,10 +152,10 @@ void CollisionMap::renderSelection(int collision, Rect rect)
 			file = "../img/interface/editor/colisao_completa.png";
 			break;
 		case 5:
-			file = "../img/interface/editor/btn_collision_1.png";
+			file = "../img/interface/editor/colisao_diag_up.png";
 			break;
 		case 6:
-			file = "../img/interface/editor/btn_collision_2.png";
+			file = "../img/interface/editor/colisao_diag_down.png";
 			break;
 		case 7:
 			file = "../img/interface/editor/colisao_morte.png";

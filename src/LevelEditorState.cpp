@@ -107,8 +107,8 @@ void LevelEditorState::initGUI()
 	collisionButtons_.emplace_back(new Button(Rect(0,0,32,32), "../img/interface/editor/colisao_parede.png"));
 	collisionButtons_.emplace_back(new Button(Rect(0,0,32,32), "../img/interface/editor/colisao_teto_chao.png"));
 	collisionButtons_.emplace_back(new Button(Rect(0,0,32,32), "../img/interface/editor/colisao_completa.png"));
-	collisionButtons_.emplace_back(new Button(Rect(0,0,32,32), "../img/interface/editor/btn_collision_1.png"));
-	collisionButtons_.emplace_back(new Button(Rect(0,0,32,32), "../img/interface/editor/btn_collision_2.png"));
+	collisionButtons_.emplace_back(new Button(Rect(0,0,32,32), "../img/interface/editor/colisao_diag_up.png"));
+	collisionButtons_.emplace_back(new Button(Rect(0,0,32,32), "../img/interface/editor/colisao_diag_down.png"));
 	collisionButtons_.emplace_back(new Button(Rect(0,0,32,32), "../img/interface/editor/colisao_morte.png"));
 
 	// Add

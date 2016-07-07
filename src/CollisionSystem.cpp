@@ -84,6 +84,7 @@ void CollisionSystem::updateTerrain(
 	std::map<int, HealthComponent*> health)
 {
 	// Colisao com o terreno
+	// std::cout << "==========" << std::endl;
 	for (auto& col : collider)
 	{
 		if (speed.find(col.first) == speed.end()) break; // Se nao tem speed, nao checa colisao com terreno
@@ -104,7 +105,7 @@ void CollisionSystem::updateTerrain(
 				                     Resources::TILE_HEIGHT );
 
 				int collisionType;
-				if ((collisionType = collisionMap.at(x,y)) >= 0/* && isColliding(finalCollider, terrain, 0, 0)*/)
+				if ((collisionType = collisionMap.at(x,y)) >= 0 && isColliding(finalCollider, terrain, 0, 0))
 				{
 					switch(collisionType)
 					{
@@ -119,16 +120,19 @@ void CollisionSystem::updateTerrain(
 							correctWall(transform[col.first]->rect_, col.second->hurtbox_, terrain, speed[col.first]->speed_);
 							break;
 						case 3:
+							// if (col.first == 0) std::cout << "Floor" << std::endl;
 							correctFloorCeiling(transform[col.first]->rect_, col.second->hurtbox_, terrain, speed[col.first]->speed_);
 							break;
 						case 4:
 							correctAllSides(transform[col.first]->rect_, col.second->hurtbox_, terrain, speed[col.first]->speed_);
 							break;
 						case 5:
+							// if (col.first == 0) std::cout << "Diag up" << std::endl;
 							if (state[col.first]->state_ != State::JUMPING)
 								correctDiagonalUp(transform[col.first]->rect_, col.second->hurtbox_, terrain, speed[col.first]->speed_);
 							break;
 						case 6:
+							// if (col.first == 0) std::cout << "Diag down" << std::endl;
 							if (state[col.first]->state_ != State::JUMPING)
 								correctDiagonalDown(transform[col.first]->rect_, col.second->hurtbox_, terrain, speed[col.first]->speed_);
 							break;
@@ -148,6 +152,7 @@ void CollisionSystem::updateTerrain(
 
 					// collidersToRender.emplace_back(terrain);
 				}
+				// else if (col.first == 0) std::cout << "NAO COLIDIU" << std::endl;
 			}
 		}
 	}
