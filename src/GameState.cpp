@@ -30,7 +30,7 @@ unsigned int GameState::nextId_ = 0;
 std::map<int, std::map<int, RenderComponent*>> GameState::mapRender_;
 
 GameState::GameState()
-: changeLevel_(false), music()
+: changeLevel_(false), music(), frameId_(3)
 {
 	frame_ = new StaticSprite("../img/moldura1.png");
 	std::cout << "e" << std::endl;
@@ -135,7 +135,31 @@ void GameState::update(float dt)
 	}
 
 	Camera::update(dt);
-	frame_->update(dt);
+
+	if (mapHealth_[player_]->health_ == 3 && frameId_ != 3)
+	{
+		delete frame_;
+		frame_ = new StaticSprite("../img/moldura1.png");
+		frameId_= 3;
+	}
+	else if (mapHealth_[player_]->health_ == 2 && frameId_ != 2)
+	{
+		delete frame_;
+		frame_ = new StaticSprite("../img/moldura2.png");
+		frameId_= 2;
+	}
+	else if (mapHealth_[player_]->health_ == 1 && frameId_ != 1)
+	{
+		delete frame_;
+		frame_ = new StaticSprite("../img/moldura3.png");
+		frameId_= 1;
+	}
+	else if (mapHealth_[player_]->health_ == 0 && frameId_ != 0)
+	{
+		delete frame_;
+		frame_ = new StaticSprite("../img/moldura4.png");
+		frameId_= 0;
+	}
 
 	deleteDeadEntities();
 
@@ -512,7 +536,7 @@ void GameState::deleteDeadEntities()
 				state->second->state_ = State::IDLE;
 				mapTransform_[player_]->rect_.x( checkpoints[((PlayerStateComponent*)mapState_[player_])->current_checkpoint].rect_.x() );
 				mapTransform_[player_]->rect_.y( checkpoints[((PlayerStateComponent*)mapState_[player_])->current_checkpoint].rect_.y() );
-				mapHealth_[player_]->health_ = 1;
+				mapHealth_[player_]->health_ = 3;
 			}
 			else
 			{
@@ -602,6 +626,7 @@ void GameState::changeLevel()
 
 	delete level_;
 	nextId_ = 0;
+	frameId_ = 3;
 
 	mapTransform_.clear();
 	mapState_.clear();

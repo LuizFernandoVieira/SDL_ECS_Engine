@@ -17,7 +17,8 @@
 #define VOLUME_SLIDE		5
 #define PRINTITALL			false
 
-#define TestVolume	MIX_MAX_VOLUME - 20
+#define TestVolume		MIX_MAX_VOLUME - 20
+#define STARTING_VOLUME	MIX_MAX_VOLUME - 20
 
 #define ROOT_DIRECTORY	"../"
 #define CONFIG_XML	"../config.xml"
@@ -25,16 +26,16 @@
 Music::Music(){
 	int i;
 	for (i = 0; i < AUDIO_MAXLAYERS; i++){
-		volumeCurrent[i] 	= 0;
-		volume[i] 			= 0;
+		volumeCurrent[i] 	= STARTING_VOLUME;
+		volume[i] 			= STARTING_VOLUME;
 		layer[i] = nullptr;
 	}
 }
 
 Music::Music(std::string file){
 	for (int i = 0; i < AUDIO_MAXLAYERS; i++){
-		volumeCurrent[i] 	= 0;
-		volume[i] 			= 0;
+		volumeCurrent[i] 	= STARTING_VOLUME;
+		volume[i] 			= STARTING_VOLUME;
 		layer[i]	= nullptr;
 	}
 
@@ -121,8 +122,8 @@ void Music::Load(_node source){
 	Stop();
 
 	for (int i = 0; i < AUDIO_MAXLAYERS; i++){
-		volumeCurrent[i]	= 0;
-		volume[i]			= 0;
+		volumeCurrent[i]	= STARTING_VOLUME;
+		volume[i]			= STARTING_VOLUME;
 		channel[i] 			= 0;
 		layer[i]			= nullptr;
 	}

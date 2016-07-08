@@ -15,6 +15,15 @@ void HealthSystem::update(float dt, GameState& gameState)
 
 	for (auto& h : health)
 	{
+		if (h.first == gameState.player_ && h.second->health_ < 3)
+		{
+			playerRecoverTime_.update(dt);
+			if (playerRecoverTime_.get() >= 10)
+			{
+				h.second->health_++;
+				playerRecoverTime_.restart();
+			}
+		}
 		if (state[h.first]->state_ == State::DYING)
 		{
 			h.second->timeToDie_.update(dt);
