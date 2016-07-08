@@ -269,10 +269,10 @@ void CollisionSystem::updateZipline(
 			break;
 		}
 	}
-/*	if (oldState[player]->state_ == State::ZIPLINE && !isCollidingZip)
+	if (state[player]->state_ == State::ZIPLINE && !isCollidingZip)
 	{
 		state[player]->state_ = State::FALLING;
-	}*/
+	}
 }
 
 
@@ -428,8 +428,10 @@ bool CollisionSystem::isColliding(const Rect& a, const Rect& b, float angleOfA, 
 void CollisionSystem::correctFloor(Rect& entityPos, Rect collider, Rect terrain, Vec2& speed)
 {
 	float angle = LineInclination(entityPos.getCenter(), terrain.getCenter());
-	if (angle >= 40 && angle <= 140 && entityPos.y() + collider.h() - collider.y() <= terrain.y() + terrain.h() / 2 )
+	std::cout << "entrou" << std::endl;
+	if (angle >= 40 && angle <= 140 && entityPos.y() + collider.h() + collider.y() <= terrain.y() + terrain.h() / 2 )
 	{
+		std::cout << "corrigiu" << std::endl;
 		entityPos.y( terrain.y() - collider.h() - collider.y() );
 		speed.y(0.0);
 	}
@@ -461,7 +463,7 @@ void CollisionSystem::correctCeiling(Rect& entityPos, Rect collider, Rect terrai
 void CollisionSystem::correctFloorCeiling(Rect& entityPos, Rect collider, Rect terrain, Vec2& speed)
 {
 	float angle = LineInclination(entityPos.getCenter(), terrain.getCenter());
-	if (angle >= 40 && angle <= 140 && entityPos.y() + collider.h() - collider.y() <= terrain.y() + terrain.h() / 2 )
+	if (angle >= 40 && angle <= 140 && entityPos.y() + collider.h() + collider.y() <= terrain.y() + terrain.h() / 2 )
 	{
 		entityPos.y( terrain.y() - collider.h() - collider.y() );
 		speed.y(0.0);
