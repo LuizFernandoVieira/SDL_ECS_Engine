@@ -90,6 +90,7 @@ private:
 	Level* level_;
 	Music music;
 	StaticSprite* frame_;
+	int frameId_;
 	std::vector<System*> systems_;
 };
 

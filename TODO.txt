@@ -1,8 +1,7 @@
 Fazendo:
 
 - Macaco;
-- Molduras;
-- Imagem vento;
+- Invencibilidade ao tomar dano
 - Fullscreen;
 
 

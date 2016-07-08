@@ -145,14 +145,14 @@
 			<sprite state="6" umbrella_state="1" umbrella_direction="1" filename="../img/characters/player/zipline.png" frame_count="19" frame_time="0.01" />
 			<sprite state="6" umbrella_state="1" umbrella_direction="2" filename="../img/characters/player/zipline.png" frame_count="19" frame_time="0.01" />
 			<sprite state="6" umbrella_state="1" umbrella_direction="3" filename="../img/characters/player/zipline.png" frame_count="19" frame_time="0.01" />
-			<sprite state="8" umbrella_state="0" umbrella_direction="0" filename="../img/characters/player/spritemorre.png" frame_count="10" frame_time="0.04" />
-			<sprite state="8" umbrella_state="0" umbrella_direction="1" filename="../img/characters/player/spritemorre.png" frame_count="10" frame_time="0.04" />
-			<sprite state="8" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/spritemorre.png" frame_count="10" frame_time="0.04" />
-			<sprite state="8" umbrella_state="0" umbrella_direction="3" filename="../img/characters/player/spritemorre.png" frame_count="10" frame_time="0.04" />
-			<sprite state="8" umbrella_state="1" umbrella_direction="0" filename="../img/characters/player/spritemorre.png" frame_count="10" frame_time="0.04" />
-			<sprite state="8" umbrella_state="1" umbrella_direction="1" filename="../img/characters/player/spritemorre.png" frame_count="10" frame_time="0.04" />
-			<sprite state="8" umbrella_state="1" umbrella_direction="2" filename="../img/characters/player/spritemorre.png" frame_count="10" frame_time="0.04" />
-			<sprite state="8" umbrella_state="1" umbrella_direction="3" filename="../img/characters/player/spritemorre.png" frame_count="10" frame_time="0.04" />
+			<sprite state="8" umbrella_state="0" umbrella_direction="0" filename="../img/characters/player/spritemorre.png" frame_count="10" frame_time="0.28" />
+			<sprite state="8" umbrella_state="0" umbrella_direction="1" filename="../img/characters/player/spritemorre.png" frame_count="10" frame_time="0.28" />
+			<sprite state="8" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/spritemorre.png" frame_count="10" frame_time="0.28" />
+			<sprite state="8" umbrella_state="0" umbrella_direction="3" filename="../img/characters/player/spritemorre.png" frame_count="10" frame_time="0.28" />
+			<sprite state="8" umbrella_state="1" umbrella_direction="0" filename="../img/characters/player/spritemorre.png" frame_count="10" frame_time="0.28" />
+			<sprite state="8" umbrella_state="1" umbrella_direction="1" filename="../img/characters/player/spritemorre.png" frame_count="10" frame_time="0.28" />
+			<sprite state="8" umbrella_state="1" umbrella_direction="2" filename="../img/characters/player/spritemorre.png" frame_count="10" frame_time="0.28" />
+			<sprite state="8" umbrella_state="1" umbrella_direction="3" filename="../img/characters/player/spritemorre.png" frame_count="10" frame_time="0.28" />
 		</player_render>
 		<sound>
 			<sound state="2" filename="../audio/sfx/character_jump.ogg" />
@@ -165,7 +165,7 @@
 		</collider>
 		<speed />
 		<player_state />
-		<health value="1" />
+		<health value="3" />
 		<physics gravity_scale="1.0" />
 	</object>
 	<object name="Lampada 3" id="49" layer="1">

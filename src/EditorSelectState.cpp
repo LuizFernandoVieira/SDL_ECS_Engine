@@ -11,28 +11,18 @@
 EditorSelectState::EditorSelectState() :
 	bg_("../img/build.png"),
 	mode(INIT),
-	btnNewMap("../img/interface/editor/btn.png"),
+	btnNewMap("../img/buttons/new.png"),
 	btnNewMapPos(300, 250, 200, 100),
-	btnNewMapText("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Criar Mapa", Colors::purple),
-	btnEditMap("../img/interface/editor/btn.png"),
+	btnEditMap("../img/buttons/edit.png"),
 	btnEditMapPos(600, 250, 200, 100),
-	btnEditMapText("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Editar Mapa", Colors::purple),
-	btnAccept("../img/interface/editor/btn.png"),
+	btnAccept("../img/buttons/next.png"),
 	btnAcceptPos(900, 500, 100, 60),
-	btnAcceptText("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Proximo", Colors::purple),
-	btnReturn("../img/interface/editor/btn.png"),
+	btnReturn("../img/buttons/back.png"),
 	btnReturnPos(750, 500, 100, 60),
-	btnReturnText("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Voltar", Colors::purple),
 	textLabels(),
 	textAreas(),
 	selectedTextArea(0)
 {
-	btnNewMapText.setPos(400, 300);
-	btnEditMapText.setPos(700, 300);
-
-	btnAcceptText.setPos(950, 515);
-	btnReturnText.setPos(800, 515);
-
 	btnNewMap.setScaleX(200 / btnNewMap.getWidth());
 	btnNewMap.setScaleY(100 / btnNewMap.getHeight());
 	btnEditMap.setScaleX(200 / btnEditMap.getWidth());
@@ -172,11 +162,9 @@ void EditorSelectState::render()
 	{
 		// NEW MAP BTN
 		btnNewMap.render(btnNewMapPos.x(), btnNewMapPos.y());
-		btnNewMapText.render();
 
 		// EDIT MAP BTN
 		btnEditMap.render(btnEditMapPos.x(), btnEditMapPos.y());
-		btnEditMapText.render();
 	}
 	else
 	{
@@ -187,11 +175,9 @@ void EditorSelectState::render()
 		}
 
 		btnAccept.render(btnAcceptPos.x(), btnAcceptPos.y());
-		btnAcceptText.render();
 	}
 
 	btnReturn.render(btnReturnPos.x(), btnReturnPos.y());
-	btnReturnText.render();
 }
 
 void EditorSelectState::accept()

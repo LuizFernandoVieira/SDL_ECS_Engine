@@ -31,19 +31,15 @@ private:
 
 	Sprite btnNewMap;
 	Rect btnNewMapPos;
-	Text btnNewMapText;
 
 	Sprite btnEditMap;
 	Rect btnEditMapPos;
-	Text btnEditMapText;
 
 	Sprite btnAccept;
 	Rect btnAcceptPos;
-	Text btnAcceptText;
 
 	Sprite btnReturn;
 	Rect btnReturnPos;
-	Text btnReturnText;
 
 	std::vector<Text*> textLabels;
 	std::vector<Text*> textAreas;

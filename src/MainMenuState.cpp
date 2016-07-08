@@ -7,16 +7,11 @@
 
 MainMenuState::MainMenuState() :
 	bg_("../img/loading.png"),
-	btnPlay_("../img/interface/editor/btn.png"),
+	btnPlay_("../img/buttons/play.png"),
 	btnPlayPos_(300, 250, 200, 100),
-	btnPlayText_("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Jogar", Colors::purple),
-	btnMapEditor_("../img/interface/editor/btn.png"),
-	btnMapEditorPos_(600, 250, 200, 100),
-	btnMapEditorText_("../font/arial.ttf", 16, Text::TextStyle::BLENDED, "Editar", Colors::purple)
+	btnMapEditor_("../img/buttons/build.png"),
+	btnMapEditorPos_(600, 250, 200, 100)
 {
-	btnPlayText_.setPos(400, 300);
-	btnMapEditorText_.setPos(700, 300);
-
 	btnPlay_.setScaleX(200 / btnPlay_.getWidth());
 	btnPlay_.setScaleY(100 / btnPlay_.getHeight());
 	btnMapEditor_.setScaleX(200 / btnMapEditor_.getWidth());
@@ -60,10 +55,7 @@ void MainMenuState::render()
 	bg_.render(0,0);
 
 	btnPlay_.render(btnPlayPos_.x(), btnPlayPos_.y());
-	btnPlayText_.render();
-
 	btnMapEditor_.render(btnMapEditorPos_.x(), btnMapEditorPos_.y());
-	btnMapEditorText_.render();
 }
 
 void MainMenuState::pause()
