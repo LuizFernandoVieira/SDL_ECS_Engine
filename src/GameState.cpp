@@ -33,7 +33,6 @@ GameState::GameState()
 : changeLevel_(false), music(), frameId_(3)
 {
 	frame_ = new StaticSprite("../img/moldura1.png");
-	std::cout << "e" << std::endl;
 	StaticSprite loadScreen("../img/loading.png");
 	loadScreen.render(0,0);
 	SDL_RenderPresent(Game::getInstance().getRenderer());
@@ -222,6 +221,7 @@ void GameState::render()
 		showTriggers();
 
 	frame_->render(0,0);
+	//printf("X: %.0f\tY: %.0f\n", mapTransform_[player_]->rect_.getCenter().x(), mapTransform_[player_]->rect_.getCenter().y());
 }
 
 void GameState::pause()

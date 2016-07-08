@@ -4,6 +4,7 @@
 #include "../include/Sprite.hpp"
 #include "../include/Game.hpp"
 #include "../include/Sound.hpp"
+#include "../include/Timer.hpp"
 /*#include "../include/TransformComponent.hpp"
 #include "../include/ColliderComponent.hpp"
 #include "../include/SpeedComponent.hpp"
@@ -114,6 +115,7 @@ void CollisionSystem::updateTerrain(
 				int collisionType;
 				if ((collisionType = collisionMap.at(x,y)) >= 0 && isColliding(finalCollider, terrain, 0, 0))
 				{
+					if (col.first == 1) std::cout << "hey" << std::endl;
 					switch(collisionType)
 					{
 						case 0:
@@ -155,9 +157,12 @@ void CollisionSystem::updateTerrain(
 						if (col.first == player && 
 						    ((PlayerStateComponent*)state[player])->fallTime_.get() >= Resources::MAX_SAFE_FALL_TIME &&
 						    ( ((PlayerStateComponent*)state[player])->umbrellaState_ != UmbrellaState::OPEN
-						    	|| ((PlayerStateComponent*)state[player])->umbrellaDirection_ != UmbrellaDirection::UP ) )
+						      || ((PlayerStateComponent*)state[player])->umbrellaDirection_ != UmbrellaDirection::UP ) &&
+			     		      !health[player]->invincible_ )
 						{
 							health[player]->health_--;
+							health[player]->invincible_ = true;
+							health[player]->timeToDie_.restart();
 							((PlayerStateComponent*)state[player])->fallTime_.restart();
 						}
 					}
@@ -191,9 +196,12 @@ void CollisionSystem::updateCollider(
 			     isColliding( col->second->hitbox_ + transform[col->first]->rect_.getPivot(),
 			                  col2->second->hurtbox_ + transform[col2->first]->rect_.getPivot(),
 			                  transform[col->first]->rotation_,
-			                  transform[col2->first]->rotation_))
+			                  transform[col2->first]->rotation_) &&
+			     !health[col2->first]->invincible_)
 			{
 				health[col2->first]->health_--;
+				health[col2->first]->invincible_ = true;
+				health[col2->first]->timeToDie_.restart();
 			}
 		}
 	}
