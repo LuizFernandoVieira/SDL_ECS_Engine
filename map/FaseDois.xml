@@ -4,12 +4,9 @@
 	<tilemap file="../map/FaseDois_tilemap.txt" />
 	<collision_map file="../map/FaseDois_colmap.txt" />
 	<layers>
-		<screen main="false" tiled="false" file="../img/screen_layers/cemiterio_1.png" 
-		    parallax_x="0.13" parallax_y="0" scale_x="0.85" scale_y="0.75" offset_x="0" offset_y="-550" />		
-		<screen main="false" tiled="false" file="../img/screen_layers/cemiterio_2.png" 
-		    parallax_x="0.1" parallax_y="0" scale_x="0.85" scale_y="0.8" offset_x="0" offset_y="-500" />
-		<screen main="false" tiled="false" file="../img/screen_layers/cemiterio_3.png" 
-		    parallax_x="0" parallax_y="0" scale_x="0.5" scale_y="0.5" offset_x="0" offset_y="-200" />
+		<screen main="false" tiled="false" file="../img/screen_layers/cemiterio_1.png" parallax_x="0.13" parallax_y="0" scale_x="0.85" scale_y="0.75" offset_x="0" offset_y="-550" />
+		<screen main="false" tiled="false" file="../img/screen_layers/cemiterio_2.png" parallax_x="0.1" parallax_y="0" scale_x="0.85" scale_y="0.8" offset_x="0" offset_y="-500" />
+		<screen main="false" tiled="false" file="../img/screen_layers/cemiterio_3.png" parallax_x="0" parallax_y="0" scale_x="0.5" scale_y="0.5" offset_x="0" offset_y="-200" />
 	</layers>
 	<music>
 		<assets>
@@ -57,10 +54,7 @@
 		</volume>
 	</music>
 	<triggers>
-		<!-- MAIN SPAWN :: PLAYER STARTING POSITION -->
 		<checkpoint x="60" y="1020" w="48" h="96" />
-
-		<!-- CHECKPOINTS -->
 		<checkpoint x="2688" y="720" w="48" h="96" />
 		<checkpoint x="4608" y="1248" w="48" h="96" />
 	</triggers>

@@ -95,7 +95,7 @@ private:
 	bool quit;
 	int updateCounter;
 
-	const int JOYSTICK_DEAD_ZONE = 8000;
+	const int JOYSTICK_DEAD_ZONE = 10000;
 
 	bool screenResized;
 

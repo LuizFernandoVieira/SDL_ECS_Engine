@@ -4,7 +4,7 @@
 	<tilemap file="../map/FaseUm_tilemap.txt" />
 	<collision_map file="../map/FaseUm_colmap.txt" />
 	<layers>
-		<screen main="false" tiled="false" file="../img/screen_layers/cidade_1.png" parallax_x="0.15" parallax_y="0" scale_x="0.75" scale_y="0.75" offset_x="900" offset_y="-300" />
+		<screen main="false" tiled="false" file="../img/screen_layers/cidade_1.png" parallax_x="0.15" parallax_y="0" scale_x="0.75" scale_y="0.75" offset_x="700" offset_y="-300" />
 		<screen main="false" tiled="false" file="../img/screen_layers/cidade_2.png" parallax_x="0.1" parallax_y="0" scale_x="0.75" scale_y="0.5" offset_x="0" offset_y="0" />
 		<screen main="false" tiled="false" file="../img/screen_layers/cidade_3.png" parallax_x="0" parallax_y="0" scale_x="1.0" scale_y="1.0" offset_x="0" offset_y="0" />
 	</layers>
@@ -13,14 +13,14 @@
 			<layer channel="1" file="audio/music/town.ogg" />
 		</assets>
 		<volume state="all_on">
-			<layer channel="1" value="128" />
-			<layer channel="2" value="128" />
-			<layer channel="3" value="128" />
-			<layer channel="4" value="128" />
-			<layer channel="5" value="128" />
-			<layer channel="6" value="128" />
-			<layer channel="7" value="128" />
-			<layer channel="8" value="128" />
+			<layer channel="1" value="100" />
+			<layer channel="2" value="100" />
+			<layer channel="3" value="100" />
+			<layer channel="4" value="100" />
+			<layer channel="5" value="100" />
+			<layer channel="6" value="100" />
+			<layer channel="7" value="100" />
+			<layer channel="8" value="100" />
 		</volume>
 		<volume state="all_off">
 			<layer channel="1" value="0" />
@@ -33,24 +33,24 @@
 			<layer channel="8" value="0" />
 		</volume>
 		<volume state="outdoors" play="true">
-			<layer channel="1" value="128" />
-			<layer channel="2" value="128" />
-			<layer channel="3" value="128" />
-			<layer channel="4" value="128" />
-			<layer channel="5" value="128" />
-			<layer channel="6" value="128" />
-			<layer channel="7" value="128" />
-			<layer channel="8" value="128" />
+			<layer channel="1" value="100" />
+			<layer channel="2" value="100" />
+			<layer channel="3" value="100" />
+			<layer channel="4" value="100" />
+			<layer channel="5" value="100" />
+			<layer channel="6" value="100" />
+			<layer channel="7" value="100" />
+			<layer channel="8" value="100" />
 		</volume>
 		<volume state="indoors" play="true">
-			<layer channel="1" value="0" />
-			<layer channel="2" value="0" />
-			<layer channel="3" value="0" />
-			<layer channel="4" value="0" />
-			<layer channel="5" value="0" />
-			<layer channel="6" value="0" />
-			<layer channel="7" value="0" />
-			<layer channel="8" value="0" />
+			<layer channel="1" value="15" />
+			<layer channel="2" value="15" />
+			<layer channel="3" value="15" />
+			<layer channel="4" value="15" />
+			<layer channel="5" value="15" />
+			<layer channel="6" value="15" />
+			<layer channel="7" value="15" />
+			<layer channel="8" value="15" />
 		</volume>
 	</music>
 	<triggers>
@@ -58,27 +58,48 @@
 		<checkpoint x="288" y="500" w="48" h="96" />
 		<switch target="" />
 		<front state="0" play="true" x="288" y="500" w="48" h="96" />
-		<music state="outdoors" state_int="0" play="true" x="2352" y="576" w="10" h="192" />
-		<music state="outdoors" state_int="0" play="true" x="7809" y="3120" w="10" h="192" />
-		<music state="outdoors" state_int="0" play="true" x="6816" y="2640" w="10" h="144" />
-		<music state="outdoors" state_int="0" play="true" x="7296" y="3264" w="10" h="144" />
-		<music state="outdoors" state_int="0" play="true" x="7536" y="3264" w="10" h="144" />
-		<music state="outdoors" state_int="0" play="true" x="8448" y="3264" w="10" h="192" />
-		<music state="outdoors" state_int="0" play="true" x="8304" y="3264" w="10" h="192" />
-		<music state="outdoors" state_int="0" play="true" x="6720" y="1536" w="10" h="144" />
-		<music state="outdoors" state_int="0" play="true" x="6960" y="1536" w="10" h="240" />
-		<music state="outdoors" state_int="0" play="true" x="8976" y="1968" w="10" h="144" />
+
+		<!-- Casa de Três Andares -->
+		<music state="indoors" state_int="1" play="true" x="6630" y="2784" w="10" h="240" />
+		<music state="outdoors" state_int="1" play="true" x="6610" y="2784" w="10" h="240" />
+
+		<music state="indoors" state_int="1" play="true" x="6630" y="3120" w="10" h="240" />
+		<music state="outdoors" state_int="1" play="true" x="6610" y="3120" w="10" h="240" />
+
+		<music state="indoors" state_int="1" play="true" x="6836" y="2592" w="10" h="144" />
+		<music state="outdoors" state_int="0" play="true" x="6856" y="2592" w="10" h="144" />
+
+		<!-- Pequena casa Azul (Segunda Ilha) -->
+		<music state="outdoors" state_int="0" play="true" x="7320" y="3264" w="10" h="144" />
+		<music state="indoors" state_int="1" play="true" x="7354" y="3264" w="10" h="192" />
+
+		<music state="indoors" state_int="1" play="true" x="7512" y="3264" w="10" h="192" />
+		<music state="outdoors" state_int="0" play="true" x="7540" y="3264" w="10" h="144" />
+
+		<!-- Zipline através da Casa Amarela -->
+		<music state="outdoors" state_int="0" play="true" x="8472" y="3264" w="10" h="192" />
+		<music state="indoors" state_int="1" play="true" x="8510" y="3264" w="10" h="240" />
+
+		<music state="indoors" state_int="1" play="true" x="8754" y="3264" w="10" h="240" />
+		<music state="outdoors" state_int="0" play="true" x="8780" y="3264" w="10" h="240" />
+
+		<!-- Casa Roxa No Alto da Segunda Ilha -->
+		<music state="outdoors" state_int="0" play="true" x="9000" y="1968" w="10" h="144" />
+		<music state="indoors" state_int="1" play="true" x="9034" y="1968" w="10" h="144" />
+
+		<music state="indoors" state_int="1" play="true" x="9190" y="1968" w="10" h="144" />
 		<music state="outdoors" state_int="0" play="true" x="9216" y="1968" w="10" h="144" />
-		<music state="indoors" state_int="1" play="true" x="6624" y="3120" w="10" h="240" />
-		<music state="indoors" state_int="1" play="true" x="6816" y="2736" w="10" h="144" />
-		<music state="indoors" state_int="1" play="true" x="7344" y="3264" w="10" h="192" />
-		<music state="indoors" state_int="1" play="true" x="7488" y="3264" w="10" h="192" />
-		<music state="indoors" state_int="1" play="true" x="8496" y="3264" w="10" h="240" />
-		<music state="indoors" state_int="1" play="true" x="8736" y="3264" w="10" h="240" />
-		<music state="indoors" state_int="1" play="true" x="6768" y="1536" w="10" h="192" />
-		<music state="indoors" state_int="1" play="true" x="6912" y="1536" w="10" h="240" />
-		<music state="indoors" state_int="1" play="true" x="9024" y="1968" w="10" h="144" />
-		<music state="indoors" state_int="1" play="true" x="9168" y="1968" w="10" h="144" />
+
+		<!-- Casa Azul no Topo do Mundo-->
+		<music state="outdoors" state_int="0" play="true" x="6744" y="1536" w="10" h="144" />
+		<music state="indoors" state_int="1" play="true" x="6772" y="1536" w="10" h="192" />
+
+		<music state="indoors" state_int="1" play="true" x="6936" y="1536" w="10" h="240" />
+		<music state="outdoors" state_int="0" play="true" x="6980" y="1536" w="10" h="240" />
+		
+		
+
+
 	</triggers>
 </world_info>
 <world_objects>
@@ -7292,6 +7313,32 @@
 			</state_index>
 			<state_index state="13" cooldown="1">
 				<trigger verification="0" target_index="0" />
+			</state_index>
+		</AI>
+	</object>
+	<object name="follower" id="30" layer="2">
+		<transform>
+			<rect x="309" y="415" w="115" h="158" />
+			<scale x="0.6" y="0.6" />
+			<rotation value="0" />
+		</transform>
+		<health value="1" />
+		<render>
+			<sprite state="0" filename="../img/characters/enemies/Andando menor.png" frame_count="44" frame_time="0.02" />
+		</render>
+		<physics gravity_scale="1.0" />
+		<collider>
+			<hurtbox x="10" y="20" w="48" h="120" />
+			<hitbox x="10" y="20" w="48" h="120" />
+		</collider>
+		<speed jump="10" walk="10" />
+		<state />
+		<AI type="0" debug="true">
+			<state_index state="0" cooldown="0.3">
+				<trigger verification="7" target_index="1" />
+			</state_index>
+			<state_index state="9" cooldown="0.3">
+				<trigger verification="6" target_index="0" />
 			</state_index>
 		</AI>
 	</object>
