@@ -24,7 +24,8 @@
 #include "../include/AISystem.hpp"
 #include "../include/ParticleEmitterSystem.hpp"
 
-#define LEVEL_1_FILE "../map/FaseUm.xml"
+//#define LEVEL_1_FILE "../map/FaseUm.xml"
+#define LEVEL_1_FILE "../map/FaseDois.xml"
 
 unsigned int GameState::nextId_ = 0;
 std::map<int, std::map<int, RenderComponent*>> GameState::mapRender_;
