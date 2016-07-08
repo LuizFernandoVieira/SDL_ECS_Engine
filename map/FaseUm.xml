@@ -7148,4 +7148,30 @@
 			</state_index>
 		</AI>
 	</object>
+	<object name="follower" id="30" layer="2">
+		<transform>
+			<rect x="309" y="415" w="115" h="158" />
+			<scale x="0.6" y="0.6" />
+			<rotation value="0" />
+		</transform>
+		<health value="1" />
+		<render>
+			<sprite state="0" filename="../img/characters/enemies/Andando menor.png" frame_count="44" frame_time="0.02" />
+		</render>
+		<physics gravity_scale="1.0" />
+		<collider>
+			<hurtbox x="10" y="20" w="48" h="120" />
+			<hitbox x="10" y="20" w="48" h="120" />
+		</collider>
+		<speed jump="10" walk="10" />
+		<state />
+		<AI type="0" debug="true">
+			<state_index state="0" cooldown="0.3">
+				<trigger verification="7" target_index="1" />
+			</state_index>
+			<state_index state="9" cooldown="0.3">
+				<trigger verification="6" target_index="0" />
+			</state_index>
+		</AI>
+	</object>
 </world_objects>
