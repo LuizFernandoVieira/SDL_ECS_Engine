@@ -58,7 +58,7 @@ void ParticleEmitterSystem::update(float dt, GameState& gameState)
 			nextId_++;
 
 			int xRand = rand() % (ec->xWidth_*2);
-			mapTransform_.emplace(particle_, new TransformComponent(Rect(Camera::pos_.x() + xRand - 512, 0, 16, 16)));
+			mapTransform_.emplace(particle_, new TransformComponent(Rect(Camera::pos_.x() + xRand - 512, 0, ec->size_, ec->size_)));
 
 			// Exemplo soh pra testar, nao esquecer de mudar depois
 			std::unordered_map<State, Sprite> particleSprite;
@@ -74,8 +74,8 @@ void ParticleEmitterSystem::update(float dt, GameState& gameState)
 				Rect(
 					mapTransform_[particle_]->rect_.x(),
 					mapTransform_[particle_]->rect_.y(),
-					16,
-					16
+					5,
+					5
 				)
 			));
 		}
@@ -112,7 +112,7 @@ void ParticleEmitterSystem::update(float dt, GameState& gameState)
 	{
 		t.second->update(dt);
 
-		if(t.second->get() > 2) {
+		if(t.second->get() > 5) {
 			mapTransform_.erase(t.first);
 			mapR_.erase(t.first);
 			mapT_.erase(t.first);
