@@ -55,6 +55,14 @@ private:
 		std::map<int, StateComponent*> state,
 		std::map<int, WindComponent*> wind
 	);
+	void updateCoin(
+		float dt,
+		int player,
+		std::map<int, TransformComponent*> transform,
+		std::map<int, ColliderComponent*> collider,
+		std::map<int, StateComponent*> state,
+		std::map<int, CoinComponent*> coin
+	);
 
 	void updateTriggers(GameState& gameState);
 

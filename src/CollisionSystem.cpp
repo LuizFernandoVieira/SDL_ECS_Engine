@@ -28,11 +28,13 @@ void CollisionSystem::update(float dt, GameState& gameState)
 	std::map<int, ZiplineComponent*> zipline = gameState.mapZipline_;
 	std::map<int, WindComponent*> wind = gameState.mapWind_;
 	std::map<int, HealthComponent*> health = gameState.mapHealth_;
+	std::map<int, CoinComponent*> coin = gameState.mapCoin_;
 
 	collidersToRender.clear();
 
 	updateZipline(player, transform, collider, speed, oldState, state, zipline);
 	updateWind(dt, player, transform, collider, /*speed, oldState,*/ state, wind);
+	updateCoin(dt, player, transform, collider, state, coin);
 	updateTerrain(player, collisionMap, oldTransform, transform, collider, speed, state, health);
 	updateCollider(transform, collider, speed, state, health);
 
@@ -332,6 +334,22 @@ void CollisionSystem::updateWind(
 		}
 	}
 }
+
+
+void CollisionSystem::updateCoin(
+	float dt,
+	int player,
+	std::map<int, TransformComponent*> transform,
+	std::map<int, ColliderComponent*> collider,
+	std::map<int, StateComponent*> state,
+	std::map<int, CoinComponent*> coin)
+{
+/*	for (auto& c : coin)
+	{
+
+	}*/
+}
+
 
 
 bool CollisionSystem::isColliding(const Rect& a, const Rect& b, float angleOfA, float angleOfB)
