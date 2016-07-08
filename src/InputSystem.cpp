@@ -83,7 +83,7 @@ void InputSystem::update(float dt, GameState& gameState)
 		}
 
 		// GUARDA CHUVA
-		if (input.isKeyDown('i'))
+		if (input.isKeyDown('i') || input.isGamePadDown(GAMEPAD_Y))
 		{
 			stateComp->umbrellaDirection_ = UmbrellaDirection::UP;
 			stateComp->umbrellaState_ = UmbrellaState::OPEN;
@@ -93,12 +93,12 @@ void InputSystem::update(float dt, GameState& gameState)
 			stateComp->umbrellaDirection_ = UmbrellaDirection::DOWN;
 			stateComp->umbrellaState_ = UmbrellaState::OPEN;
 		}
-		else if (input.isKeyDown('j'))
+		else if (input.isKeyDown('j') || input.isGamePadDown(GAMEPAD_X))
 		{
 			stateComp->umbrellaDirection_ = stateComp->facingRight_ ? UmbrellaDirection::BACK : UmbrellaDirection::FRONT;
 			stateComp->umbrellaState_ = UmbrellaState::OPEN;
 		}
-		else if (input.isKeyDown('l'))
+		else if (input.isKeyDown('l') || input.isGamePadDown(GAMEPAD_B))
 		{
 			stateComp->umbrellaDirection_ = stateComp->facingRight_ ? UmbrellaDirection::FRONT : UmbrellaDirection::BACK;
 			stateComp->umbrellaState_ = UmbrellaState::OPEN;

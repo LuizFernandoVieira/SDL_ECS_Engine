@@ -123,6 +123,7 @@ void InputHandler::update()
 					if( event.jaxis.value < -JOYSTICK_DEAD_ZONE )
 					{
 						std::cout << "arrow left" << std::endl;
+
 					}
 					else if( event.jaxis.value > JOYSTICK_DEAD_ZONE )
 					{
