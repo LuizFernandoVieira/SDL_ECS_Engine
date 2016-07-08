@@ -61,8 +61,8 @@ void RenderSystem::render(int layer, GameState& gameState)
 		sprite.setScaleX(transfComp[render.first]->scale_.x());
 		sprite.setScaleY(transfComp[render.first]->scale_.y());
 		sprite.render(
-			transform.getBase().x() - (sprite.getWidth() / 2) + layerSpeed.x(),
-			transform.getBase().y() - sprite.getHeight() + layerSpeed.y(),
+			transform.x() + layerSpeed.x(),
+			transform.y() + layerSpeed.y(),
 			transfComp[render.first]->rotation_,
 			!stateComp[render.first]->facingRight_ // flip se nao ta virado pra direita
 		);
