@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<!-- FASE UM :: CIDADE -->
 <world_info>
 	<tileset file="../img/maps/tilesetcidade1.png" />
 	<tilemap file="../map/FaseUm_tilemap.txt" />
