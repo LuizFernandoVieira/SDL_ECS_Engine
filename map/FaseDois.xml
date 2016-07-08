@@ -141,7 +141,18 @@
 		</collider>
 		<speed />
 		<player_state />
-		<health value="1" />
+		<health value="3" />
 		<physics gravity_scale="1.0" />
+	</object>
+	<object name="Umbra TBC" id="1" layer="0">
+		<transform>
+			<rect x="9204" y="1124" w="262" h="153" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/tbc.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
 	</object>
 </world_objects>
