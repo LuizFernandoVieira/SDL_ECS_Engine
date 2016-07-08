@@ -17,9 +17,10 @@ Level::Level() :
 }
 
 Level::Level(pugi::xml_node source) :
-	tileSet_(Resources::TILE_WIDTH, Resources::TILE_HEIGHT, Resources::TILE_SET_IMG.c_str()),
-	tileMap_(source.child("tilemap").attribute("file").value(), &tileSet_),
-	collisionMap_(source.child("collision_map").attribute("file").value())
+	tileSet_(Resources::TILE_WIDTH, Resources::TILE_HEIGHT,
+					source.child("tileset").attribute("file").value()),
+	tileMap_(		source.child("tilemap").attribute("file").value(), &tileSet_),
+	collisionMap_(	source.child("collision_map").attribute("file").value())
 {
 	short int current_layer = 0;
 	short int c_tiled_layer = 0;
@@ -86,8 +87,10 @@ void Level::render(int layer)
 		}
 	}
 	
-	tileMap_.renderLayer(layer, 0, 0);
-	// collisionMap_.render(0,0);
+	//tileMap_.renderLayer(layer, 0, 0);
+	
+	if (Resources::DEBUG_COLLISION && LAYER == 0)
+		collisionMap_.render(0,0);
 
 	/*
 	 -- Forma final da implementação --
