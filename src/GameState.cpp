@@ -59,7 +59,7 @@ GameState::GameState()
 		systems_.emplace_back(new RenderSystem());
 		systems_.emplace_back(new PlayerRenderSystem());
 		systems_.emplace_back(new SoundSystem());
-		systems_.emplace_back(new ParticleEmitterSystem());
+		systems_.emplace_back(new ParticleEmitterSystem(*this));
 
 		createParticleEmitter();
 
@@ -240,7 +240,7 @@ void GameState::createParticleEmitter()
 	nextId_++;
 
 	mapTransform_.emplace(particleEmitter_, new TransformComponent(Rect(100, 0, 32, 32)));
-	mapEmitter_.emplace(particleEmitter_, new EmitterComponent(0.1, "../img/waterdrop.png", 1024, 10));
+	mapEmitter_.emplace(particleEmitter_, new EmitterComponent(0.1, "../img/waterdrop.png", "../img/waterdrop-colision", 3, 1024, 10));
 	mapTimer_.emplace(particleEmitter_, new TimerComponent());
 }
 
@@ -250,7 +250,7 @@ void GameState::createSnowParticleEmitter()
 	nextId_++;
 
 	mapTransform_.emplace(particleEmitter_, new TransformComponent(Rect(100, 0, 32, 32)));
-	mapEmitter_.emplace(particleEmitter_, new EmitterComponent(0.3, "../img/neve.png", 1024, 1));
+	mapEmitter_.emplace(particleEmitter_, new EmitterComponent(0.3, "../img/neve.png", "../img/neve.png", 1, 1024, 1));
 	mapTimer_.emplace(particleEmitter_, new TimerComponent());
 }
 
@@ -676,7 +676,7 @@ void GameState::changeLevel()
 
 	systems_.erase(systems_.begin() + 10);
 
-	systems_.emplace_back(new ParticleEmitterSystem());
+	systems_.emplace_back(new ParticleEmitterSystem(*this));
 	createSnowParticleEmitter();
 
 	Camera::follow(mapTransform_[player_]);

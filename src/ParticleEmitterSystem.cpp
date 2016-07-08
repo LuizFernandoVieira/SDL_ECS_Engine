@@ -9,7 +9,8 @@ unsigned int ParticleEmitterSystem::nextId_ = 0;
 std::map<int, RenderComponent*> ParticleEmitterSystem::mapR_;
 std::map<int, TransformComponent*> ParticleEmitterSystem::mapTransform_;
 
-ParticleEmitterSystem::ParticleEmitterSystem()
+ParticleEmitterSystem::ParticleEmitterSystem(GameState& gameState)
+: gameState_(gameState)
 {
 	srand (time(NULL));
 	mapR_.clear();
@@ -165,7 +166,9 @@ void ParticleEmitterSystem::destroyParticle(int particle)
 	mapTransform_.emplace(rainSplat, new TransformComponent(mapTransform_[particle]->rect_));
 
 	std::unordered_map<State, Sprite> rainSplatSprite;
-	rainSplatSprite.emplace(State::IDLE, Sprite("../img/waterdrop-colision.png", 3, 0.1));
+
+	rainSplatSprite.emplace(State::IDLE, Sprite(gameState_.mapEmitter_[gameState_.particleEmitter_]->particleEndPath_.c_str(), gameState_.mapEmitter_[gameState_.particleEmitter_]->frameCount_, 0.1));
+
 	mapR_.emplace(rainSplat, new RenderComponent(rainSplatSprite));
 
 	mapT_.emplace(rainSplat, new Timer());

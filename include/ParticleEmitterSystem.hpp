@@ -17,7 +17,7 @@
 class ParticleEmitterSystem : public System
 {
 public:
-	ParticleEmitterSystem();
+	ParticleEmitterSystem(GameState& gameState);
 	~ParticleEmitterSystem();
 	void update(float dt, GameState& gameState);
 	void render();
@@ -37,6 +37,8 @@ private:
 
 	EmissionRateSystem emissionRateSystem_;
 	CollisionRainTerrainSystem collisionRainTerrainSystem_;
+
+	GameState& gameState_;
 };
 
 #endif

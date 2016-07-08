@@ -14,6 +14,8 @@ public:
 	EmitterComponent()
 	: emissionRate_(0.1),
 		particlePath_("../img/waterdrop.png"),
+		particleEndPath_("../img/waterdrop-colision.png"),
+		frameCount_(1),
 		xWidth_(1024),
 		ySpeed_(10)
 	{  }
@@ -21,11 +23,15 @@ public:
 	EmitterComponent(
 		float emissionRate,
 		std::string particlePath,
+		std::string particleEndPath,
+		int frameCount,
 		int xWidth,
 		int ySpeed
 	)
 	: emissionRate_(emissionRate),
 		particlePath_(particlePath),
+		particleEndPath_(particleEndPath),
+		frameCount_(frameCount),
 		xWidth_(xWidth),
 		ySpeed_(ySpeed)
 	{  }
@@ -37,6 +43,8 @@ public:
 
   float emissionRate_;
 	std::string particlePath_;
+	std::string particleEndPath_;
+	int frameCount_;
 	int xWidth_;
 	int ySpeed_;
 };
