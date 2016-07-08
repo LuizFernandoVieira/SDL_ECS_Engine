@@ -12,6 +12,8 @@
 #include "../include/ZiplineComponent.hpp"
 #include "../include/WindComponent.hpp"*/
 
+#define COIN_SOUND	"../audio/sfx/coin_get.ogg"
+
 CollisionSystem::CollisionSystem()
 {
 
@@ -366,7 +368,7 @@ void CollisionSystem::updateCoin(
 		{
 			gameState.deleteEntity(c.first);
 			((PlayerStateComponent*)state[player])->coinCounter_++;
-			Sound sound("../audio/character_fall.wav");
+			Sound sound(COIN_SOUND);
 			sound.Play();
 			break;
 		}

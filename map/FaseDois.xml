@@ -4,17 +4,16 @@
 	<tilemap file="../map/FaseDois_tilemap.txt" />
 	<collision_map file="../map/FaseDois_colmap.txt" />
 	<layers>
-		<screen main="false" tiled="false" file="../img/screen_layers/cemiterio_1.png" parallax_x="0.2" parallax_y="0" scale_x="0.75" scale_y="0.75" offset_x="900" offset_y="-300" />
-		<screen main="false" tiled="false" file="../img/screen_layers/cemiterio_2.png" parallax_x="0.1" parallax_y="0" scale_x="0.70" scale_y="0.70" offset_x="0" offset_y="-200" />
-		<screen main="false" tiled="false" file="../img/screen_layers/cemiterio_3.png" parallax_x="0" parallax_y="0" scale_x="0.5" scale_y="0.5" offset_x="0" offset_y="-200" />
+		<screen main="false" tiled="false" file="../img/screen_layers/cemiterio_1.png" 
+		    parallax_x="0.13" parallax_y="0" scale_x="0.85" scale_y="0.75" offset_x="0" offset_y="-550" />		
+		<screen main="false" tiled="false" file="../img/screen_layers/cemiterio_2.png" 
+		    parallax_x="0.1" parallax_y="0" scale_x="0.85" scale_y="0.8" offset_x="0" offset_y="-500" />
+		<screen main="false" tiled="false" file="../img/screen_layers/cemiterio_3.png" 
+		    parallax_x="0" parallax_y="0" scale_x="0.5" scale_y="0.5" offset_x="0" offset_y="-200" />
 	</layers>
 	<music>
 		<assets>
-			<layer channel="1" file="audio/umbra_test_bass.wav" />
-			<layer channel="2" file="audio/umbra_test_flute.wav" />
-			<layer channel="3" file="audio/umbra_test_piano.wav" />
-			<layer channel="4" file="audio/umbra_test_synth.wav" />
-			<layer channel="5" file="audio/umbra_test_violin.wav" />
+			<layer channel="1" file="audio/music/graveyard.ogg" />
 		</assets>
 		<volume state="all_on">
 			<layer channel="1" value="128" />
@@ -58,7 +57,12 @@
 		</volume>
 	</music>
 	<triggers>
-		<checkpoint x="58" y="1041" w="48" h="96" />
+		<!-- MAIN SPAWN :: PLAYER STARTING POSITION -->
+		<checkpoint x="60" y="1020" w="48" h="96" />
+
+		<!-- CHECKPOINTS -->
+		<checkpoint x="2688" y="720" w="48" h="96" />
+		<checkpoint x="4608" y="1248" w="48" h="96" />
 	</triggers>
 </world_info>
 <world_objects>
@@ -127,9 +131,9 @@
 			<sprite state="6" umbrella_state="1" umbrella_direction="3" filename="../img/characters/player/zipline.png" frame_count="19" frame_time="0.01" />
 		</player_render>
 		<sound>
-			<sound state="2" filename="../audio/character_jump.wav" />
-			<sound state="8" filename="../audio/character_fall.wav" />
-			<sound state="4" filename="../audio/character_attack.wav" />
+			<sound state="2" filename="../audio/sfx/character_jump.ogg" />
+			<sound state="8" filename="../audio/sfx/character_fall.ogg" />
+			<sound state="4" filename="../audio/sfx/character_attack.ogg" />
 		</sound>
 		<collider>
 			<hurtbox x="0" y="0" w="52" h="90" />
@@ -137,7 +141,18 @@
 		</collider>
 		<speed />
 		<player_state />
-		<health value="1" />
+		<health value="3" />
 		<physics gravity_scale="1.0" />
+	</object>
+	<object name="Umbra TBC" id="1" layer="0">
+		<transform>
+			<rect x="9204" y="1124" w="262" h="153" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/tbc.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
 	</object>
 </world_objects>
