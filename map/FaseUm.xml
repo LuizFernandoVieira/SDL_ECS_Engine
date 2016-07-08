@@ -6555,4 +6555,40 @@
 		</render>
 		<state />
 	</object>
+	<object name="Coin" id="712" layer="2">
+		<transform>
+			<rect x="606" y="549" w="48" h="48" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/coin_32x32.png" frame_count="4" frame_time="0.1" />
+		</render>
+		<coin />
+		<state />
+	</object>
+	<object name="Coin" id="713" layer="2">
+		<transform>
+			<rect x="690" y="549" w="48" h="48" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/coin_32x32.png" frame_count="4" frame_time="0.1" />
+		</render>
+		<coin />
+		<state />
+	</object>
+	<object name="Coin" id="714" layer="2">
+		<transform>
+			<rect x="798" y="552" w="48" h="48" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/coin_32x32.png" frame_count="4" frame_time="0.1" />
+		</render>
+		<coin />
+		<state />
+	</object>
 </world_objects>

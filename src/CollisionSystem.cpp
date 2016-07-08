@@ -3,6 +3,7 @@
 #include "../include/Camera.hpp"
 #include "../include/Sprite.hpp"
 #include "../include/Game.hpp"
+#include "../include/Sound.hpp"
 /*#include "../include/TransformComponent.hpp"
 #include "../include/ColliderComponent.hpp"
 #include "../include/SpeedComponent.hpp"
@@ -34,7 +35,7 @@ void CollisionSystem::update(float dt, GameState& gameState)
 
 	updateZipline(player, transform, collider, speed, oldState, state, zipline);
 	updateWind(dt, player, transform, collider, /*speed, oldState,*/ state, wind);
-	updateCoin(dt, player, transform, collider, state, coin);
+	updateCoin(dt, player, gameState, transform, collider, state, coin);
 	updateTerrain(player, collisionMap, oldTransform, transform, collider, speed, state, health);
 	updateCollider(transform, collider, speed, state, health);
 
@@ -339,15 +340,26 @@ void CollisionSystem::updateWind(
 void CollisionSystem::updateCoin(
 	float dt,
 	int player,
+	GameState& gameState,
 	std::map<int, TransformComponent*> transform,
 	std::map<int, ColliderComponent*> collider,
 	std::map<int, StateComponent*> state,
 	std::map<int, CoinComponent*> coin)
 {
-/*	for (auto& c : coin)
+	for (auto& c : coin)
 	{
-
-	}*/
+ 		if (isColliding( collider[player]->hurtbox_ + Vec2(transform[player]->rect_.x(), transform[player]->rect_.y() ),
+		                 transform[c.first]->rect_,
+		                 transform[player]->rotation_,
+		                 transform[c.first]->rotation_ ))
+		{
+			gameState.deleteEntity(c.first);
+			((PlayerStateComponent*)state[player])->coinCounter_++;
+			Sound sound("../audio/character_fall.wav");
+			sound.Play();
+			break;
+		}
+	}
 }
 
 

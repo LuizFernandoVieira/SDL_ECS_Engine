@@ -58,6 +58,7 @@ private:
 	void updateCoin(
 		float dt,
 		int player,
+		GameState& gameState,
 		std::map<int, TransformComponent*> transform,
 		std::map<int, ColliderComponent*> collider,
 		std::map<int, StateComponent*> state,
