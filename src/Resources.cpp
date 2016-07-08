@@ -153,7 +153,7 @@ void Resources::Read(std::string _filename){
 		//for(pugi::xml_node tool = tools.first_child(); tool; tool = tool.next_sibling())
 
 	int 			tempInt	= 0;
-	float 			tempFloat;
+	// float 			tempFloat;
 	std::string		varName;
 	std::string		varType;
 	_document 	doc;

@@ -54,7 +54,7 @@ void CollisionRainTerrainSystem::update(
           }
 					// coisaFeia.emplace_back(terrain);
 				}
-        else if ( collisionMap.at(x,y) == 5 || collisionMap.at(x,y) == 6 &&
+        else if ( (collisionMap.at(x,y) == 5 || collisionMap.at(x,y) == 6) &&
               isColliding(collider, terrain, 0, 0))
         {
           toDeleteNow.emplace_back(col.first);

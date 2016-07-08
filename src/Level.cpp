@@ -23,7 +23,7 @@ Level::Level(pugi::xml_node source) :
 	collisionMap_(	source.child("collision_map").attribute("file").value())
 {
 	short int current_layer = 0;
-	short int c_tiled_layer = 0;
+	// short int c_tiled_layer = 0;
 
 	max_layers = 0;
 	main_layer = 0;
@@ -67,9 +67,9 @@ Level::Level(pugi::xml_node source) :
 
 Level::~Level()
 {
-	for (auto& it : screen){
+/*	for (auto& it : screen){
 		//liberar camadas  
-	}
+	}*/
 }
 
 // void Level::update(float dt)

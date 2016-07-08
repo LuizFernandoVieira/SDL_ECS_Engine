@@ -239,11 +239,14 @@ void AISystem::update(float dt, GameState& gameState)
 					// Instancia o vento
 					int windId = gameState.nextId_++;
 					Rect aiRect = transComp->rect_;
-					gameState.mapTransform_.emplace(windId, new TransformComponent(Rect( aiRect.x() - 300,
-					                                                                     aiRect.y() + aiRect.h() / 2 - 50,
-					                                                                     300,
-					                                                                     100 )));
+					gameState.mapTransform_.emplace(windId, new TransformComponent(Rect( aiRect.x() - 400,
+					                                                                     aiRect.y() + aiRect.h() / 2 - 239,
+					                                                                     400,
+					                                                                     478 )));
 					gameState.mapWind_.emplace(windId, new WindComponent(Direction::W_LEFT, 100));
+					gameState.mapState_.emplace(windId, new StateComponent());
+					/*gameState.mapRender_[2].emplace(windId, new RenderComponent());
+					gameState.mapRender_[2][windId]->addSprite(State::IDLE, Sprite("../img/vento.png", 30, 0.1));*/
 					ai.second->action_target = windId;
 					stateComp->state_ = State::SUCKING;
 				}
@@ -262,10 +265,13 @@ void AISystem::update(float dt, GameState& gameState)
 					int windId = gameState.nextId_++;
 					Rect aiRect = transComp->rect_;
 					gameState.mapTransform_.emplace(windId, new TransformComponent(Rect( aiRect.x() + aiRect.w(),
-					                                                                     aiRect.y() + aiRect.h() / 2 - 50,
-					                                                                     300,
-					                                                                     100 )));
+					                                                                     aiRect.y() + aiRect.h() / 2 - 239,
+					                                                                     400,
+					                                                                     478 )));
 					gameState.mapWind_.emplace(windId, new WindComponent(Direction::W_LEFT, 100));
+					gameState.mapState_.emplace(windId, new StateComponent());
+					/*gameState.mapRender_[2].emplace(windId, new RenderComponent());
+					gameState.mapRender_[2][windId]->addSprite(State::IDLE, Sprite("../img/vento.png", 30, 0.1));*/
 					ai.second->action_target = windId;
 					stateComp->state_ = State::IDLE;
 				}

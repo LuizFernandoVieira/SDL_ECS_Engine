@@ -16,10 +16,13 @@ void RenderSystem::update(float dt, GameState& gameState)
 	std::map<int, StateComponent*> stateComp = gameState.mapState_;
 	std::map<int, std::map<int, RenderComponent*>> renderComp = gameState.mapRender_;
 
-	for (int i = 0; i < 4; i++)
+	// std::cout << renderComp[2].size() << std::endl;
+	for (int i = 0; i < 6; i++)
 	{
 		for(auto& render : renderComp[i])
 		{
+			if (render.first == 598)
+				std::cout << stateComp[render.first]->state_ << std::endl;
 			if (stateComp[render.first]->state_ != oldState[render.first]->state_)
 			{
 				render.second->getSprite(stateComp[render.first]->state_).setFrame(0);

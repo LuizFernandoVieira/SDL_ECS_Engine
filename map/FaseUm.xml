@@ -1437,7 +1437,7 @@
 		</render>
 		<state />
 	</object>
-	<object name="Janela O 2" id="176" layer="1">
+	<object name="Janela O 2" id="176" layer="2">
 		<transform>
 			<rect x="4033" y="3595" w="10" h="10" />
 			<scale x="1" y="1" />
@@ -1448,7 +1448,7 @@
 		</render>
 		<state />
 	</object>
-	<object name="Janela O 2" id="177" layer="1">
+	<object name="Janela O 2" id="177" layer="2">
 		<transform>
 			<rect x="4033" y="3448" w="10" h="10" />
 			<scale x="1" y="1" />
@@ -1459,7 +1459,7 @@
 		</render>
 		<state />
 	</object>
-	<object name="Janela O 2" id="178" layer="1">
+	<object name="Janela O 2" id="178" layer="2">
 		<transform>
 			<rect x="4031" y="3315" w="10" h="10" />
 			<scale x="1" y="1" />
@@ -1470,7 +1470,7 @@
 		</render>
 		<state />
 	</object>
-	<object name="Porta 7" id="179" layer="1">
+	<object name="Porta 7" id="179" layer="2">
 		<transform>
 			<rect x="4005" y="3843" w="10" h="10" />
 			<scale x="1" y="1" />
@@ -2361,7 +2361,7 @@
 		</render>
 		<state />
 	</object>
-	<object name="Janela O 7" id="290" layer="1">
+	<object name="Janela O 7" id="290" layer="2">
 		<transform>
 			<rect x="6911" y="2063" w="10" h="10" />
 			<scale x="1" y="1" />
@@ -2372,7 +2372,7 @@
 		</render>
 		<state />
 	</object>
-	<object name="Janela O 7" id="291" layer="1">
+	<object name="Janela O 7" id="291" layer="2">
 		<transform>
 			<rect x="6960" y="2064" w="10" h="10" />
 			<scale x="1" y="1" />
@@ -2383,7 +2383,7 @@
 		</render>
 		<state />
 	</object>
-	<object name="Janela O 7" id="292" layer="1">
+	<object name="Janela O 7" id="292" layer="2">
 		<transform>
 			<rect x="6960" y="2208" w="10" h="10" />
 			<scale x="1" y="1" />
@@ -2394,7 +2394,7 @@
 		</render>
 		<state />
 	</object>
-	<object name="Janela O 7" id="293" layer="1">
+	<object name="Janela O 7" id="293" layer="2">
 		<transform>
 			<rect x="6915" y="2210" w="10" h="10" />
 			<scale x="1" y="1" />
@@ -2405,7 +2405,7 @@
 		</render>
 		<state />
 	</object>
-	<object name="Janela O 7" id="294" layer="1">
+	<object name="Janela O 7" id="294" layer="2">
 		<transform>
 			<rect x="6721" y="2254" w="10" h="10" />
 			<scale x="1" y="1" />
@@ -2416,7 +2416,7 @@
 		</render>
 		<state />
 	</object>
-	<object name="Janela O 7" id="295" layer="1">
+	<object name="Janela O 7" id="295" layer="2">
 		<transform>
 			<rect x="6814" y="2254" w="10" h="10" />
 			<scale x="1" y="1" />
@@ -2427,7 +2427,7 @@
 		</render>
 		<state />
 	</object>
-	<object name="Porta 1" id="296" layer="1">
+	<object name="Porta 1" id="296" layer="2">
 		<transform>
 			<rect x="6910" y="2353" w="10" h="10" />
 			<scale x="1" y="1" />
@@ -5650,28 +5650,6 @@
 		</render>
 		<state />
 	</object>
-	<object name="Portao tras" id="653" layer="4">
-		<transform>
-			<rect x="9247" y="1115" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/portao-tras.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Portao frente" id="654" layer="4">
-		<transform>
-			<rect x="9387" y="1115" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/portao-frente.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
 	<object name="Portao frente" id="655" layer="1">
 		<transform>
 			<rect x="17994" y="2115" w="10" h="10" />
@@ -5683,7 +5661,7 @@
 		</render>
 		<state />
 	</object>
-	<object name="Portao tras" id="656" layer="1">
+	<object name="Portao tras" id="656" layer="3">
 		<transform>
 			<rect x="17855" y="2117" w="10" h="10" />
 			<scale x="1" y="1" />
@@ -6093,7 +6071,7 @@
 		</render>
 		<state />
 	</object>
-	<object name="Janela O 9" id="710" layer="1">
+	<object name="Janela O 9" id="710" layer="2">
 		<transform>
 			<rect x="8550" y="3120" w="10" h="10" />
 			<scale x="1" y="1" />
@@ -6104,7 +6082,7 @@
 		</render>
 		<state />
 	</object>
-	<object name="Janela O 9" id="711" layer="1">
+	<object name="Janela O 9" id="711" layer="2">
 		<transform>
 			<rect x="8684" y="3116" w="10" h="10" />
 			<scale x="1" y="1" />
@@ -6801,6 +6779,41 @@
 		<render>
 			<sprite state="0" filename="../img/objetos/logo.png" frame_count="1" frame_time="1.0" />
 		</render>
+		<state />
+	</object>
+	<!-- <object name="estatua" id="768" layer="2">
+		<transform>
+			<rect x="554" y="463" w="120" h="162" />
+			<scale x="0.5" y="0.5" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/characters/enemies/Tormenta 1.png" frame_count="30" frame_time="0.02" />
+			<sprite state="10" filename="../img/characters/enemies/Tormenta 2.png" frame_count="30" frame_time="0.02" />
+		</render>
+		<state />
+		<AI>
+			<state_index state="0" cooldown="0">
+				<trigger verification="0" target_index="1" />
+			</state_index>
+			<state_index state="10" cooldown="1">
+				<trigger verification="0" target_index="2" />
+			</state_index>
+			<state_index state="11" cooldown="1">
+				<trigger verification="0" target_index="1" />
+			</state_index>
+		</AI>
+	</object> -->
+	<object name="Vento" layer="2">
+		<transform>
+			<rect x="554" y="463" w="500" h="500" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/vento.png" frame_count="30" frame_time="0.1" />
+		</render>
+		<wind direction="2" speed="100" />
 		<state />
 	</object>
 </world_objects>

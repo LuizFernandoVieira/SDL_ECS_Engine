@@ -17,21 +17,13 @@ ParticleEmitterSystem::ParticleEmitterSystem()
 
 ParticleEmitterSystem::~ParticleEmitterSystem()
 {
-	std::cout << "destrutor 1" << std::endl;
 	nextId_ = 0;
-	std::cout << "destrutor 2" << std::endl;
 	mapTransform_.clear();
-	std::cout << "destrutor 3" << std::endl;
 	mapR_.clear();
-	std::cout << "destrutor 4" << std::endl;
 	mapTimer_.clear();
-	std::cout << "destrutor 5" << std::endl;
 	mapSpeed_.clear();
-	std::cout << "destrutor 6" << std::endl;
 	mapCollider_.clear();
-	std::cout << "destrutor 7" << std::endl;
 	mapT_.clear();
-	std::cout << "destrutor fim" << std::endl;
 }
 
 void ParticleEmitterSystem::destroyAll()
@@ -68,7 +60,7 @@ void ParticleEmitterSystem::update(float dt, GameState& gameState)
 
 			// Exemplo soh pra testar, nao esquecer de mudar depois
 			std::unordered_map<State, Sprite> particleSprite;
-			particleSprite.emplace(State::IDLE, Sprite("../img/waterdrop.png", 1, 0.1, 2));
+			particleSprite.emplace(State::IDLE, Sprite("../img/waterdrop.png", 1, 0.1));
 			mapR_.emplace(particle_, new RenderComponent(particleSprite));
 
 			mapTimer_.emplace(particle_, new TimerComponent());

@@ -11,7 +11,6 @@
 #include "../include/GameState.hpp"
 #include "../include/Camera.hpp"
 #include "../include/InputHandler.hpp"
-#include "../include/StaticSprite.hpp"
 #include "../include/InputSystem.hpp"
 #include "../include/PlayerRenderSystem.hpp"
 #include "../include/RenderSystem.hpp"
@@ -31,8 +30,10 @@ unsigned int GameState::nextId_ = 0;
 std::map<int, std::map<int, RenderComponent*>> GameState::mapRender_;
 
 GameState::GameState()
-: music(), changeLevel_(false)
+: changeLevel_(false), music()
 {
+	frame_ = new StaticSprite("../img/moldura1.png");
+	std::cout << "e" << std::endl;
 	StaticSprite loadScreen("../img/loading.png");
 	loadScreen.render(0,0);
 	SDL_RenderPresent(Game::getInstance().getRenderer());
@@ -134,6 +135,7 @@ void GameState::update(float dt)
 	}
 
 	Camera::update(dt);
+	frame_->update(dt);
 
 	deleteDeadEntities();
 
@@ -194,6 +196,8 @@ void GameState::render()
 
 	if (Resources::DEBUG_TRIGGERS)
 		showTriggers();
+
+	frame_->render(0,0);
 }
 
 void GameState::pause()

@@ -120,8 +120,8 @@ public:
 		int state_ 	= state_index;
 		int target_	= target_index;
 
-		if (target_ > states.size()) 	target_ = 0;
-		if (state_ > states.size()) 	state_ = 0;
+		if (target_ > (int)states.size()) 	target_ = 0;
+		if (state_ > (int)states.size()) 	state_ = 0;
 
 		states[state_].addTrigger(condition_index, target_);
 	}

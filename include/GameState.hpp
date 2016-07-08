@@ -6,6 +6,7 @@
 #include "IState.hpp"
 #include "Level.hpp"
 #include "System.hpp"
+#include "StaticSprite.hpp"
 #include "TransformComponent.hpp"
 #include "StateComponent.hpp"
 #include "RenderComponent.hpp"
@@ -88,6 +89,7 @@ private:
 
 	Level* level_;
 	Music music;
+	StaticSprite* frame_;
 	std::vector<System*> systems_;
 };
 
