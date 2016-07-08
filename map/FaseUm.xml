@@ -7029,20 +7029,6 @@
 		</collider>
 		<speed jump="10" walk="10" />
 		<state />
-		<AI>
-			<state_index state="0" cooldown="2">
-				<trigger verification="0" target_index="1" />
-			</state_index>
-			<state_index state="12" cooldown="1">
-				<trigger verification="0" target_index="2" />
-			</state_index>
-			<state_index state="1" cooldown="2">
-				<trigger verification="0" target_index="3" />
-			</state_index>
-			<state_index state="13" cooldown="1">
-				<trigger verification="0" target_index="0" />
-			</state_index>
-		</AI>
 	</object>
 	<object name="Zig Zag" id="30" layer="2">
 		<transform>
@@ -7091,20 +7077,6 @@
 		</collider>
 		<speed jump="10" walk="10" />
 		<state />
-		<AI>
-			<state_index state="0" cooldown="2">
-				<trigger verification="0" target_index="1" />
-			</state_index>
-			<state_index state="12" cooldown="1">
-				<trigger verification="0" target_index="2" />
-			</state_index>
-			<state_index state="1" cooldown="2">
-				<trigger verification="0" target_index="3" />
-			</state_index>
-			<state_index state="13" cooldown="1">
-				<trigger verification="0" target_index="0" />
-			</state_index>
-		</AI>
 	</object>
 	<object name="Macaco parado" id="32" layer="2">
 		<transform>
@@ -7122,20 +7094,6 @@
 		</collider>
 		<speed jump="10" walk="10" />
 		<state />
-		<AI>
-			<state_index state="0" cooldown="2">
-				<trigger verification="0" target_index="1" />
-			</state_index>
-			<state_index state="12" cooldown="1">
-				<trigger verification="0" target_index="2" />
-			</state_index>
-			<state_index state="1" cooldown="2">
-				<trigger verification="0" target_index="3" />
-			</state_index>
-			<state_index state="13" cooldown="1">
-				<trigger verification="0" target_index="0" />
-			</state_index>
-		</AI>
 	</object>
 	<object name="Follower" id="33" layer="2">
 		<transform>
@@ -7178,20 +7136,6 @@
 		</collider>
 		<speed jump="10" walk="10" />
 		<state />
-		<AI>
-			<state_index state="0" cooldown="2">
-				<trigger verification="0" target_index="1" />
-			</state_index>
-			<state_index state="12" cooldown="1">
-				<trigger verification="0" target_index="2" />
-			</state_index>
-			<state_index state="1" cooldown="2">
-				<trigger verification="0" target_index="3" />
-			</state_index>
-			<state_index state="13" cooldown="1">
-				<trigger verification="0" target_index="0" />
-			</state_index>
-		</AI>
 	</object>
 	<object name="Coin" id="35" layer="2">
 		<transform>
@@ -7245,20 +7189,6 @@
 		</collider>
 		<speed jump="10" walk="10" />
 		<state />
-		<AI>
-			<state_index state="0" cooldown="2">
-				<trigger verification="0" target_index="1" />
-			</state_index>
-			<state_index state="12" cooldown="1">
-				<trigger verification="0" target_index="2" />
-			</state_index>
-			<state_index state="1" cooldown="2">
-				<trigger verification="0" target_index="3" />
-			</state_index>
-			<state_index state="13" cooldown="1">
-				<trigger verification="0" target_index="0" />
-			</state_index>
-		</AI>
 	</object>
 	<object name="Follower" id="39" layer="2">
 		<transform>
@@ -7313,32 +7243,6 @@
 			</state_index>
 			<state_index state="13" cooldown="1">
 				<trigger verification="0" target_index="0" />
-			</state_index>
-		</AI>
-	</object>
-	<object name="follower" id="30" layer="2">
-		<transform>
-			<rect x="309" y="415" w="115" h="158" />
-			<scale x="0.6" y="0.6" />
-			<rotation value="0" />
-		</transform>
-		<health value="1" />
-		<render>
-			<sprite state="0" filename="../img/characters/enemies/Andando menor.png" frame_count="44" frame_time="0.02" />
-		</render>
-		<physics gravity_scale="1.0" />
-		<collider>
-			<hurtbox x="10" y="20" w="48" h="120" />
-			<hitbox x="10" y="20" w="48" h="120" />
-		</collider>
-		<speed jump="10" walk="10" />
-		<state />
-		<AI type="0" debug="true">
-			<state_index state="0" cooldown="0.3">
-				<trigger verification="7" target_index="1" />
-			</state_index>
-			<state_index state="9" cooldown="0.3">
-				<trigger verification="6" target_index="0" />
 			</state_index>
 		</AI>
 	</object>
