@@ -245,8 +245,9 @@ void AISystem::update(float dt, GameState& gameState)
 					                                                                     478 )));
 					gameState.mapWind_.emplace(windId, new WindComponent(Direction::W_LEFT, 100));
 					gameState.mapState_.emplace(windId, new StateComponent());
-					/*gameState.mapRender_[2].emplace(windId, new RenderComponent());
-					gameState.mapRender_[2][windId]->addSprite(State::IDLE, Sprite("../img/vento.png", 30, 0.1));*/
+					/*RenderComponent* render = new RenderComponent();
+					render->addSprite(State::IDLE, Sprite("../img/vento.png", 30, 0.1));
+					GameState::mapRender_[2].emplace(windId, render);*/
 					ai.second->action_target = windId;
 					stateComp->state_ = State::SUCKING;
 				}
@@ -270,8 +271,9 @@ void AISystem::update(float dt, GameState& gameState)
 					                                                                     478 )));
 					gameState.mapWind_.emplace(windId, new WindComponent(Direction::W_LEFT, 100));
 					gameState.mapState_.emplace(windId, new StateComponent());
-					/*gameState.mapRender_[2].emplace(windId, new RenderComponent());
-					gameState.mapRender_[2][windId]->addSprite(State::IDLE, Sprite("../img/vento.png", 30, 0.1));*/
+					/*RenderComponent* render = new RenderComponent();
+					render->addSprite(State::IDLE, Sprite("../img/vento.png", 30, 0.1));
+					GameState::mapRender_[2].emplace(windId, render);*/
 					ai.second->action_target = windId;
 					stateComp->state_ = State::IDLE;
 				}

@@ -1,7 +1,6 @@
 Fazendo:
 
 - Macaco;
-- Invencibilidade ao tomar dano
 - Fullscreen;
 
 
@@ -10,11 +9,6 @@ Probleminhas a resolver:
 - Bug do editor, mousePress e isMouseDown;
 - Posicionamento dos sprites da menina;
 
-
-============== PROXIMA AULA ==================
-
-
-============== ESSA SEMANA ==================
 
 
 =============== ENTREGAS ====================

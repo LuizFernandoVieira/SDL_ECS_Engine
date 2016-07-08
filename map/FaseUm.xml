@@ -6707,54 +6707,6 @@
 			<end x="0" y="0" />
 		</zipline>
 	</object>
-	<object name="Coin" id="762" layer="2">
-		<transform>
-			<rect x="692" y="548" w="48" h="48" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/moeda.png" frame_count="5" frame_time="0.08" />
-		</render>
-		<coin />
-		<state />
-	</object>
-	<object name="Coin" id="763" layer="2">
-		<transform>
-			<rect x="743" y="546" w="48" h="48" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/moeda.png" frame_count="5" frame_time="0.08" />
-		</render>
-		<coin />
-		<state />
-	</object>
-	<object name="Coin" id="764" layer="2">
-		<transform>
-			<rect x="808" y="554" w="48" h="48" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/moeda.png" frame_count="5" frame_time="0.08" />
-		</render>
-		<coin />
-		<state />
-	</object>
-	<object name="Coin" id="765" layer="2">
-		<transform>
-			<rect x="862" y="554" w="48" h="48" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/moeda.png" frame_count="5" frame_time="0.08" />
-		</render>
-		<coin />
-		<state />
-	</object>
 	<object name="Toldo 1" id="766" layer="2">
 		<transform>
 			<rect x="6768" y="1488" w="10" h="10" />
@@ -6777,16 +6729,423 @@
 		</render>
 		<state />
 	</object>
-	<object name="Vento" layer="2">
+	<object name="Coin" id="3" layer="2">
 		<transform>
-			<rect x="554" y="463" w="500" h="500" />
+			<rect x="2878" y="1900" w="48" h="48" />
 			<scale x="1" y="1" />
 			<rotation value="0" />
 		</transform>
 		<render>
-			<sprite state="0" filename="../img/vento.png" frame_count="30" frame_time="0.1" />
+			<sprite state="0" filename="../img/moeda.png" frame_count="5" frame_time="0.05" />
 		</render>
-		<wind direction="2" speed="100" />
+		<coin />
 		<state />
+	</object>
+	<object name="Coin" id="4" layer="2">
+		<transform>
+			<rect x="2918" y="1899" w="48" h="48" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/moeda.png" frame_count="5" frame_time="0.05" />
+		</render>
+		<coin />
+		<state />
+	</object>
+	<object name="Coin" id="5" layer="2">
+		<transform>
+			<rect x="2834" y="1899" w="48" h="48" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/moeda.png" frame_count="5" frame_time="0.05" />
+		</render>
+		<coin />
+		<state />
+	</object>
+	<object name="Coin" id="6" layer="2">
+		<transform>
+			<rect x="1390" y="2452" w="48" h="48" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/moeda.png" frame_count="5" frame_time="0.05" />
+		</render>
+		<coin />
+		<state />
+	</object>
+	<object name="follower" id="7" layer="2">
+		<transform>
+			<rect x="3484" y="2413" w="115" h="158" />
+			<scale x="0.6" y="0.6" />
+			<rotation value="0" />
+		</transform>
+		<health value="1" />
+		<render>
+			<sprite state="0" filename="../img/characters/enemies/Andando menor.png" frame_count="44" frame_time="0.02" />
+		</render>
+		<physics gravity_scale="1.0" />
+		<collider>
+			<hurtbox x="10" y="20" w="48" h="120" />
+			<hitbox x="10" y="20" w="48" h="120" />
+		</collider>
+		<speed jump="10" walk="10" />
+		<state />
+		<AI type="0" debug="true">
+			<state_index state="0" cooldown="0.3">
+				<trigger verification="7" target_index="1" />
+			</state_index>
+			<state_index state="9" cooldown="0.3">
+				<trigger verification="6" target_index="0" />
+			</state_index>
+		</AI>
+	</object>
+	<object name="Coin" id="8" layer="2">
+		<transform>
+			<rect x="2951" y="2284" w="48" h="48" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/moeda.png" frame_count="5" frame_time="0.05" />
+		</render>
+		<coin />
+		<state />
+	</object>
+	<object name="Coin" id="9" layer="2">
+		<transform>
+			<rect x="3005" y="2284" w="48" h="48" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/moeda.png" frame_count="5" frame_time="0.05" />
+		</render>
+		<coin />
+		<state />
+	</object>
+	<object name="Coin" id="10" layer="2">
+		<transform>
+			<rect x="6528" y="2629" w="48" h="48" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/moeda.png" frame_count="5" frame_time="0.05" />
+		</render>
+		<coin />
+		<state />
+	</object>
+	<object name="Coin" id="11" layer="2">
+		<transform>
+			<rect x="6815" y="1414" w="48" h="48" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/moeda.png" frame_count="5" frame_time="0.05" />
+		</render>
+		<coin />
+		<state />
+	</object>
+	<object name="Coin" id="12" layer="2">
+		<transform>
+			<rect x="6865" y="1414" w="48" h="48" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/moeda.png" frame_count="5" frame_time="0.05" />
+		</render>
+		<coin />
+		<state />
+	</object>
+	<object name="Coin" id="13" layer="2">
+		<transform>
+			<rect x="6577" y="2863" w="48" h="48" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/moeda.png" frame_count="5" frame_time="0.05" />
+		</render>
+		<coin />
+		<state />
+	</object>
+	<object name="follower" id="14" layer="2">
+		<transform>
+			<rect x="8560" y="2813" w="115" h="158" />
+			<scale x="0.6" y="0.6" />
+			<rotation value="0" />
+		</transform>
+		<health value="1" />
+		<render>
+			<sprite state="0" filename="../img/characters/enemies/Andando menor.png" frame_count="44" frame_time="0.02" />
+		</render>
+		<physics gravity_scale="1.0" />
+		<collider>
+			<hurtbox x="10" y="20" w="48" h="120" />
+			<hitbox x="10" y="20" w="48" h="120" />
+		</collider>
+		<speed jump="10" walk="10" />
+		<state />
+		<AI type="0" debug="true">
+			<state_index state="0" cooldown="0.3">
+				<trigger verification="7" target_index="1" />
+			</state_index>
+			<state_index state="9" cooldown="0.3">
+				<trigger verification="6" target_index="0" />
+			</state_index>
+		</AI>
+	</object>
+	<object name="follower" id="15" layer="2">
+		<transform>
+			<rect x="6312" y="3449" w="115" h="158" />
+			<scale x="0.6" y="0.6" />
+			<rotation value="0" />
+		</transform>
+		<health value="1" />
+		<render>
+			<sprite state="0" filename="../img/characters/enemies/Andando menor.png" frame_count="44" frame_time="0.02" />
+		</render>
+		<physics gravity_scale="1.0" />
+		<collider>
+			<hurtbox x="10" y="20" w="48" h="120" />
+			<hitbox x="10" y="20" w="48" h="120" />
+		</collider>
+		<speed jump="10" walk="10" />
+		<state />
+		<AI type="0" debug="true">
+			<state_index state="0" cooldown="0.3">
+				<trigger verification="7" target_index="1" />
+			</state_index>
+			<state_index state="9" cooldown="0.3">
+				<trigger verification="6" target_index="0" />
+			</state_index>
+		</AI>
+	</object>
+	<object name="Coin" id="16" layer="2">
+		<transform>
+			<rect x="7868" y="3314" w="48" h="48" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/moeda.png" frame_count="5" frame_time="0.05" />
+		</render>
+		<coin />
+		<state />
+	</object>
+	<object name="Coin" id="17" layer="2">
+		<transform>
+			<rect x="7957" y="3320" w="48" h="48" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/moeda.png" frame_count="5" frame_time="0.05" />
+		</render>
+		<coin />
+		<state />
+	</object>
+	<object name="Coin" id="18" layer="2">
+		<transform>
+			<rect x="9099" y="2034" w="48" h="48" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/moeda.png" frame_count="5" frame_time="0.05" />
+		</render>
+		<coin />
+		<state />
+	</object>
+	<object name="follower" id="19" layer="2">
+		<transform>
+			<rect x="10770" y="2510" w="115" h="158" />
+			<scale x="0.6" y="0.6" />
+			<rotation value="0" />
+		</transform>
+		<health value="1" />
+		<render>
+			<sprite state="0" filename="../img/characters/enemies/Andando menor.png" frame_count="44" frame_time="0.02" />
+		</render>
+		<physics gravity_scale="1.0" />
+		<collider>
+			<hurtbox x="10" y="20" w="48" h="120" />
+			<hitbox x="10" y="20" w="48" h="120" />
+		</collider>
+		<speed jump="10" walk="10" />
+		<state />
+		<AI type="0" debug="true">
+			<state_index state="0" cooldown="0.3">
+				<trigger verification="7" target_index="1" />
+			</state_index>
+			<state_index state="9" cooldown="0.3">
+				<trigger verification="6" target_index="0" />
+			</state_index>
+		</AI>
+	</object>
+	<object name="Coin" id="20" layer="2">
+		<transform>
+			<rect x="11060" y="2198" w="48" h="48" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/moeda.png" frame_count="5" frame_time="0.05" />
+		</render>
+		<coin />
+		<state />
+	</object>
+	<object name="estatua" id="21" layer="2">
+		<transform>
+			<rect x="12363" y="3740" w="120" h="162" />
+			<scale x="0.5" y="0.5" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/characters/enemies/Tormenta 1.png" frame_count="30" frame_time="0.02" />
+			<sprite state="10" filename="../img/characters/enemies/Tormenta 2.png" frame_count="30" frame_time="0.02" />
+		</render>
+		<state />
+		<AI>
+			<state_index state="0" cooldown="0">
+				<trigger verification="0" target_index="1" />
+			</state_index>
+			<state_index state="10" cooldown="1">
+				<trigger verification="0" target_index="2" />
+			</state_index>
+			<state_index state="11" cooldown="1">
+				<trigger verification="0" target_index="1" />
+			</state_index>
+		</AI>
+	</object>
+	<object name="follower" id="22" layer="2">
+		<transform>
+			<rect x="11573" y="3724" w="115" h="158" />
+			<scale x="0.6" y="0.6" />
+			<rotation value="0" />
+		</transform>
+		<health value="1" />
+		<render>
+			<sprite state="0" filename="../img/characters/enemies/Andando menor.png" frame_count="44" frame_time="0.02" />
+		</render>
+		<physics gravity_scale="1.0" />
+		<collider>
+			<hurtbox x="10" y="20" w="48" h="120" />
+			<hitbox x="10" y="20" w="48" h="120" />
+		</collider>
+		<speed jump="10" walk="10" />
+		<state />
+		<AI type="0" debug="true">
+			<state_index state="0" cooldown="0.3">
+				<trigger verification="7" target_index="1" />
+			</state_index>
+			<state_index state="9" cooldown="0.3">
+				<trigger verification="6" target_index="0" />
+			</state_index>
+		</AI>
+	</object>
+	<object name="Coin" id="23" layer="2">
+		<transform>
+			<rect x="11850" y="3783" w="48" h="48" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/moeda.png" frame_count="5" frame_time="0.05" />
+		</render>
+		<coin />
+		<state />
+	</object>
+	<object name="Coin" id="24" layer="2">
+		<transform>
+			<rect x="11968" y="3785" w="48" h="48" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/moeda.png" frame_count="5" frame_time="0.05" />
+		</render>
+		<coin />
+		<state />
+	</object>
+	<object name="Coin" id="25" layer="2">
+		<transform>
+			<rect x="12932" y="2918" w="48" h="48" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/moeda.png" frame_count="5" frame_time="0.05" />
+		</render>
+		<coin />
+		<state />
+	</object>
+	<object name="Coin" id="26" layer="2">
+		<transform>
+			<rect x="15338" y="2621" w="48" h="48" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/moeda.png" frame_count="5" frame_time="0.05" />
+		</render>
+		<coin />
+		<state />
+	</object>
+	<object name="Coin" id="27" layer="2">
+		<transform>
+			<rect x="16151" y="2012" w="48" h="48" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/moeda.png" frame_count="5" frame_time="0.05" />
+		</render>
+		<coin />
+		<state />
+	</object>
+	<object name="Coin" id="28" layer="2">
+		<transform>
+			<rect x="16292" y="2058" w="48" h="48" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/moeda.png" frame_count="5" frame_time="0.05" />
+		</render>
+		<coin />
+		<state />
+	</object>
+	<object name="follower" id="29" layer="2">
+		<transform>
+			<rect x="16243" y="3283" w="115" h="158" />
+			<scale x="0.6" y="0.6" />
+			<rotation value="0" />
+		</transform>
+		<health value="1" />
+		<render>
+			<sprite state="0" filename="../img/characters/enemies/Andando menor.png" frame_count="44" frame_time="0.02" />
+		</render>
+		<physics gravity_scale="1.0" />
+		<collider>
+			<hurtbox x="10" y="20" w="48" h="120" />
+			<hitbox x="10" y="20" w="48" h="120" />
+		</collider>
+		<speed jump="10" walk="10" />
+		<state />
+		<AI type="0" debug="true">
+			<state_index state="0" cooldown="0.3">
+				<trigger verification="7" target_index="1" />
+			</state_index>
+			<state_index state="9" cooldown="0.3">
+				<trigger verification="6" target_index="0" />
+			</state_index>
+		</AI>
 	</object>
 </world_objects>

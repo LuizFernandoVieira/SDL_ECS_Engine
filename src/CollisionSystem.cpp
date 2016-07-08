@@ -115,7 +115,6 @@ void CollisionSystem::updateTerrain(
 				int collisionType;
 				if ((collisionType = collisionMap.at(x,y)) >= 0 && isColliding(finalCollider, terrain, 0, 0))
 				{
-					if (col.first == 1) std::cout << "hey" << std::endl;
 					switch(collisionType)
 					{
 						case 0:
