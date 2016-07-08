@@ -46,9 +46,9 @@ void TileSetAndObjectsPanel::createButtons()
 		objectButtonProportions.h() * rect_.h()
 	);
 
-	Button* tileButton   = new Button(tileButtonRect, "../img/interface/editor/btn_1.png"/*, nullptr*/);
-	Button* collisionButton = new Button(collisionButtonRect, "../img/interface/editor/btn_2.png"/*, nullptr*/);
-	Button* objectButton = new Button(objectButtonRect, "../img/interface/editor/btn_3.png"/*, nullptr*/);
+	Button* tileButton   = new Button(tileButtonRect, "../img/interface/editor/tiles.png"/*, nullptr*/);
+	Button* collisionButton = new Button(collisionButtonRect, "../img/interface/editor/cols.png"/*, nullptr*/);
+	Button* objectButton = new Button(objectButtonRect, "../img/interface/editor/objs.png"/*, nullptr*/);
 
 	tileButton->setResizable(true);
 	collisionButton->setResizable(true);
