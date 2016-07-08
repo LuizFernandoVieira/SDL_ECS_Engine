@@ -68,7 +68,7 @@ void AISystem::update(float dt, GameState& gameState)
 
 				//Caso: Idle
 				case 1:
-						move = ((int) current_state.state == 0);
+					move = ((int) current_state.state == 0);
 					break;
 
 

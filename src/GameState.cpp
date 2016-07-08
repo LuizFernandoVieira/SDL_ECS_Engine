@@ -92,6 +92,7 @@ GameState::~GameState()
 	oldTransform_.clear();
 	oldState_.clear();
 	mapAI_.clear();
+	mapCoin_.clear();
 
 	mapRender_[0].clear();
 	mapRender_[1].clear();
@@ -515,6 +516,7 @@ void GameState::deleteDeadEntities()
 				mapHealth_.erase(id);
 				mapWind_.erase(id);
 				mapAI_.erase(id);
+				mapCoin_.erase(id);
 
 				for (int i = 0; i <= max_layers; i++)	//era para ser i < max_layers, segundo o que estava escrito
 					mapRender_[i].erase(id);
@@ -541,6 +543,7 @@ void GameState::deleteEntity(int id)
 	mapHealth_.erase(id);
 	mapWind_.erase(id);
 	mapAI_.erase(id);
+	mapCoin_.erase(id);
 
 	for (int i = 0; i <= max_layers; i++)	//era para ser i < max_layers, segundo o que estava escrito
 		mapRender_[i].erase(id);

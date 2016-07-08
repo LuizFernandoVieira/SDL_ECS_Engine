@@ -63,12 +63,13 @@ public:
 class PlayerStateComponent : public StateComponent
 {
 public:
-	PlayerStateComponent() : StateComponent(), umbrellaState_(CLOSED), umbrellaDirection_(DOWN) { current_checkpoint = 0;}
+	PlayerStateComponent() : StateComponent(), umbrellaState_(CLOSED), umbrellaDirection_(DOWN), fallTime_(), coinCounter_(0) { current_checkpoint = 0;}
 
 	short unsigned int current_checkpoint;
 	UmbrellaState umbrellaState_;
 	UmbrellaDirection umbrellaDirection_;
 	Timer fallTime_;
+	int coinCounter_;
 };
 
 

@@ -832,19 +832,14 @@ WIND DIRECTIOM
 	</collider>
 	<speed jump="10" walk="10" />
 	<state />
-	<AI type="0" debug="true">
-		<state_index state="0" cooldown="0.3">
-			<trigger verification="2" target_index="1" />
-			<trigger verification="4" target_index="2" />
-		</state_index>
-		<state_index state="9" cooldown="0.3">
-			<trigger verification="3" target_index="0" />
-			<trigger verification="4" target_index="2" />
-		</state_index>
-		<state_index state="2" cooldown="2.0">
-			<trigger verification="2" target_index="1" />
-		</state_index>
-	</AI>
+		<AI type="0" debug="true">
+			<state_index state="0" cooldown="0.3">
+				<trigger verification="7" target_index="1" />
+			</state_index>
+			<state_index state="9" cooldown="0.3">
+				<trigger verification="6" target_index="0" />
+			</state_index>
+		</AI>
 </object>
 
 <object name="estatua">

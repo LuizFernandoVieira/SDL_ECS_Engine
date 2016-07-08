@@ -3,6 +3,7 @@
 #include "../include/Camera.hpp"
 #include "../include/Sprite.hpp"
 #include "../include/Game.hpp"
+#include "../include/Sound.hpp"
 /*#include "../include/TransformComponent.hpp"
 #include "../include/ColliderComponent.hpp"
 #include "../include/SpeedComponent.hpp"
@@ -28,11 +29,13 @@ void CollisionSystem::update(float dt, GameState& gameState)
 	std::map<int, ZiplineComponent*> zipline = gameState.mapZipline_;
 	std::map<int, WindComponent*> wind = gameState.mapWind_;
 	std::map<int, HealthComponent*> health = gameState.mapHealth_;
+	std::map<int, CoinComponent*> coin = gameState.mapCoin_;
 
 	collidersToRender.clear();
 
 	updateZipline(player, transform, collider, speed, oldState, state, zipline);
 	updateWind(dt, player, transform, collider, /*speed, oldState,*/ state, wind);
+	updateCoin(dt, player, gameState, transform, collider, state, coin);
 	updateTerrain(player, collisionMap, oldTransform, transform, collider, speed, state, health);
 	updateCollider(transform, collider, speed, state, health);
 
@@ -121,19 +124,16 @@ void CollisionSystem::updateTerrain(
 							correctWall(transform[col.first]->rect_, col.second->hurtbox_, terrain, speed[col.first]->speed_);
 							break;
 						case 3:
-							// if (col.first == 0) std::cout << "Floor" << std::endl;
 							correctFloorCeiling(transform[col.first]->rect_, col.second->hurtbox_, terrain, speed[col.first]->speed_);
 							break;
 						case 4:
 							correctAllSides(transform[col.first]->rect_, col.second->hurtbox_, terrain, speed[col.first]->speed_);
 							break;
 						case 5:
-							// if (col.first == 0) std::cout << "Diag up" << std::endl;
 							if (state[col.first]->state_ != State::JUMPING)
 								correctDiagonalUp(transform[col.first]->rect_, col.second->hurtbox_, terrain, speed[col.first]->speed_);
 							break;
 						case 6:
-							// if (col.first == 0) std::cout << "Diag down" << std::endl;
 							if (state[col.first]->state_ != State::JUMPING)
 								correctDiagonalDown(transform[col.first]->rect_, col.second->hurtbox_, terrain, speed[col.first]->speed_);
 							break;
@@ -147,7 +147,9 @@ void CollisionSystem::updateTerrain(
 					{
 						state[col.first]->state_ = speed[col.first]->speed_.x() == 0 ? State::IDLE : State::WALKING;
 						if (col.first == player && 
-						    ((PlayerStateComponent*)state[player])->fallTime_.get() >= Resources::MAX_SAFE_FALL_TIME)
+						    ((PlayerStateComponent*)state[player])->fallTime_.get() >= Resources::MAX_SAFE_FALL_TIME &&
+						    ( ((PlayerStateComponent*)state[player])->umbrellaState_ != UmbrellaState::OPEN
+						    	|| ((PlayerStateComponent*)state[player])->umbrellaDirection_ != UmbrellaDirection::UP ) )
 						{
 							health[player]->health_--;
 							((PlayerStateComponent*)state[player])->fallTime_.restart();
@@ -332,6 +334,33 @@ void CollisionSystem::updateWind(
 		}
 	}
 }
+
+
+void CollisionSystem::updateCoin(
+	float dt,
+	int player,
+	GameState& gameState,
+	std::map<int, TransformComponent*> transform,
+	std::map<int, ColliderComponent*> collider,
+	std::map<int, StateComponent*> state,
+	std::map<int, CoinComponent*> coin)
+{
+	for (auto& c : coin)
+	{
+ 		if (isColliding( collider[player]->hurtbox_ + Vec2(transform[player]->rect_.x(), transform[player]->rect_.y() ),
+		                 transform[c.first]->rect_,
+		                 transform[player]->rotation_,
+		                 transform[c.first]->rotation_ ))
+		{
+			gameState.deleteEntity(c.first);
+			((PlayerStateComponent*)state[player])->coinCounter_++;
+			Sound sound("../audio/character_fall.wav");
+			sound.Play();
+			break;
+		}
+	}
+}
+
 
 
 bool CollisionSystem::isColliding(const Rect& a, const Rect& b, float angleOfA, float angleOfB)

@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
-<!-- FASE UM :: CIDADE -->
 <world_info>
 	<tileset file="../img/maps/tilesetcidade1.png" />
 	<tilemap file="../map/FaseUm_tilemap.txt" />
@@ -106,18 +105,18 @@
 			<sprite state="1" umbrella_state="0" umbrella_direction="1" filename="../img/characters/player/Correndo.png" frame_count="24" frame_time="0.02" />
 			<sprite state="1" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/Correndo.png" frame_count="24" frame_time="0.02" />
 			<sprite state="1" umbrella_state="0" umbrella_direction="3" filename="../img/characters/player/Correndo.png" frame_count="24" frame_time="0.02" />
-			<sprite state="1" umbrella_state="1" umbrella_direction="0" filename="../img/characters/player/andando guarda-chuva para cima.png" frame_count="24" frame_time="0.02" />
+			<sprite state="1" umbrella_state="1" umbrella_direction="0" filename="../img/characters/player/andando.png" frame_count="24" frame_time="0.02" />
 			<sprite state="1" umbrella_state="1" umbrella_direction="1" filename="../img/characters/player/andando apontado pra frente.png" frame_count="24" frame_time="0.02" />
-			<sprite state="1" umbrella_state="1" umbrella_direction="2" filename="../img/characters/player/Correndo.png" frame_count="24" frame_time="0.02" />
+			<sprite state="1" umbrella_state="1" umbrella_direction="2" filename="../img/characters/player/andando apontado pra frente.png" frame_count="24" frame_time="0.02" />
 			<sprite state="1" umbrella_state="1" umbrella_direction="3" filename="../img/characters/player/andando apontado pra tras.png" frame_count="24" frame_time="0.02" />
-			<sprite state="2" umbrella_state="0" umbrella_direction="0" filename="../img/characters/player/jumping_front_closed.png" frame_count="23" frame_time="0.01" loop_back_frame="7" />
-			<sprite state="2" umbrella_state="0" umbrella_direction="1" filename="../img/characters/player/jumping_front_closed.png" frame_count="23" frame_time="0.01" loop_back_frame="7" />
-			<sprite state="2" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/jumping_front_closed.png" frame_count="23" frame_time="0.01" loop_back_frame="7" />
-			<sprite state="2" umbrella_state="0" umbrella_direction="3" filename="../img/characters/player/jumping_front_closed.png" frame_count="23" frame_time="0.01" loop_back_frame="7" />
-			<sprite state="2" umbrella_state="1" umbrella_direction="0" filename="../img/characters/player/pulando guarda chuvas aberto pra cima.png" frame_count="30" frame_time="0.01" loop_back_frame="7" />
-			<sprite state="2" umbrella_state="1" umbrella_direction="1" filename="../img/characters/player/Pulando guarda-chuvas aberto para frente.png" frame_count="30" frame_time="0.01" loop_back_frame="7" />
-			<sprite state="2" umbrella_state="1" umbrella_direction="2" filename="../img/characters/player/jumping_front_closed.png" frame_count="30" frame_time="0.01" loop_back_frame="7" />
-			<sprite state="2" umbrella_state="1" umbrella_direction="3" filename="../img/characters/player/Pulando guarda-chuvas aberto para tras.png" frame_count="30" frame_time="0.01" loop_back_frame="7" />
+			<sprite state="2" umbrella_state="0" umbrella_direction="0" filename="../img/characters/player/jumping_front_closed.png" frame_count="23" frame_time="0.01" />
+			<sprite state="2" umbrella_state="0" umbrella_direction="1" filename="../img/characters/player/jumping_front_closed.png" frame_count="23" frame_time="0.01" />
+			<sprite state="2" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/jumping_front_closed.png" frame_count="23" frame_time="0.01" />
+			<sprite state="2" umbrella_state="0" umbrella_direction="3" filename="../img/characters/player/jumping_front_closed.png" frame_count="23" frame_time="0.01" />
+			<sprite state="2" umbrella_state="1" umbrella_direction="0" filename="../img/characters/player/jumping_front_closed.png" frame_count="23" frame_time="0.01" />
+			<sprite state="2" umbrella_state="1" umbrella_direction="1" filename="../img/characters/player/jumping_front_closed.png" frame_count="23" frame_time="0.01" />
+			<sprite state="2" umbrella_state="1" umbrella_direction="2" filename="../img/characters/player/jumping_front_closed.png" frame_count="23" frame_time="0.01" />
+			<sprite state="2" umbrella_state="1" umbrella_direction="3" filename="../img/characters/player/jumping_front_closed.png" frame_count="23" frame_time="0.01" />
 			<sprite state="3" umbrella_state="0" umbrella_direction="0" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.01" />
 			<sprite state="3" umbrella_state="0" umbrella_direction="1" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.01" />
 			<sprite state="3" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.01" />
@@ -6478,260 +6477,5 @@
 			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO5.png" frame_count="1" frame_time="1.0" />
 		</render>
 		<state />
-	</object>
-	<object name="Zipline NAO USE" id="745" layer="2">
-		<transform>
-			<rect x="955" y="537" w="48" h="2" />
-			<scale x="41" y="1" />
-			<rotation value="11" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-		<zipline>
-			<start x="0" y="0" />
-			<end x="0" y="0" />
-		</zipline>
-	</object>
-	<object name="Zipline NAO USE" id="746" layer="2">
-		<transform>
-			<rect x="2909" y="4044" w="48" h="2" />
-			<scale x="11" y="1" />
-			<rotation value="49" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-		<zipline>
-			<start x="0" y="0" />
-			<end x="0" y="0" />
-		</zipline>
-	</object>
-	<object name="Zipline NAO USE" id="747" layer="2">
-		<transform>
-			<rect x="4166" y="3985" w="48" h="2" />
-			<scale x="19" y="1" />
-			<rotation value="23" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-		<zipline>
-			<start x="0" y="0" />
-			<end x="0" y="0" />
-		</zipline>
-	</object>
-	<object name="Zipline NAO USE" id="748" layer="2">
-		<transform>
-			<rect x="4123" y="3155" w="48" h="2" />
-			<scale x="24" y="1" />
-			<rotation value="164" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-		<zipline>
-			<start x="0" y="0" />
-			<end x="0" y="0" />
-		</zipline>
-	</object>
-	<object name="Zipline NAO USE" id="749" layer="2">
-		<transform>
-			<rect x="7147" y="1871" w="48" h="2" />
-			<scale x="20" y="1" />
-			<rotation value="174" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-		<zipline>
-			<start x="0" y="0" />
-			<end x="0" y="0" />
-		</zipline>
-	</object>
-	<object name="Zipline NAO USE" id="750" layer="2">
-		<transform>
-			<rect x="6906" y="1377" w="48" h="2" />
-			<scale x="61" y="1" />
-			<rotation value="1" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-		<zipline>
-			<start x="0" y="0" />
-			<end x="0" y="0" />
-		</zipline>
-	</object>
-	<object name="Zipline NAO USE" id="751" layer="2">
-		<transform>
-			<rect x="5954" y="2776" w="48" h="2" />
-			<scale x="14" y="1" />
-			<rotation value="174" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-		<zipline>
-			<start x="0" y="0" />
-			<end x="0" y="0" />
-		</zipline>
-	</object>
-	<object name="Zipline NAO USE" id="752" layer="2">
-		<transform>
-			<rect x="7532" y="3300" w="48" h="2" />
-			<scale x="38" y="1" />
-			<rotation value="2" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-		<zipline>
-			<start x="0" y="0" />
-			<end x="0" y="0" />
-		</zipline>
-	</object>
-	<object name="Zipline NAO USE" id="753" layer="2">
-		<transform>
-			<rect x="11561" y="3228" w="48" h="2" />
-			<scale x="19" y="1" />
-			<rotation value="22" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-		<zipline>
-			<start x="0" y="0" />
-			<end x="0" y="0" />
-		</zipline>
-	</object>
-	<object name="Zipline NAO USE" id="754" layer="2">
-		<transform>
-			<rect x="11563" y="3338" w="48" h="2" />
-			<scale x="18" y="1" />
-			<rotation value="164" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-		<zipline>
-			<start x="0" y="0" />
-			<end x="0" y="0" />
-		</zipline>
-	</object>
-	<object name="Zipline NAO USE" id="755" layer="2">
-		<transform>
-			<rect x="12618" y="3075" w="48" h="2" />
-			<scale x="21" y="1" />
-			<rotation value="-21" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-		<zipline>
-			<start x="0" y="0" />
-			<end x="0" y="0" />
-		</zipline>
-	</object>
-	<object name="Zipline NAO USE" id="756" layer="2">
-		<transform>
-			<rect x="13963" y="3035" w="48" h="2" />
-			<scale x="3" y="1" />
-			<rotation value="8" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-		<zipline>
-			<start x="0" y="0" />
-			<end x="0" y="0" />
-		</zipline>
-	</object>
-	<object name="Zipline NAO USE" id="757" layer="2">
-		<transform>
-			<rect x="13964" y="3090" w="48" h="2" />
-			<scale x="3" y="1" />
-			<rotation value="167" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-		<zipline>
-			<start x="0" y="0" />
-			<end x="0" y="0" />
-		</zipline>
-	</object>
-	<object name="Zipline NAO USE" id="758" layer="2">
-		<transform>
-			<rect x="13963" y="3145" w="48" h="2" />
-			<scale x="3" y="1" />
-			<rotation value="6" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-		<zipline>
-			<start x="0" y="0" />
-			<end x="0" y="0" />
-		</zipline>
-	</object>
-	<object name="Zipline NAO USE" id="759" layer="2">
-		<transform>
-			<rect x="13674" y="2591" w="48" h="2" />
-			<scale x="12" y="1" />
-			<rotation value="18" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-		<zipline>
-			<start x="0" y="0" />
-			<end x="0" y="0" />
-		</zipline>
-	</object>
-	<object name="Zipline NAO USE" id="760" layer="2">
-		<transform>
-			<rect x="13670" y="2663" w="48" h="2" />
-			<scale x="12" y="1" />
-			<rotation value="166" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-		<zipline>
-			<start x="0" y="0" />
-			<end x="0" y="0" />
-		</zipline>
-	</object>
-	<object name="Zipline NAO USE" id="761" layer="2">
-		<transform>
-			<rect x="14392" y="2547" w="48" h="2" />
-			<scale x="19" y="1" />
-			<rotation value="5" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-		<zipline>
-			<start x="0" y="0" />
-			<end x="0" y="0" />
-		</zipline>
 	</object>
 </world_objects>
