@@ -77,6 +77,7 @@ public:
 
 private:
 	void createParticleEmitter();
+	void createSnowParticleEmitter();
 	void deleteDeadEntities();
 
 	void setObjects(pugi::xml_node objects);
