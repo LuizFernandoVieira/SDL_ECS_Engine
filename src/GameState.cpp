@@ -221,6 +221,7 @@ void GameState::render()
 		showTriggers();
 
 	frame_->render(0,0);
+	//printf("X: %.0f\tY: %.0f\n", mapTransform_[player_]->rect_.getCenter().x(), mapTransform_[player_]->rect_.getCenter().y());
 }
 
 void GameState::pause()
