@@ -10,11 +10,7 @@
 	</layers>
 	<music>
 		<assets>
-			<layer channel="1" file="audio/umbra_test_bass.wav" />
-			<layer channel="2" file="audio/umbra_test_flute.wav" />
-			<layer channel="3" file="audio/umbra_test_piano.wav" />
-			<layer channel="4" file="audio/umbra_test_synth.wav" />
-			<layer channel="5" file="audio/umbra_test_violin.wav" />
+			<layer channel="1" file="audio/music/town.ogg" />
 		</assets>
 		<volume state="all_on">
 			<layer channel="1" value="128" />
@@ -159,9 +155,9 @@
 			<sprite state="8" umbrella_state="1" umbrella_direction="3" filename="../img/characters/player/spritemorre.png" frame_count="10" frame_time="0.04" />
 		</player_render>
 		<sound>
-			<sound state="2" filename="../audio/character_jump.wav" />
-			<sound state="8" filename="../audio/character_fall.wav" />
-			<sound state="4" filename="../audio/character_attack.wav" />
+			<sound state="2" filename="../audio/sfx/character_jump.ogg" />
+			<sound state="8" filename="../audio/sfx/character_fall.ogg" />
+			<sound state="4" filename="../audio/sfx/character_attack.ogg" />
 		</sound>
 		<collider>
 			<hurtbox x="0" y="0" w="52" h="90" />
