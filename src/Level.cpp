@@ -87,9 +87,9 @@ void Level::render(int layer)
 		}
 	}
 	
-	//tileMap_.renderLayer(layer, 0, 0);
+	tileMap_.renderLayer(layer, 0, 0);
 	
-	if (Resources::DEBUG_COLLISION && LAYER == 0)
+	if (Resources::DEBUG_COLLISION && layer == 0)
 		collisionMap_.render(0,0);
 
 	/*

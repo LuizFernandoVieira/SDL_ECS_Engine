@@ -70,6 +70,8 @@ public:
 
 	static unsigned int nextId_;
 
+	bool changeLevel_;
+
 	void deleteEntity(int id);
 
 private:
@@ -79,6 +81,8 @@ private:
 	void setObjects(pugi::xml_node objects);
 	void setTriggers(pugi::xml_node triggers);
 	void loadLevel(std::string target);
+
+	void changeLevel();
 
 	void showTriggers();
 

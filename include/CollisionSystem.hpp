@@ -23,6 +23,7 @@ private:
 
 	void updateTerrain(
 		int player,
+		GameState& gameState,
 		CollisionMap& collisionMap,
 		std::map<int, TransformComponent*> oldTransform,
 		std::map<int, TransformComponent*> transform,

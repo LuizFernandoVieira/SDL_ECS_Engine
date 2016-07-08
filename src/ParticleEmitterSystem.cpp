@@ -15,11 +15,42 @@ ParticleEmitterSystem::ParticleEmitterSystem()
 	mapR_.clear();
 }
 
+ParticleEmitterSystem::~ParticleEmitterSystem()
+{
+	std::cout << "destrutor 1" << std::endl;
+	nextId_ = 0;
+	std::cout << "destrutor 2" << std::endl;
+	mapTransform_.clear();
+	std::cout << "destrutor 3" << std::endl;
+	mapR_.clear();
+	std::cout << "destrutor 4" << std::endl;
+	mapTimer_.clear();
+	std::cout << "destrutor 5" << std::endl;
+	mapSpeed_.clear();
+	std::cout << "destrutor 6" << std::endl;
+	mapCollider_.clear();
+	std::cout << "destrutor 7" << std::endl;
+	mapT_.clear();
+	std::cout << "destrutor fim" << std::endl;
+}
+
+void ParticleEmitterSystem::destroyAll()
+{
+	nextId_ = 0;
+	mapTransform_.clear();
+	mapR_.clear();
+	mapTimer_.clear();
+	mapSpeed_.clear();
+	mapCollider_.clear();
+	mapT_.clear();
+}
+
 void ParticleEmitterSystem::update(float dt, GameState& gameState)
 {
 	CollisionMap& levelCollisionMap = gameState.getCollisionMap();
-	TransformComponent* tc = gameState.mapTransform_[gameState.particleEmitter_];
+	// TransformComponent* tc = gameState.mapTransform_[gameState.particleEmitter_];
 	EmitterComponent* ec = gameState.mapEmitter_[gameState.particleEmitter_];
+	if (ec == NULL) return;
 	TimerComponent* timerComponent = gameState.mapTimer_[gameState.particleEmitter_];
 
 	emissionRateSystem_.update(dt, timerComponent);

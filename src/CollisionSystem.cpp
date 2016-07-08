@@ -36,7 +36,7 @@ void CollisionSystem::update(float dt, GameState& gameState)
 	updateZipline(player, transform, collider, speed, oldState, state, zipline);
 	updateWind(dt, player, transform, collider, /*speed, oldState,*/ state, wind);
 	updateCoin(dt, player, gameState, transform, collider, state, coin);
-	updateTerrain(player, collisionMap, oldTransform, transform, collider, speed, state, health);
+	updateTerrain(player, gameState, collisionMap, oldTransform, transform, collider, speed, state, health);
 	updateCollider(transform, collider, speed, state, health);
 
 	updateTriggers(gameState);
@@ -79,6 +79,7 @@ void CollisionSystem::updateTriggers(GameState& gameState)
 
 void CollisionSystem::updateTerrain(
 	int player,
+	GameState& gameState,
 	CollisionMap& collisionMap,
 	std::map<int, TransformComponent*> oldTransform,
 	std::map<int, TransformComponent*> transform,
@@ -140,6 +141,9 @@ void CollisionSystem::updateTerrain(
 						case 7:
 							if (health.find(col.first) != health.end())
 								health[col.first]->health_ = 0;
+							break;
+						case 8:
+							gameState.changeLevel_ = true;
 							break;
 					}
 

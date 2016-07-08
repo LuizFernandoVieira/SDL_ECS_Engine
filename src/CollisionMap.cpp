@@ -157,6 +157,9 @@ void CollisionMap::renderSelection(int collision, Rect rect)
 		case 7:
 			file = "../img/interface/editor/colisao_morte.png";
 			break;
+		case 8:
+			file = "../img/interface/editor/colisao_vitoria.png";
+			break;
 	}
 	std::shared_ptr<SDL_Texture> texture = Resources::GetImage(file.c_str());
 	SDL_Rect clipRect, dstRect;

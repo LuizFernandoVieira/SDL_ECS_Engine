@@ -1,16 +1,12 @@
 <?xml version="1.0"?>
-<!-- FASE UM :: CIDADE -->
 <world_info>
 	<tileset file="../img/maps/tilesetcidade1.png" />
 	<tilemap file="../map/FaseUm_tilemap.txt" />
 	<collision_map file="../map/FaseUm_colmap.txt" />
 	<layers>
-		<screen main="false" tiled="false" file="../img/screen_layers/cidade_1.png" 
-		parallax_x="0.15" parallax_y="0" scale_x="0.75" scale_y="0.75" offset_x="900" offset_y="-300" />
-		<screen main="false" tiled="false" file="../img/screen_layers/cidade_2.png" 
-			parallax_x="0.1" parallax_y="0" scale_x="0.75" scale_y="0.5" offset_x="0" offset_y="0" />
-		<screen main="false" tiled="false" file="../img/screen_layers/cidade_3.png" 
-			parallax_x="0" parallax_y="0" scale_x="1.0" scale_y="1.0" offset_x="0" offset_y="0"/>
+		<screen main="false" tiled="false" file="../img/screen_layers/cidade_1.png" parallax_x="0.15" parallax_y="0" scale_x="0.75" scale_y="0.75" offset_x="900" offset_y="-300" />
+		<screen main="false" tiled="false" file="../img/screen_layers/cidade_2.png" parallax_x="0.1" parallax_y="0" scale_x="0.75" scale_y="0.5" offset_x="0" offset_y="0" />
+		<screen main="false" tiled="false" file="../img/screen_layers/cidade_3.png" parallax_x="0" parallax_y="0" scale_x="1.0" scale_y="1.0" offset_x="0" offset_y="0" />
 	</layers>
 	<music>
 		<assets>
@@ -6783,6 +6779,17 @@
 			<sprite state="0" filename="../img/moeda.png" frame_count="5" frame_time="0.08" />
 		</render>
 		<coin />
+		<state />
+	</object>
+	<object name="Toldo 1" id="766" layer="2">
+		<transform>
+			<rect x="6768" y="1488" w="10" h="10" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/objetos/toldos - puzzle da artista de rua/toldo.png" frame_count="1" frame_time="1.0" />
+		</render>
 		<state />
 	</object>
 </world_objects>

@@ -24,21 +24,22 @@
 #include "../include/AISystem.hpp"
 #include "../include/ParticleEmitterSystem.hpp"
 
-//#define LEVEL_1_FILE "../map/FaseUm.xml"
-#define LEVEL_1_FILE "../map/FaseDois.xml"
+#define LEVEL_1_FILE "../map/FaseUm.xml"
+#define LEVEL_2_FILE "../map/FaseDois.xml"
 
 unsigned int GameState::nextId_ = 0;
 std::map<int, std::map<int, RenderComponent*>> GameState::mapRender_;
 
 GameState::GameState()
-: music()
+: music(), changeLevel_(false)
 {
 	StaticSprite loadScreen("../img/loading.png");
 	loadScreen.render(0,0);
 	SDL_RenderPresent(Game::getInstance().getRenderer());
 	level_ = nullptr;
 
-	try{
+	try
+	{
 		mapRender_[0] = std::map<int, RenderComponent*>();
 		mapRender_[1] = std::map<int, RenderComponent*>();
 		mapRender_[2] = std::map<int, RenderComponent*>();
@@ -102,6 +103,9 @@ GameState::~GameState()
 	mapRender_[4].clear();
 	mapRender_[5].clear();
 
+	checkpoints.clear();
+	musicTriggers.clear();
+
 	systems_.clear();
 
 	Camera::unfollow();
@@ -124,9 +128,11 @@ void GameState::update(float dt)
 
 	music.Update();
 
+	std::cout << "=======" << std::endl;
 	for (auto& system : systems_)
 	{
 		system->update(dt, *this);
+		std::cout << "a" << std::endl;
 	}
 
 	Camera::update(dt);
@@ -151,6 +157,9 @@ void GameState::update(float dt)
 		std::cout << "DYING" << std::endl;
 	else if (mapState_[player_]->state_ == State::DEAD)
 		std::cout << "DEAD" << std::endl;*/
+
+	if (changeLevel_ || InputHandler::getInstance().keyPress('n'))
+		changeLevel();
 
 	if (InputHandler::getInstance().keyPress(ESCAPE_KEY)) {
 		pop_ = true;
@@ -209,12 +218,14 @@ void GameState::createParticleEmitter()
 	mapTimer_.emplace(particleEmitter_, new TimerComponent());
 }
 
-void GameState::loadLevel(std::string target){
+void GameState::loadLevel(std::string target)
+{
 	pugi::xml_document 	stage_file;
 	pugi::xml_parse_result	p_res;
 
 	p_res = stage_file.load_file(target.c_str());
-	if (p_res.status){
+	if (p_res.status)
+	{
 		std::cout << "Error Reading Level File: " << p_res.description() << std::endl;
 		std::cout << "\tLoad result: " << p_res.description() << std::endl;
 		std::cout << "\tStatus code: " << p_res.status << std::endl;
@@ -223,8 +234,6 @@ void GameState::loadLevel(std::string target){
 	}
 	else
 	{
-		if (level_ != nullptr)
-			delete level_;
 		level_ = new Level(stage_file.child("world_info"));
 
 		setTriggers(stage_file.child("world_info").child("triggers"));
@@ -579,4 +588,54 @@ void GameState::showTriggers(){
 
 		SDL_RenderFillRect(context,	&drawRect_);
 	}
+}
+
+void GameState::changeLevel()
+{
+	changeLevel_ = false;
+
+	StaticSprite loadScreen("../img/loading.png");
+	loadScreen.render(0,0);
+	SDL_RenderPresent(Game::getInstance().getRenderer());
+
+	delete level_;
+	nextId_ = 0;
+
+	mapTransform_.clear();
+	mapState_.clear();
+	mapPhysics_.clear();
+	mapCollider_.clear();
+	mapSpeed_.clear();
+	mapEmitter_.clear();
+	mapTimer_.clear();
+	mapZipline_.clear();
+	mapSound_.clear();
+	mapHealth_.clear();
+	mapWind_.clear();
+	oldTransform_.clear();
+	oldState_.clear();
+	mapAI_.clear();
+	mapCoin_.clear();
+
+	mapRender_[0].clear();
+	mapRender_[1].clear();
+	mapRender_[2].clear();
+	mapRender_[3].clear();
+	mapRender_[4].clear();
+	mapRender_[5].clear();
+
+	checkpoints.clear();
+	musicTriggers.clear();
+
+	Camera::unfollow();
+	Camera::pos_ = Vec2(0,0);
+
+	loadLevel(LEVEL_2_FILE);
+
+	systems_.erase(systems_.begin() + 10);
+	systems_.emplace_back(new ParticleEmitterSystem());
+
+	createParticleEmitter();
+
+	Camera::follow(mapTransform_[player_]);
 }

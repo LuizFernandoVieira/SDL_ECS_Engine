@@ -18,10 +18,12 @@ class ParticleEmitterSystem : public System
 {
 public:
 	ParticleEmitterSystem();
+	~ParticleEmitterSystem();
 	void update(float dt, GameState& gameState);
 	void render();
 	void destroyParticleNow(int particle);
 	void destroyParticle(int particle);
+	void destroyAll();
 private:
 	static unsigned int nextId_;
 
