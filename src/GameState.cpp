@@ -240,7 +240,17 @@ void GameState::createParticleEmitter()
 	nextId_++;
 
 	mapTransform_.emplace(particleEmitter_, new TransformComponent(Rect(100, 0, 32, 32)));
-	mapEmitter_.emplace(particleEmitter_, new EmitterComponent(0.1));
+	mapEmitter_.emplace(particleEmitter_, new EmitterComponent(0.1, "../img/waterdrop.png", 1024, 10));
+	mapTimer_.emplace(particleEmitter_, new TimerComponent());
+}
+
+void GameState::createSnowParticleEmitter()
+{
+	particleEmitter_ = nextId_;
+	nextId_++;
+
+	mapTransform_.emplace(particleEmitter_, new TransformComponent(Rect(100, 0, 32, 32)));
+	mapEmitter_.emplace(particleEmitter_, new EmitterComponent(0.3, "../img/neve.png", 1024, 1));
 	mapTimer_.emplace(particleEmitter_, new TimerComponent());
 }
 
@@ -439,10 +449,15 @@ void GameState::setObjects(pugi::xml_node objects)
 		}
 
 		// EMITTER
-		if ((aux = obj.child("emitter")))
-		{
-			mapEmitter_.emplace(nextId_, new EmitterComponent(aux.attribute("emission_rate").as_float()));
-		}
+		// if ((aux = obj.child("emitter")))
+		// {
+		// 	mapEmitter_.emplace(nextId_, new EmitterComponent(
+		// 		aux.attribute("emission_rate").as_float(),
+		// 		aux.attribute("particle_path").value()
+		// 		aux.attribute("x_width").as_int()
+		// 		aux.attribute("y_speed").as_int()
+		// 	);
+		// }
 
 		// TIMER
 		if ((aux = obj.child("timer")))
@@ -660,9 +675,9 @@ void GameState::changeLevel()
 	loadLevel(LEVEL_2_FILE);
 
 	systems_.erase(systems_.begin() + 10);
-	systems_.emplace_back(new ParticleEmitterSystem());
 
-	createParticleEmitter();
+	systems_.emplace_back(new ParticleEmitterSystem());
+	createSnowParticleEmitter();
 
 	Camera::follow(mapTransform_[player_]);
 }

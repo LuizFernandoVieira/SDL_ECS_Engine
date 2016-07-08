@@ -41,6 +41,7 @@ void ParticleEmitterSystem::update(float dt, GameState& gameState)
 {
 	CollisionMap& levelCollisionMap = gameState.getCollisionMap();
 	// TransformComponent* tc = gameState.mapTransform_[gameState.particleEmitter_];
+
 	EmitterComponent* ec = gameState.mapEmitter_[gameState.particleEmitter_];
 	if (ec == NULL) return;
 	TimerComponent* timerComponent = gameState.mapTimer_[gameState.particleEmitter_];
@@ -55,18 +56,18 @@ void ParticleEmitterSystem::update(float dt, GameState& gameState)
 			int particle_ = nextId_;
 			nextId_++;
 
-			int xRand = rand() % (1024*2);
+			int xRand = rand() % (ec->xWidth_*2);
 			mapTransform_.emplace(particle_, new TransformComponent(Rect(Camera::pos_.x() + xRand - 512, 0, 16, 16)));
 
 			// Exemplo soh pra testar, nao esquecer de mudar depois
 			std::unordered_map<State, Sprite> particleSprite;
-			particleSprite.emplace(State::IDLE, Sprite("../img/waterdrop.png", 1, 0.1));
+			particleSprite.emplace(State::IDLE, Sprite(ec->particlePath_.c_str(), 1, 0.1));
 			mapR_.emplace(particle_, new RenderComponent(particleSprite));
 
 			mapTimer_.emplace(particle_, new TimerComponent());
 
 			int yAux = rand() % 10;
-			mapSpeed_.emplace(particle_, new SpeedComponent(Vec2(0, yAux+10)));
+			mapSpeed_.emplace(particle_, new SpeedComponent(Vec2(0, yAux+ec->ySpeed_)));
 
 			mapCollider_.emplace(particle_, new ColliderComponent(
 				Rect(
