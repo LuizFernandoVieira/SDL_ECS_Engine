@@ -122,9 +122,9 @@
 			<sprite state="3" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.02" />
 			<sprite state="3" umbrella_state="0" umbrella_direction="3" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.02" />
 			<sprite state="3" umbrella_state="1" umbrella_direction="0" filename="../img/characters/player/caindo guarda chuvas aberto.png" frame_count="10" frame_time="0.02" />
-			<sprite state="3" umbrella_state="1" umbrella_direction="1" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.02" />
+			<sprite state="3" umbrella_state="1" umbrella_direction="1" filename="../img/characters/player/CaindoFRENTE.png" frame_count="10" frame_time="0.02" />
 			<sprite state="3" umbrella_state="1" umbrella_direction="2" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.02" />
-			<sprite state="3" umbrella_state="1" umbrella_direction="3" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.02" />
+			<sprite state="3" umbrella_state="1" umbrella_direction="3" filename="../img/characters/player/CaindoTRAS.png" frame_count="10" frame_time="0.02" />
 			<sprite state="4" umbrella_state="0" umbrella_direction="0" filename="../img/characters/player/attacking_front_closed.png" frame_count="12" frame_time="0.02" />
 			<sprite state="4" umbrella_state="0" umbrella_direction="1" filename="../img/characters/player/attacking_front_closed.png" frame_count="12" frame_time="0.02" />
 			<sprite state="4" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/attacking_front_closed.png" frame_count="12" frame_time="0.02" />
@@ -6789,6 +6789,17 @@
 		</transform>
 		<render>
 			<sprite state="0" filename="../img/objetos/toldos - puzzle da artista de rua/toldo.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+	</object>
+	<object name="Logo Umbra" id="767" layer="0">
+		<transform>
+			<rect x="4201" y="1066" w="262" h="153" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/objetos/logo.png" frame_count="1" frame_time="1.0" />
 		</render>
 		<state />
 	</object>
