@@ -1,6 +1,7 @@
 Fazendo:
 
 - Macaco;
+- Molduras;
 - Controles guarda chuva;
 - Fullscreen;
 

@@ -6733,4 +6733,52 @@
 			<end x="0" y="0" />
 		</zipline>
 	</object>
+	<object name="Coin" id="762" layer="2">
+		<transform>
+			<rect x="692" y="548" w="48" h="48" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/moeda.png" frame_count="5" frame_time="0.08" />
+		</render>
+		<coin />
+		<state />
+	</object>
+	<object name="Coin" id="763" layer="2">
+		<transform>
+			<rect x="743" y="546" w="48" h="48" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/moeda.png" frame_count="5" frame_time="0.08" />
+		</render>
+		<coin />
+		<state />
+	</object>
+	<object name="Coin" id="764" layer="2">
+		<transform>
+			<rect x="808" y="554" w="48" h="48" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/moeda.png" frame_count="5" frame_time="0.08" />
+		</render>
+		<coin />
+		<state />
+	</object>
+	<object name="Coin" id="765" layer="2">
+		<transform>
+			<rect x="862" y="554" w="48" h="48" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/moeda.png" frame_count="5" frame_time="0.08" />
+		</render>
+		<coin />
+		<state />
+	</object>
 </world_objects>

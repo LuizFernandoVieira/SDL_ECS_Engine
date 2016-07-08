@@ -873,7 +873,7 @@ WIND DIRECTIOM
 		<rotation value="0" />
 	</transform>
 	<render>
-		<sprite state="0" filename="../img/coin_32x32.png" frame_count="4" frame_time="0.1" />
+		<sprite state="0" filename="../img/moeda.png" frame_count="5" frame_time="0.05" />
 	</render>
 	<coin />
 	<state />
