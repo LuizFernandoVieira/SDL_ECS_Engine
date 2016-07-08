@@ -145,18 +145,28 @@ void Game::initWindow(const char* name, int width, int height)
 		SDL_WINDOWPOS_CENTERED,
 		/*mode.w*/width, /*mode.h*/height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE
 	);
+
+	// Resources::WINDOW_WIDTH = mode.w;
+	// Resources::WINDOW_HEIGHT = mode.h;
+
+	// Resources::GLOBAL_SCALE_X = mode.w / 1024;
+	// Resources::GLOBAL_SCALE_Y = mode.h / 600;
+
 	if (window_ == NULL) {
 		std::cerr << "Erro na criacao da janela do jogo" <<
 			std::endl << SDL_GetError() << std::endl;
 		exit(1);
 	}
 
-	// if (SDL_SetWindowFullscreen(window_, SDL_WINDOW_FULLSCREEN) != 0) {
-	// 	std::cerr << "Erro na criacao da janela do jogo" <<
-	// 		std::endl << SDL_GetError() << std::endl;
-	// 	exit(1);
-	// }
+/*	if (SDL_SetWindowFullscreen(window_, SDL_WINDOW_FULLSCREEN) != 0) {
+		std::cerr << "Erro na criacao da janela do jogo" <<
+			std::endl << SDL_GetError() << std::endl;
+		exit(1);
+	}*/
 	// SDL_MaximizeWindow(window_);
+	// SDL_RenderSetLogicalSize(renderer_, Resources::WINDOW_WIDTH, Resources::WINDOW_HEIGHT);
+
+	// SDL_RenderSetScale(renderer_, Resources::GLOBAL_SCALE_X, Resources::GLOBAL_SCALE_Y);
 }
 
 void Game::initRenderer()

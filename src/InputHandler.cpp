@@ -272,17 +272,17 @@ bool InputHandler::isGamePadDown(int button)
 
 int InputHandler::getMouseX()
 {
-	return mouseX;
+	return mouseX/* / Resources::GLOBAL_SCALE_X*/;
 }
 
 int InputHandler::getMouseY()
 {
-	return mouseY;
+	return mouseY/* / Resources::GLOBAL_SCALE_Y*/;
 }
 
 Vec2 InputHandler::getMouse()
 {
-	return Vec2(mouseX, mouseY);
+	return Vec2(mouseX/* / Resources::GLOBAL_SCALE_X*/, mouseY/* / Resources::GLOBAL_SCALE_Y*/);
 }
 
 bool InputHandler::quitRequested()

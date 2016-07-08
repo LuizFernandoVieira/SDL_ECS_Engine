@@ -39,8 +39,8 @@ void ImageLayer::Render(){
 
 	dstRect.x = offset_x - (Camera::pos_.x() * parallax_x);
 	dstRect.y = offset_y - (Camera::pos_.y() * parallax_y);
-	dstRect.w = clipRect_.w * scale_x;
-	dstRect.h = clipRect_.h * scale_y;
+	dstRect.w = clipRect_.w * scale_x;// * Resources::GLOBAL_SCALE_X;
+	dstRect.h = clipRect_.h * scale_y;// * Resources::GLOBAL_SCALE_Y;
 
 	SDL_RenderCopy ( Game::getInstance().getRenderer(), texture_.get(), &clipRect_, &dstRect);
 }

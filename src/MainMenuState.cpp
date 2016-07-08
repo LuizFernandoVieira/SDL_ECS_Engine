@@ -45,7 +45,11 @@ void MainMenuState::update(float dt)
 		}
 	}
 
-	if (input.quitRequested())
+	if (input.keyPress(SPACE_BAR))
+		Game::getInstance().push(new GameState());
+
+
+	if (input.quitRequested() || input.keyPress(ESCAPE_KEY))
 	{
 		quit_ = true;
 	}

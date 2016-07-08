@@ -71,8 +71,8 @@ void Sprite::render(int x, int y, float angle, bool flip)
 
 	dstRect.x = x - Camera::pos_.x();
 	dstRect.y = y - Camera::pos_.y();
-	dstRect.w = clipRect_.w * scaleX_;
-	dstRect.h = clipRect_.h * scaleY_;
+	dstRect.w = clipRect_.w * scaleX_;// * Resources::GLOBAL_SCALE_X;
+	dstRect.h = clipRect_.h * scaleY_;// * Resources::GLOBAL_SCALE_Y;
 
 /*	SDL_Point rotPoint;
 	rotPoint.x = x;

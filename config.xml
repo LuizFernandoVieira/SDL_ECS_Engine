@@ -14,7 +14,7 @@
 
 	<debug>
 		<resources show="false"/>
-		<collision show="true"/>
+		<collision show="false"/>
 		<triggers show="false"/>
 		<ai show="false"/>
 	</debug>

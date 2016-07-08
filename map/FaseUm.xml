@@ -5,9 +5,12 @@
 	<tilemap file="../map/FaseUm_tilemap.txt" />
 	<collision_map file="../map/FaseUm_colmap.txt" />
 	<layers>
-		<screen main="false" tiled="false" file="../img/screen_layers/cidade_1.png" parallax_x="0.15" parallax_y="0" scale_x="0.75" scale_y="0.75" offset_x="900" offset_y="-300" />
-		<screen main="false" tiled="false" file="../img/screen_layers/cidade_2.png" parallax_x="0.1" parallax_y="0" scale_x="0.75" scale_y="0.5" offset_x="0" offset_y="0" />
-		<screen main="false" tiled="false" file="../img/screen_layers/cidade_3.png" parallax_x="0" parallax_y="0" />
+		<screen main="false" tiled="false" file="../img/screen_layers/cidade_1.png" 
+		parallax_x="0.15" parallax_y="0" scale_x="0.75" scale_y="0.75" offset_x="900" offset_y="-300" />
+		<screen main="false" tiled="false" file="../img/screen_layers/cidade_2.png" 
+			parallax_x="0.1" parallax_y="0" scale_x="0.75" scale_y="0.5" offset_x="0" offset_y="0" />
+		<screen main="false" tiled="false" file="../img/screen_layers/cidade_3.png" 
+			parallax_x="0" parallax_y="0" scale_x="1.0" scale_y="1.0" offset_x="0" offset_y="0"/>
 	</layers>
 	<music>
 		<assets>
@@ -118,14 +121,14 @@
 			<sprite state="2" umbrella_state="1" umbrella_direction="1" filename="../img/characters/player/Pulando guarda-chuvas aberto para frente.png" frame_count="30" frame_time="0.01" loop_back_frame="7" />
 			<sprite state="2" umbrella_state="1" umbrella_direction="2" filename="../img/characters/player/jumping_front_closed.png" frame_count="30" frame_time="0.01" loop_back_frame="7" />
 			<sprite state="2" umbrella_state="1" umbrella_direction="3" filename="../img/characters/player/Pulando guarda-chuvas aberto para tras.png" frame_count="30" frame_time="0.01" loop_back_frame="7" />
-			<sprite state="3" umbrella_state="0" umbrella_direction="0" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.01" />
-			<sprite state="3" umbrella_state="0" umbrella_direction="1" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.01" />
-			<sprite state="3" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.01" />
-			<sprite state="3" umbrella_state="0" umbrella_direction="3" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.01" />
-			<sprite state="3" umbrella_state="1" umbrella_direction="0" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.01" />
-			<sprite state="3" umbrella_state="1" umbrella_direction="1" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.01" />
-			<sprite state="3" umbrella_state="1" umbrella_direction="2" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.01" />
-			<sprite state="3" umbrella_state="1" umbrella_direction="3" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.01" />
+			<sprite state="3" umbrella_state="0" umbrella_direction="0" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.02" />
+			<sprite state="3" umbrella_state="0" umbrella_direction="1" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.02" />
+			<sprite state="3" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.02" />
+			<sprite state="3" umbrella_state="0" umbrella_direction="3" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.02" />
+			<sprite state="3" umbrella_state="1" umbrella_direction="0" filename="../img/characters/player/caindo guarda chuvas aberto.png" frame_count="10" frame_time="0.02" />
+			<sprite state="3" umbrella_state="1" umbrella_direction="1" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.02" />
+			<sprite state="3" umbrella_state="1" umbrella_direction="2" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.02" />
+			<sprite state="3" umbrella_state="1" umbrella_direction="3" filename="../img/characters/player/Caindo.png" frame_count="20" frame_time="0.02" />
 			<sprite state="4" umbrella_state="0" umbrella_direction="0" filename="../img/characters/player/attacking_front_closed.png" frame_count="12" frame_time="0.02" />
 			<sprite state="4" umbrella_state="0" umbrella_direction="1" filename="../img/characters/player/attacking_front_closed.png" frame_count="12" frame_time="0.02" />
 			<sprite state="4" umbrella_state="0" umbrella_direction="2" filename="../img/characters/player/attacking_front_closed.png" frame_count="12" frame_time="0.02" />

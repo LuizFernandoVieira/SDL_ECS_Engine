@@ -21,6 +21,9 @@ float Resources::PLAYER_ZIPLINE_SPEED  = 300;
 float Resources::DYING_TIME            = 3; // seconds
 float Resources::MAX_SAFE_FALL_TIME    = 2; // seconds
 
+int Resources::GLOBAL_SCALE_X          = 0;
+int Resources::GLOBAL_SCALE_Y          = 0;
+
 int Resources::MAP_WIDTH               = 0;
 int Resources::MAP_HEIGHT              = 0;
 

@@ -34,6 +34,9 @@ public:
 	static int TILE_WIDTH;
 	static int TILE_HEIGHT;
 
+	static int GLOBAL_SCALE_X;
+	static int GLOBAL_SCALE_Y;
+
 	static int GRAVITY;
 
 	static float PLAYER_WALK_SPEED;
