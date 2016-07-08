@@ -21,7 +21,9 @@ private:
 		DEAD,
 		FOLLOW,
 		BLOWING,
-		SUCKING
+		SUCKING,
+		MOVE_RIGHT,
+		MOVE_LEFT
 	};
 
 	class AIState{

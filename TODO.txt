@@ -1,6 +1,5 @@
 Fazendo:
 
-- Macaco;
 - Fullscreen;
 
 

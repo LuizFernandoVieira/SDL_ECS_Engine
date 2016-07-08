@@ -179,7 +179,9 @@ void AISystem::update(float dt, GameState& gameState)
 			DEAD,		//8
 			FOLLOW		//9
 			BLOWING,	//10
-			SUCKING		//11
+			SUCKING,	//11
+			MOVE_RIGHT, //12
+			MOVE_LEFT	//13
 		};*/
 			//IDLE
 			case 0:
@@ -191,9 +193,10 @@ void AISystem::update(float dt, GameState& gameState)
 				stateComp->state_ = State::IDLE;
 				break;
 
-			//WALK
+			//WALK (migue idle 2)
 			case 1:
-
+				speedComp->speed_.x(0);
+				stateComp->state_ = State::IDLE;
 				break;
 
 			//JUMP
@@ -277,6 +280,20 @@ void AISystem::update(float dt, GameState& gameState)
 					ai.second->action_target = windId;
 					stateComp->state_ = State::IDLE;
 				}
+				break;
+
+			// MOVE_RIGHT
+			case 12:
+				speedComp->speed_.x( 250 );
+				stateComp->state_ = State::WALKING;
+				stateComp->facingRight_ = true;
+				break;
+
+			// MOVE_LEFT
+			case 13:
+				speedComp->speed_.x( -250 );
+				stateComp->state_ = State::WALKING;
+				stateComp->facingRight_ = false;
 				break;
 
 			default:
