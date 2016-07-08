@@ -68,7 +68,7 @@ void ParticleEmitterSystem::update(float dt, GameState& gameState)
 
 			// Exemplo soh pra testar, nao esquecer de mudar depois
 			std::unordered_map<State, Sprite> particleSprite;
-			particleSprite.emplace(State::IDLE, Sprite("../img/waterdrop.png", 1, 0.1));
+			particleSprite.emplace(State::IDLE, Sprite("../img/waterdrop.png", 1, 0.1, 2));
 			mapR_.emplace(particle_, new RenderComponent(particleSprite));
 
 			mapTimer_.emplace(particle_, new TimerComponent());

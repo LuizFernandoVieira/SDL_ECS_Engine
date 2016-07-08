@@ -128,11 +128,9 @@ void GameState::update(float dt)
 
 	music.Update();
 
-	std::cout << "=======" << std::endl;
 	for (auto& system : systems_)
 	{
 		system->update(dt, *this);
-		std::cout << "a" << std::endl;
 	}
 
 	Camera::update(dt);

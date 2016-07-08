@@ -2,7 +2,7 @@ Fazendo:
 
 - Macaco;
 - Molduras;
-- Controles guarda chuva;
+- Imagem vento;
 - Fullscreen;
 
 
