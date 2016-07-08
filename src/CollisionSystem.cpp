@@ -269,10 +269,10 @@ void CollisionSystem::updateZipline(
 			break;
 		}
 	}
-/*	if (oldState[player]->state_ == State::ZIPLINE && !isCollidingZip)
+	if (state[player]->state_ == State::ZIPLINE && !isCollidingZip)
 	{
 		state[player]->state_ = State::FALLING;
-	}*/
+	}
 }
 
 
