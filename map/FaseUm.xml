@@ -172,127 +172,6 @@
 		<health value="1" />
 		<physics gravity_scale="1.0" />
 	</object>
-	<object name="Lampada 4" id="1" layer="2">
-		<transform>
-			<rect x="2878" y="722" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes chao/lampada4.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Janela O 3" id="2" layer="2">
-		<transform>
-			<rect x="2832" y="1007" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO3.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Janela O 3" id="20" layer="2">
-		<transform>
-			<rect x="2833" y="1682" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO3.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Lampada 2" id="40" layer="1">
-		<transform>
-			<rect x="3168" y="1825" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes chao/lampada2.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Lampada 2" id="41" layer="1">
-		<transform>
-			<rect x="3430" y="2018" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes chao/lampada2.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Lampada 2" id="42" layer="1">
-		<transform>
-			<rect x="2138" y="2162" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes chao/lampada2.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Lampada 1" id="43" layer="1">
-		<transform>
-			<rect x="2465" y="2067" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes chao/lampada1.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Lampada 2" id="44" layer="1">
-		<transform>
-			<rect x="2161" y="2834" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes chao/lampada2.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Lampada 2" id="45" layer="1">
-		<transform>
-			<rect x="2207" y="3025" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes chao/lampada2.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Lampada 3" id="46" layer="1">
-		<transform>
-			<rect x="1760" y="4084" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes chao/lampada3.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Lampada 3" id="48" layer="1">
-		<transform>
-			<rect x="1278" y="4083" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes chao/lampada3.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
 	<object name="Lampada 3" id="49" layer="1">
 		<transform>
 			<rect x="2240" y="4082" w="10" h="10" />
@@ -2438,160 +2317,6 @@
 		</render>
 		<state />
 	</object>
-	<object name="Janela O 2" id="266" layer="1">
-		<transform>
-			<rect x="6286" y="3365" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO2.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Janela O 2" id="267" layer="1">
-		<transform>
-			<rect x="6175" y="3370" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO2.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Janela O 2" id="268" layer="1">
-		<transform>
-			<rect x="6404" y="3364" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO2.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Janela O 2" id="269" layer="1">
-		<transform>
-			<rect x="6285" y="3507" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO2.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Janela O 2" id="270" layer="1">
-		<transform>
-			<rect x="6175" y="3508" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO2.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Janela O 2" id="271" layer="1">
-		<transform>
-			<rect x="6402" y="3507" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO2.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Janela O 2" id="272" layer="1">
-		<transform>
-			<rect x="6523" y="3460" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO2.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Janela O 2" id="273" layer="1">
-		<transform>
-			<rect x="6719" y="3458" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO2.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Janela O 2" id="274" layer="1">
-		<transform>
-			<rect x="6962" y="3364" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO2.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Janela O 2" id="275" layer="1">
-		<transform>
-			<rect x="6958" y="3504" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO2.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Janela O 2" id="276" layer="1">
-		<transform>
-			<rect x="7079" y="3363" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO2.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Janela O 2" id="277" layer="1">
-		<transform>
-			<rect x="7078" y="3505" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO2.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Janela O 2" id="278" layer="1">
-		<transform>
-			<rect x="6841" y="3362" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO2.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Janela O 2" id="279" layer="1">
-		<transform>
-			<rect x="6841" y="3511" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO2.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
 	<object name="Porta 8" id="280" layer="3">
 		<transform>
 			<rect x="6599" y="3461" w="10" h="10" />
@@ -2614,50 +2339,6 @@
 		</render>
 		<state />
 	</object>
-	<object name="Lampada 3" id="282" layer="1">
-		<transform>
-			<rect x="6709" y="3409" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes chao/lampada3.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Lampada 3" id="283" layer="1">
-		<transform>
-			<rect x="6370" y="3418" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes chao/lampada3.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Lampada 3" id="284" layer="1">
-		<transform>
-			<rect x="7018" y="3411" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes chao/lampada3.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Lampada 3" id="285" layer="1">
-		<transform>
-			<rect x="6059" y="3413" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes chao/lampada3.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
 	<object name="Lampada 2" id="286" layer="1">
 		<transform>
 			<rect x="6437" y="3698" w="10" h="10" />
@@ -2677,28 +2358,6 @@
 		</transform>
 		<render>
 			<sprite state="0" filename="../img/objetos/decoracoes chao/lampada2.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Janela O 9" id="288" layer="1">
-		<transform>
-			<rect x="7101" y="3165" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO9.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Janela O 9" id="289" layer="1">
-		<transform>
-			<rect x="7252" y="3356" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO9.png" frame_count="1" frame_time="1.0" />
 		</render>
 		<state />
 	</object>
@@ -4726,17 +4385,6 @@
 		</render>
 		<state />
 	</object>
-	<object name="Porta 3" id="535" layer="1">
-		<transform>
-			<rect x="13399" y="3312" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes de parede/P3.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
 	<object name="Porta 1" id="537" layer="3">
 		<transform>
 			<rect x="12668" y="3698" w="10" h="10" />
@@ -6445,94 +6093,6 @@
 		</render>
 		<state />
 	</object>
-	<object name="Porta 7" id="701" layer="1">
-		<transform>
-			<rect x="8593" y="3988" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes de parede/P7.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Janela O 9" id="702" layer="1">
-		<transform>
-			<rect x="8545" y="3977" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO9.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Janela O 9" id="703" layer="1">
-		<transform>
-			<rect x="8475" y="3930" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO9.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Janela O 9" id="704" layer="1">
-		<transform>
-			<rect x="8683" y="3972" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO9.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Janela O 9" id="705" layer="1">
-		<transform>
-			<rect x="8759" y="3897" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO9.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Janela O 9" id="706" layer="1">
-		<transform>
-			<rect x="8684" y="3800" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO9.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Janela O 9" id="708" layer="1">
-		<transform>
-			<rect x="8546" y="3796" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO9.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
-	<object name="Janela O 9" id="709" layer="1">
-		<transform>
-			<rect x="8618" y="3678" w="10" h="10" />
-			<scale x="1" y="1" />
-			<rotation value="0" />
-		</transform>
-		<render>
-			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO9.png" frame_count="1" frame_time="1.0" />
-		</render>
-		<state />
-	</object>
 	<object name="Janela O 9" id="710" layer="1">
 		<transform>
 			<rect x="8550" y="3120" w="10" h="10" />
@@ -6555,40 +6115,622 @@
 		</render>
 		<state />
 	</object>
-	<object name="Coin" id="712" layer="2">
+	<object name="Porta 4" id="712" layer="2">
 		<transform>
-			<rect x="606" y="549" w="48" h="48" />
+			<rect x="8593" y="3985" w="10" h="10" />
 			<scale x="1" y="1" />
 			<rotation value="0" />
 		</transform>
 		<render>
-			<sprite state="0" filename="../img/coin_32x32.png" frame_count="4" frame_time="0.1" />
+			<sprite state="0" filename="../img/objetos/decoracoes de parede/P4.png" frame_count="1" frame_time="1.0" />
 		</render>
-		<coin />
 		<state />
 	</object>
-	<object name="Coin" id="713" layer="2">
+	<object name="Janela O 7" id="713" layer="2">
 		<transform>
-			<rect x="690" y="549" w="48" h="48" />
+			<rect x="8546" y="3971" w="10" h="10" />
 			<scale x="1" y="1" />
 			<rotation value="0" />
 		</transform>
 		<render>
-			<sprite state="0" filename="../img/coin_32x32.png" frame_count="4" frame_time="0.1" />
+			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO7.png" frame_count="1" frame_time="1.0" />
 		</render>
-		<coin />
 		<state />
 	</object>
-	<object name="Coin" id="714" layer="2">
+	<object name="Janela O 7" id="714" layer="2">
 		<transform>
-			<rect x="798" y="552" w="48" h="48" />
+			<rect x="8683" y="3970" w="10" h="10" />
 			<scale x="1" y="1" />
 			<rotation value="0" />
 		</transform>
 		<render>
-			<sprite state="0" filename="../img/coin_32x32.png" frame_count="4" frame_time="0.1" />
+			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO7.png" frame_count="1" frame_time="1.0" />
 		</render>
-		<coin />
 		<state />
+	</object>
+	<object name="Janela O 7" id="715" layer="2">
+		<transform>
+			<rect x="8682" y="3793" w="10" h="10" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO7.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+	</object>
+	<object name="Janela O 7" id="716" layer="2">
+		<transform>
+			<rect x="8547" y="3793" w="10" h="10" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO7.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+	</object>
+	<object name="Janela O 7" id="717" layer="2">
+		<transform>
+			<rect x="8546" y="3623" w="10" h="10" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO7.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+	</object>
+	<object name="Janela O 7" id="718" layer="2">
+		<transform>
+			<rect x="8682" y="3620" w="10" h="10" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO7.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+	</object>
+	<object name="Janela O 7" id="719" layer="2">
+		<transform>
+			<rect x="8615" y="3705" w="10" h="10" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO7.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+	</object>
+	<object name="Janela O 7" id="720" layer="2">
+		<transform>
+			<rect x="8467" y="3888" w="10" h="10" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO7.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+	</object>
+	<object name="Janela O 7" id="721" layer="2">
+		<transform>
+			<rect x="8759" y="3889" w="10" h="10" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO7.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+	</object>
+	<object name="Lampada 4" id="722" layer="2">
+		<transform>
+			<rect x="2878" y="722" w="10" h="10" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/objetos/decoracoes chao/lampada4.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+	</object>
+	<object name="Janela O 8" id="723" layer="2">
+		<transform>
+			<rect x="6961" y="3374" w="10" h="10" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO8.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+	</object>
+	<object name="Janela O 8" id="724" layer="2">
+		<transform>
+			<rect x="6960" y="3507" w="10" h="10" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO8.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+	</object>
+	<object name="Janela O 8" id="725" layer="2">
+		<transform>
+			<rect x="7076" y="3438" w="10" h="10" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO8.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+	</object>
+	<object name="Janela O 8" id="726" layer="2">
+		<transform>
+			<rect x="6841" y="3437" w="10" h="10" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO8.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+	</object>
+	<object name="Janela O 8" id="727" layer="2">
+		<transform>
+			<rect x="6410" y="3425" w="10" h="10" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO8.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+	</object>
+	<object name="Janela O 8" id="728" layer="2">
+		<transform>
+			<rect x="6291" y="3503" w="10" h="10" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO8.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+	</object>
+	<object name="Janela O 8" id="729" layer="2">
+		<transform>
+			<rect x="6288" y="3371" w="10" h="10" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO8.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+	</object>
+	<object name="Janela O 8" id="730" layer="2">
+		<transform>
+			<rect x="6171" y="3426" w="10" h="10" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO8.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+	</object>
+	<object name="Lampada 3" id="731" layer="1">
+		<transform>
+			<rect x="6105" y="3411" w="10" h="10" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/objetos/decoracoes chao/lampada3.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+	</object>
+	<object name="Lampada 3" id="732" layer="1">
+		<transform>
+			<rect x="6295" y="3409" w="10" h="10" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/objetos/decoracoes chao/lampada3.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+	</object>
+	<object name="Lampada 3" id="733" layer="1">
+		<transform>
+			<rect x="6776" y="3412" w="10" h="10" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/objetos/decoracoes chao/lampada3.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+	</object>
+	<object name="Lampada 3" id="734" layer="1">
+		<transform>
+			<rect x="7016" y="3409" w="10" h="10" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/objetos/decoracoes chao/lampada3.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+	</object>
+	<object name="Estatua chafariz" id="735" layer="1">
+		<transform>
+			<rect x="6575" y="3355" w="10" h="10" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/objetos/decoracoes chao/estatua do chafariz.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+	</object>
+	<object name="Estatua chafariz" id="736" layer="1">
+		<transform>
+			<rect x="8971" y="3980" w="10" h="10" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/objetos/decoracoes chao/estatua do chafariz.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+	</object>
+	<object name="Lampada 2" id="737" layer="1">
+		<transform>
+			<rect x="9503" y="3843" w="10" h="10" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/objetos/decoracoes chao/lampada2.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+	</object>
+	<object name="Janela O 1" id="738" layer="2">
+		<transform>
+			<rect x="7225" y="3354" w="10" h="10" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO1.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+	</object>
+	<object name="Janela O 1" id="739" layer="2">
+		<transform>
+			<rect x="7103" y="3167" w="10" h="10" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO1.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+	</object>
+	<object name="Porta 7" id="740" layer="2">
+		<transform>
+			<rect x="13395" y="3315" w="10" h="10" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/objetos/decoracoes de parede/P7.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+	</object>
+	<object name="Janela O 7" id="741" layer="3">
+		<transform>
+			<rect x="13585" y="2539" w="10" h="10" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO7.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+	</object>
+	<object name="Janela O 7" id="742" layer="3">
+		<transform>
+			<rect x="13534" y="2641" w="10" h="10" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO7.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+	</object>
+	<object name="Janela O 7" id="743" layer="3">
+		<transform>
+			<rect x="13632" y="2644" w="10" h="10" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO7.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+	</object>
+	<object name="Janela O 5" id="744" layer="3">
+		<transform>
+			<rect x="13679" y="2698" w="10" h="10" />
+			<scale x="1" y="1" />
+			<rotation value="0" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/objetos/decoracoes de parede/JO5.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+	</object>
+	<object name="Zipline NAO USE" id="745" layer="2">
+		<transform>
+			<rect x="955" y="537" w="48" h="2" />
+			<scale x="41" y="1" />
+			<rotation value="11" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+		<zipline>
+			<start x="0" y="0" />
+			<end x="0" y="0" />
+		</zipline>
+	</object>
+	<object name="Zipline NAO USE" id="746" layer="2">
+		<transform>
+			<rect x="2909" y="4044" w="48" h="2" />
+			<scale x="11" y="1" />
+			<rotation value="49" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+		<zipline>
+			<start x="0" y="0" />
+			<end x="0" y="0" />
+		</zipline>
+	</object>
+	<object name="Zipline NAO USE" id="747" layer="2">
+		<transform>
+			<rect x="4166" y="3985" w="48" h="2" />
+			<scale x="19" y="1" />
+			<rotation value="23" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+		<zipline>
+			<start x="0" y="0" />
+			<end x="0" y="0" />
+		</zipline>
+	</object>
+	<object name="Zipline NAO USE" id="748" layer="2">
+		<transform>
+			<rect x="4123" y="3155" w="48" h="2" />
+			<scale x="24" y="1" />
+			<rotation value="164" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+		<zipline>
+			<start x="0" y="0" />
+			<end x="0" y="0" />
+		</zipline>
+	</object>
+	<object name="Zipline NAO USE" id="749" layer="2">
+		<transform>
+			<rect x="7147" y="1871" w="48" h="2" />
+			<scale x="20" y="1" />
+			<rotation value="174" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+		<zipline>
+			<start x="0" y="0" />
+			<end x="0" y="0" />
+		</zipline>
+	</object>
+	<object name="Zipline NAO USE" id="750" layer="2">
+		<transform>
+			<rect x="6906" y="1377" w="48" h="2" />
+			<scale x="61" y="1" />
+			<rotation value="1" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+		<zipline>
+			<start x="0" y="0" />
+			<end x="0" y="0" />
+		</zipline>
+	</object>
+	<object name="Zipline NAO USE" id="751" layer="2">
+		<transform>
+			<rect x="5954" y="2776" w="48" h="2" />
+			<scale x="14" y="1" />
+			<rotation value="174" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+		<zipline>
+			<start x="0" y="0" />
+			<end x="0" y="0" />
+		</zipline>
+	</object>
+	<object name="Zipline NAO USE" id="752" layer="2">
+		<transform>
+			<rect x="7532" y="3300" w="48" h="2" />
+			<scale x="38" y="1" />
+			<rotation value="2" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+		<zipline>
+			<start x="0" y="0" />
+			<end x="0" y="0" />
+		</zipline>
+	</object>
+	<object name="Zipline NAO USE" id="753" layer="2">
+		<transform>
+			<rect x="11561" y="3228" w="48" h="2" />
+			<scale x="19" y="1" />
+			<rotation value="22" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+		<zipline>
+			<start x="0" y="0" />
+			<end x="0" y="0" />
+		</zipline>
+	</object>
+	<object name="Zipline NAO USE" id="754" layer="2">
+		<transform>
+			<rect x="11563" y="3338" w="48" h="2" />
+			<scale x="18" y="1" />
+			<rotation value="164" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+		<zipline>
+			<start x="0" y="0" />
+			<end x="0" y="0" />
+		</zipline>
+	</object>
+	<object name="Zipline NAO USE" id="755" layer="2">
+		<transform>
+			<rect x="12618" y="3075" w="48" h="2" />
+			<scale x="21" y="1" />
+			<rotation value="-21" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+		<zipline>
+			<start x="0" y="0" />
+			<end x="0" y="0" />
+		</zipline>
+	</object>
+	<object name="Zipline NAO USE" id="756" layer="2">
+		<transform>
+			<rect x="13963" y="3035" w="48" h="2" />
+			<scale x="3" y="1" />
+			<rotation value="8" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+		<zipline>
+			<start x="0" y="0" />
+			<end x="0" y="0" />
+		</zipline>
+	</object>
+	<object name="Zipline NAO USE" id="757" layer="2">
+		<transform>
+			<rect x="13964" y="3090" w="48" h="2" />
+			<scale x="3" y="1" />
+			<rotation value="167" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+		<zipline>
+			<start x="0" y="0" />
+			<end x="0" y="0" />
+		</zipline>
+	</object>
+	<object name="Zipline NAO USE" id="758" layer="2">
+		<transform>
+			<rect x="13963" y="3145" w="48" h="2" />
+			<scale x="3" y="1" />
+			<rotation value="6" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+		<zipline>
+			<start x="0" y="0" />
+			<end x="0" y="0" />
+		</zipline>
+	</object>
+	<object name="Zipline NAO USE" id="759" layer="2">
+		<transform>
+			<rect x="13674" y="2591" w="48" h="2" />
+			<scale x="12" y="1" />
+			<rotation value="18" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+		<zipline>
+			<start x="0" y="0" />
+			<end x="0" y="0" />
+		</zipline>
+	</object>
+	<object name="Zipline NAO USE" id="760" layer="2">
+		<transform>
+			<rect x="13670" y="2663" w="48" h="2" />
+			<scale x="12" y="1" />
+			<rotation value="166" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+		<zipline>
+			<start x="0" y="0" />
+			<end x="0" y="0" />
+		</zipline>
+	</object>
+	<object name="Zipline NAO USE" id="761" layer="2">
+		<transform>
+			<rect x="14392" y="2547" w="48" h="2" />
+			<scale x="19" y="1" />
+			<rotation value="5" />
+		</transform>
+		<render>
+			<sprite state="0" filename="../img/line.png" frame_count="1" frame_time="1.0" />
+		</render>
+		<state />
+		<zipline>
+			<start x="0" y="0" />
+			<end x="0" y="0" />
+		</zipline>
 	</object>
 </world_objects>

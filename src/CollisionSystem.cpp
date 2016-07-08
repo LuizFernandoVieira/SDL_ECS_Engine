@@ -124,19 +124,16 @@ void CollisionSystem::updateTerrain(
 							correctWall(transform[col.first]->rect_, col.second->hurtbox_, terrain, speed[col.first]->speed_);
 							break;
 						case 3:
-							// if (col.first == 0) std::cout << "Floor" << std::endl;
 							correctFloorCeiling(transform[col.first]->rect_, col.second->hurtbox_, terrain, speed[col.first]->speed_);
 							break;
 						case 4:
 							correctAllSides(transform[col.first]->rect_, col.second->hurtbox_, terrain, speed[col.first]->speed_);
 							break;
 						case 5:
-							// if (col.first == 0) std::cout << "Diag up" << std::endl;
 							if (state[col.first]->state_ != State::JUMPING)
 								correctDiagonalUp(transform[col.first]->rect_, col.second->hurtbox_, terrain, speed[col.first]->speed_);
 							break;
 						case 6:
-							// if (col.first == 0) std::cout << "Diag down" << std::endl;
 							if (state[col.first]->state_ != State::JUMPING)
 								correctDiagonalDown(transform[col.first]->rect_, col.second->hurtbox_, terrain, speed[col.first]->speed_);
 							break;
@@ -150,7 +147,9 @@ void CollisionSystem::updateTerrain(
 					{
 						state[col.first]->state_ = speed[col.first]->speed_.x() == 0 ? State::IDLE : State::WALKING;
 						if (col.first == player && 
-						    ((PlayerStateComponent*)state[player])->fallTime_.get() >= Resources::MAX_SAFE_FALL_TIME)
+						    ((PlayerStateComponent*)state[player])->fallTime_.get() >= Resources::MAX_SAFE_FALL_TIME &&
+						    ( ((PlayerStateComponent*)state[player])->umbrellaState_ != UmbrellaState::OPEN
+						    	|| ((PlayerStateComponent*)state[player])->umbrellaDirection_ != UmbrellaDirection::UP ) )
 						{
 							health[player]->health_--;
 							((PlayerStateComponent*)state[player])->fallTime_.restart();

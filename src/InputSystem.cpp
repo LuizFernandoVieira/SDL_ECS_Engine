@@ -21,6 +21,8 @@ void InputSystem::update(float dt, GameState& gameState)
 	ColliderComponent* colComp = gameState.mapCollider_[gameState.player_];
 
 	physicsComp->gravityScale_ = 1.0;
+	stateComp->umbrellaDirection_ = UmbrellaDirection::DOWN;
+	stateComp->umbrellaState_ = UmbrellaState::CLOSED;
 
 	if (stateComp->state_ != State::DYING && stateComp->state_ != State::DEAD)
 	{
@@ -81,33 +83,31 @@ void InputSystem::update(float dt, GameState& gameState)
 		}
 
 		// GUARDA CHUVA
-		if (input.keyPress(UP_ARROW_KEY))
+		if (input.isKeyDown('i'))
 		{
 			stateComp->umbrellaDirection_ = UmbrellaDirection::UP;
+			stateComp->umbrellaState_ = UmbrellaState::OPEN;
 		}
-		else if (input.keyPress(DOWN_ARROW_KEY))
+		else if (input.isKeyDown('k'))
 		{
 			stateComp->umbrellaDirection_ = UmbrellaDirection::DOWN;
+			stateComp->umbrellaState_ = UmbrellaState::OPEN;
 		}
-		else if (input.keyPress(LEFT_ARROW_KEY))
+		else if (input.isKeyDown('j'))
 		{
 			stateComp->umbrellaDirection_ = stateComp->facingRight_ ? UmbrellaDirection::BACK : UmbrellaDirection::FRONT;
+			stateComp->umbrellaState_ = UmbrellaState::OPEN;
 		}
-		else if (input.keyPress(RIGHT_ARROW_KEY))
+		else if (input.isKeyDown('l'))
 		{
 			stateComp->umbrellaDirection_ = stateComp->facingRight_ ? UmbrellaDirection::FRONT : UmbrellaDirection::BACK;
+			stateComp->umbrellaState_ = UmbrellaState::OPEN;
 		}
 
-		if (input.keyPress(SPACE_BAR))
+		/*if (input.keyPress(SPACE_BAR))
 		{
-			/*
-			if (stateComp->state_ == State::Dead){
-				//stateComp->state_ = State::Respawn;
-			}
-			else
-			*/
 			stateComp->umbrellaState_ = stateComp->umbrellaState_ == UmbrellaState::OPEN ? UmbrellaState::CLOSED : UmbrellaState::OPEN;
-		}
+		}*/
 
 		if (input.keyPress('e') && stateComp->state_ != State::ATTACKING)
 		{
@@ -122,14 +122,14 @@ void InputSystem::update(float dt, GameState& gameState)
 			}
 		}
 
-		if (input.keyPress('0'))
+		/*if (input.keyPress('0'))
 		{
 			stateComp->state_ = State::DEAD;
 			stateComp->umbrellaState_ = UmbrellaState::OPEN;
 			stateComp->umbrellaDirection_ = UmbrellaDirection::UP;
 
 			std::cout << "State: Dead // Code:" << stateComp->state_ << std::endl;
-		}
+		}*/
 
 		if (stateComp->state_ == State::FALLING)
 		{
@@ -141,6 +141,10 @@ void InputSystem::update(float dt, GameState& gameState)
 				physicsComp->gravityScale_ = 1.0;
 				stateComp->fallTime_.update(dt);
 			}
+		}
+		else
+		{
+			stateComp->fallTime_.restart();
 		}
 	}
 }
