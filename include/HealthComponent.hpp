@@ -13,6 +13,7 @@ public:
 
 	int health_;
 	Timer timeToDie_;
+	bool invincible_;
 };
 
 #endif

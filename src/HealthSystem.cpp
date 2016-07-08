@@ -24,6 +24,15 @@ void HealthSystem::update(float dt, GameState& gameState)
 				playerRecoverTime_.restart();
 			}
 		}
+		if (h.second->invincible_)
+		{
+			h.second->timeToDie_.update(dt);
+			if (h.second->timeToDie_.get() >= 4)
+			{
+				h.second->invincible_ = false;
+				h.second->timeToDie_.restart();
+			}
+		}
 		if (state[h.first]->state_ == State::DYING)
 		{
 			h.second->timeToDie_.update(dt);

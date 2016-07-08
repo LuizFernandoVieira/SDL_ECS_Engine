@@ -837,12 +837,12 @@ WIND DIRECTIOM
 <object name="follower">
 	<transform>
 		<rect x="288" y="350" w="115" h="158" />
-		<scale x="0.3" y="0.3" />
+		<scale x="0.6" y="0.6" />
 		<rotation value="0" />
 	</transform>
 	<health value="1" />
 	<render>
-		<sprite state="0" filename="../img/characters/enemies/agonia/Agonia_Andando.png" frame_count="42" frame_time="0.01" />
+		<sprite state="0" filename="../img/characters/enemies/Andando menor.png" frame_count="44" frame_time="0.02" />
 	</render>
 	<physics gravity_scale="1.0" />
 	<collider>

@@ -33,7 +33,6 @@ GameState::GameState()
 : changeLevel_(false), music(), frameId_(3)
 {
 	frame_ = new StaticSprite("../img/moldura1.png");
-	std::cout << "e" << std::endl;
 	StaticSprite loadScreen("../img/loading.png");
 	loadScreen.render(0,0);
 	SDL_RenderPresent(Game::getInstance().getRenderer());
