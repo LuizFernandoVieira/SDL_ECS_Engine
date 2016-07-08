@@ -123,10 +123,8 @@ void GameState::update(float dt)
 
 	music.Update();
 
-	std::cout << "========" << std::endl;
 	for (auto& system : systems_)
 	{
-		std::cout << "a" << std::endl;
 		system->update(dt, *this);
 	}
 
