@@ -22,11 +22,11 @@ private:
 
 	Sprite btnPlay_;
 	Rect btnPlayPos_;
-	Text btnPlayText_;
+	// Text btnPlayText_;
 
 	Sprite btnMapEditor_;
 	Rect btnMapEditorPos_;
-	Text btnMapEditorText_;
+	// Text btnMapEditorText_;
 };
 
 #endif
